@@ -71,6 +71,16 @@ Fabio non sa nulla di falegnameria. Le istruzioni devono essere:
 ### 6. Output HTML
 
 L'HTML deve contenere:
+- **Freccia "← Progetti" nell'header** — link di ritorno all'indice (`https://fabiosangregorio.github.io/claude-projects/`). Usa questo snippet nell'header, subito prima dell'`<h1>`:
+  ```html
+  <a class="back" href="https://fabiosangregorio.github.io/claude-projects/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>Progetti</a>
+  ```
+  E nel CSS aggiungi `position:relative` all'`header` più la classe `.back`:
+  ```css
+  .back{position:absolute;left:0;top:2.5rem;display:inline-flex;align-items:center;gap:.35rem;font-family:'Space Mono',monospace;font-size:.75rem;color:var(--tx2);text-decoration:none;padding:.35rem .6rem;border-radius:6px;border:1px solid var(--bd);background:var(--sf);transition:border-color .2s,color .2s}
+  .back:hover{border-color:var(--ac);color:var(--ac)}
+  .back svg{width:14px;height:14px}
+  ```
 - **Paragrafo introduttivo** — descrizione del goal del progetto
 - **Sezione dimensioni** — con card per ogni misura e stack verticale (o equivalente)
 - **Vista esplosa SVG** — schema con i pezzi colorati, le misure e il tipo di fissaggio
@@ -87,6 +97,7 @@ Stile: dark theme, font Space Mono + DM Sans, colori GitHub-style. Mobile-first.
 - Crea la cartella `nome-progetto/` nella repo `fabiosangregorio/claude-projects`
 - Metti il file come `index.html`
 - Usa l'API GitHub con il PAT per pushare
+- **Aggiorna il dizionario `META` in `index.html`** (nella root) aggiungendo una entry per il nuovo progetto con descrizione e tag
 - La pagina sarà live su `https://fabiosangregorio.github.io/claude-projects/nome-progetto/`
 
 ### 8. Double-check finale
