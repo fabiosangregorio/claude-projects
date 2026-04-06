@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Scaffale Erbe Aromatiche — Progetto DIY</title>
+<meta name="theme-color" content="#0e1117">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0e1117;--sf:#161b22;--sf2:#1c2230;--bd:#2a3040;--tx:#e6edf3;--tx2:#8b949e;--ac:#58a6ff;--ac2:#3fb950;--wn:#f0883e;--rd:#f85149;--pa:#5e9eff;--pb:#7ee787;--pc:#ffa657;--pd:#d2a8ff;--pe:#ff7b72;--pf:#79c0ff;--pg:#56d364;--ph:#e3b341}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--tx);line-height:1.6}
+.c{max-width:1100px;margin:0 auto;padding:2rem 1.5rem}
+header{text-align:center;padding:2.5rem 0 1.5rem;border-bottom:1px solid var(--bd);margin-bottom:2.5rem}
+header h1{font-family:'Space Mono',monospace;font-size:clamp(1.6rem,4vw,2.5rem);font-weight:700;letter-spacing:-1px;margin-bottom:.4rem;background:linear-gradient(135deg,var(--ac2),var(--ph));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+header p{color:var(--tx2);font-size:.9rem}
+.br{display:flex;gap:.6rem;justify-content:center;margin-top:.8rem;flex-wrap:wrap}
+.bg{font-family:'Space Mono',monospace;font-size:.65rem;padding:.25rem .6rem;border-radius:999px;border:1px solid var(--bd);color:var(--tx2);background:var(--sf)}
+section{margin-bottom:2.5rem}
+h2{font-family:'Space Mono',monospace;font-size:1.2rem;margin-bottom:1rem;color:var(--ac);display:flex;align-items:center;gap:.5rem}
+h2 .n{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:6px;background:var(--ac);color:var(--bg);font-size:.75rem;font-weight:700;flex-shrink:0}
+h3{font-size:.95rem;margin-bottom:.6rem;margin-top:1rem}
+.sg{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:.8rem;margin-bottom:1.5rem}
+.sc{background:var(--sf);border:1px solid var(--bd);border-radius:10px;padding:1rem}
+.sc .l{font-size:.65rem;color:var(--tx2);text-transform:uppercase;letter-spacing:1px;margin-bottom:.15rem;font-family:'Space Mono',monospace}
+.sc .v{font-size:1.2rem;font-weight:700;font-family:'Space Mono',monospace}
+.sc .u{font-size:.8rem;color:var(--tx2);font-weight:400}
+.sc .s{font-size:.65rem;color:var(--tx2);margin-top:.15rem}
+.dc{background:var(--sf);border:1px solid var(--bd);border-radius:12px;padding:1.25rem;margin-bottom:1.5rem;overflow-x:auto}
+.dc svg{display:block;margin:0 auto;max-width:100%;height:auto}
+.dt{font-family:'Space Mono',monospace;font-size:.7rem;color:var(--tx2);text-align:center;margin-top:.8rem;text-transform:uppercase;letter-spacing:2px}
+table.b{width:100%;border-collapse:collapse;font-size:.85rem}
+table.b th{font-family:'Space Mono',monospace;font-size:.65rem;text-transform:uppercase;letter-spacing:1px;color:var(--tx2);text-align:left;padding:.6rem .8rem;border-bottom:2px solid var(--bd);background:var(--sf2)}
+table.b td{padding:.6rem .8rem;border-bottom:1px solid var(--bd);vertical-align:middle}
+table.b tr:hover td{background:var(--sf2)}
+.cd{display:inline-block;width:11px;height:11px;border-radius:3px;margin-right:.4rem;vertical-align:middle}
+.dm{font-family:'Space Mono',monospace;font-size:.8rem;color:var(--ac)}
+.sep td{background:var(--sf2)!important;color:var(--tx2);font-family:'Space Mono',monospace;font-size:.65rem;letter-spacing:1px}
+.steps{counter-reset:step;list-style:none;padding:0}
+.steps li{counter-increment:step;position:relative;padding:.9rem .9rem .9rem 3.2rem;margin-bottom:.6rem;background:var(--sf);border:1px solid var(--bd);border-radius:10px;font-size:.88rem}
+.steps li::before{content:counter(step);position:absolute;left:.9rem;top:.9rem;width:22px;height:22px;background:var(--ac2);color:var(--bg);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Space Mono',monospace;font-size:.7rem;font-weight:700}
+.steps li strong{color:var(--ac)}
+.lg{display:flex;gap:1rem;flex-wrap:wrap;margin:.8rem 0;font-size:.8rem}
+.li{display:flex;align-items:center;gap:.35rem}
+.ls{width:13px;height:13px;border-radius:3px}
+.tip{background:rgba(88,166,255,.08);border-left:3px solid var(--ac);padding:.9rem 1.1rem;border-radius:0 8px 8px 0;margin:.8rem 0;font-size:.85rem;color:var(--tx2)}
+.tip strong{color:var(--ac)}
+.tip.warn{border-left-color:var(--wn);background:rgba(240,136,62,.08)}
+.tip.warn strong{color:var(--wn)}
+.tip.green{border-left-color:var(--ac2);background:rgba(63,185,80,.08)}
+.tip.green strong{color:var(--ac2)}
+/* HERB CARDS */
+.herb-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:.8rem;margin-bottom:1rem}
+.herb-card{background:var(--sf);border:1px solid var(--bd);border-radius:10px;padding:1rem;position:relative;overflow:hidden}
+.herb-card .herb-name{font-family:'Space Mono',monospace;font-size:.9rem;font-weight:700;margin-bottom:.2rem}
+.herb-card .herb-it{font-size:.75rem;color:var(--tx2);font-style:italic;margin-bottom:.5rem}
+.herb-card .herb-use{font-size:.8rem;margin-bottom:.4rem}
+.herb-card .herb-care{font-size:.75rem;color:var(--tx2)}
+.herb-card .herb-pot{font-family:'Space Mono',monospace;font-size:.65rem;color:var(--wn);margin-top:.4rem}
+.herb-card.dry{border-color:rgba(227,179,65,.3)}
+.herb-card.wet{border-color:rgba(63,185,80,.3)}
+/* SHOP */
+.shop-header{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.5rem;margin-bottom:.8rem}
+.shop-header h2{margin-bottom:0}
+.shop-reset{padding:.35rem .7rem;background:var(--sf);border:1px solid var(--bd);color:var(--tx2);border-radius:6px;font-size:.68rem;cursor:pointer;font-family:'Space Mono',monospace}
+.shop-reset:hover{border-color:var(--rd);color:var(--rd)}
+.progress{height:5px;background:var(--sf);border-radius:99px;overflow:hidden;margin-bottom:.25rem}
+.progress-bar{height:100%;background:var(--ac2);border-radius:99px;transition:width .3s}
+.progress-text{font-size:.68rem;color:var(--tx2);margin-bottom:1rem;font-family:'Space Mono',monospace}
+.shop-cat{font-size:.6rem;text-transform:uppercase;letter-spacing:1.5px;color:var(--wn);font-weight:700;padding:.6rem 0 .3rem;font-family:'Space Mono',monospace}
+.shop-item{display:flex;align-items:flex-start;gap:.7rem;padding:.8rem;margin-bottom:.45rem;background:var(--sf);border:1px solid var(--bd);border-radius:10px;cursor:pointer;-webkit-tap-highlight-color:transparent;user-select:none;transition:opacity .2s,border-color .2s}
+.shop-item:active{border-color:var(--ac)}
+.shop-item.done{opacity:.35}
+.shop-item.done .si-name{text-decoration:line-through}
+.si-check{width:20px;height:20px;border:2px solid var(--bd);border-radius:5px;flex-shrink:0;display:flex;align-items:center;justify-content:center;margin-top:2px;transition:all .15s}
+.shop-item.done .si-check{background:var(--ac2);border-color:var(--ac2)}
+.si-check svg{width:12px;height:12px;stroke:#0e1117;stroke-width:3;fill:none;opacity:0;transition:opacity .1s}
+.shop-item.done .si-check svg{opacity:1}
+.si-info{flex:1;min-width:0}
+.si-name{font-size:.88rem;font-weight:600;line-height:1.3}
+.si-detail{font-size:.75rem;color:var(--tx2);margin-top:.1rem}
+.si-meta{display:flex;gap:.6rem;align-items:center;margin-top:.2rem;flex-wrap:wrap}
+.si-qty{font-size:.68rem;color:var(--wn);font-weight:600;font-family:'Space Mono',monospace}
+.si-price{font-size:.68rem;color:var(--ac2);font-weight:700;font-family:'Space Mono',monospace}
+.si-link{display:inline-block;margin-top:.3rem;font-size:.68rem;color:var(--ac);text-decoration:none;font-weight:600;padding:.18rem .5rem;border:1px solid rgba(88,166,255,.3);border-radius:5px}
+.si-link:active{opacity:.6}
+footer{text-align:center;padding:1.5rem 0;border-top:1px solid var(--bd);margin-top:1.5rem;color:var(--tx2);font-size:.72rem}
+@media(max-width:600px){.c{padding:1rem}.sg{grid-template-columns:1fr 1fr}table.b{font-size:.75rem}table.b th,table.b td{padding:.4rem .5rem}.herb-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="c">
+
+<header>
+  <h1>Scaffale Erbe Aromatiche</h1>
+  <p>Scaffale a scala appoggiato al muro per erbe aromatiche sul balcone</p>
+  <div class="br">
+    <span class="bg">Pino piallato</span>
+    <span class="bg">500 × 400 × 1500 mm</span>
+    <span class="bg">Verniciato bianco</span>
+    <span class="bg">4 ripiani</span>
+    <span class="bg">~€70</span>
+  </div>
+</header>
+
+<section style="margin-bottom:2rem">
+  <p style="font-size:.95rem;color:var(--tx2);line-height:1.7;max-width:680px">
+    Sul balcone c'è uno spazio largo <strong style="color:var(--tx)">50 cm</strong> dove batte il sole nel pomeriggio, coperto da una tettoia. L'obiettivo è costruire uno <strong style="color:var(--tx)">scaffale a scala in pino verniciato bianco</strong> che si appoggia al muro (senza forarlo — siamo in affitto) e ospita <strong style="color:var(--tx)">8 erbe aromatiche</strong> in vaso per cucina e tisane. I ripiani si restringono verso l'alto (da 30 a 15 cm di profondità), così le erbe che bevono di più stanno in basso dove sono facili da annaffiare, e le mediterranee assetate zero stanno in alto al sole. Budget: €60–100. Tempo di costruzione: un weekend.
+  </p>
+</section>
+
+<!-- 1 DIMENSIONI -->
+<section>
+  <h2><span class="n">1</span> Dimensioni</h2>
+  <h3>Spazio disponibile</h3>
+  <div class="sg">
+    <div class="sc"><div class="l">Larghezza</div><div class="v">500<span class="u">mm</span></div><div class="s">Nicchia balcone</div></div>
+    <div class="sc"><div class="l">Altezza muro</div><div class="v">1500<span class="u">mm</span></div><div class="s">Punto contatto</div></div>
+    <div class="sc"><div class="l">Profondità base</div><div class="v">~380<span class="u">mm</span></div><div class="s">Regola 4:1 → 75°</div></div>
+  </div>
+  <h3>Scaffale</h3>
+  <div class="sg">
+    <div class="sc"><div class="l">Larghezza</div><div class="v">500<span class="u">mm</span></div></div>
+    <div class="sc"><div class="l">Gambe</div><div class="v">1600<span class="u">mm</span></div><div class="s">+100mm per angoli</div></div>
+    <div class="sc"><div class="l">Sezione gambe</div><div class="v">40×40<span class="u">mm</span></div></div>
+    <div class="sc"><div class="l">Spessore ripiani</div><div class="v">20<span class="u">mm</span></div></div>
+    <div class="sc"><div class="l">N° ripiani</div><div class="v">4</div></div>
+    <div class="sc"><div class="l">Traversi/ripiano</div><div class="v">2</div><div class="s">Fronte + retro</div></div>
+  </div>
+
+  <h3>Ripiani (dal basso verso l'alto)</h3>
+  <div class="sg">
+    <div class="sc"><div class="l">Ripiano 1 (basso)</div><div class="v">300<span class="u">mm</span></div><div class="s">500×300 · @100mm da terra</div></div>
+    <div class="sc"><div class="l">Ripiano 2</div><div class="v">250<span class="u">mm</span></div><div class="s">500×250 · @450mm</div></div>
+    <div class="sc"><div class="l">Ripiano 3</div><div class="v">200<span class="u">mm</span></div><div class="s">500×200 · @800mm</div></div>
+    <div class="sc"><div class="l">Ripiano 4 (alto)</div><div class="v">150<span class="u">mm</span></div><div class="s">500×150 · @1150mm</div></div>
+  </div>
+
+  <div class="tip"><strong>Stabilità senza fissaggi a muro:</strong> inclinazione ~75° (base a ~38 cm dal muro), feltrini in gomma sotto le gambe e in cima (protezione muro), vasi pesanti sempre in basso. Il peso stesso tiene tutto fermo.</div>
+</section>
+
+<!-- 2 VISTA ESPLOSA -->
+<section>
+  <h2><span class="n">2</span> Vista esplosa</h2>
+  <div class="lg">
+    <div class="li"><div class="ls" style="background:var(--pa)"></div>A/B Gambe (×2)</div>
+    <div class="li"><div class="ls" style="background:var(--pc)"></div>Traversi (×8)</div>
+    <div class="li"><div class="ls" style="background:var(--pb)"></div>R1 Ripiano 300mm</div>
+    <div class="li"><div class="ls" style="background:var(--ac2)"></div>R2 Ripiano 250mm</div>
+    <div class="li"><div class="ls" style="background:var(--pd)"></div>R3 Ripiano 200mm</div>
+    <div class="li"><div class="ls" style="background:var(--ph)"></div>R4 Ripiano 150mm</div>
+  </div>
+  <div class="dc">
+    <svg viewBox="0 0 440 560" xmlns="http://www.w3.org/2000/svg">
+      <text x="220" y="18" text-anchor="middle" fill="#8b949e" font-family="Space Mono,monospace" font-size="9" letter-spacing="2">VISTA LATERALE</text>
+
+      <!-- Wall -->
+      <line x1="370" y1="30" x2="370" y2="510" stroke="#2a3040" stroke-width="2" stroke-dasharray="6,4"/>
+      <text x="383" y="270" fill="#484f58" font-family="Space Mono,monospace" font-size="7" transform="rotate(90,383,270)">MURO</text>
+
+      <!-- Floor -->
+      <line x1="30" y1="510" x2="400" y2="510" stroke="#2a3040" stroke-width="1"/>
+      <text x="215" y="525" text-anchor="middle" fill="#484f58" font-family="Space Mono,monospace" font-size="7">PAVIMENTO</text>
+
+      <!-- Left Leg A -->
+      <rect x="80" y="48" width="12" height="460" rx="2" fill="var(--pa)" opacity=".85" stroke="#fff" stroke-width=".5" transform="rotate(-4,86,510)"/>
+      <text x="60" y="290" fill="var(--pa)" font-family="Space Mono,monospace" font-size="7" font-weight="700" transform="rotate(-4,60,290)">A — 1600mm</text>
+
+      <!-- Right Leg B -->
+      <rect x="330" y="48" width="12" height="460" rx="2" fill="var(--pa)" opacity=".85" stroke="#fff" stroke-width=".5" transform="rotate(-4,336,510)"/>
+
+      <!-- Shelf 4 (top) -->
+      <rect x="295" y="120" width="70" height="10" rx="2" fill="var(--ph)" opacity=".85" stroke="#fff" stroke-width=".5"/>
+      <text x="330" y="128" text-anchor="middle" fill="#0e1117" font-family="Space Mono,monospace" font-size="6" font-weight="700">R4 150mm</text>
+      <!-- traversi -->
+      <line x1="295" y1="118" x2="295" y2="132" stroke="var(--pc)" stroke-width="3"/>
+      <line x1="365" y1="118" x2="365" y2="132" stroke="var(--pc)" stroke-width="3"/>
+
+      <!-- Shelf 3 -->
+      <rect x="245" y="220" width="110" height="10" rx="2" fill="var(--pd)" opacity=".85" stroke="#fff" stroke-width=".5"/>
+      <text x="300" y="228" text-anchor="middle" fill="#0e1117" font-family="Space Mono,monospace" font-size="6" font-weight="700">R3 200mm</text>
+      <line x1="245" y1="218" x2="245" y2="232" stroke="var(--pc)" stroke-width="3"/>
+      <line x1="355" y1="218" x2="355" y2="232" stroke="var(--pc)" stroke-width="3"/>
+
+      <!-- Shelf 2 -->
+      <rect x="195" y="320" width="150" height="10" rx="2" fill="var(--ac2)" opacity=".7" stroke="#fff" stroke-width=".5"/>
+      <text x="270" y="328" text-anchor="middle" fill="#0e1117" font-family="Space Mono,monospace" font-size="6" font-weight="700">R2 250mm</text>
+      <line x1="195" y1="318" x2="195" y2="332" stroke="var(--pc)" stroke-width="3"/>
+      <line x1="345" y1="318" x2="345" y2="332" stroke="var(--pc)" stroke-width="3"/>
+
+      <!-- Shelf 1 (bottom) -->
+      <rect x="145" y="430" width="190" height="10" rx="2" fill="var(--pb)" opacity=".85" stroke="#fff" stroke-width=".5"/>
+      <text x="240" y="438" text-anchor="middle" fill="#0e1117" font-family="Space Mono,monospace" font-size="6" font-weight="700">R1 300mm</text>
+      <line x1="145" y1="428" x2="145" y2="442" stroke="var(--pc)" stroke-width="3"/>
+      <line x1="335" y1="428" x2="335" y2="442" stroke="var(--pc)" stroke-width="3"/>
+
+      <!-- Rubber feet -->
+      <rect x="82" y="505" width="16" height="5" rx="2" fill="#6e7681"/>
+      <rect x="330" y="505" width="16" height="5" rx="2" fill="#6e7681"/>
+      <text x="220" y="545" text-anchor="middle" fill="#6e7681" font-family="Space Mono,monospace" font-size="7">+ feltrini gomma sotto + in cima</text>
+
+      <!-- Height dimension -->
+      <line x1="40" y1="50" x2="40" y2="510" stroke="var(--wn)" stroke-width=".5"/>
+      <text x="40" y="42" text-anchor="middle" fill="var(--wn)" font-family="Space Mono,monospace" font-size="7">↑</text>
+      <text x="40" y="520" text-anchor="middle" fill="var(--wn)" font-family="Space Mono,monospace" font-size="7">↓</text>
+      <text x="28" y="285" fill="var(--wn)" font-family="Space Mono,monospace" font-size="7" transform="rotate(-90,28,285)">1500mm al muro</text>
+
+      <!-- Angle -->
+      <path d="M 340 510 A 60 60 0 0 1 368 458" fill="none" stroke="var(--ac)" stroke-width=".8"/>
+      <text x="355" y="490" fill="var(--ac)" font-family="Space Mono,monospace" font-size="8" font-weight="700">~75°</text>
+
+      <!-- Base dimension -->
+      <line x1="90" y1="535" x2="370" y2="535" stroke="var(--wn)" stroke-width=".5"/>
+      <text x="230" y="550" text-anchor="middle" fill="var(--wn)" font-family="Space Mono,monospace" font-size="7">~380mm dal muro</text>
+    </svg>
+  </div>
+
+  <div class="dc">
+    <svg viewBox="0 0 440 200" xmlns="http://www.w3.org/2000/svg">
+      <text x="220" y="18" text-anchor="middle" fill="#8b949e" font-family="Space Mono,monospace" font-size="9" letter-spacing="2">VISTA FRONTALE</text>
+
+      <!-- Left leg -->
+      <rect x="50" y="30" width="12" height="160" rx="2" fill="var(--pa)" opacity=".85" stroke="#fff" stroke-width=".5"/>
+      <text x="56" y="115" text-anchor="middle" fill="#0e1117" font-family="Space Mono,monospace" font-size="6" font-weight="700" transform="rotate(-90,56,115)">GAMBA A</text>
+
+      <!-- Right leg -->
+      <rect x="378" y="30" width="12" height="160" rx="2" fill="var(--pa)" opacity=".85" stroke="#fff" stroke-width=".5"/>
+      <text x="384" y="115" text-anchor="middle" fill="#0e1117" font-family="Space Mono,monospace" font-size="6" font-weight="700" transform="rotate(-90,384,115)">GAMBA B</text>
+
+      <!-- Traversi pairs -->
+      <rect x="62" y="155" width="316" height="5" rx="1" fill="var(--pc)" opacity=".8"/>
+      <rect x="62" y="163" width="316" height="5" rx="1" fill="var(--pc)" opacity=".8"/>
+      <text x="220" y="180" text-anchor="middle" fill="var(--pc)" font-family="Space Mono,monospace" font-size="6">TRAVERSI 420mm × 30×20mm</text>
+
+      <rect x="62" y="115" width="316" height="5" rx="1" fill="var(--pc)" opacity=".6"/>
+      <rect x="62" y="123" width="316" height="5" rx="1" fill="var(--pc)" opacity=".6"/>
+
+      <rect x="62" y="75" width="316" height="5" rx="1" fill="var(--pc)" opacity=".5"/>
+      <rect x="62" y="83" width="316" height="5" rx="1" fill="var(--pc)" opacity=".5"/>
+
+      <rect x="62" y="38" width="316" height="5" rx="1" fill="var(--pc)" opacity=".4"/>
+      <rect x="62" y="46" width="316" height="5" rx="1" fill="var(--pc)" opacity=".4"/>
+
+      <!-- Width dimension -->
+      <line x1="50" y1="195" x2="390" y2="195" stroke="var(--wn)" stroke-width=".5"/>
+      <text x="220" y="195" text-anchor="middle" fill="var(--wn)" font-family="Space Mono,monospace" font-size="8" font-weight="700">500mm</text>
+    </svg>
+  </div>
+</section>
+
+<!-- 3 DISTINTA -->
+<section>
+  <h2><span class="n">3</span> Distinta e piano taglio</h2>
+  <div class="dc" style="padding:0;overflow:hidden">
+    <table class="b">
+      <thead><tr><th>ID</th><th>Pezzo</th><th>mm (L×La×Sp)</th><th>Q</th><th>Fonte</th></tr></thead>
+      <tbody>
+        <tr><td><span class="cd" style="background:var(--pa)"></span>A</td><td>Gamba SX</td><td class="dm">1600×40×40</td><td>1</td><td rowspan="2">2× listello pino 40×40, 2m → taglio a 160cm</td></tr>
+        <tr><td><span class="cd" style="background:var(--pa)"></span>B</td><td>Gamba DX</td><td class="dm">1600×40×40</td><td>1</td></tr>
+        <tr class="sep"><td colspan="5">TRAVERSI — dai listelli 30×20mm</td></tr>
+        <tr><td><span class="cd" style="background:var(--pc)"></span>T</td><td>Traversi (supporto ripiani)</td><td class="dm">420×30×20</td><td>8</td><td>2× listello pino 30×20, 2m → 4 pezzi per listello</td></tr>
+        <tr class="sep"><td colspan="5">RIPIANI — dall'asse pino 30cm × 200cm × 2cm</td></tr>
+        <tr><td><span class="cd" style="background:var(--pb)"></span>R1</td><td>Ripiano basso</td><td class="dm">500×300×20</td><td>1</td><td rowspan="4">1× asse pino piallato 30cm × 200cm × 2cm</td></tr>
+        <tr><td><span class="cd" style="background:var(--ac2)"></span>R2</td><td>Ripiano 2</td><td class="dm">500×250×20</td><td>1</td></tr>
+        <tr><td><span class="cd" style="background:var(--pd)"></span>R3</td><td>Ripiano 3</td><td class="dm">500×200×20</td><td>1</td></tr>
+        <tr><td><span class="cd" style="background:var(--ph)"></span>R4</td><td>Ripiano alto</td><td class="dm">500×150×20</td><td>1</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="tip"><strong>Piano taglio semplificato:</strong><br>
+  <strong>Listello 1</strong> (40×40, 2m): taglio a 160cm → <strong>Gamba A</strong> + sfrido 40cm<br>
+  <strong>Listello 2</strong> (40×40, 2m): taglio a 160cm → <strong>Gamba B</strong> + sfrido 40cm<br>
+  <strong>Listello 3</strong> (30×20, 2m): 4 tagli a 42cm → <strong>4 traversi</strong> + sfrido 32cm<br>
+  <strong>Listello 4</strong> (30×20, 2m): 4 tagli a 42cm → <strong>4 traversi</strong> + sfrido 32cm<br>
+  <strong>Asse</strong> (30cm×200cm): taglio a 50cm × 4 volte → <strong>R1+R2+R3+R4</strong> (poi rifila le larghezze a 25, 20 e 15cm)</div>
+
+  <div class="tip warn"><strong>Traversi 420mm:</strong> I traversi si incastrano TRA le due gambe. Ogni gamba è 40mm, quindi: 500 − 40 − 40 = 420mm. Misura dopo aver tagliato le gambe per confermare.</div>
+</section>
+
+<!-- 4 LISTA SPESA -->
+<section id="shop-section">
+  <div class="shop-header">
+    <h2><span class="n">4</span> Lista spesa</h2>
+    <button class="shop-reset" onclick="resetShop()">↺ Reset</button>
+  </div>
+  <div class="progress"><div class="progress-bar" id="bar"></div></div>
+  <div class="progress-text" id="prog"></div>
+  <div id="shop-list"></div>
+</section>
+
+<!-- 5 MONTAGGIO -->
+<section>
+  <h2><span class="n">5</span> Montaggio</h2>
+
+  <div class="tip" style="margin-bottom:1.2rem"><strong>Prima di iniziare:</strong> Lavora in uno spazio aperto e pulito (il balcone stesso va bene). Tieni a portata: avvitatore, metro, matita, carta vetrata, morsetti. Metti un telo o cartone per terra. Leggi TUTTI gli step prima di iniziare.</div>
+
+  <ol class="steps">
+
+    <li><strong>Step 1 — Taglia gambe e traversi.</strong><br><br>
+    Se non l'hai già fatto fare al negozio, taglia i due listelli 40×40 a <strong>160 cm</strong> ciascuno (gambe A e B). Poi taglia 8 pezzi da <strong>42 cm</strong> dai listelli 30×20 (traversi).<br><br>
+    <strong>Come tagliare dritto:</strong> Segna la misura col metro, traccia una linea con la squadretta su tutti e 4 i lati del listello, poi segui la linea con la sega. Se usi un seghetto, tieni la lama appena a lato della linea (dal lato dello sfrido).<br><br>
+    <em>💡 Tip: il taglio della sega toglie ~2mm di materiale (il "kerf"). Segna la linea e taglia dal lato dello sfrido, non dal lato del pezzo utile.</em>
+    </li>
+
+    <li><strong>Step 2 — Taglia i ripiani.</strong><br><br>
+    Dall'asse di pino 30×200 cm, taglia 4 pezzi da <strong>50 cm</strong> di lunghezza. Ora hai 4 rettangoli identici da 50×30 cm.<br><br>
+    <strong>Rifila le larghezze:</strong> R1 resta a 30 cm (non toccare). Per R2 rifila a <strong>25 cm</strong>. Per R3 rifila a <strong>20 cm</strong>. Per R4 rifila a <strong>15 cm</strong>. Segna la linea sul lato lungo e taglia con la sega. Scrivi a matita sul retro "R1", "R2", "R3", "R4" per non confonderli.<br><br>
+    <em>💡 Tip: per un taglio lungo e dritto, blocca una guida (un listello dritto) con i morsetti e fai scorrere la sega lungo di essa.</em>
+    </li>
+
+    <li><strong>Step 3 — Carteggia tutto.</strong><br><br>
+    Passa carta vetrata <strong>grana 120</strong> su tutti i pezzi, insistendo sui tagli e sugli spigoli. Poi rifinisci con <strong>grana 180</strong> per una superficie liscia. Togli la polvere con un panno umido.<br><br>
+    <strong>Tempo:</strong> circa 30–45 minuti per tutti i pezzi.<br><br>
+    <em>💡 Tip: carteggia sempre nel senso delle venature del legno, mai di traverso — altrimenti restano graffi visibili sotto la vernice.</em>
+    </li>
+
+    <li><strong>Step 4 — Fondo + prima mano di bianco.</strong><br><br>
+    Applica una mano di <strong>fondo per legno</strong> (primer) su tutti i pezzi. Lascia asciugare 2–4 ore. Poi dai la <strong>prima mano di smalto bianco</strong> all'acqua per esterni.<br><br>
+    <strong>Perché verniciare PRIMA di assemblare:</strong> una volta montato lo scaffale, gli angoli interni dove i traversi incontrano le gambe sono impossibili da raggiungere col pennello. Vernicia i singoli pezzi, assembla dopo, poi ritocca.<br><br>
+    Lascia asciugare una notte intera.<br><br>
+    <em>💡 Tip: dai mani sottili. Due mani sottili sono meglio di una spessa — asciugano prima, non colano, e il risultato è più liscio.</em>
+    </li>
+
+    <li><strong>Step 5 — Segna le posizioni dei traversi sulle gambe.</strong><br><br>
+    Appoggia le due gambe affiancate. Con metro e matita, segna su ciascuna gamba la posizione dei traversi:<br><br>
+    • <strong>Ripiano 1:</strong> traverso frontale a 100mm dalla base, traverso posteriore a 100+300 = 400mm<br>
+    • <strong>Ripiano 2:</strong> traverso frontale a 450mm, posteriore a 450+250 = 700mm<br>
+    • <strong>Ripiano 3:</strong> traverso frontale a 800mm, posteriore a 800+200 = 1000mm<br>
+    • <strong>Ripiano 4:</strong> traverso frontale a 1150mm, posteriore a 1150+150 = 1300mm<br><br>
+    Segna una "X" al centro di ciascuna posizione, su entrambe le facce interne delle gambe.<br><br>
+    <em>💡 Tip: segna ENTRAMBE le gambe contemporaneamente — mettile affiancate, usa la squadretta per tracciare una linea che attraversa entrambe. Così le altezze sono identiche.</em>
+    </li>
+
+    <li><strong>Step 6 — Assembla traversi alle gambe.</strong><br><br>
+    Per ogni posizione, il metodo è identico:<br><br>
+    1. Metti una goccia di <strong>colla vinilica</strong> dove il traverso toccherà la gamba.<br>
+    2. Posiziona il traverso (30×20mm) con il lato da 30mm appoggiato alla gamba. Blocca con un morsetto.<br>
+    3. <strong>Pre-fora</strong> attraverso la gamba nel traverso: punta da <strong>2.5–3mm</strong>, profondità ~35mm.<br>
+    4. Avvita una vite <strong>4×40mm</strong>.<br>
+    5. Ripeti sull'altra gamba.<br><br>
+    Fai questo per tutti gli 8 traversi (2 per ripiano × 4 ripiani = 16 giunti, 32 viti totali).<br><br>
+    <em>💡 Tip: PRE-FORA SEMPRE. Il pino si spacca facilmente in testa ai listelli. Se non pre-fori, il traverso si apre a metà e devi buttarlo. Usa una punta da 2.5mm per una vite da 4mm.</em>
+    </li>
+
+    <li><strong>Step 7 — Monta i ripiani.</strong><br><br>
+    Appoggia ciascun ripiano sulla coppia di traversi corrispondente. Il ripiano deve sporgere in modo uguale ai due lati (~40mm per parte).<br><br>
+    <strong>Due opzioni:</strong><br>
+    <strong>A) Avvitati</strong> (più solido): pre-fora dall'alto attraverso il ripiano nel traverso, e avvita con viti <strong>4×30mm</strong>. 2 viti per traverso.<br>
+    <strong>B) Appoggiati</strong> (smontabile — consigliato per chi è in affitto): metti una striscia di <strong>tappetino antiscivolo</strong> tra ripiano e traverso. Il peso dei vasi tiene tutto fermo e puoi smontare tutto quando traslochi.<br><br>
+    <em>💡 Tip: se scegli l'opzione B, compra un rotolo di tappetino antiscivolo per cassetti (€2 da Leroy Merlin) — funziona perfettamente.</em>
+    </li>
+
+    <li><strong>Step 8 — Seconda mano di bianco e ritocchi.</strong><br><br>
+    Carteggia leggermente con <strong>grana 180</strong> i punti dove la vernice è stata graffiata dall'assemblaggio. Dai la <strong>seconda mano di smalto bianco</strong> su tutto lo scaffale, con attenzione alle teste delle viti e ai giunti. Se vuoi un bianco più coprente, dai una terza mano.<br><br>
+    Lascia asciugare <strong>24 ore</strong> prima di caricare i vasi.<br><br>
+    <em>💡 Tip: non dimenticare i piedi delle gambe — è la zona che sarà più esposta all'acqua dei sottovasi.</em>
+    </li>
+
+    <li><strong>Step 9 — Feltrini e posizionamento.</strong><br><br>
+    1. Incolla <strong>2 feltrini in gomma</strong> sotto le gambe (impediscono lo scivolamento sul pavimento).<br>
+    2. Incolla <strong>2 feltrini</strong> in cima alle gambe dove toccano il muro (protezione parete).<br>
+    3. Porta lo scaffale sul balcone.<br>
+    4. Appoggialo al muro con la base a <strong>~38 cm dal muro</strong>.<br>
+    5. Carica i vasi — <strong>i più pesanti sempre in basso!</strong><br>
+    6. Fatto! 🌿<br><br>
+    <em>💡 Tip: se il pavimento del balcone è inclinato per il drenaggio dell'acqua (molto comune), compensa mettendo un pezzetto di gomma extra sotto la gamba più bassa.</em>
+    </li>
+
+  </ol>
+
+  <div class="tip warn"><strong>Regole d'oro per il pino (tienile a mente SEMPRE):</strong><br>
+  • <strong>Pre-fora TUTTO:</strong> punta 2.5–3mm per le viti. Mai avvitare direttamente nel pino in testa — si spacca.<br>
+  • <strong>Colla + vite:</strong> la colla vinilica rinforza il giunto, la vite lo tiene fermo mentre la colla asciuga.<br>
+  • <strong>Coppia bassa sull'avvitatore:</strong> il pino è tenero — se stringi troppo, la vite gira a vuoto e perde presa.<br>
+  • <strong>Venature:</strong> carteggia e vernicia sempre nel senso delle venature.</div>
+</section>
+
+<!-- 6 ERBE -->
+<section>
+  <h2><span class="n">6</span> Erbe aromatiche</h2>
+  <p style="color:var(--tx2);font-size:.88rem;margin-bottom:1rem">Le erbe sono divise in due gruppi per esigenze idriche. Le mediterranee (poca acqua) vanno in alto, le assetate in basso dove è più comodo annaffiarle ogni giorno.</p>
+
+  <h3 style="color:var(--ph)">☀️ Ripiani 3–4 (alto) — Mediterranee, poca acqua</h3>
+  <div class="herb-grid">
+    <div class="herb-card dry">
+      <div class="herb-name">Rosemary</div>
+      <div class="herb-it">Rosmarino</div>
+      <div class="herb-use">🍳 Arrosti, patate, focaccia, carni</div>
+      <div class="herb-care">Perenne. Lascia asciugare il terreno tra un'innaffiatura e l'altra. Vive anni.</div>
+      <div class="herb-pot">VASO: 20–25cm Ø → Ripiano 3</div>
+    </div>
+    <div class="herb-card dry">
+      <div class="herb-name">Sage</div>
+      <div class="herb-it">Salvia</div>
+      <div class="herb-use">🍳 Burro e salvia, saltimbocca · 🍵 Tisana</div>
+      <div class="herb-care">Perenne. Foglie argentate. Pota per tenerla compatta.</div>
+      <div class="herb-pot">VASO: 15–20cm Ø → Ripiano 3</div>
+    </div>
+    <div class="herb-card dry">
+      <div class="herb-name">Thyme</div>
+      <div class="herb-it">Timo</div>
+      <div class="herb-use">🍳 Zuppe, arrosti, marinature · 🍵 Tisana</div>
+      <div class="herb-care">Perenne. Compattissimo. Quasi non serve innaffiarlo.</div>
+      <div class="herb-pot">VASO: 12–15cm Ø → Ripiano 4</div>
+    </div>
+    <div class="herb-card dry">
+      <div class="herb-name">Oregano</div>
+      <div class="herb-it">Origano</div>
+      <div class="herb-use">🍳 Pizza, sughi, grigliate</div>
+      <div class="herb-care">Perenne. Più sapore da secco. Praticamente indistruttibile.</div>
+      <div class="herb-pot">VASO: 12–15cm Ø → Ripiano 4</div>
+    </div>
+  </div>
+
+  <h3 style="color:var(--ac2)">💧 Ripiani 1–2 (basso) — Assetate, innaffiare ogni giorno</h3>
+  <div class="herb-grid">
+    <div class="herb-card wet">
+      <div class="herb-name">Basil</div>
+      <div class="herb-it">Basilico</div>
+      <div class="herb-use">🍳 Pesto, caprese, pasta, insalate</div>
+      <div class="herb-care">Annuale. Togli i fiori per avere più foglie. Innaffia ogni giorno d'estate.</div>
+      <div class="herb-pot">VASO: 20–25cm Ø → Ripiano 1</div>
+    </div>
+    <div class="herb-card wet">
+      <div class="herb-name">Parsley</div>
+      <div class="herb-it">Prezzemolo</div>
+      <div class="herb-use">🍳 Gremolata, zuppe, pesce, risotti</div>
+      <div class="herb-care">Biennale. Prendi la varietà a foglia piatta (italiana).</div>
+      <div class="herb-pot">VASO: 15–20cm Ø → Ripiano 1</div>
+    </div>
+    <div class="herb-card wet">
+      <div class="herb-name">Mint</div>
+      <div class="herb-it">Menta</div>
+      <div class="herb-use">🍵 Tisane, mojito, insalate di frutta</div>
+      <div class="herb-care">Perenne. ⚠️ INVASIVA — tienila nel suo vaso, mai con altre erbe!</div>
+      <div class="herb-pot">VASO: 15–20cm Ø → Ripiano 2</div>
+    </div>
+    <div class="herb-card wet">
+      <div class="herb-name">Lemon Balm</div>
+      <div class="herb-it">Melissa</div>
+      <div class="herb-use">🍵 Tisana rilassante, sapore di limone</div>
+      <div class="herb-care">Perenne. ⚠️ Come la menta — vaso suo! Cresce veloce.</div>
+      <div class="herb-pot">VASO: 15–20cm Ø → Ripiano 2</div>
+    </div>
+  </div>
+
+  <div class="tip green"><strong>Consigli per i vasi:</strong><br>
+  • <strong>Sottovasi SEMPRE</strong> — l'acqua che cola è il nemico del legno e del vicino di sotto.<br>
+  • <strong>Terriccio:</strong> per le mediterranee (alto) mescola terriccio universale con 30% di perlite/sabbia. Per le assetate (basso) usa terriccio universale tal quale.<br>
+  • <strong>Argilla espansa</strong> (2–3 cm) sul fondo del vaso per drenaggio.<br>
+  • <strong>Compra piantine già cresciute</strong> al vivaio — raccolto in poche settimane.</div>
+</section>
+
+<!-- 7 BUDGET -->
+<section>
+  <h2><span class="n">7</span> Budget</h2>
+  <div class="dc" style="padding:0;overflow:hidden">
+    <table class="b">
+      <thead><tr><th>Voce</th><th>€</th></tr></thead>
+      <tbody>
+        <tr><td>2× Listello pino piallato 40×40mm, 2m</td><td class="dm">~12</td></tr>
+        <tr><td>2× Listello pino piallato 30×20mm, 2m</td><td class="dm">~6</td></tr>
+        <tr><td>1× Asse pino piallato 30cm×200cm, sp. 20mm</td><td class="dm">~16</td></tr>
+        <tr><td>Viti 4×40mm (conf. 50) + viti 4×30mm (conf. 20)</td><td class="dm">~6</td></tr>
+        <tr><td>Colla vinilica per legno</td><td class="dm">~3</td></tr>
+        <tr><td>Fondo per legno 0.5L</td><td class="dm">~6</td></tr>
+        <tr><td>Smalto bianco per esterni 0.5L</td><td class="dm">~12</td></tr>
+        <tr><td>Carta vetrata (120 + 180)</td><td class="dm">~4</td></tr>
+        <tr><td>Feltrini in gomma adesivi ×4</td><td class="dm">~3</td></tr>
+        <tr><td>Tappetino antiscivolo (opzionale)</td><td class="dm">~2</td></tr>
+        <tr style="font-weight:700;background:var(--sf2)"><td>TOTALE SCAFFALE</td><td class="dm" style="color:var(--ac2)">~€70</td></tr>
+        <tr class="sep"><td colspan="2">ERBE E TERRICCIO (opzionale)</td></tr>
+        <tr><td>8× piantine aromatiche dal vivaio</td><td class="dm">~24</td></tr>
+        <tr><td>8× vasi plastica + sottovasi</td><td class="dm">~12</td></tr>
+        <tr><td>Terriccio universale 20L + perlite 5L</td><td class="dm">~8</td></tr>
+        <tr style="font-weight:700;background:var(--sf2)"><td>TOTALE CON ERBE</td><td class="dm" style="color:var(--ac2)">~€114</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<footer>
+  Progetto per Fabio — Scaffale erbe aromatiche — Apr 2026<br>
+  <span style="color:var(--ac2)">L 500mm · H 1500mm · Pino piallato · Bianco per esterni · Appoggiato al muro · 8 erbe 🌿</span>
+</footer>
+</div>
+
+<script>
+const ITEMS=[
+{cat:"LEGNO — LEROY MERLIN / OBI",name:"Listello pino piallato 40×40 mm, 2 m",detail:"Per le gambe A e B. Taglia a 160cm ciascuno.",qty:"Qtà: 2",price:"~€6 cad.",url:"https://www.leroymerlin.it/search?q=listello+pino+piallato+40x40+2m"},
+{cat:"LEGNO — LEROY MERLIN / OBI",name:"Listello pino piallato 30×20 mm, 2 m",detail:"Per i traversi. 4 pezzi da 42cm per listello.",qty:"Qtà: 2",price:"~€3 cad.",url:"https://www.leroymerlin.it/search?q=listello+pino+piallato+30x20+2m"},
+{cat:"LEGNO — LEROY MERLIN / OBI",name:"Asse pino piallato 30 cm × 200 cm, sp. 20 mm",detail:"Per tutti e 4 i ripiani. Taglia a 50cm e rifila le larghezze.",qty:"Qtà: 1",price:"~€16",url:"https://www.leroymerlin.it/search?q=asse+pino+piallato+30+200+20mm"},
+{cat:"FERRAMENTA",name:"Viti per legno 4×40 mm (conf. 50 pz)",detail:"Per fissare i traversi alle gambe — 32 viti (2 per giunto, 16 giunti).",qty:"Qtà: 1 conf.",price:"~€4",url:"https://www.leroymerlin.it/search?q=viti+legno+4x40"},
+{cat:"FERRAMENTA",name:"Viti per legno 4×30 mm (conf. 20 pz)",detail:"Per fissare i ripiani ai traversi (opzionale — solo se li avviti).",qty:"Qtà: 1 conf.",price:"~€2",url:"https://www.leroymerlin.it/search?q=viti+legno+4x30"},
+{cat:"FERRAMENTA",name:"Colla vinilica per legno",detail:"Rinforza ogni giunto traverso-gamba. Ne basta una piccola bottiglia.",qty:"Qtà: 1",price:"~€3",url:"https://www.leroymerlin.it/search?q=colla+vinilica+legno"},
+{cat:"FINITURA",name:"Fondo/primer per legno 0.5 L",detail:"Prima mano prima del bianco — fa aderire la vernice e la fa durare di più.",qty:"Qtà: 1",price:"~€6",url:"https://www.leroymerlin.it/search?q=fondo+primer+legno+bianco+0.5"},
+{cat:"FINITURA",name:"Smalto all'acqua bianco per esterni 0.5 L (satinato)",detail:"2–3 mani. Smalto all'acqua = facile da pulire, non puzza, asciuga in fretta.",qty:"Qtà: 1",price:"~€12",url:"https://www.leroymerlin.it/search?q=smalto+acqua+bianco+esterno+0.5"},
+{cat:"FINITURA",name:"Carta vetrata grana 120 + grana 180",detail:"120 per carteggiare dopo il taglio. 180 per rifinire prima della vernice.",qty:"Qtà: 2–3 fogli per grana",price:"~€4",url:"https://www.leroymerlin.it/search?q=carta+vetrata+120+180"},
+{cat:"STABILITÀ",name:"Feltrini adesivi in gomma ~30–40 mm",detail:"2 sotto le gambe (antiscivolo) + 2 in cima (protezione muro).",qty:"Qtà: 4",price:"~€3",url:"https://www.leroymerlin.it/search?q=feltrini+gomma+adesivi+30mm"},
+{cat:"STABILITÀ (opzionale)",name:"Tappetino antiscivolo per cassetti",detail:"Se lasci i ripiani appoggiati (smontabili), mettine una striscia tra ripiano e traverso.",qty:"Qtà: 1 rotolo",price:"~€2",url:"https://www.leroymerlin.it/search?q=tappetino+antiscivolo+cassetti"},
+{cat:"ERBE — VIVAIO",name:"Basilico (pianta)",detail:"Ripiano 1. Annuale — sostituisci ogni primavera.",qty:"Qtà: 1",price:"~€3",url:""},
+{cat:"ERBE — VIVAIO",name:"Prezzemolo a foglia piatta (pianta)",detail:"Ripiano 1. Biennale — prendi la varietà italiana.",qty:"Qtà: 1",price:"~€3",url:""},
+{cat:"ERBE — VIVAIO",name:"Menta (pianta)",detail:"Ripiano 2. ⚠️ Vaso suo — è invasiva!",qty:"Qtà: 1",price:"~€3",url:""},
+{cat:"ERBE — VIVAIO",name:"Melissa / Lemon Balm (pianta)",detail:"Ripiano 2. Per tisane. Vaso suo come la menta.",qty:"Qtà: 1",price:"~€3",url:""},
+{cat:"ERBE — VIVAIO",name:"Rosmarino (pianta)",detail:"Ripiano 3. Perenne — vivrà per anni.",qty:"Qtà: 1",price:"~€3",url:""},
+{cat:"ERBE — VIVAIO",name:"Salvia (pianta)",detail:"Ripiano 3. Perenne. Splendide foglie argentate.",qty:"Qtà: 1",price:"~€3",url:""},
+{cat:"ERBE — VIVAIO",name:"Timo (pianta)",detail:"Ripiano 4. Perenne. Quasi non serve innaffiarlo.",qty:"Qtà: 1",price:"~€3",url:""},
+{cat:"ERBE — VIVAIO",name:"Origano (pianta)",detail:"Ripiano 4. Perenne. Più buono secco che fresco!",qty:"Qtà: 1",price:"~€3",url:""},
+{cat:"TERRICCIO — VIVAIO / LEROY MERLIN",name:"Terriccio universale 20 L",detail:"Per tutti i vasi. Per le mediterranee mescola con 30% perlite.",qty:"Qtà: 1 sacco",price:"~€5",url:"https://www.leroymerlin.it/search?q=terriccio+universale+20+litri"},
+{cat:"TERRICCIO — VIVAIO / LEROY MERLIN",name:"Perlite 5 L",detail:"Da mescolare al terriccio per le erbe mediterranee (ripiani 3–4).",qty:"Qtà: 1 sacco",price:"~€3",url:"https://www.leroymerlin.it/search?q=perlite+5+litri"},
+{cat:"VASI",name:"Vasi plastica con sottovasi (varie misure)",detail:"4× da 20–25cm Ø + 4× da 12–15cm Ø. Tutti con fori di drenaggio.",qty:"Qtà: 8 totali",price:"~€12",url:"https://www.leroymerlin.it/search?q=vaso+plastica+sottovaso"},
+];
+
+const KEY='scaffale-erbe-v1';
+let state=JSON.parse(localStorage.getItem(KEY)||'{}');
+
+function render(){
+  const el=document.getElementById('shop-list');
+  let html='',lastCat='';
+  ITEMS.forEach((it,i)=>{
+    if(it.cat!==lastCat){html+=`<div class="shop-cat">${it.cat}</div>`;lastCat=it.cat;}
+    const done=state[i]?'done':'';
+    const linkHtml=it.url?`<a class="si-link" href="${it.url}" target="_blank" onclick="event.stopPropagation()">Cerca prodotto →</a>`:'';
+    html+=`<div class="shop-item ${done}" onclick="toggle(${i})">
+      <div class="si-check"><svg viewBox="0 0 16 16"><polyline points="3,8 7,12 13,4"/></svg></div>
+      <div class="si-info">
+        <div class="si-name">${it.name}</div>
+        <div class="si-detail">${it.detail}</div>
+        <div class="si-meta"><span class="si-qty">${it.qty}</span><span class="si-price">${it.price}</span></div>
+        ${linkHtml}
+      </div>
+    </div>`;
+  });
+  el.innerHTML=html;
+  updateProgress();
+}
+
+function toggle(i){state[i]=!state[i];localStorage.setItem(KEY,JSON.stringify(state));render();}
+function resetShop(){state={};localStorage.setItem(KEY,JSON.stringify(state));render();}
+function updateProgress(){
+  const total=ITEMS.length;
+  const done=Object.values(state).filter(Boolean).length;
+  document.getElementById('bar').style.width=`${(done/total)*100}%`;
+  document.getElementById('prog').textContent=`${done} / ${total} prodotti`;
+}
+render();
+</script>
+</body>
+</html>

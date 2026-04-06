@@ -104,3 +104,4 @@ Stile: dark theme, font Space Mono + DM Sans, colori GitHub-style. Mobile-first.
 | Progetto | Descrizione | Link |
 |---|---|---|
 | [mobile-lavatrice](mobile-lavatrice/) | Mobile a ponte per lavatrice LG F10B8NDA | [Live](https://fabiosangregorio.github.io/claude-projects/mobile-lavatrice/) |
+| [scaffale-erbe](scaffale-erbe/) | Scaffale a scala per erbe aromatiche sul balcone | [Live](https://fabiosangregorio.github.io/claude-projects/scaffale-erbe/) |
