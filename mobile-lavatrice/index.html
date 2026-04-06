@@ -7,71 +7,71 @@
 <meta name="theme-color" content="#0e1117">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#0e1117;--sf:#161b22;--sf2:#1c2230;--bd:#2a3040;--tx:#e6edf3;--tx2:#8b949e;--ac:#58a6ff;--ac2:#3fb950;--wn:#f0883e;--rd:#f85149;--pa:#5e9eff;--pb:#7ee787;--pc:#ffa657;--pd:#d2a8ff;--pe:#ff7b72;--wm:#484f58}
+:root{--bg:#0e1117;--sf:#161b22;--sf2:#1c2230;--bd:#2a3040;--tx:#e6edf3;--tx2:#8b949e;--ac:#58a6ff;--ac2:#3fb950;--wn:#f0883e;--rd:#f85149;--pa:#5e9eff;--pb:#7ee787;--pc:#ffa657;--pd:#d2a8ff;--pe:#ff7b72}
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--tx);line-height:1.6}
-.c{max-width:1200px;margin:0 auto;padding:2rem 1.5rem}
-header{text-align:center;padding:3rem 0 2rem;border-bottom:1px solid var(--bd);margin-bottom:3rem}
-header h1{font-family:'Space Mono',monospace;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:700;letter-spacing:-1px;margin-bottom:.5rem;background:linear-gradient(135deg,var(--ac),var(--pd));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-header p{color:var(--tx2)}
-.br{display:flex;gap:.75rem;justify-content:center;margin-top:1rem;flex-wrap:wrap}
-.bg{font-family:'Space Mono',monospace;font-size:.7rem;padding:.3rem .75rem;border-radius:999px;border:1px solid var(--bd);color:var(--tx2);background:var(--sf)}
-section{margin-bottom:3rem}
-h2{font-family:'Space Mono',monospace;font-size:1.3rem;margin-bottom:1.25rem;color:var(--ac);display:flex;align-items:center;gap:.5rem}
-h2 .n{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:6px;background:var(--ac);color:var(--bg);font-size:.8rem;font-weight:700;flex-shrink:0}
-h3{font-size:1rem;margin-bottom:.75rem}
-.sg{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1rem;margin-bottom:2rem}
-.sc{background:var(--sf);border:1px solid var(--bd);border-radius:10px;padding:1.1rem}
-.sc .l{font-size:.7rem;color:var(--tx2);text-transform:uppercase;letter-spacing:1px;margin-bottom:.2rem;font-family:'Space Mono',monospace}
-.sc .v{font-size:1.3rem;font-weight:700;font-family:'Space Mono',monospace}
-.sc .u{font-size:.85rem;color:var(--tx2);font-weight:400}
-.sc .s{font-size:.7rem;color:var(--tx2);margin-top:.2rem}
-.dc{background:var(--sf);border:1px solid var(--bd);border-radius:12px;padding:1.5rem;margin-bottom:2rem;overflow-x:auto}
+.c{max-width:1100px;margin:0 auto;padding:2rem 1.5rem}
+header{text-align:center;padding:2.5rem 0 1.5rem;border-bottom:1px solid var(--bd);margin-bottom:2.5rem}
+header h1{font-family:'Space Mono',monospace;font-size:clamp(1.6rem,4vw,2.5rem);font-weight:700;letter-spacing:-1px;margin-bottom:.4rem;background:linear-gradient(135deg,var(--ac),var(--pd));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+header p{color:var(--tx2);font-size:.9rem}
+.br{display:flex;gap:.6rem;justify-content:center;margin-top:.8rem;flex-wrap:wrap}
+.bg{font-family:'Space Mono',monospace;font-size:.65rem;padding:.25rem .6rem;border-radius:999px;border:1px solid var(--bd);color:var(--tx2);background:var(--sf)}
+section{margin-bottom:2.5rem}
+h2{font-family:'Space Mono',monospace;font-size:1.2rem;margin-bottom:1rem;color:var(--ac);display:flex;align-items:center;gap:.5rem}
+h2 .n{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:6px;background:var(--ac);color:var(--bg);font-size:.75rem;font-weight:700;flex-shrink:0}
+h3{font-size:.95rem;margin-bottom:.6rem}
+.sg{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:.8rem;margin-bottom:1.5rem}
+.sc{background:var(--sf);border:1px solid var(--bd);border-radius:10px;padding:1rem}
+.sc .l{font-size:.65rem;color:var(--tx2);text-transform:uppercase;letter-spacing:1px;margin-bottom:.15rem;font-family:'Space Mono',monospace}
+.sc .v{font-size:1.2rem;font-weight:700;font-family:'Space Mono',monospace}
+.sc .u{font-size:.8rem;color:var(--tx2);font-weight:400}
+.sc .s{font-size:.65rem;color:var(--tx2);margin-top:.15rem}
+.dc{background:var(--sf);border:1px solid var(--bd);border-radius:12px;padding:1.25rem;margin-bottom:1.5rem;overflow-x:auto}
 .dc svg{display:block;margin:0 auto;max-width:100%;height:auto}
-.dt{font-family:'Space Mono',monospace;font-size:.75rem;color:var(--tx2);text-align:center;margin-top:1rem;text-transform:uppercase;letter-spacing:2px}
-table.b{width:100%;border-collapse:collapse;font-size:.88rem}
-table.b th{font-family:'Space Mono',monospace;font-size:.68rem;text-transform:uppercase;letter-spacing:1px;color:var(--tx2);text-align:left;padding:.7rem .9rem;border-bottom:2px solid var(--bd);background:var(--sf2)}
-table.b td{padding:.7rem .9rem;border-bottom:1px solid var(--bd);vertical-align:middle}
+.dt{font-family:'Space Mono',monospace;font-size:.7rem;color:var(--tx2);text-align:center;margin-top:.8rem;text-transform:uppercase;letter-spacing:2px}
+table.b{width:100%;border-collapse:collapse;font-size:.85rem}
+table.b th{font-family:'Space Mono',monospace;font-size:.65rem;text-transform:uppercase;letter-spacing:1px;color:var(--tx2);text-align:left;padding:.6rem .8rem;border-bottom:2px solid var(--bd);background:var(--sf2)}
+table.b td{padding:.6rem .8rem;border-bottom:1px solid var(--bd);vertical-align:middle}
 table.b tr:hover td{background:var(--sf2)}
-.cd{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:.5rem;vertical-align:middle}
-.dm{font-family:'Space Mono',monospace;font-size:.83rem;color:var(--ac)}
-.sep td{background:var(--sf2)!important;color:var(--tx2);font-family:'Space Mono',monospace;font-size:.7rem;letter-spacing:1px}
+.cd{display:inline-block;width:11px;height:11px;border-radius:3px;margin-right:.4rem;vertical-align:middle}
+.dm{font-family:'Space Mono',monospace;font-size:.8rem;color:var(--ac)}
+.sep td{background:var(--sf2)!important;color:var(--tx2);font-family:'Space Mono',monospace;font-size:.65rem;letter-spacing:1px}
 .steps{counter-reset:step;list-style:none;padding:0}
-.steps li{counter-increment:step;position:relative;padding:1rem 1rem 1rem 3.5rem;margin-bottom:.7rem;background:var(--sf);border:1px solid var(--bd);border-radius:10px;font-size:.92rem}
-.steps li::before{content:counter(step);position:absolute;left:1rem;top:1rem;width:24px;height:24px;background:var(--ac2);color:var(--bg);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Space Mono',monospace;font-size:.75rem;font-weight:700}
+.steps li{counter-increment:step;position:relative;padding:.9rem .9rem .9rem 3.2rem;margin-bottom:.6rem;background:var(--sf);border:1px solid var(--bd);border-radius:10px;font-size:.88rem}
+.steps li::before{content:counter(step);position:absolute;left:.9rem;top:.9rem;width:22px;height:22px;background:var(--ac2);color:var(--bg);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Space Mono',monospace;font-size:.7rem;font-weight:700}
 .steps li strong{color:var(--ac)}
-.lg{display:flex;gap:1.25rem;flex-wrap:wrap;margin:1rem 0;font-size:.83rem}
-.li{display:flex;align-items:center;gap:.4rem}
-.ls{width:14px;height:14px;border-radius:3px}
-.tip{background:rgba(88,166,255,.08);border-left:3px solid var(--ac);padding:1rem 1.2rem;border-radius:0 8px 8px 0;margin:1rem 0;font-size:.88rem;color:var(--tx2)}
+.lg{display:flex;gap:1rem;flex-wrap:wrap;margin:.8rem 0;font-size:.8rem}
+.li{display:flex;align-items:center;gap:.35rem}
+.ls{width:13px;height:13px;border-radius:3px}
+.tip{background:rgba(88,166,255,.08);border-left:3px solid var(--ac);padding:.9rem 1.1rem;border-radius:0 8px 8px 0;margin:.8rem 0;font-size:.85rem;color:var(--tx2)}
 .tip strong{color:var(--ac)}
-
-/* SHOPPING LIST */
-.shop-header{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.5rem;margin-bottom:1rem}
+/* SHOP */
+.shop-header{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.5rem;margin-bottom:.8rem}
 .shop-header h2{margin-bottom:0}
-.shop-reset{padding:.4rem .8rem;background:var(--sf);border:1px solid var(--bd);color:var(--tx2);border-radius:6px;font-size:.72rem;cursor:pointer;font-family:'Space Mono',monospace}
+.shop-reset{padding:.35rem .7rem;background:var(--sf);border:1px solid var(--bd);color:var(--tx2);border-radius:6px;font-size:.68rem;cursor:pointer;font-family:'Space Mono',monospace}
 .shop-reset:hover{border-color:var(--rd);color:var(--rd)}
-.progress{height:6px;background:var(--sf);border-radius:99px;overflow:hidden;margin-bottom:.3rem}
+.progress{height:5px;background:var(--sf);border-radius:99px;overflow:hidden;margin-bottom:.25rem}
 .progress-bar{height:100%;background:var(--ac2);border-radius:99px;transition:width .3s}
-.progress-text{font-size:.72rem;color:var(--tx2);margin-bottom:1.25rem;font-family:'Space Mono',monospace}
-.shop-cat{font-size:.65rem;text-transform:uppercase;letter-spacing:1.5px;color:var(--wn);font-weight:700;padding:.75rem 0 .4rem;font-family:'Space Mono',monospace}
-.shop-item{display:flex;align-items:flex-start;gap:.75rem;padding:.85rem;margin-bottom:.5rem;background:var(--sf);border:1px solid var(--bd);border-radius:10px;cursor:pointer;-webkit-tap-highlight-color:transparent;user-select:none;transition:opacity .2s,border-color .2s}
+.progress-text{font-size:.68rem;color:var(--tx2);margin-bottom:1rem;font-family:'Space Mono',monospace}
+.shop-cat{font-size:.6rem;text-transform:uppercase;letter-spacing:1.5px;color:var(--wn);font-weight:700;padding:.6rem 0 .3rem;font-family:'Space Mono',monospace}
+.shop-item{display:flex;align-items:flex-start;gap:.7rem;padding:.8rem;margin-bottom:.45rem;background:var(--sf);border:1px solid var(--bd);border-radius:10px;cursor:pointer;-webkit-tap-highlight-color:transparent;user-select:none;transition:opacity .2s,border-color .2s}
 .shop-item:active{border-color:var(--ac)}
-.shop-item.done{opacity:.4}
+.shop-item.done{opacity:.35}
 .shop-item.done .si-name{text-decoration:line-through}
-.si-check{width:22px;height:22px;border:2px solid var(--bd);border-radius:6px;flex-shrink:0;display:flex;align-items:center;justify-content:center;margin-top:2px;transition:all .15s}
+.si-check{width:20px;height:20px;border:2px solid var(--bd);border-radius:5px;flex-shrink:0;display:flex;align-items:center;justify-content:center;margin-top:2px;transition:all .15s}
 .shop-item.done .si-check{background:var(--ac2);border-color:var(--ac2)}
-.si-check svg{width:13px;height:13px;stroke:#0e1117;stroke-width:3;fill:none;opacity:0;transition:opacity .1s}
+.si-check svg{width:12px;height:12px;stroke:#0e1117;stroke-width:3;fill:none;opacity:0;transition:opacity .1s}
 .shop-item.done .si-check svg{opacity:1}
 .si-info{flex:1;min-width:0}
-.si-name{font-size:.92rem;font-weight:600;line-height:1.3}
-.si-detail{font-size:.78rem;color:var(--tx2);margin-top:.1rem}
-.si-qty{font-size:.72rem;color:var(--wn);font-weight:600;margin-top:.2rem;font-family:'Space Mono',monospace}
-.si-link{display:inline-block;margin-top:.35rem;font-size:.72rem;color:var(--ac);text-decoration:none;font-weight:600;padding:.2rem .55rem;border:1px solid rgba(88,166,255,.3);border-radius:5px}
+.si-name{font-size:.88rem;font-weight:600;line-height:1.3}
+.si-detail{font-size:.75rem;color:var(--tx2);margin-top:.1rem}
+.si-meta{display:flex;gap:.6rem;align-items:center;margin-top:.2rem;flex-wrap:wrap}
+.si-qty{font-size:.68rem;color:var(--wn);font-weight:600;font-family:'Space Mono',monospace}
+.si-price{font-size:.68rem;color:var(--ac2);font-weight:700;font-family:'Space Mono',monospace}
+.si-link{display:inline-block;margin-top:.3rem;font-size:.68rem;color:var(--ac);text-decoration:none;font-weight:600;padding:.18rem .5rem;border:1px solid rgba(88,166,255,.3);border-radius:5px}
 .si-link:active{opacity:.6}
-
-footer{text-align:center;padding:2rem 0;border-top:1px solid var(--bd);margin-top:2rem;color:var(--tx2);font-size:.78rem}
-@media(max-width:600px){.c{padding:1rem}.sg{grid-template-columns:1fr 1fr}table.b{font-size:.78rem}table.b th,table.b td{padding:.5rem}}
+footer{text-align:center;padding:1.5rem 0;border-top:1px solid var(--bd);margin-top:1.5rem;color:var(--tx2);font-size:.72rem}
+@media(max-width:600px){.c{padding:1rem}.sg{grid-template-columns:1fr 1fr}table.b{font-size:.75rem}table.b th,table.b td{padding:.4rem .5rem}}
 </style>
 </head>
 <body>
@@ -79,148 +79,105 @@ footer{text-align:center;padding:2rem 0;border-top:1px solid var(--bd);margin-to
 
 <header>
   <h1>Mobile Lavatrice</h1>
-  <p>Progetto DIY — 2 fianchi + 2 ripiani + schienale, fissaggi nascosti</p>
+  <p>Progetto DIY — 2 fianchi + 2 ripiani + schienale + piedini</p>
   <div class="br">
     <span class="bg">LG F10B8NDA</span>
-    <span class="bg">656 × 580 × 1030 mm</span>
-    <span class="bg">Melaminico bianco 18 mm</span>
-    <span class="bg">~€55–75</span>
+    <span class="bg">656 × 600 × 1020 mm</span>
+    <span class="bg">Melaminico 16 mm</span>
+    <span class="bg">~€65</span>
   </div>
 </header>
 
-<!-- 1 DIMENSIONI -->
+<!-- 1 -->
 <section>
   <h2><span class="n">1</span> Dimensioni</h2>
-  <h3>Lavatrice (LG F10B8NDA)</h3>
+  <h3>Lavatrice</h3>
   <div class="sg">
-    <div class="sc"><div class="l">Larghezza</div><div class="v">600 <span class="u">mm</span></div></div>
-    <div class="sc"><div class="l">Profondità</div><div class="v">440 <span class="u">mm</span></div></div>
-    <div class="sc"><div class="l">Altezza</div><div class="v">842 <span class="u">mm</span></div></div>
+    <div class="sc"><div class="l">Larghezza</div><div class="v">600<span class="u">mm</span></div></div>
+    <div class="sc"><div class="l">Profondità</div><div class="v">440<span class="u">mm</span></div></div>
+    <div class="sc"><div class="l">Altezza</div><div class="v">842<span class="u">mm</span></div></div>
   </div>
-  <h3>Mobile (esterno)</h3>
+  <h3>Mobile</h3>
   <div class="sg">
-    <div class="sc"><div class="l">Largh. est.</div><div class="v">656 <span class="u">mm</span></div><div class="s">600+10×2+18×2</div></div>
-    <div class="sc"><div class="l">Largh. int.</div><div class="v">620 <span class="u">mm</span></div><div class="s">10 mm gioco/lato</div></div>
-    <div class="sc"><div class="l">Profondità</div><div class="v">580 <span class="u">mm</span></div></div>
-    <div class="sc"><div class="l">Altezza max</div><div class="v">1030 <span class="u">mm</span></div><div class="s">Finestra a 1040</div></div>
-    <div class="sc"><div class="l">Nicchia</div><div class="v">142 <span class="u">mm</span></div><div class="s">Tra C e D</div></div>
-    <div class="sc"><div class="l">Spessore</div><div class="v">18 <span class="u">mm</span></div></div>
+    <div class="sc"><div class="l">Largh. est.</div><div class="v">632<span class="u">mm</span></div><div class="s">600+16×2</div></div>
+    <div class="sc"><div class="l">Largh. int.</div><div class="v">600<span class="u">mm</span></div><div class="s">A filo lavatrice</div></div>
+    <div class="sc"><div class="l">Profondità</div><div class="v">600<span class="u">mm</span></div><div class="s">Pannelli 60cm</div></div>
+    <div class="sc"><div class="l">Alt. pannelli</div><div class="v">1000<span class="u">mm</span></div><div class="s">Fianchi 100cm</div></div>
+    <div class="sc"><div class="l">Piedini</div><div class="v">20<span class="u">mm</span></div><div class="s">Tappi plastica</div></div>
+    <div class="sc"><div class="l">Alt. totale</div><div class="v">1020<span class="u">mm</span></div><div class="s">Finestra a 1040 ✓</div></div>
+    <div class="sc"><div class="l">Nicchia</div><div class="v">110<span class="u">mm</span></div><div class="s">Tra C e D</div></div>
+    <div class="sc"><div class="l">Spessore</div><div class="v">16<span class="u">mm</span></div><div class="s">Spinotti ø6</div></div>
   </div>
-  <div class="tip"><strong>Stack verticale:</strong> 0→842 lavatrice · 842→852 gioco 10mm · 852→870 ripiano C · 870→1012 nicchia 142mm · 1012→1030 ripiano D · 1030→1040 margine finestra ✓</div>
+  <div class="tip"><strong>Stack verticale:</strong> 0→20 piedini · 20→862 lavatrice (842) · 862→872 gioco 10mm · 872→888 ripiano C (16mm) · 888→1004 nicchia 116mm · 1004→1020 ripiano D (16mm) · margine finestra 20mm ✓</div>
 </section>
 
-<!-- 2 ESPLOSO -->
+<!-- 2 -->
 <section>
   <h2><span class="n">2</span> Vista esplosa</h2>
   <div class="lg">
-    <div class="li"><div class="ls" style="background:var(--pa)"></div> A — Fianco SX</div>
-    <div class="li"><div class="ls" style="background:var(--pb)"></div> B — Fianco DX</div>
-    <div class="li"><div class="ls" style="background:var(--pc)"></div> C — Ripiano basso</div>
-    <div class="li"><div class="ls" style="background:var(--pd)"></div> D — Ripiano alto</div>
-    <div class="li"><div class="ls" style="background:var(--pe)"></div> E — Schienale</div>
+    <div class="li"><div class="ls" style="background:var(--pa)"></div>A Fianco SX</div>
+    <div class="li"><div class="ls" style="background:var(--pb)"></div>B Fianco DX</div>
+    <div class="li"><div class="ls" style="background:var(--pc)"></div>C Ripiano basso</div>
+    <div class="li"><div class="ls" style="background:var(--pd)"></div>D Ripiano alto</div>
+    <div class="li"><div class="ls" style="background:var(--pe)"></div>E Schienale</div>
   </div>
   <div class="dc">
     <svg viewBox="0 0 500 480" xmlns="http://www.w3.org/2000/svg">
       <text x="250" y="18" text-anchor="middle" fill="#8b949e" font-family="Space Mono,monospace" font-size="9" letter-spacing="2">VISTA ESPLOSA</text>
-      <!-- D top -->
-      <rect x="120" y="32" width="260" height="16" rx="2" fill="var(--pd)" opacity=".8" stroke="#fff" stroke-width=".5"/>
-      <text x="250" y="44" text-anchor="middle" fill="#0e1117" font-family="Space Mono,monospace" font-size="8" font-weight="700">D — 656×580×18</text>
-      <text x="250" y="64" text-anchor="middle" fill="var(--tx2)" font-size="12">↓</text>
-      <!-- C shelf -->
-      <rect x="140" y="110" width="220" height="16" rx="2" fill="var(--pc)" opacity=".8" stroke="#fff" stroke-width=".5"/>
-      <text x="250" y="122" text-anchor="middle" fill="#0e1117" font-family="Space Mono,monospace" font-size="8" font-weight="700">C — 620×580×18</text>
-      <!-- A left -->
-      <rect x="82" y="70" width="16" height="340" rx="2" fill="var(--pa)" opacity=".8" stroke="#fff" stroke-width=".5"/>
-      <text x="90" y="250" text-anchor="middle" fill="#0e1117" font-family="Space Mono,monospace" font-size="8" font-weight="700" transform="rotate(-90,90,250)">A — 580×1030×18</text>
-      <text x="115" y="250" fill="var(--tx2)" font-size="12">→</text>
-      <!-- B right -->
-      <rect x="402" y="70" width="16" height="340" rx="2" fill="var(--pb)" opacity=".8" stroke="#fff" stroke-width=".5"/>
-      <text x="410" y="250" text-anchor="middle" fill="#0e1117" font-family="Space Mono,monospace" font-size="8" font-weight="700" transform="rotate(-90,410,250)">B — 580×1030×18</text>
-      <text x="385" y="250" fill="var(--tx2)" font-size="12">←</text>
-      <!-- E back -->
-      <rect x="140" y="430" width="220" height="14" rx="2" fill="var(--pe)" opacity=".7" stroke="#fff" stroke-width=".5"/>
-      <text x="250" y="441" text-anchor="middle" fill="#0e1117" font-family="Space Mono,monospace" font-size="8" font-weight="700">E — Schienale 652×1026×3.5</text>
-      <text x="250" y="422" text-anchor="middle" fill="var(--tx2)" font-size="12">↑</text>
-      <text x="250" y="462" text-anchor="middle" fill="var(--pe)" font-family="Space Mono,monospace" font-size="7">inchiodato sul retro</text>
-      <!-- Washer ghost -->
-      <rect x="155" y="180" width="190" height="230" rx="8" fill="#484f58" stroke="#6e7681" stroke-width="1" opacity=".2"/>
-      <text x="250" y="300" text-anchor="middle" fill="#6e7681" font-family="Space Mono,monospace" font-size="9" opacity=".5">Lavatrice</text>
-      <!-- Fastener notes -->
+      <rect x="120" y="32" width="260" height="14" rx="2" fill="var(--pd)" opacity=".8" stroke="#fff" stroke-width=".5"/>
+      <text x="250" y="43" text-anchor="middle" fill="#0e1117" font-family="Space Mono,monospace" font-size="8" font-weight="700">D — 632×600×16</text>
+      <text x="250" y="62" text-anchor="middle" fill="var(--tx2)" font-size="12">↓</text>
+      <rect x="140" y="108" width="220" height="14" rx="2" fill="var(--pc)" opacity=".8" stroke="#fff" stroke-width=".5"/>
+      <text x="250" y="119" text-anchor="middle" fill="#0e1117" font-family="Space Mono,monospace" font-size="8" font-weight="700">C — 600×600×16</text>
+      <rect x="82" y="68" width="14" height="340" rx="2" fill="var(--pa)" opacity=".8" stroke="#fff" stroke-width=".5"/>
+      <text x="89" y="248" text-anchor="middle" fill="#0e1117" font-family="Space Mono,monospace" font-size="8" font-weight="700" transform="rotate(-90,89,248)">A — 600×1000×16</text>
+      <text x="113" y="248" fill="var(--tx2)" font-size="12">→</text>
+      <rect x="404" y="68" width="14" height="340" rx="2" fill="var(--pb)" opacity=".8" stroke="#fff" stroke-width=".5"/>
+      <text x="411" y="248" text-anchor="middle" fill="#0e1117" font-family="Space Mono,monospace" font-size="8" font-weight="700" transform="rotate(-90,411,248)">B — 600×1000×16</text>
+      <text x="387" y="248" fill="var(--tx2)" font-size="12">←</text>
+      <rect x="140" y="428" width="220" height="12" rx="2" fill="var(--pe)" opacity=".7" stroke="#fff" stroke-width=".5"/>
+      <text x="250" y="438" text-anchor="middle" fill="#0e1117" font-family="Space Mono,monospace" font-size="7" font-weight="700">E — Schienale faesite 628×996×3.5</text>
+      <text x="250" y="420" text-anchor="middle" fill="var(--tx2)" font-size="12">↑</text>
+      <text x="250" y="458" text-anchor="middle" fill="var(--pe)" font-family="Space Mono,monospace" font-size="7">inchiodato sul retro</text>
+      <rect x="155" y="178" width="190" height="230" rx="8" fill="#484f58" stroke="#6e7681" stroke-width="1" opacity=".2"/>
+      <text x="250" y="298" text-anchor="middle" fill="#6e7681" font-family="Space Mono,monospace" font-size="9" opacity=".5">Lavatrice</text>
       <g font-family="Space Mono,monospace" font-size="7" fill="var(--wn)">
-        <text x="250" y="105" text-anchor="middle">spinotti ø8 + colla</text>
-        <text x="250" y="62" text-anchor="middle" fill="var(--wn)" font-size="6">staffe angolari (nella nicchia)</text>
+        <text x="250" y="103" text-anchor="middle">spinotti ø6 + colla</text>
+        <text x="250" y="60" text-anchor="middle" font-size="6">staffe angolari (nella nicchia)</text>
       </g>
+      <!-- Piedini -->
+      <rect x="88" y="410" width="8" height="8" rx="2" fill="#6e7681"/>
+      <rect x="404" y="410" width="8" height="8" rx="2" fill="#6e7681"/>
+      <text x="250" y="475" text-anchor="middle" fill="#6e7681" font-family="Space Mono,monospace" font-size="7">+ 4 piedini plastica h20mm sotto i fianchi</text>
     </svg>
-    <div class="dt">Vista esplosa</div>
   </div>
 </section>
 
-<!-- 3 BOM -->
+<!-- 3 -->
 <section>
-  <h2><span class="n">3</span> Distinta base</h2>
+  <h2><span class="n">3</span> Distinta e piano taglio</h2>
   <div class="dc" style="padding:0;overflow:hidden">
     <table class="b">
-      <thead><tr><th>ID</th><th>Pezzo</th><th>mm</th><th>Q</th></tr></thead>
+      <thead><tr><th>ID</th><th>Pezzo</th><th>mm (L×P×Sp)</th><th>Q</th><th>Fonte</th></tr></thead>
       <tbody>
-        <tr><td><span class="cd" style="background:var(--pa)"></span>A</td><td>Fianco SX</td><td class="dm">580×1030×18</td><td>1</td></tr>
-        <tr><td><span class="cd" style="background:var(--pb)"></span>B</td><td>Fianco DX</td><td class="dm">580×1030×18</td><td>1</td></tr>
-        <tr><td><span class="cd" style="background:var(--pc)"></span>C</td><td>Ripiano basso</td><td class="dm">620×580×18</td><td>1</td></tr>
-        <tr><td><span class="cd" style="background:var(--pd)"></span>D</td><td>Ripiano alto</td><td class="dm">656×580×18</td><td>1</td></tr>
-        <tr><td><span class="cd" style="background:var(--pe)"></span>E</td><td>Schienale faesite</td><td class="dm">652×1026×3.5</td><td>1</td></tr>
+        <tr><td><span class="cd" style="background:var(--pa)"></span>A</td><td>Fianco SX</td><td class="dm">600×1000×16</td><td>1</td><td rowspan="2">1° pannello 200×60 → taglio a metà</td></tr>
+        <tr><td><span class="cd" style="background:var(--pb)"></span>B</td><td>Fianco DX</td><td class="dm">600×1000×16</td><td>1</td></tr>
+        <tr><td><span class="cd" style="background:var(--pc)"></span>C</td><td>Ripiano basso</td><td class="dm">600×600×16</td><td>1</td><td rowspan="2">2° pannello 200×60 → 2 tagli</td></tr>
+        <tr><td><span class="cd" style="background:var(--pd)"></span>D</td><td>Ripiano alto</td><td class="dm">632×600×16</td><td>1</td></tr>
+        <tr><td><span class="cd" style="background:var(--pe)"></span>E</td><td>Schienale</td><td class="dm">628×996×3.5</td><td>1</td><td>Faesite bianca</td></tr>
       </tbody>
     </table>
   </div>
+  <div class="tip"><strong>Piano taglio semplificato:</strong><br>
+  Pannello 1 (200×60 sp.16): taglio a 100cm → <strong>A</strong> + <strong>B</strong> (1 taglio)<br>
+  Pannello 2 (200×60 sp.16): taglio a 60cm e poi a 123.2cm → <strong>C</strong> (60cm) + <strong>D</strong> (63.2cm) + sfrido (2 tagli)<br>
+  Faesite: taglio a 99.6cm e poi a 62.8cm → <strong>E</strong> (1–2 tagli)</div>
 </section>
 
-<!-- 4 PIANO DI TAGLIO -->
-<section>
-  <h2><span class="n">4</span> Piano di taglio</h2>
-  <div class="dc">
-    <svg viewBox="0 0 500 340" xmlns="http://www.w3.org/2000/svg">
-      <text x="250" y="16" text-anchor="middle" fill="#8b949e" font-family="Space Mono,monospace" font-size="8" letter-spacing="1">MELAMINICO 2440×1220×18</text>
-      <rect x="20" y="28" width="460" height="230" rx="3" fill="#1c2230" stroke="#6e7681" stroke-width="1"/>
-      <!-- A 580×1030 => 109×194 -->
-      <rect x="24" y="32" width="109" height="194" rx="2" fill="var(--pa)" opacity=".75" stroke="#fff" stroke-width=".8"/>
-      <text x="78" y="130" text-anchor="middle" fill="#0e1117" font-family="Space Mono,monospace" font-size="11" font-weight="700">A</text>
-      <text x="78" y="145" text-anchor="middle" fill="#0e1117" font-size="7">580×1030</text>
-      <!-- B -->
-      <rect x="137" y="32" width="109" height="194" rx="2" fill="var(--pb)" opacity=".75" stroke="#fff" stroke-width=".8"/>
-      <text x="191" y="130" text-anchor="middle" fill="#0e1117" font-family="Space Mono,monospace" font-size="11" font-weight="700">B</text>
-      <text x="191" y="145" text-anchor="middle" fill="#0e1117" font-size="7">580×1030</text>
-      <!-- C 620×580 => 117×109 -->
-      <rect x="250" y="32" width="117" height="109" rx="2" fill="var(--pc)" opacity=".75" stroke="#fff" stroke-width=".8"/>
-      <text x="308" y="88" text-anchor="middle" fill="#0e1117" font-family="Space Mono,monospace" font-size="11" font-weight="700">C</text>
-      <text x="308" y="103" text-anchor="middle" fill="#0e1117" font-size="7">620×580</text>
-      <!-- D 656×580 => 124×109 -->
-      <rect x="250" y="145" width="124" height="109" rx="2" fill="var(--pd)" opacity=".75" stroke="#fff" stroke-width=".8"/>
-      <text x="312" y="201" text-anchor="middle" fill="#0e1117" font-family="Space Mono,monospace" font-size="11" font-weight="700">D</text>
-      <text x="312" y="216" text-anchor="middle" fill="#0e1117" font-size="7">656×580</text>
-      <!-- Waste -->
-      <rect x="24" y="230" width="222" height="24" rx="1" fill="#30363d" opacity=".3" stroke="#484f58" stroke-width=".5" stroke-dasharray="3,2"/>
-      <rect x="378" y="32" width="98" height="222" rx="1" fill="#30363d" opacity=".3" stroke="#484f58" stroke-width=".5" stroke-dasharray="3,2"/>
-      <!-- Cuts -->
-      <line x1="133" y1="26" x2="133" y2="260" stroke="var(--rd)" stroke-width=".8" stroke-dasharray="4,2" opacity=".5"/>
-      <line x1="246" y1="26" x2="246" y2="260" stroke="var(--rd)" stroke-width=".8" stroke-dasharray="4,2" opacity=".5"/>
-      <line x1="374" y1="26" x2="374" y2="260" stroke="var(--rd)" stroke-width=".8" stroke-dasharray="4,2" opacity=".5"/>
-      <line x1="24" y1="226" x2="246" y2="226" stroke="var(--rd)" stroke-width=".8" stroke-dasharray="4,2" opacity=".5"/>
-      <line x1="246" y1="141" x2="480" y2="141" stroke="var(--rd)" stroke-width=".8" stroke-dasharray="4,2" opacity=".5"/>
-      <text x="250" y="278" text-anchor="middle" fill="#6e7681" font-family="Space Mono,monospace" font-size="8">← 2440 mm → 5 tagli</text>
-
-      <text x="250" y="300" text-anchor="middle" fill="#8b949e" font-family="Space Mono,monospace" font-size="8" letter-spacing="1">FAESITE 2440×1220×3.5</text>
-      <rect x="20" y="308" width="460" height="20" rx="2" fill="#1c2230" stroke="#6e7681" stroke-width="1"/>
-      <rect x="24" y="311" width="123" height="14" rx="1" fill="var(--pe)" opacity=".65" stroke="#fff" stroke-width=".5"/>
-      <text x="85" y="321" text-anchor="middle" fill="#0e1117" font-family="Space Mono,monospace" font-size="7" font-weight="700">E 652×1026</text>
-      <rect x="151" y="311" width="325" height="14" rx="1" fill="#30363d" opacity=".25" stroke="#484f58" stroke-width=".5" stroke-dasharray="3,2"/>
-      <text x="313" y="321" text-anchor="middle" fill="#6e7681" font-family="Space Mono,monospace" font-size="7">sfrido · 1 taglio</text>
-    </svg>
-    <div class="dt">Piano di taglio</div>
-  </div>
-</section>
-
-<!-- 5 LISTA SPESA INTERATTIVA -->
+<!-- 4 LISTA SPESA -->
 <section id="shop-section">
   <div class="shop-header">
-    <h2><span class="n">5</span> Lista spesa — Leroy Merlin</h2>
+    <h2><span class="n">4</span> Lista spesa</h2>
     <button class="shop-reset" onclick="resetShop()">↺ Reset</button>
   </div>
   <div class="progress"><div class="progress-bar" id="bar"></div></div>
@@ -228,35 +185,38 @@ footer{text-align:center;padding:2rem 0;border-top:1px solid var(--bd);margin-to
   <div id="shop-list"></div>
 </section>
 
-<!-- 6 MONTAGGIO -->
+<!-- 5 -->
 <section>
-  <h2><span class="n">6</span> Montaggio</h2>
+  <h2><span class="n">5</span> Montaggio</h2>
   <ol class="steps">
-    <li><strong>Bordatura.</strong> Bordo preincollato sui lati frontali di A, B, C, D. Ferro da stiro 160–190°C, passa lento, premi, rifila con cutter, carteggia.</li>
-    <li><strong>Fori spinotti su C.</strong> 4 punti per lato sullo spessore (18 mm): a 5, 20, 40 e 57 cm dal bordo frontale. Punta ø8, profondità 15 mm. Inserisci centratori.</li>
-    <li><strong>Trasferisci segni sui fianchi.</strong> Quota 852 mm dal fondo. Appoggia C di costa, premi: i centratori segnano. Fora ø8 prof. 15 mm. Ripeti su B.</li>
-    <li><strong>Assembla C ai fianchi.</strong> Colla nei fori e spinotti. Incastra A e B. Pressione 30 min.</li>
-    <li><strong>Inchioda schienale E.</strong> Struttura a faccia in giù. Faesite E sul retro (bianco fuori). Chiodini ogni ~15 cm. <em>Questo rende il mobile rigido.</em></li>
-    <li><strong>Monta D sopra.</strong> Ripiano D (656 mm) sopra i fianchi. 4 staffe angolari dall'interno nicchia. Viti 3.5×16.</li>
-    <li><strong>Posiziona.</strong> Infila la lavatrice. Nessun fissaggio a muro. Il peso (~56 kg) stabilizza.</li>
+    <li><strong>Bordatura.</strong> Bordo preincollato sui lati frontali di A, B, C, D. Ferro da stiro 160–190°C, passa lento, premi, rifila con cutter.</li>
+    <li><strong>Piedini.</strong> Avvita o infila i 4 tappi in plastica sotto i fianchi A e B — 2 per fianco, a ~5cm dal bordo anteriore e posteriore.</li>
+    <li><strong>Fori spinotti su C.</strong> 4 punti per lato sullo spessore (16 mm): a 5, 20, 40 e 57cm dal fronte. Punta ø6, profondità 12mm. Inserisci centratori.</li>
+    <li><strong>Trasferisci segni sui fianchi.</strong> Quota 852mm dal fondo del fianco (incluso piedino). Appoggia C di costa, premi: i centratori segnano. Fora ø6 prof. 12mm.</li>
+    <li><strong>Assembla C.</strong> Colla nei fori e spinotti. Incastra A e B. Pressione 30 min.</li>
+    <li><strong>Schienale E.</strong> Struttura a faccia in giù. Faesite E sul retro (bianco fuori). Chiodini ogni ~15cm lungo i bordi. <em>Rende il mobile rigido.</em></li>
+    <li><strong>Ripiano D sopra.</strong> D (632mm) appoggia sopra i fianchi. 4 staffe angolari dall'interno nicchia. Viti 3.5×12mm (corte!).</li>
+    <li><strong>Posiziona.</strong> Infila la lavatrice. Il peso (~56kg) stabilizza tutto.</li>
   </ol>
-  <div class="tip"><strong>Regola:</strong> Pre-fora SEMPRE (2.5 mm per viti, 8 mm per spinotti). Mai a meno di 3 cm dallo spigolo. Coppia bassa.</div>
+  <div class="tip"><strong>Regola 16mm:</strong> Pre-fora SEMPRE (punta 2mm per viti, punta 6mm per spinotti). Mai a meno di 3cm dallo spigolo. Coppia bassa sull'avvitatore.</div>
 </section>
 
-<!-- 7 BUDGET -->
+<!-- 6 -->
 <section>
-  <h2><span class="n">7</span> Budget</h2>
+  <h2><span class="n">6</span> Budget</h2>
   <div class="dc" style="padding:0;overflow:hidden">
     <table class="b">
       <thead><tr><th>Voce</th><th>€</th></tr></thead>
       <tbody>
-        <tr><td>Pannello melaminico 244×122 sp.18mm</td><td class="dm">25–35</td></tr>
-        <tr><td>Faesite bianca 244×122 sp.3.5mm</td><td class="dm">8–12</td></tr>
-        <tr><td>Taglio (6 tagli)</td><td class="dm">3–6</td></tr>
-        <tr><td>Bordo preincollato ×2</td><td class="dm">7–8</td></tr>
-        <tr><td>Set spinatura + spine</td><td class="dm">5–7</td></tr>
-        <tr><td>Staffe + viti + chiodini</td><td class="dm">7–10</td></tr>
-        <tr style="font-weight:700;background:var(--sf2)"><td>TOTALE</td><td class="dm" style="color:var(--ac2)">€55–78</td></tr>
+        <tr><td>2× Ripiano 200×60 sp.16mm bianco (Leroy Merlin)</td><td class="dm">39,98</td></tr>
+        <tr><td>Faesite bianca (Leroy Merlin / OBI)</td><td class="dm">~6</td></tr>
+        <tr><td>Bordo preincollato bianco ×2 rotoli</td><td class="dm">~4</td></tr>
+        <tr><td>Spine giunzione ø6 + set spinatura</td><td class="dm">~5</td></tr>
+        <tr><td>Staffe angolari + viti</td><td class="dm">~5</td></tr>
+        <tr><td>Chiodini senza testa</td><td class="dm">~2</td></tr>
+        <tr><td>Piedini/tappi plastica ×4</td><td class="dm">~2</td></tr>
+        <tr><td>Servizio taglio (~5 tagli)</td><td class="dm">~3</td></tr>
+        <tr style="font-weight:700;background:var(--sf2)"><td>TOTALE</td><td class="dm" style="color:var(--ac2)">~€67</td></tr>
       </tbody>
     </table>
   </div>
@@ -264,28 +224,28 @@ footer{text-align:center;padding:2rem 0;border-top:1px solid var(--bd);margin-to
 
 <footer>
   Progetto per Fabio — LG F10B8NDA — Apr 2026<br>
-  <span style="color:var(--ac)">H 1030 · Finestra 1040 · Fissaggi nascosti · Schienale rigido ✓</span>
+  <span style="color:var(--ac)">H 1020mm · Finestra 1040 · 16mm + spinotti ø6 · Schienale rigido · Piedini 20mm ✓</span>
 </footer>
-
 </div>
 
 <script>
 const ITEMS=[
-{cat:"LEGNO — TAGLIO SU MISURA",name:"Pannello HDF melaminico bianco 244×122 cm, sp. 18 mm",detail:"5 tagli per A, B, C, D",qty:"Qtà: 1",url:"https://www.leroymerlin.it/prodotti/pannello-hdf-l-244-x-h-122-cm-sp-18-mm-bianco-su-misura-81261141.html"},
-{cat:"LEGNO — TAGLIO SU MISURA",name:"Faesite bianca 244×122 cm, sp. 3.5 mm",detail:"1 taglio: 652×1026 per schienale E",qty:"Qtà: 1",url:"https://www.leroymerlin.it/prodotti/pannello-legno-faesite-l-244-x-h-122-cm-sp-3-5-mm-bianco-su-misura-35165543.html"},
-{cat:"BORDI",name:"Bordo preincollato bianco H 2.8 × L 500 cm",detail:"Per tagli a vista, si applica col ferro da stiro",qty:"Qtà: 2 rotoli",url:"https://www.leroymerlin.it/prodotti/falegnameria/tavole-pannelli-in-legno-e-cavalletti/bordi-per-pannelli-in-legno/bordo-preincollato-bianco-500-x-2-8-cm-35656082.html"},
-{cat:"FISSAGGIO RIPIANO C",name:"Spine di giunzione legno ø8 × 30 mm",detail:"Per giuntare C ai fianchi (invisibili). Ne servono 8.",qty:"Qtà: 1 conf.",url:"https://www.leroymerlin.it/prodotti/spine-di-giunzione-in-legno-x-30-mm-8-mm-81266199.html"},
-{cat:"FISSAGGIO RIPIANO C",name:"Set spinatura Wolfcraft ø8 mm",detail:"Centratori + punta + spine. Indispensabile per allineare fori.",qty:"Qtà: 1 set",url:"https://www.leroymerlin.it/catalogo/set-di-spinatura-wolfcraft-in-legno--8-mm-31463215-p"},
-{cat:"FISSAGGIO RIPIANO D",name:"Staffe angolari 40×40 mm + viti 3.5×16",detail:"Fissano D dall'interno nicchia (nascoste)",qty:"Qtà: 4 staffe",url:"https://www.leroymerlin.it/prodotti/ferramenta/tasselli-viti-bulloni-chiodi/piastre-e-lastre/staffe-ad-angolo-p.html"},
-{cat:"FISSAGGIO SCHIENALE E",name:"Chiodini senza testa 16 mm",detail:"Per inchiodare faesite E sul retro dei fianchi",qty:"Qtà: 1 conf.",url:"https://www.leroymerlin.it/catalogo/chiodi-senza-testa-16-mm-35852950-p"},
+{cat:"LEGNO — LEROY MERLIN",name:"Ripiano melaminico bianco 200×60 cm sp. 16 mm",detail:"Pannello 1: taglio a metà → fianchi A+B. Pannello 2: tagli per ripiani C+D.",qty:"Qtà: 2",price:"€19,99 cad.",url:"https://www.leroymerlin.it/prodotti/ripiano-per-interno-mobile-in-truciolare-l-200-x-p-60-sp-16-mm-bianco-84739229.html"},
+{cat:"LEGNO — LEROY MERLIN / OBI",name:"Faesite bianca ~122×60 cm sp. 3 mm",detail:"Per schienale E. Tagliala a 62.8×99.6 cm. In alternativa prendi quella su misura 244×122.",qty:"Qtà: 1",price:"~€6",url:"https://www.leroymerlin.it/search?q=faesite+bianca+3mm"},
+{cat:"BORDI",name:"Bordo preincollato bianco H 2.8 × L 500 cm",detail:"Per i tagli a vista. Si applica col ferro da stiro.",qty:"Qtà: 2 rotoli",price:"~€4 cad.",url:"https://www.leroymerlin.it/search?q=bordo+preincollato+bianco+28mm"},
+{cat:"FISSAGGIO RIPIANO C — SPINOTTI",name:"Spine di giunzione legno ø6 × 30 mm",detail:"Per giuntare C ai fianchi (invisibili). Ne servono 8.",qty:"Qtà: 1 conf.",price:"~€2",url:"https://www.leroymerlin.it/search?q=spine+giunzione+6mm+legno"},
+{cat:"FISSAGGIO RIPIANO C — SPINOTTI",name:"Set spinatura Wolfcraft (centratori + punta ø6)",detail:"Centratori per allineare i fori. Supporta ø6, ø8 e ø10.",qty:"Qtà: 1 set",price:"~€4",url:"https://www.leroymerlin.it/search?q=wolfcraft+set+spinatura"},
+{cat:"FISSAGGIO RIPIANO D — STAFFE",name:"Staffe angolari ~40×40 mm + viti 3.5×12 mm",detail:"Fissano D dall'interno nicchia (nascoste). Viti corte per non bucare il 16mm!",qty:"Qtà: 4 staffe",price:"~€5",url:"https://www.leroymerlin.it/search?q=staffe+angolari+40mm"},
+{cat:"FISSAGGIO SCHIENALE E",name:"Chiodini senza testa 15 mm",detail:"Per inchiodare faesite E sul retro dei fianchi.",qty:"Qtà: 1 conf.",price:"~€2",url:"https://www.leroymerlin.it/search?q=chiodi+senza+testa+15mm"},
+{cat:"PIEDINI",name:"Tappi tondi plastica ~20 mm (o gommini a infilare)",detail:"Sotto i fianchi per rialzare il mobile di 20mm. Cerca nel reparto piedini/feltrini.",qty:"Qtà: 4",price:"~€2",url:"https://www.obi-italia.it/search/piedini%20plastica%2020mm"},
 ];
 
-const KEY='mobile-lavatrice-shop';
+const KEY='mobile-lav-v5';
 let state=JSON.parse(localStorage.getItem(KEY)||'{}');
 
 function render(){
   const el=document.getElementById('shop-list');
-  let html='';let lastCat='';
+  let html='',lastCat='';
   ITEMS.forEach((it,i)=>{
     if(it.cat!==lastCat){html+=`<div class="shop-cat">${it.cat}</div>`;lastCat=it.cat;}
     const done=state[i]?'done':'';
@@ -294,8 +254,8 @@ function render(){
       <div class="si-info">
         <div class="si-name">${it.name}</div>
         <div class="si-detail">${it.detail}</div>
-        <div class="si-qty">${it.qty}</div>
-        <a class="si-link" href="${it.url}" target="_blank" onclick="event.stopPropagation()">Apri prodotto →</a>
+        <div class="si-meta"><span class="si-qty">${it.qty}</span><span class="si-price">${it.price}</span></div>
+        <a class="si-link" href="${it.url}" target="_blank" onclick="event.stopPropagation()">Cerca prodotto →</a>
       </div>
     </div>`;
   });
