@@ -146,16 +146,32 @@ footer{text-align:center;padding:1.5rem 0;border-top:1px solid var(--bd);margin-
 
   <div class="dc">
     <!--
-      VISTA LATERALE
-      Scala: 1500mm → 440px → 1mm=0.293px
-      Gamba post: x=340 (verticale y=40→480)
-      Gamba ant: da (60,480) a (186,40) — base=340mm→280px, cima=200mm→165px dal fondo
-        x_ant = 60 + (186-60)*((480-y)/440)
-      Ripiani: rettangoli orizzontali che vanno da gamba ant a gamba post
-        @100mm → y=451, x_ant=69
-        @450mm → y=348, x_ant=105
-        @800mm → y=246, x_ant=140
-        @1150mm → y=143, x_ant=176
+      VISTA LATERALE — orientamento corretto
+      Sinistra = retro (muro), Destra = fronte (dove sta chi guarda)
+      Gamba post (verticale): x=80, da y=480 a y=40
+      Gamba ant (inclinata): da (80+200=280, y=40) in alto a (80+340=420, y=480) in basso
+        Cima: prof=200mm → 200px → x=280
+        Base: prof=340mm → 340px → x=420
+        Ma 420 è fuori dal viewBox 420. Usiamo scala ridotta.
+
+      Riscalo: 340mm reali → 280px. 1mm=0.824px
+      Gamba post: x=60 (verticale)
+      Gamba ant cima: x = 60 + 200×0.824 = 225
+      Gamba ant base: x = 60 + 340×0.824 = 340
+      Gamba ant: da (225, 40) a (340, 480) — si allarga verso il basso ✓
+
+      Ripiani:
+        @1150mm → y=143, x_ant = 225 + (340-225)×((480-143)/440) = 225 + 115×0.766 = 313
+        @800mm  → y=246, x_ant = 225 + 115×((480-246)/440) = 225 + 115×0.532 = 286
+        @450mm  → y=348, x_ant = 225 + 115×((480-348)/440) = 225 + 115×0.300 = 260
+        @100mm  → y=451, x_ant = 225 + 115×((480-451)/440) = 225 + 115×0.066 = 233 ← SBAGLIATO
+
+      Ricalcolo: la gamba ant va da (225,40) TOP a (340,480) BOTTOM
+      A un dato y: x_ant = 225 + (340-225) × ((y-40)/(480-40)) = 225 + 115 × ((y-40)/440)
+        @y=143 (1150mm): x = 225 + 115×(103/440) = 225 + 27 = 252
+        @y=246 (800mm):  x = 225 + 115×(206/440) = 225 + 54 = 279
+        @y=348 (450mm):  x = 225 + 115×(308/440) = 225 + 81 = 306
+        @y=451 (100mm):  x = 225 + 115×(411/440) = 225 + 107 = 332
     -->
     <svg viewBox="0 0 420 540" xmlns="http://www.w3.org/2000/svg">
       <text x="210" y="16" text-anchor="middle" fill="#8b949e" font-family="Space Mono,monospace" font-size="9" letter-spacing="2">VISTA LATERALE</text>
@@ -163,46 +179,50 @@ footer{text-align:center;padding:1.5rem 0;border-top:1px solid var(--bd);margin-
       <!-- Pavimento -->
       <line x1="20" y1="483" x2="400" y2="483" stroke="#2a3040" stroke-width="2"/>
 
-      <!-- Gamba posteriore (verticale) -->
-      <line x1="340" y1="480" x2="340" y2="40" stroke="#5e9eff" stroke-width="10" stroke-linecap="round"/>
-      <text x="358" y="265" fill="#5e9eff" font-family="Space Mono,monospace" font-size="7" font-weight="700" transform="rotate(-90,358,265)">POST. 1500mm</text>
+      <!-- Gamba posteriore (verticale, a SINISTRA = retro) -->
+      <line x1="60" y1="480" x2="60" y2="40" stroke="#5e9eff" stroke-width="10" stroke-linecap="round"/>
+      <text x="42" y="265" fill="#5e9eff" font-family="Space Mono,monospace" font-size="7" font-weight="700" transform="rotate(-90,42,265)">POST. 1500mm</text>
 
-      <!-- Gamba anteriore (inclinata) -->
-      <line x1="60" y1="480" x2="186" y2="40" stroke="#79c0ff" stroke-width="10" stroke-linecap="round"/>
-      <text x="98" y="250" fill="#79c0ff" font-family="Space Mono,monospace" font-size="7" font-weight="700" transform="rotate(-74,98,250)">ANT. ~1507mm</text>
+      <!-- Gamba anteriore (inclinata, si allarga verso il basso a DESTRA = fronte) -->
+      <line x1="225" y1="40" x2="340" y2="480" stroke="#79c0ff" stroke-width="10" stroke-linecap="round"/>
+      <text x="305" y="280" fill="#79c0ff" font-family="Space Mono,monospace" font-size="7" font-weight="700" transform="rotate(79,305,280)">ANT. ~1507mm</text>
 
-      <!-- R1 @100mm — y=451, x_ant=69, pieno fino a gamba post x=340 -->
-      <rect x="69" y="447" width="271" height="8" rx="2" fill="#7ee787" opacity=".85" stroke="#fff" stroke-width=".4"/>
-      <text x="205" y="454" text-anchor="middle" fill="#0e1117" font-family="Space Mono,monospace" font-size="6" font-weight="700">R1 — 500×340</text>
+      <!-- R4 @1150mm CAPPELLO — y=143, gamba ant x=252 -->
+      <rect x="60" y="139" width="192" height="8" rx="2" fill="#e3b341" opacity=".9" stroke="#fff" stroke-width=".6"/>
+      <text x="156" y="146" text-anchor="middle" fill="#0e1117" font-family="Space Mono,monospace" font-size="6" font-weight="700">R4 — 500×200 ★</text>
 
-      <!-- R2 @450mm — y=348, x_ant=105 -->
-      <rect x="105" y="344" width="235" height="8" rx="2" fill="#3fb950" opacity=".8" stroke="#fff" stroke-width=".4"/>
-      <text x="222" y="351" text-anchor="middle" fill="#0e1117" font-family="Space Mono,monospace" font-size="6" font-weight="700">R2 — 500×290</text>
+      <!-- R3 @800mm — y=246, gamba ant x=279 -->
+      <rect x="60" y="242" width="219" height="8" rx="2" fill="#d2a8ff" opacity=".85" stroke="#fff" stroke-width=".4"/>
+      <text x="170" y="249" text-anchor="middle" fill="#0e1117" font-family="Space Mono,monospace" font-size="6" font-weight="700">R3 — 500×240</text>
 
-      <!-- R3 @800mm — y=246, x_ant=140 -->
-      <rect x="140" y="242" width="200" height="8" rx="2" fill="#d2a8ff" opacity=".85" stroke="#fff" stroke-width=".4"/>
-      <text x="240" y="249" text-anchor="middle" fill="#0e1117" font-family="Space Mono,monospace" font-size="6" font-weight="700">R3 — 500×240</text>
+      <!-- R2 @450mm — y=348, gamba ant x=306 -->
+      <rect x="60" y="344" width="246" height="8" rx="2" fill="#3fb950" opacity=".8" stroke="#fff" stroke-width=".4"/>
+      <text x="183" y="351" text-anchor="middle" fill="#0e1117" font-family="Space Mono,monospace" font-size="6" font-weight="700">R2 — 500×290</text>
 
-      <!-- R4 @1150mm — y=143, x_ant=176 — CAPPELLO -->
-      <rect x="176" y="139" width="164" height="8" rx="2" fill="#e3b341" opacity=".9" stroke="#fff" stroke-width=".6"/>
-      <text x="258" y="146" text-anchor="middle" fill="#0e1117" font-family="Space Mono,monospace" font-size="6" font-weight="700">R4 — 500×200 ★</text>
+      <!-- R1 @100mm — y=451, gamba ant x=332 -->
+      <rect x="60" y="447" width="272" height="8" rx="2" fill="#7ee787" opacity=".85" stroke="#fff" stroke-width=".4"/>
+      <text x="196" y="454" text-anchor="middle" fill="#0e1117" font-family="Space Mono,monospace" font-size="6" font-weight="700">R1 — 500×340</text>
 
       <!-- Feltrini -->
       <rect x="52" y="481" width="18" height="5" rx="2" fill="#6e7681"/>
       <rect x="332" y="481" width="18" height="5" rx="2" fill="#6e7681"/>
 
-      <!-- Altezze a sinistra -->
-      <g stroke="#8b949e" stroke-width=".4" stroke-dasharray="2,3">
-        <line x1="25" y1="451" x2="69" y2="451"/>
-        <line x1="25" y1="348" x2="105" y2="348"/>
-        <line x1="25" y1="246" x2="140" y2="246"/>
-        <line x1="25" y1="143" x2="176" y2="143"/>
+      <!-- Etichette laterali -->
+      <text x="30" y="490" fill="#8b949e" font-family="Space Mono,monospace" font-size="6">RETRO</text>
+      <text x="355" y="490" fill="#8b949e" font-family="Space Mono,monospace" font-size="6">FRONTE</text>
+
+      <!-- Altezze a destra -->
+      <g fill="#8b949e" font-family="Space Mono,monospace" font-size="6" text-anchor="start">
+        <text x="370" y="454">@100</text>
+        <text x="370" y="351">@450</text>
+        <text x="370" y="249">@800</text>
+        <text x="370" y="146">@1150</text>
       </g>
-      <g fill="#8b949e" font-family="Space Mono,monospace" font-size="6" text-anchor="end">
-        <text x="23" y="454">@100</text>
-        <text x="23" y="351">@450</text>
-        <text x="23" y="249">@800</text>
-        <text x="23" y="146">@1150</text>
+      <g stroke="#8b949e" stroke-width=".4" stroke-dasharray="2,3">
+        <line x1="335" y1="451" x2="368" y2="451"/>
+        <line x1="310" y1="348" x2="368" y2="348"/>
+        <line x1="282" y1="246" x2="368" y2="246"/>
+        <line x1="255" y1="143" x2="368" y2="143"/>
       </g>
 
       <!-- Quota altezza -->
@@ -211,19 +231,19 @@ footer{text-align:center;padding:1.5rem 0;border-top:1px solid var(--bd);margin-
       <line x1="6" y1="480" x2="14" y2="480" stroke="#f0883e" stroke-width="1"/>
       <text x="7" y="265" fill="#f0883e" font-family="Space Mono,monospace" font-size="7" font-weight="700" transform="rotate(-90,7,265)">1500mm</text>
 
-      <!-- Quota base -->
+      <!-- Quota base (al pavimento) -->
       <line x1="60" y1="505" x2="340" y2="505" stroke="#f0883e" stroke-width=".7" stroke-dasharray="3,2"/>
       <line x1="60" y1="500" x2="60" y2="510" stroke="#f0883e" stroke-width="1"/>
       <line x1="340" y1="500" x2="340" y2="510" stroke="#f0883e" stroke-width="1"/>
       <text x="200" y="520" text-anchor="middle" fill="#f0883e" font-family="Space Mono,monospace" font-size="7" font-weight="700">340mm (base)</text>
 
       <!-- Quota cima -->
-      <line x1="186" y1="28" x2="340" y2="28" stroke="#f0883e" stroke-width=".7" stroke-dasharray="3,2"/>
-      <line x1="186" y1="24" x2="186" y2="33" stroke="#f0883e" stroke-width="1"/>
-      <line x1="340" y1="24" x2="340" y2="33" stroke="#f0883e" stroke-width="1"/>
-      <text x="263" y="22" text-anchor="middle" fill="#f0883e" font-family="Space Mono,monospace" font-size="7" font-weight="700">200mm (cima)</text>
+      <line x1="60" y1="28" x2="225" y2="28" stroke="#f0883e" stroke-width=".7" stroke-dasharray="3,2"/>
+      <line x1="60" y1="24" x2="60" y2="33" stroke="#f0883e" stroke-width="1"/>
+      <line x1="225" y1="24" x2="225" y2="33" stroke="#f0883e" stroke-width="1"/>
+      <text x="143" y="22" text-anchor="middle" fill="#f0883e" font-family="Space Mono,monospace" font-size="7" font-weight="700">200mm (cima)</text>
 
-      <text x="210" y="535" text-anchor="middle" fill="#484f58" font-family="Space Mono,monospace" font-size="6">AUTOPORTANTE — i ripiani collegano le gambe ant. e post.</text>
+      <text x="210" y="535" text-anchor="middle" fill="#484f58" font-family="Space Mono,monospace" font-size="6">AUTOPORTANTE — i ripiani collegano gambe ant. e post.</text>
     </svg>
   </div>
 
