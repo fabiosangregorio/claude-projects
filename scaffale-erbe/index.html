@@ -151,99 +151,168 @@ footer{text-align:center;padding:1.5rem 0;border-top:1px solid var(--bd);margin-
     <div class="li"><div class="ls" style="background:var(--ph)"></div>R4 Ripiano 150mm</div>
   </div>
   <div class="dc">
-    <svg viewBox="0 0 440 560" xmlns="http://www.w3.org/2000/svg">
-      <text x="220" y="18" text-anchor="middle" fill="#8b949e" font-family="Space Mono,monospace" font-size="9" letter-spacing="2">VISTA LATERALE</text>
+    <!-- VISTA LATERALE: scaffale appoggiato al muro a ~75° -->
+    <!-- Coordinate: muro a x=380, pavimento a y=500, gamba da (100,500) in basso a (360,40) in alto -->
+    <!-- Inclinazione reale: base a ~280px dal muro, altezza 460px → circa 75° -->
+    <svg viewBox="0 0 460 580" xmlns="http://www.w3.org/2000/svg">
+      <text x="230" y="18" text-anchor="middle" fill="#8b949e" font-family="Space Mono,monospace" font-size="9" letter-spacing="2">VISTA LATERALE (sezione)</text>
 
-      <!-- Wall -->
-      <line x1="370" y1="30" x2="370" y2="510" stroke="#2a3040" stroke-width="2" stroke-dasharray="6,4"/>
-      <text x="383" y="270" fill="#484f58" font-family="Space Mono,monospace" font-size="7" transform="rotate(90,383,270)">MURO</text>
+      <!-- Muro -->
+      <line x1="390" y1="25" x2="390" y2="500" stroke="#2a3040" stroke-width="3"/>
+      <rect x="390" y="25" width="40" height="475" fill="#161b22" opacity=".5"/>
+      <text x="410" y="270" fill="#484f58" font-family="Space Mono,monospace" font-size="8" transform="rotate(90,410,270)">MURO</text>
 
-      <!-- Floor -->
-      <line x1="30" y1="510" x2="400" y2="510" stroke="#2a3040" stroke-width="1"/>
-      <text x="215" y="525" text-anchor="middle" fill="#484f58" font-family="Space Mono,monospace" font-size="7">PAVIMENTO</text>
+      <!-- Pavimento -->
+      <line x1="20" y1="500" x2="430" y2="500" stroke="#2a3040" stroke-width="2"/>
+      <text x="230" y="518" text-anchor="middle" fill="#484f58" font-family="Space Mono,monospace" font-size="7">PAVIMENTO BALCONE</text>
 
-      <!-- Left Leg A -->
-      <rect x="80" y="48" width="12" height="460" rx="2" fill="var(--pa)" opacity=".85" stroke="#fff" stroke-width=".5" transform="rotate(-4,86,510)"/>
-      <text x="60" y="290" fill="var(--pa)" font-family="Space Mono,monospace" font-size="7" font-weight="700" transform="rotate(-4,60,290)">A — 1600mm</text>
+      <!-- Gamba (linea inclinata da basso-sx a alto-dx) -->
+      <!-- bottom: (110, 498)  top: (372, 42)  → ~75° dal pavimento -->
+      <line x1="110" y1="498" x2="372" y2="42" stroke="#5e9eff" stroke-width="10" stroke-linecap="round"/>
+      <line x1="110" y1="498" x2="372" y2="42" stroke="#fff" stroke-width="1" opacity=".15"/>
+      <text x="210" y="230" fill="#5e9eff" font-family="Space Mono,monospace" font-size="8" font-weight="700" transform="rotate(-75,210,230)">GAMBA 1600mm</text>
 
-      <!-- Right Leg B -->
-      <rect x="330" y="48" width="12" height="460" rx="2" fill="var(--pa)" opacity=".85" stroke="#fff" stroke-width=".5" transform="rotate(-4,336,510)"/>
+      <!-- Feltrino basso -->
+      <rect x="100" y="498" width="22" height="5" rx="2" fill="#6e7681"/>
+      <text x="111" y="515" text-anchor="middle" fill="#6e7681" font-family="Space Mono,monospace" font-size="6">gomma</text>
 
-      <!-- Shelf 4 (top) -->
-      <rect x="295" y="120" width="70" height="10" rx="2" fill="var(--ph)" opacity=".85" stroke="#fff" stroke-width=".5"/>
-      <text x="330" y="128" text-anchor="middle" fill="#0e1117" font-family="Space Mono,monospace" font-size="6" font-weight="700">R4 150mm</text>
-      <!-- traversi -->
-      <line x1="295" y1="118" x2="295" y2="132" stroke="var(--pc)" stroke-width="3"/>
-      <line x1="365" y1="118" x2="365" y2="132" stroke="var(--pc)" stroke-width="3"/>
+      <!-- Feltrino alto (muro) -->
+      <rect x="372" y="36" width="5" height="18" rx="2" fill="#6e7681"/>
 
-      <!-- Shelf 3 -->
-      <rect x="245" y="220" width="110" height="10" rx="2" fill="var(--pd)" opacity=".85" stroke="#fff" stroke-width=".5"/>
-      <text x="300" y="228" text-anchor="middle" fill="#0e1117" font-family="Space Mono,monospace" font-size="6" font-weight="700">R3 200mm</text>
-      <line x1="245" y1="218" x2="245" y2="232" stroke="var(--pc)" stroke-width="3"/>
-      <line x1="355" y1="218" x2="355" y2="232" stroke="var(--pc)" stroke-width="3"/>
+      <!-- Shelf positions along the leg -->
+      <!-- Ripiano 1 @100mm → ~6% dal basso → y≈470, x≈126 -->
+      <rect x="126" y="465" width="92" height="8" rx="2" fill="#7ee787" opacity=".85" stroke="#fff" stroke-width=".5"/>
+      <line x1="126" y1="465" x2="126" y2="473" stroke="#ffa657" stroke-width="3"/>
+      <line x1="218" y1="465" x2="218" y2="473" stroke="#ffa657" stroke-width="3"/>
+      <text x="172" y="462" text-anchor="middle" fill="#7ee787" font-family="Space Mono,monospace" font-size="7" font-weight="700">R1 — 300mm</text>
+      <!-- herb icons -->
+      <text x="150" y="456" text-anchor="middle" font-size="10">🌿</text>
+      <text x="195" y="456" text-anchor="middle" font-size="10">🌿</text>
 
-      <!-- Shelf 2 -->
-      <rect x="195" y="320" width="150" height="10" rx="2" fill="var(--ac2)" opacity=".7" stroke="#fff" stroke-width=".5"/>
-      <text x="270" y="328" text-anchor="middle" fill="#0e1117" font-family="Space Mono,monospace" font-size="6" font-weight="700">R2 250mm</text>
-      <line x1="195" y1="318" x2="195" y2="332" stroke="var(--pc)" stroke-width="3"/>
-      <line x1="345" y1="318" x2="345" y2="332" stroke="var(--pc)" stroke-width="3"/>
+      <!-- Ripiano 2 @450mm → ~28% dal basso → y≈370, x≈183 -->
+      <rect x="183" y="367" width="77" height="8" rx="2" fill="#3fb950" opacity=".75" stroke="#fff" stroke-width=".5"/>
+      <line x1="183" y1="367" x2="183" y2="375" stroke="#ffa657" stroke-width="3"/>
+      <line x1="260" y1="367" x2="260" y2="375" stroke="#ffa657" stroke-width="3"/>
+      <text x="221" y="363" text-anchor="middle" fill="#3fb950" font-family="Space Mono,monospace" font-size="7" font-weight="700">R2 — 250mm</text>
+      <text x="206" y="357" text-anchor="middle" font-size="10">🍵</text>
+      <text x="245" y="357" text-anchor="middle" font-size="10">🍵</text>
 
-      <!-- Shelf 1 (bottom) -->
-      <rect x="145" y="430" width="190" height="10" rx="2" fill="var(--pb)" opacity=".85" stroke="#fff" stroke-width=".5"/>
-      <text x="240" y="438" text-anchor="middle" fill="#0e1117" font-family="Space Mono,monospace" font-size="6" font-weight="700">R1 300mm</text>
-      <line x1="145" y1="428" x2="145" y2="442" stroke="var(--pc)" stroke-width="3"/>
-      <line x1="335" y1="428" x2="335" y2="442" stroke="var(--pc)" stroke-width="3"/>
+      <!-- Ripiano 3 @800mm → ~50% dal basso → y≈270, x≈240 -->
+      <rect x="240" y="268" width="62" height="8" rx="2" fill="#d2a8ff" opacity=".85" stroke="#fff" stroke-width=".5"/>
+      <line x1="240" y1="268" x2="240" y2="276" stroke="#ffa657" stroke-width="3"/>
+      <line x1="302" y1="268" x2="302" y2="276" stroke="#ffa657" stroke-width="3"/>
+      <text x="271" y="264" text-anchor="middle" fill="#d2a8ff" font-family="Space Mono,monospace" font-size="7" font-weight="700">R3 — 200mm</text>
+      <text x="260" y="258" text-anchor="middle" font-size="10">☀️</text>
+      <text x="290" y="258" text-anchor="middle" font-size="10">☀️</text>
 
-      <!-- Rubber feet -->
-      <rect x="82" y="505" width="16" height="5" rx="2" fill="#6e7681"/>
-      <rect x="330" y="505" width="16" height="5" rx="2" fill="#6e7681"/>
-      <text x="220" y="545" text-anchor="middle" fill="#6e7681" font-family="Space Mono,monospace" font-size="7">+ feltrini gomma sotto + in cima</text>
+      <!-- Ripiano 4 @1150mm → ~72% dal basso → y≈170, x≈298 -->
+      <rect x="298" y="170" width="46" height="8" rx="2" fill="#e3b341" opacity=".85" stroke="#fff" stroke-width=".5"/>
+      <line x1="298" y1="170" x2="298" y2="178" stroke="#ffa657" stroke-width="3"/>
+      <line x1="344" y1="170" x2="344" y2="178" stroke="#ffa657" stroke-width="3"/>
+      <text x="321" y="166" text-anchor="middle" fill="#e3b341" font-family="Space Mono,monospace" font-size="7" font-weight="700">R4 — 150mm</text>
+      <text x="321" y="157" text-anchor="middle" font-size="10">☀️</text>
 
-      <!-- Height dimension -->
-      <line x1="40" y1="50" x2="40" y2="510" stroke="var(--wn)" stroke-width=".5"/>
-      <text x="40" y="42" text-anchor="middle" fill="var(--wn)" font-family="Space Mono,monospace" font-size="7">↑</text>
-      <text x="40" y="520" text-anchor="middle" fill="var(--wn)" font-family="Space Mono,monospace" font-size="7">↓</text>
-      <text x="28" y="285" fill="var(--wn)" font-family="Space Mono,monospace" font-size="7" transform="rotate(-90,28,285)">1500mm al muro</text>
+      <!-- Quota altezza muro -->
+      <line x1="42" y1="42" x2="42" y2="498" stroke="#f0883e" stroke-width=".7" stroke-dasharray="3,2"/>
+      <line x1="36" y1="42" x2="48" y2="42" stroke="#f0883e" stroke-width="1"/>
+      <line x1="36" y1="498" x2="48" y2="498" stroke="#f0883e" stroke-width="1"/>
+      <text x="30" y="275" fill="#f0883e" font-family="Space Mono,monospace" font-size="7" font-weight="700" transform="rotate(-90,30,275)">1500mm</text>
 
-      <!-- Angle -->
-      <path d="M 340 510 A 60 60 0 0 1 368 458" fill="none" stroke="var(--ac)" stroke-width=".8"/>
-      <text x="355" y="490" fill="var(--ac)" font-family="Space Mono,monospace" font-size="8" font-weight="700">~75°</text>
+      <!-- Quota base-muro -->
+      <line x1="110" y1="530" x2="390" y2="530" stroke="#f0883e" stroke-width=".7" stroke-dasharray="3,2"/>
+      <line x1="110" y1="525" x2="110" y2="535" stroke="#f0883e" stroke-width="1"/>
+      <line x1="390" y1="525" x2="390" y2="535" stroke="#f0883e" stroke-width="1"/>
+      <text x="250" y="543" text-anchor="middle" fill="#f0883e" font-family="Space Mono,monospace" font-size="7" font-weight="700">~380mm</text>
 
-      <!-- Base dimension -->
-      <line x1="90" y1="535" x2="370" y2="535" stroke="var(--wn)" stroke-width=".5"/>
-      <text x="230" y="550" text-anchor="middle" fill="var(--wn)" font-family="Space Mono,monospace" font-size="7">~380mm dal muro</text>
+      <!-- Angolo -->
+      <path d="M 140 498 A 40 40 0 0 0 120 462" fill="none" stroke="#58a6ff" stroke-width="1.2"/>
+      <text x="150" y="478" fill="#58a6ff" font-family="Space Mono,monospace" font-size="9" font-weight="700">75°</text>
+
+      <!-- Legenda ripiani altezze -->
+      <g fill="#8b949e" font-family="Space Mono,monospace" font-size="6">
+        <text x="68" y="472">@100mm</text>
+        <text x="68" y="374">@450mm</text>
+        <text x="68" y="275">@800mm</text>
+        <text x="68" y="176">@1150mm</text>
+      </g>
+
+      <!-- Frecce altezze -->
+      <line x1="96" y1="470" x2="124" y2="470" stroke="#8b949e" stroke-width=".5" stroke-dasharray="2,2"/>
+      <line x1="96" y1="372" x2="181" y2="372" stroke="#8b949e" stroke-width=".5" stroke-dasharray="2,2"/>
+      <line x1="96" y1="273" x2="238" y2="273" stroke="#8b949e" stroke-width=".5" stroke-dasharray="2,2"/>
+      <line x1="96" y1="174" x2="296" y2="174" stroke="#8b949e" stroke-width=".5" stroke-dasharray="2,2"/>
+
+      <!-- Note -->
+      <text x="230" y="568" text-anchor="middle" fill="#484f58" font-family="Space Mono,monospace" font-size="6">I ripiani si restringono verso l'alto — vasi pesanti sempre in basso</text>
     </svg>
   </div>
 
   <div class="dc">
-    <svg viewBox="0 0 440 200" xmlns="http://www.w3.org/2000/svg">
+    <!-- VISTA FRONTALE: due gambe verticali + traversi orizzontali + ripiani -->
+    <svg viewBox="0 0 440 520" xmlns="http://www.w3.org/2000/svg">
       <text x="220" y="18" text-anchor="middle" fill="#8b949e" font-family="Space Mono,monospace" font-size="9" letter-spacing="2">VISTA FRONTALE</text>
 
-      <!-- Left leg -->
-      <rect x="50" y="30" width="12" height="160" rx="2" fill="var(--pa)" opacity=".85" stroke="#fff" stroke-width=".5"/>
-      <text x="56" y="115" text-anchor="middle" fill="#0e1117" font-family="Space Mono,monospace" font-size="6" font-weight="700" transform="rotate(-90,56,115)">GAMBA A</text>
+      <!-- Gamba A (sinistra) -->
+      <rect x="48" y="32" width="12" height="450" rx="2" fill="#5e9eff" opacity=".85" stroke="#fff" stroke-width=".5"/>
+      <text x="54" y="260" text-anchor="middle" fill="#0e1117" font-family="Space Mono,monospace" font-size="7" font-weight="700" transform="rotate(-90,54,260)">A — GAMBA SX 1600mm</text>
 
-      <!-- Right leg -->
-      <rect x="378" y="30" width="12" height="160" rx="2" fill="var(--pa)" opacity=".85" stroke="#fff" stroke-width=".5"/>
-      <text x="384" y="115" text-anchor="middle" fill="#0e1117" font-family="Space Mono,monospace" font-size="6" font-weight="700" transform="rotate(-90,384,115)">GAMBA B</text>
+      <!-- Gamba B (destra) -->
+      <rect x="380" y="32" width="12" height="450" rx="2" fill="#5e9eff" opacity=".85" stroke="#fff" stroke-width=".5"/>
+      <text x="386" y="260" text-anchor="middle" fill="#0e1117" font-family="Space Mono,monospace" font-size="7" font-weight="700" transform="rotate(-90,386,260)">B — GAMBA DX 1600mm</text>
 
-      <!-- Traversi pairs -->
-      <rect x="62" y="155" width="316" height="5" rx="1" fill="var(--pc)" opacity=".8"/>
-      <rect x="62" y="163" width="316" height="5" rx="1" fill="var(--pc)" opacity=".8"/>
-      <text x="220" y="180" text-anchor="middle" fill="var(--pc)" font-family="Space Mono,monospace" font-size="6">TRAVERSI 420mm × 30×20mm</text>
+      <!-- Ripiano 4 (top) @1150mm → y≈56 -->
+      <rect x="60" y="53" width="320" height="4" rx="1" fill="#ffa657" opacity=".7"/>
+      <rect x="60" y="60" width="320" height="4" rx="1" fill="#ffa657" opacity=".7"/>
+      <rect x="130" y="46" width="180" height="8" rx="2" fill="#e3b341" opacity=".85" stroke="#fff" stroke-width=".5"/>
+      <text x="220" y="53" text-anchor="middle" fill="#0e1117" font-family="Space Mono,monospace" font-size="6" font-weight="700">R4 — 500×150</text>
 
-      <rect x="62" y="115" width="316" height="5" rx="1" fill="var(--pc)" opacity=".6"/>
-      <rect x="62" y="123" width="316" height="5" rx="1" fill="var(--pc)" opacity=".6"/>
+      <!-- Ripiano 3 @800mm → y≈155 -->
+      <rect x="60" y="152" width="320" height="4" rx="1" fill="#ffa657" opacity=".7"/>
+      <rect x="60" y="159" width="320" height="4" rx="1" fill="#ffa657" opacity=".7"/>
+      <rect x="110" y="145" width="220" height="8" rx="2" fill="#d2a8ff" opacity=".85" stroke="#fff" stroke-width=".5"/>
+      <text x="220" y="152" text-anchor="middle" fill="#0e1117" font-family="Space Mono,monospace" font-size="6" font-weight="700">R3 — 500×200</text>
 
-      <rect x="62" y="75" width="316" height="5" rx="1" fill="var(--pc)" opacity=".5"/>
-      <rect x="62" y="83" width="316" height="5" rx="1" fill="var(--pc)" opacity=".5"/>
+      <!-- Ripiano 2 @450mm → y≈255 -->
+      <rect x="60" y="252" width="320" height="4" rx="1" fill="#ffa657" opacity=".7"/>
+      <rect x="60" y="259" width="320" height="4" rx="1" fill="#ffa657" opacity=".7"/>
+      <rect x="90" y="245" width="260" height="8" rx="2" fill="#3fb950" opacity=".75" stroke="#fff" stroke-width=".5"/>
+      <text x="220" y="252" text-anchor="middle" fill="#0e1117" font-family="Space Mono,monospace" font-size="6" font-weight="700">R2 — 500×250</text>
 
-      <rect x="62" y="38" width="316" height="5" rx="1" fill="var(--pc)" opacity=".4"/>
-      <rect x="62" y="46" width="316" height="5" rx="1" fill="var(--pc)" opacity=".4"/>
+      <!-- Ripiano 1 @100mm → y≈396 -->
+      <rect x="60" y="393" width="320" height="4" rx="1" fill="#ffa657" opacity=".7"/>
+      <rect x="60" y="400" width="320" height="4" rx="1" fill="#ffa657" opacity=".7"/>
+      <rect x="70" y="386" width="300" height="8" rx="2" fill="#7ee787" opacity=".85" stroke="#fff" stroke-width=".5"/>
+      <text x="220" y="393" text-anchor="middle" fill="#0e1117" font-family="Space Mono,monospace" font-size="6" font-weight="700">R1 — 500×300</text>
 
-      <!-- Width dimension -->
-      <line x1="50" y1="195" x2="390" y2="195" stroke="var(--wn)" stroke-width=".5"/>
-      <text x="220" y="195" text-anchor="middle" fill="var(--wn)" font-family="Space Mono,monospace" font-size="8" font-weight="700">500mm</text>
+      <!-- Feltrini -->
+      <rect x="46" y="482" width="16" height="5" rx="2" fill="#6e7681"/>
+      <rect x="378" y="482" width="16" height="5" rx="2" fill="#6e7681"/>
+
+      <!-- Quota larghezza -->
+      <line x1="48" y1="500" x2="392" y2="500" stroke="#f0883e" stroke-width=".7" stroke-dasharray="3,2"/>
+      <line x1="48" y1="495" x2="48" y2="505" stroke="#f0883e" stroke-width="1"/>
+      <line x1="392" y1="495" x2="392" y2="505" stroke="#f0883e" stroke-width="1"/>
+      <text x="220" y="513" text-anchor="middle" fill="#f0883e" font-family="Space Mono,monospace" font-size="8" font-weight="700">500mm</text>
+
+      <!-- Quota traversi interni -->
+      <line x1="60" y1="422" x2="380" y2="422" stroke="#8b949e" stroke-width=".5" stroke-dasharray="2,2"/>
+      <text x="220" y="435" text-anchor="middle" fill="#8b949e" font-family="Space Mono,monospace" font-size="6">traversi 420mm (tra le gambe)</text>
+
+      <!-- Legenda altezze a destra -->
+      <g fill="#8b949e" font-family="Space Mono,monospace" font-size="6" text-anchor="end">
+        <text x="440" y="394">@100mm</text>
+        <text x="440" y="255">@450mm</text>
+        <text x="440" y="155">@800mm</text>
+        <text x="440" y="55">@1150mm</text>
+      </g>
+
+      <!-- Note assemblagio -->
+      <g font-family="Space Mono,monospace" font-size="6" fill="#ffa657">
+        <text x="28" y="400" text-anchor="middle" transform="rotate(-90,28,400)">viti 4×40</text>
+        <text x="28" y="255" text-anchor="middle" transform="rotate(-90,28,255)">viti 4×40</text>
+        <text x="28" y="155" text-anchor="middle" transform="rotate(-90,28,155)">viti 4×40</text>
+        <text x="28" y="55" text-anchor="middle" transform="rotate(-90,28,55)">viti 4×40</text>
+      </g>
     </svg>
   </div>
 </section>
