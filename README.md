@@ -75,9 +75,9 @@ L'HTML deve contenere:
   ```html
   <a class="back" href="https://fabiosangregorio.github.io/claude-projects/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>Progetti</a>
   ```
-  E nel CSS aggiungi `position:relative` all'`header` più la classe `.back`:
+  E nel CSS la classe `.back`:
   ```css
-  .back{position:absolute;left:0;top:2.5rem;display:inline-flex;align-items:center;gap:.35rem;font-family:'Space Mono',monospace;font-size:.75rem;color:var(--tx2);text-decoration:none;padding:.35rem .6rem;border-radius:6px;border:1px solid var(--bd);background:var(--sf);transition:border-color .2s,color .2s}
+  .back{display:inline-flex;align-items:center;gap:.35rem;font-family:'Space Mono',monospace;font-size:.75rem;color:var(--tx2);text-decoration:none;padding:.35rem .6rem;border-radius:6px;border:1px solid var(--bd);background:var(--sf);transition:border-color .2s,color .2s;margin-bottom:1rem}
   .back:hover{border-color:var(--ac);color:var(--ac)}
   .back svg{width:14px;height:14px}
   ```
