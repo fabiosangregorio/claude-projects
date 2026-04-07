@@ -84,7 +84,10 @@ L'HTML deve contenere:
 - **Paragrafo introduttivo** — descrizione del goal del progetto
 - **Sezione dimensioni** — con card per ogni misura e stack verticale (o equivalente)
 - **Vista esplosa SVG** — schema con i pezzi colorati, le misure e il tipo di fissaggio
-- **Distinta base** — tabella con ID pezzo, nome, misure, quantità, fonte
+- **Distinta base** — tabella con ID pezzo, nome, misure, quantità, fonte. Le misure usano sempre la notazione **A×L×P** (Altezza × Larghezza × Profondità), dove:
+  - Per pezzi verticali (fianchi, gambe): A=altezza in opera, L=larghezza, P=spessore del pannello
+  - Per pezzi orizzontali (ripiani): A=altezza in opera (= spessore del pannello), L=larghezza, P=profondità
+  - L'intestazione colonna nella tabella deve essere `mm (A×L×P)`
 - **Piano di taglio SVG** — visualizzazione grafica di come ricavare i pezzi dai pannelli acquistati, con misure quotate e sfridi evidenziati
 - **Lista spesa interattiva** — con checkbox localStorage (per spuntare in negozio dal telefono), link ai prodotti, prezzi
 - **Istruzioni di montaggio dettagliate** — step by step per principianti con tip per ogni step
@@ -116,3 +119,4 @@ Stile: dark theme, font Space Mono + DM Sans, colori GitHub-style. Mobile-first.
 |---|---|---|
 | [mobile-lavatrice](mobile-lavatrice/) | Mobile a ponte per lavatrice LG F10B8NDA | [Live](https://fabiosangregorio.github.io/claude-projects/mobile-lavatrice/) |
 | [scaffale-erbe](scaffale-erbe/) | Scaffale a scala per erbe aromatiche sul balcone | [Live](https://fabiosangregorio.github.io/claude-projects/scaffale-erbe/) |
+
