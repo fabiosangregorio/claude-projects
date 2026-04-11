@@ -48,12 +48,38 @@ Per decidere: se il risparmio è significativo e il mobile ha carichi leggeri, i
 
 **IMPORTANTE:** se cambi spessore dopo aver già calcolato le misure, DEVI ricalcolare TUTTO: larghezze esterne, dimensioni ripiani, schienale, piano di taglio, e tutte le misure nelle istruzioni di montaggio.
 
-### 4. Link ai prodotti
+### 4. Link e prezzi prodotti
 
-**Lezione importante:** i link diretti ai prodotti OBI e Leroy Merlin si rompono spesso. Usa questa strategia:
+**Lezione importante:** i link diretti ai prodotti OBI e Leroy Merlin si rompono spesso, e `web_fetch` è bloccato da entrambi i siti (anti-bot + dominio non nella whitelist di rete). Usa questa strategia:
 
-1. **Link diretti** dove li trovi e funzionano (verifica con web_fetch se possibile)
-2. **Link di ricerca** come fallback: `https://www.leroymerlin.it/search?q=parole+chiave` o `https://www.obi-italia.it/search/parole%20chiave`
+#### Verifica prezzi con Google snippets
+
+Dato che non è possibile accedere direttamente alle pagine prodotto, usa `web_search` con query mirate per estrarre dati strutturati dagli snippet di Google:
+
+```
+site:leroymerlin.it "CODICE_REF" nome prodotto prezzo
+```
+
+Oppure senza ref:
+```
+site:leroymerlin.it bordo preincollato bianco 28mm prezzo
+```
+
+Questo restituisce dagli snippet: **nome completo, prezzo, ref, rating, numero recensioni** — senza mai visitare la pagina. Funziona in modo affidabile per:
+- ✅ Prodotti con ref noto → risultati molto ricchi
+- ✅ Prodotti specifici (marca + dimensione) → trova il prodotto giusto
+- ⚠️ Prodotti "su misura" / solo negozio → ref sì, prezzo spesso assente
+- ⚠️ Prodotti generici (viti, feltrini) → risultati multipli, serve disambiguare
+
+**Fai SEMPRE questa verifica prima di pubblicare la pagina** per ogni prodotto con prezzo > €3. Permette di:
+1. Confermare che il prodotto esiste ancora nel catalogo
+2. Verificare che il prezzo sia aggiornato
+3. Trovare il ref e il link diretto aggiornato
+
+#### Strategia link nella pagina
+
+1. **Link diretti** dove li trovi e funzionano (verifica con il metodo snippet sopra)
+2. **Link di ricerca** come fallback affidabile: `https://www.leroymerlin.it/search?q=parole+chiave` o `https://www.obi-italia.it/search/parole%20chiave`
 3. **Mai inventare URL** — se non trovi il link diretto, usa la ricerca
 
 I link di ricerca funzionano sempre e portano direttamente ai risultati filtrati quando aperti dal telefono in negozio.
