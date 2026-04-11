@@ -78,11 +78,12 @@ Questo restituisce dagli snippet: **nome completo, prezzo, ref, rating, numero r
 
 #### Strategia link nella pagina
 
-1. **Link diretti** dove li trovi e funzionano (verifica con il metodo snippet sopra)
-2. **Link di ricerca** come fallback affidabile: `https://www.leroymerlin.it/search?q=parole+chiave` o `https://www.obi-italia.it/search/parole%20chiave`
+1. **Link diretti verificati** — quando il metodo snippet sopra restituisce un URL `/prodotti/...nome-prodotto-REF.html`, usalo come link nella shopping list. Questi URL contengono il ref numerico e puntano alla pagina prodotto esatta.
+2. **Link di ricerca** come fallback per prodotti generici o quando il link diretto non emerge dagli snippet: `https://www.leroymerlin.it/search?q=parole+chiave` o `https://www.obi-italia.it/search/parole%20chiave`
 3. **Mai inventare URL** — se non trovi il link diretto, usa la ricerca
+4. **Vecchi URL `/catalogo/`** — sono deprecati e bloccati da robots.txt. Se li trovi, sostituiscili con il formato `/prodotti/` equivalente.
 
-I link di ricerca funzionano sempre e portano direttamente ai risultati filtrati quando aperti dal telefono in negozio.
+I link di ricerca funzionano sempre e portano direttamente ai risultati filtrati quando aperti dal telefono in negozio. I link diretti verificati sono preferibili perché portano alla scheda prodotto con prezzo, disponibilità e recensioni.
 
 ### 5. Istruzioni di montaggio
 
