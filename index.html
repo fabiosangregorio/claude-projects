@@ -32,6 +32,10 @@ header p{color:var(--tx2);font-size:.9rem;max-width:420px;margin:0 auto}
 
 .card-footer{display:flex;gap:.6rem;align-items:center;margin-top:.6rem;flex-wrap:wrap}
 .badge{font-family:'Space Mono',monospace;font-size:.6rem;padding:.2rem .5rem;border-radius:999px;border:1px solid var(--bd);color:var(--tx2);background:var(--sf2);text-transform:uppercase;letter-spacing:.5px}
+.status{font-family:'Space Mono',monospace;font-size:.6rem;padding:.2rem .55rem;border-radius:999px;text-transform:uppercase;letter-spacing:.5px}
+.status-completato{border:1px solid var(--ac2);color:var(--ac2);background:rgba(63,185,80,.1)}
+.status-pianificato{border:1px solid var(--ac);color:var(--ac);background:rgba(88,166,255,.1)}
+.status-in-corso{border:1px solid var(--wn);color:var(--wn);background:rgba(240,136,62,.1)}
 
 /* Loading & error states */
 .loader{text-align:center;padding:3rem 0;color:var(--tx2)}
@@ -70,11 +74,13 @@ footer a{color:var(--ac);text-decoration:none}
 const META = {
   'mobile-lavatrice': {
     desc: 'Mobile a ponte per lavatrice LG F10B8NDA',
-    tags: ['truciolare', 'mobile']
+    tags: ['truciolare', 'mobile'],
+    status: 'completato'
   },
   'scaffale-erbe': {
     desc: 'Scaffale a scala per erbe aromatiche sul balcone',
-    tags: ['balcone', 'scaffale']
+    tags: ['balcone', 'scaffale'],
+    status: 'pianificato'
   }
 };
 
@@ -117,6 +123,9 @@ async function load() {
       const meta = META[name] || {};
       const desc = meta.desc || formatName(name);
       const tags = meta.tags || [];
+      const status = meta.status || '';
+      const statusLabels = { completato: '✅ Completato', pianificato: '📐 Pianificato', 'in-corso': '🔨 In corso' };
+      const statusHtml = status ? `<span class="status status-${status}">${statusLabels[status] || status}</span>` : '';
       const tagsHtml = tags.map(t => `<span class="badge">${t}</span>`).join('');
 
       return `
@@ -126,7 +135,7 @@ async function load() {
             <svg class="card-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
           </div>
           <div class="card-desc">${desc}</div>
-          ${tagsHtml ? `<div class="card-footer">${tagsHtml}</div>` : ''}
+          ${(statusHtml || tagsHtml) ? `<div class="card-footer">${statusHtml}${tagsHtml}</div>` : ''}
         </a>`;
     }).join('');
 
@@ -149,3 +158,4 @@ load();
 </script>
 </body>
 </html>
+
