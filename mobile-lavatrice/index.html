@@ -43,6 +43,13 @@ table.b tr:hover td{background:var(--sf2)}
 .steps li{counter-increment:step;position:relative;padding:.9rem .9rem .9rem 3.2rem;margin-bottom:.6rem;background:var(--sf);border:1px solid var(--bd);border-radius:10px;font-size:.88rem}
 .steps li::before{content:counter(step);position:absolute;left:.9rem;top:.9rem;width:22px;height:22px;background:var(--ac2);color:var(--bg);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Space Mono',monospace;font-size:.7rem;font-weight:700}
 .steps li strong{color:var(--ac)}
+/* ACCORDION STEPS */
+.steps details{margin:0}
+.steps summary{cursor:pointer;list-style:none;font-size:.88rem}
+.steps summary::-webkit-details-marker{display:none}
+.steps summary::after{content:'▸';float:right;color:var(--tx2);transition:transform .2s;font-size:.75rem;margin-top:2px}
+.steps details[open] summary::after{transform:rotate(90deg);color:var(--ac)}
+.steps .step-body{padding-top:.7rem}
 .lg{display:flex;gap:1rem;flex-wrap:wrap;margin:.8rem 0;font-size:.8rem}
 .li{display:flex;align-items:center;gap:.35rem}
 .ls{width:13px;height:13px;border-radius:3px}
@@ -236,7 +243,8 @@ footer{text-align:center;padding:1.5rem 0;border-top:1px solid var(--bd);margin-
 
   <ol class="steps">
 
-    <li><strong>Step 1 — Taglio della faesite (schienale E).</strong><br><br>
+    <li><details><summary><strong>Step 1 — Taglio della faesite (schienale E).</strong></summary>
+    <div class="step-body">
     La faesite è sottile (3mm), si taglia facilmente anche a casa con un cutter e un righello lungo, oppure falla tagliare in negozio.<br><br>
     <strong>Misura da tagliare:</strong> 996 × 648 mm (= larghezza esterna 652mm meno 2mm per lato × altezza 1000mm meno 2mm per lato).<br><br>
     <strong>Come tagliare con il cutter:</strong> Appoggia la faesite su una superficie piana. Segna con matita e metro le misure. Metti un righello lungo (o un'asse dritta) sulla linea. Passa il cutter lungo il righello premendo forte, facendo 3–4 passate sullo stesso solco. Poi piega la faesite lungo il solco: si spezza netto. Carteggia il bordo con carta vetrata se è ruvido.<br><br>
@@ -249,9 +257,10 @@ footer{text-align:center;padding:1.5rem 0;border-top:1px solid var(--bd);margin-
     4. Taglia con il cutter seguendo le due linee dritte verticali, poi carteggia i bordi.<br>
     5. Per l'arco: se hai un seghetto da traforo usalo; altrimenti fai una serie di tagli dritti a scaletta con il cutter e carteggia fino a ottenere una curva accettabile — non deve essere perfetta, va contro il muro.<br><br>
     <em>💡 Tip: misura due volte prima di tagliare. L'apertura è sul retro e non si vede, quindi non importa se è un po' irregolare — l'importante è che sia abbastanza larga da non premere sui tubi quando il mobile è in posizione.</em>
-    </li>
+    </div></details></li>
 
-    <li><strong>Step 2 — Bordatura dei pannelli.</strong><br><br>
+    <li><details><summary><strong>Step 2 — Bordatura dei pannelli.</strong></summary>
+    <div class="step-body">
     Solo il bordo frontale del ripiano D è esposto e visibile — tutti gli altri tagli sono nascosti (coperti dai ripiani, dallo schienale, o contro il muro). Si usa il bordo preincollato bianco, che ha una colla termofusibile sul retro attivata dal calore.<br><br>
     <strong>Quale bordo:</strong> Solo il lato frontale di D (652mm) — 1 striscia da ~70cm.<br><br>
     <strong>Come fare:</strong><br>
@@ -263,16 +272,18 @@ footer{text-align:center;padding:1.5rem 0;border-top:1px solid var(--bd);margin-
     6. Con un cutter affilato, rifila l'eccesso di bordo che sporge ai lati e in alto/basso. Tieni la lama piatta contro il pannello e taglia via la striscia in eccesso.<br>
     7. Carteggia leggermente il bordo con carta vetrata fine (grana 120+) per rendere il giunto liscio al tatto.<br><br>
     <em>💡 Tip: se il bordo si stacca in un punto, ripassalo col ferro da stiro. Se hai bruciato un pezzo, staccalo (si stacca a caldo) e rifai con un pezzo nuovo.</em>
-    </li>
+    </div></details></li>
 
-    <li><strong>Step 3 — Feltrini sotto i fianchi.</strong><br><br>
+    <li><details><summary><strong>Step 3 — Feltrini sotto i fianchi.</strong></summary>
+    <div class="step-body">
     Prima di assemblare, attacca i 4 feltrini adesivi (o gommini) sotto i fianchi A e B. Servono a proteggere il fondo del truciolare dal contatto diretto col pavimento.<br><br>
     <strong>Posizione:</strong> 2 feltrini per fianco — uno a ~5cm dal bordo frontale, uno a ~5cm dal bordo posteriore. Centra ciascun feltrino sulla larghezza del fianco (a ~28.5cm dal bordo).<br><br>
     <strong>Come fissare:</strong> I feltrini adesivi si incollano direttamente: pulisci la superficie, stacca la pellicola e premi. Per gommini a infilare: fai un foro del diametro giusto e spingi dentro.<br><br>
     <em>💡 Tip: fai questa operazione ORA, col pannello ancora appoggiato piatto sul pavimento. Dopo che il mobile è assemblato non riesci più a girarlo.</em>
-    </li>
+    </div></details></li>
 
-    <li><strong>Step 4 — Fori per gli spinotti nel ripiano C.</strong><br><br>
+    <li><details><summary><strong>Step 4 — Fori per gli spinotti nel ripiano C.</strong></summary>
+    <div class="step-body">
     Gli spinotti sono cilindri di legno che collegano il ripiano C ai fianchi A e B senza viti visibili. Per farli funzionare devi fare fori precisi su entrambi i pezzi che combacino perfettamente.<br><br>
     <strong>Dove forare su C:</strong> Sul bordo laterale (lo spessore di 16mm) del ripiano C, fai 4 fori per lato. Segna con la matita 4 punti a: 5cm, 20cm, 40cm e 54cm dal bordo frontale. Ogni punto deve essere al centro dello spessore (a 8mm dal bordo superiore e inferiore del pannello).<br><br>
     <strong>Come forare:</strong><br>
@@ -282,9 +293,10 @@ footer{text-align:center;padding:1.5rem 0;border-top:1px solid var(--bd);margin-
     4. Fora lentamente e dritto su ogni segno, fermandoti quando il nastro tocca il legno (profondità 12mm).<br>
     5. Soffia via la polvere dai fori.<br><br>
     <em>💡 Tip: il foro deve essere PERFETTAMENTE al centro dello spessore (8mm). Se sbagli anche di 2mm, lo spinotto esce dal pannello. Per centrare: appoggia il pannello di costa, misura 8mm dal bordo con il metro, e segna un puntino a matita. Poi fora su quel puntino.</em>
-    </li>
+    </div></details></li>
 
-    <li><strong>Step 5 — Fori corrispondenti sui fianchi.</strong><br><br>
+    <li><details><summary><strong>Step 5 — Fori corrispondenti sui fianchi.</strong></summary>
+    <div class="step-body">
     Ora devi fare sui fianchi A e B i fori che combaceranno con quelli del ripiano C. Siccome non usi i centratori, devi riportare le stesse misure a mano — con calma e precisione.<br><br>
     <strong>Trova la quota:</strong> Il ripiano C va posizionato a 852mm dal fondo del fianco (= 842mm lavatrice + 10mm gioco; i feltrini hanno spessore trascurabile). Misura con il metro e segna una linea orizzontale leggera a matita su entrambi i fianchi, sulla faccia interna.<br><br>
     <strong>Segna i punti di foratura:</strong> Sulla linea a 852mm, riporta le stesse 4 distanze che hai usato su C: 5cm, 20cm, 40cm e 54cm dal bordo frontale del fianco. Ogni punto va a 8mm dal bordo dove il pannello C si appoggerà (cioè 8mm sopra la linea a 852mm).<br><br>
@@ -295,9 +307,10 @@ footer{text-align:center;padding:1.5rem 0;border-top:1px solid var(--bd);margin-
     4. Fora sui 4 segni con punta ø6 a profondità 12mm (usa il trucco del nastro adesivo).<br>
     5. Ripeti tutto identico sul fianco B.<br><br>
     <em>💡 Tip: prima di forare, fai una prova a secco — appoggia il ripiano C di costa sulla linea e verifica che i fori su C si allineino con i segni sul fianco. Se qualcosa non torna, ricontrolla le misure prima di bucare.</em>
-    </li>
+    </div></details></li>
 
-    <li><strong>Step 6 — Assembla il ripiano C ai fianchi.</strong><br><br>
+    <li><details><summary><strong>Step 6 — Assembla il ripiano C ai fianchi.</strong></summary>
+    <div class="step-body">
     Questo è il momento clou — dopo questo step hai la struttura base del mobile.<br><br>
     <strong>Come fare:</strong><br>
     1. Metti un po' di colla vinilica in ogni foro (su C e sui fianchi) — basta una goccia per foro, non esagerare.<br>
@@ -308,9 +321,10 @@ footer{text-align:center;padding:1.5rem 0;border-top:1px solid var(--bd);margin-
     6. Se hai dei morsetti, usali per tenere in pressione. Altrimenti appoggia la struttura su un lato e metti dei pesi sopra (bottiglie d'acqua, libri).<br>
     7. Lascia asciugare la colla almeno 30 minuti (meglio 1 ora) senza muovere niente.<br><br>
     <em>💡 Tip: se uno spinotto non entra, NON forzare col martello — rischi di spaccare il truciolare. Verifica che il foro sia profondo abbastanza e che lo spinotto non sia storto. Eventualmente allarga leggermente il foro ripassando la punta.</em>
-    </li>
+    </div></details></li>
 
-    <li><strong>Step 7 — Inchioda lo schienale E.</strong><br><br>
+    <li><details><summary><strong>Step 7 — Inchioda lo schienale E.</strong></summary>
+    <div class="step-body">
     Lo schienale in faesite è il pezzo che tiene il mobile rigido e impedisce l'oscillazione. Senza di lui, il mobile balla a destra e sinistra.<br><br>
     <strong>Come fare:</strong><br>
     1. Appoggia la struttura (A + C + B) a faccia in giù sul pavimento (con il lato frontale appoggiato a terra, protetto da un cartone).<br>
@@ -318,9 +332,10 @@ footer{text-align:center;padding:1.5rem 0;border-top:1px solid var(--bd);margin-
     3. Parti da un angolo in alto. Pianta un chiodino senza testa ogni ~12–15cm lungo il bordo del fianco A, poi lungo il bordo superiore (dove c'è il ripiano C), poi lungo il fianco B, e infine lungo il bordo inferiore.<br>
     4. Usa il martello con colpi leggeri — i chiodini sono piccoli (1.2×20mm) e basta poco per piantarli nella faesite e nel truciolare sottostante.<br><br>
     <em>💡 Tip: prima di inchiodare, verifica che la struttura sia in squadra. Misura le due diagonali del rettangolo posteriore: se sono uguali (o differiscono di meno di 3mm), sei in squadra. Se no, spingi un angolo finché non si allineano, poi inchioda. Una volta inchiodato lo schienale, il mobile rimane rigido nella posizione in cui l'hai fissato.</em>
-    </li>
+    </div></details></li>
 
-    <li><strong>Step 8 — Monta il ripiano D sopra.</strong><br><br>
+    <li><details><summary><strong>Step 8 — Monta il ripiano D sopra.</strong></summary>
+    <div class="step-body">
     Il ripiano D è quello in cima, e appoggia SOPRA i due fianchi. È fissato con staffe angolari dall'interno della nicchia (lo spazio tra C e D), quindi le staffe non si vedono guardando il mobile dal fronte.<br><br>
     <strong>Come fare:</strong><br>
     1. Rialza il mobile in posizione verticale.<br>
@@ -331,16 +346,17 @@ footer{text-align:center;padding:1.5rem 0;border-top:1px solid var(--bd);margin-
     6. Avvita le viti 2×15mm (penetrano ~13mm nel pannello da 16mm, ok).<br>
     7. Verifica che D non si muova.<br><br>
     <em>💡 Tip: tieni la staffa ferma con una mano e avvita con l'altra. Se l'avvitatore ha la regolazione di coppia (la ghiera numerata), mettilo su un valore basso (2–3). Appena la vite smette di girare, fermati — se stringi troppo il truciolare si sbriciola e la vite perde presa.</em>
-    </li>
+    </div></details></li>
 
-    <li><strong>Step 9 — Posizionamento finale.</strong><br><br>
+    <li><details><summary><strong>Step 9 — Posizionamento finale.</strong></summary>
+    <div class="step-body">
     1. Porta il mobile nel bagno, nel punto dove andrà la lavatrice.<br>
     2. Infila la lavatrice nello spazio tra i fianchi. Deve entrare senza forzare — hai ~10mm di gioco per lato (20mm totali): è il gioco progettato, non è un errore.<br>
     3. Verifica che ci siano almeno 10mm di aria tra il top della lavatrice e il fondo del ripiano C.<br>
     4. Non servono fissaggi a muro — il peso della lavatrice (~56 kg) stabilizza il mobile.<br>
     5. Carica i ripiani con carta igienica, scatole, prodotti bagno. Fatto! 🎉<br><br>
     <em>💡 Tip: se il pavimento non è perfettamente livellato e il mobile balla, metti un pezzetto di cartone sotto il feltrino che non tocca.</em>
-    </li>
+    </div></details></li>
 
   </ol>
 
