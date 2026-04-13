@@ -396,7 +396,7 @@ footer{text-align:center;padding:1.5rem 0;border-top:1px solid var(--bd);margin-
       <div class="cap">Prima — lavatrice scoperta</div>
     </a>
     <a href="javascript:void(0)" onclick="openLB(1)">
-      <img src="foto/2-struttura.png" alt="Struttura montata senza prodotti" loading="lazy">
+      <img src="foto/2-struttura.jpeg" alt="Struttura montata senza prodotti" loading="lazy">
       <div class="cap">Render AI del progetto</div>
     </a>
     <a href="javascript:void(0)" onclick="openLB(2)">
@@ -472,7 +472,7 @@ function updateProgress(){
 render();
 
 // Lightbox
-const LB_IMGS=['foto/1-prima.jpeg','foto/2-struttura.png','foto/3-frontale.jpeg','foto/4-angolo.jpeg','foto/5-panoramica.jpeg'];
+const LB_IMGS=['foto/1-prima.jpeg','foto/2-struttura.jpeg','foto/3-frontale.jpeg','foto/4-angolo.jpeg','foto/5-panoramica.jpeg'];
 let lbIdx=0;
 function openLB(i){lbIdx=i;document.getElementById('lb-img').src=LB_IMGS[i];document.getElementById('lb').classList.add('open');document.body.style.overflow='hidden';}
 function closeLB(){document.getElementById('lb').classList.remove('open');document.body.style.overflow='';}
