@@ -99,13 +99,13 @@ footer{text-align:center;padding:1.5rem 0;border-top:1px solid var(--bd);margin-
     <span class="bg">1600 × 500 × 410 mm</span>
     <span class="bg">Bianco esterno</span>
     <span class="bg">Richiudibile 60mm</span>
-    <span class="bg">~€50-65</span>
+    <span class="bg">~€45-60</span>
   </div>
 </header>
 
 <section style="margin-bottom:2rem">
   <p style="font-size:.95rem;color:var(--tx2);line-height:1.7;max-width:680px">
-    Fioriera a scala <strong style="color:var(--tx)">stile Relaxdays</strong>: cavalletto autoportante con <strong style="color:var(--tx)">telaio posteriore verticale</strong> (va al muro) e <strong style="color:var(--tx)">telaio anteriore inclinato</strong>. I due telai si uniscono in cima con una <strong style="color:var(--tx)">cerniera</strong> (barra filettata M8). Ogni telaio ha 4 pioli orizzontali in corrispondenza dei ripiani. I <strong style="color:var(--tx)">ripiani a doghe</strong> sono fissati sul piolo posteriore e poggiano sul piolo anteriore — quando chiudi la scala, i ripiani ruotano e scendono tra i telai, appiattendosi a <strong style="color:var(--tx)">~60mm di spessore</strong>.
+    Fioriera a scala <strong style="color:var(--tx)">pieghevole a libro</strong>: due telai-scala uniti in cima da <strong style="color:var(--tx)">2 cerniere da mobili</strong>. Il telaio posteriore è verticale (al muro), quello anteriore si apre in avanti. I <strong style="color:var(--tx)">ripiani a doghe sono fissati rigidamente al telaio posteriore</strong> e poggiano per gravità sui pioli del telaio anteriore quando aperta. Per chiudere: sollevi il telaio anteriore, i ripiani si sollevano con il posteriore e la fioriera si appiattisce a <strong style="color:var(--tx)">~60mm di spessore</strong>.
   </p>
 </section>
 
@@ -117,7 +117,7 @@ footer{text-align:center;padding:1.5rem 0;border-top:1px solid var(--bd);margin-
     <div class="sc"><div class="l">Altezza</div><div class="v">1600<span class="u">mm</span></div></div>
     <div class="sc"><div class="l">Largh. telaio</div><div class="v">410<span class="u">mm</span></div></div>
     <div class="sc"><div class="l">Prof. base</div><div class="v">500<span class="u">mm</span></div></div>
-    <div class="sc"><div class="l">Angolo ant.</div><div class="v">17.7<span class="u">°</span></div></div>
+    <div class="sc"><div class="l">Angolo ant.</div><div class="v">17.7<span class="u">°</span></div><div class="s">Apertura max</div></div>
     <div class="sc"><div class="l">Mont. post.</div><div class="v">1600<span class="u">mm</span></div><div class="s">Verticali ×2</div></div>
     <div class="sc"><div class="l">Mont. ant.</div><div class="v">1650<span class="u">mm</span></div><div class="s">Inclinati ×2</div></div>
     <div class="sc"><div class="l">Sez. montanti</div><div class="v">40×20<span class="u">mm</span></div></div>
@@ -132,7 +132,7 @@ footer{text-align:center;padding:1.5rem 0;border-top:1px solid var(--bd);margin-
     <div class="sc"><div class="l">R4 basso</div><div class="v">410×500<span class="u">mm</span></div><div class="s">@300mm</div></div>
   </div>
 
-  <div class="tip"><strong>Come funziona:</strong> ogni ripiano è una doga di 4 listelli affiancati (larghezza 410mm, lunghezza crescente verso il basso). I listelli sono fissati con viti al piolo posteriore (si muovono con quel telaio) e poggiano liberamente sul piolo anteriore. Quando chiudi la scala, i ripiani scivolano fuori dal piolo anteriore e pendono tra i due telai.</div>
+  <div class="tip"><strong>Come funziona:</strong> ogni ripiano è fatto di listelli (doghe) affiancati fissati <strong>rigidamente</strong> al piolo posteriore. Il lato anteriore del ripiano poggia soltanto sul piolo del telaio anteriore, senza essere fissato. Quando apri la scala, i ripiani si appoggiano orizzontali sui pioli anteriori. Quando la chiudi, sollevi il telaio anteriore: i ripiani si sollevano col telaio posteriore, ruotando sulle cerniere in cima. A scala chiusa, tutto l'insieme è piatto — i 2 telai si accostano uno all'altro a libro.</div>
 </section>
 
 <!-- 2 VISTA -->
@@ -143,7 +143,7 @@ footer{text-align:center;padding:1.5rem 0;border-top:1px solid var(--bd);margin-
     <div class="li"><div class="ls" style="background:#79c0ff"></div>Mont. ant. (×2)</div>
     <div class="li"><div class="ls" style="background:#e3b341"></div>Pioli post. (×4)</div>
     <div class="li"><div class="ls" style="background:#d2a8ff"></div>Pioli ant. (×4)</div>
-    <div class="li"><div class="ls" style="background:#f85149"></div>Cerniera M8</div>
+    <div class="li"><div class="ls" style="background:#f85149"></div>Cerniere (×2)</div>
     <div class="li"><div class="ls" style="background:#7ee787"></div>Doghe ripiani</div>
   </div>
 
@@ -189,9 +189,10 @@ footer{text-align:center;padding:1.5rem 0;border-top:1px solid var(--bd);margin-
       <!-- Montante anteriore (inclinato) -->
       <line x1="205" y1="480" x2="60" y2="28" stroke="#79c0ff" stroke-width="8" stroke-linecap="round"/>
 
-      <!-- Cerniera (in cima) -->
-      <circle cx="60" cy="25" r="5" fill="#f85149" stroke="#fff" stroke-width="1"/>
-      <text x="72" y="22" fill="#f85149" font-family="Space Mono,monospace" font-size="6" font-weight="700">CERNIERA M8</text>
+      <!-- Cerniere da mobili (in cima) -->
+      <rect x="56" y="22" width="10" height="6" rx="1" fill="#f85149" stroke="#fff" stroke-width=".5"/>
+      <text x="72" y="22" fill="#f85149" font-family="Space Mono,monospace" font-size="6" font-weight="700">CERNIERE</text>
+      <text x="72" y="29" fill="#f85149" font-family="Space Mono,monospace" font-size="5">40×40mm ×2</text>
 
       <!-- R1 @1500 : post x=60 y=45, ant x=118 y=45 -->
       <circle cx="60" cy="45" r="3.5" fill="#e3b341"/>
@@ -264,8 +265,8 @@ footer{text-align:center;padding:1.5rem 0;border-top:1px solid var(--bd);margin-
       <line x1="170" y1="480" x2="170" y2="22" stroke="#5e9eff" stroke-width="6" stroke-linecap="round"/>
       <!-- Montante ant accostato -->
       <line x1="180" y1="480" x2="180" y2="22" stroke="#79c0ff" stroke-width="6" stroke-linecap="round"/>
-      <!-- Cerniera -->
-      <circle cx="175" cy="25" r="4" fill="#f85149" stroke="#fff" stroke-width=".6"/>
+      <!-- Cerniere da mobili -->
+      <rect x="167" y="20" width="16" height="4" rx="1" fill="#f85149" stroke="#fff" stroke-width=".4"/>
 
       <!-- Ripiani pendono in basso tra i 2 montanti -->
       <!-- R1 pende ~200mm dal suo piolo post @1500 -->
@@ -314,9 +315,10 @@ footer{text-align:center;padding:1.5rem 0;border-top:1px solid var(--bd);margin-
       <rect x="46" y="22" width="8" height="430" rx="1" fill="#79c0ff" opacity=".9" stroke="#fff" stroke-width=".5"/>
       <rect x="406" y="22" width="8" height="430" rx="1" fill="#79c0ff" opacity=".9" stroke="#fff" stroke-width=".5"/>
 
-      <!-- Cerniera -->
-      <line x1="56" y1="25" x2="410" y2="25" stroke="#f85149" stroke-width="2.5" stroke-linecap="round"/>
-      <text x="230" y="20" text-anchor="middle" fill="#f85149" font-family="Space Mono,monospace" font-size="6" font-weight="700">CERNIERA M8 (sopra R1)</text>
+      <!-- 2 Cerniere da mobili -->
+      <rect x="80" y="22" width="40" height="6" rx="1" fill="#f85149" stroke="#fff" stroke-width=".4"/>
+      <rect x="330" y="22" width="40" height="6" rx="1" fill="#f85149" stroke="#fff" stroke-width=".4"/>
+      <text x="230" y="20" text-anchor="middle" fill="#f85149" font-family="Space Mono,monospace" font-size="6" font-weight="700">2× CERNIERE 40×40mm</text>
 
       <!-- Pioli orizzontali (uno sul telaio post + uno sul telaio ant per ogni ripiano) -->
       <!-- Altezze ripiani: R1=45, R2=161, R3=277, R4=393 (scalate come vista laterale) -->
@@ -381,9 +383,8 @@ footer{text-align:center;padding:1.5rem 0;border-top:1px solid var(--bd);margin-
         <tr><td><span class="cd" style="background:#7ee787"></span>D2</td><td>Doghe R2 — 4 listelli</td><td class="dm">10×300×30</td><td>4</td></tr>
         <tr><td><span class="cd" style="background:#7ee787"></span>D3</td><td>Doghe R3 — 4 listelli</td><td class="dm">10×400×30</td><td>4</td></tr>
         <tr><td><span class="cd" style="background:#7ee787"></span>D4</td><td>Doghe R4 (basso) — 4 listelli</td><td class="dm">10×500×30</td><td>4</td></tr>
-        <tr class="sep"><td colspan="5">PERNI + FERRAMENTA</td></tr>
-        <tr><td><span class="cd" style="background:#f85149"></span>BC</td><td>Cerniera (in cima, tra i 2 telai)</td><td class="dm">M8, 500mm</td><td>1</td><td rowspan="2">1× barra filettata zincata M8, 1m → 2 tagli da ~48cm</td></tr>
-        <tr><td>—</td><td>(avanzo 500mm per futuro)</td><td class="dm">—</td><td>—</td></tr>
+        <tr class="sep"><td colspan="5">CERNIERE + FERRAMENTA</td></tr>
+        <tr><td><span class="cd" style="background:#f85149"></span>CN</td><td>Cerniere piatte da mobili (in cima)</td><td class="dm">40×40mm acciaio zincato</td><td>2</td><td>Leroy Merlin — con viti incluse</td></tr>
       </tbody>
     </table>
   </div>
@@ -501,21 +502,12 @@ footer{text-align:center;padding:1.5rem 0;border-top:1px solid var(--bd);margin-
         </g>
       </g>
 
-      <!-- Barra filettata -->
-      <g transform="translate(20,340)">
-        <text x="0" y="-4" fill="#8b949e" font-family="Space Mono,monospace" font-size="7">BARRA FILETTATA M8 × 1000mm #1 — CERNIERA</text>
-        <rect x="0" y="0" width="380" height="10" fill="#1c2230" stroke="#2a3040" stroke-width=".5"/>
-        <rect x="0" y="0" width="190" height="10" fill="#f85149" opacity=".85"/>
-        <text x="95" y="7" text-anchor="middle" fill="#fff" font-family="Space Mono,monospace" font-size="6" font-weight="700">CERNIERA 500mm</text>
-        <text x="285" y="7" text-anchor="middle" fill="#8b949e" font-family="Space Mono,monospace" font-size="6">scorta 500mm</text>
-      </g>
-
       <!-- Legenda -->
       <g transform="translate(20,380)" font-family="Space Mono,monospace" font-size="7" fill="#8b949e">
         <text x="0" y="0">TOTALE LISTELLI 40×20×2m: 4 pezzi</text>
         <text x="0" y="14">TOTALE LISTELLI 30×20×2m: 2 pezzi (pioli — robusti)</text>
         <text x="0" y="28">TOTALE LISTELLI 10×30×2m: 3 pezzi (doghe — sottili e leggere)</text>
-        <text x="0" y="42">TOTALE BARRA FILETTATA M8×1m: 1 pezzo</text>
+        <text x="0" y="42">CERNIERE: 2× piatte 40×40mm acciaio zincato (ferramenta)</text>
         
       </g>
     </svg>
@@ -525,7 +517,7 @@ footer{text-align:center;padding:1.5rem 0;border-top:1px solid var(--bd);margin-
   • <strong>4× listello 40×20, 2m:</strong> 2 tagli a 1600mm (MP) + 2 tagli a 1650mm (MA)<br>
   • <strong>2× listello 30×20, 2m (PIOLI):</strong> 4 tagli a 410mm per listello = 8 pioli totali.<br>
   • <strong>3× listello 10×30, 2m (DOGHE):</strong> 1° listello → 4 tagli a 500mm (D4). 2° listello → 4 tagli a 400mm (D3, sfrido 400). 3° listello → 4 tagli a 300mm (D2) + 4 tagli a 200mm (D1) = tutto esaurito.<br>
-  • <strong>1× barra filettata M8 × 1m:</strong> 1 taglio a 500mm per la cerniera (con seghetto per ferro). Il resto è scorta.</div>
+  • <strong>2× cerniera piatta 40×40mm:</strong> nessun taglio, si avvitano così come sono.</div>
 
   <div class="tip warn"><strong>Fatti tagliare al negozio!</strong> Leroy Merlin offre servizio taglio gratuito su legno. Porta la lista precisa dei tagli. A casa dovrai solo carteggiare e forare.</div>
 </section>
@@ -552,7 +544,7 @@ footer{text-align:center;padding:1.5rem 0;border-top:1px solid var(--bd);margin-
     • Listelli 40×20mm: 2×1600mm (MP) + 2×1650mm (MA) — 4 tagli<br>
     • Listelli 30×20mm (PIOLI): 8×410mm — 8 tagli<br>
     • Listelli 10×30mm (DOGHE): 4×500mm (D4) + 4×400mm (D3) + 4×300mm (D2) + 4×200mm (D1) — 16 tagli<br>
-    • Barra filettata M8: 1×500mm (puoi tagliarla anche a casa con un seghetto per ferro)<br><br>
+    <br><br>
     <em>💡 Tip: controlla ogni pezzo appena tagliato con un metro. Se un pezzo è storto o ha nodi grossi, chiedi il cambio subito.</em></li>
 
     <li><strong>Step 2 — Carteggia tutto.</strong><br><br>
@@ -560,9 +552,10 @@ footer{text-align:center;padding:1.5rem 0;border-top:1px solid var(--bd);margin-
     <em>💡 Tip: carteggia sempre nel senso delle venature, mai di traverso. Se passi il dito sulla superficie e "accroccia", serve ancora carta vetrata.</em></li>
 
     <li><strong>Step 3 — Fora i montanti e i pioli.</strong><br><br>
-    Serve un trapano con punta da legno ø8.5mm (leggermente più larga degli 8mm della barra filettata, per permettere la rotazione).<br><br>
-    <strong>Montanti posteriori (MP):</strong> segna 4 fori a <strong>300, 700, 1100, 1500mm</strong> dal basso, centrati sulla larghezza (20mm dal bordo, cioè a metà del lato da 40mm). Piu uno in cima a <strong>1570mm</strong> per la cerniera. Totale 5 fori per MP.<br><br>
-    <strong>Montanti anteriori (MA):</strong> stesse posizioni ma misurate lungo il montante (non da terra). A <strong>300, 707, 1118, 1530mm</strong> dal piede, più <strong>1648mm</strong> per la cerniera.<br><br>
+    Serve un trapano con punta da legno ø8mm per i fori di fissaggio dei pioli nei montanti.<br><br>
+    <strong>Montanti posteriori (MP):</strong> segna 4 fori a <strong>300, 700, 1100, 1500mm</strong> dal basso, centrati sulla larghezza (20mm dal bordo, cioè a metà del lato da 40mm). Totale 4 fori per MP.<br><br>
+    <strong>Montanti anteriori (MA):</strong> stesse posizioni ma misurate lungo il montante (non da terra). A <strong>300, 707, 1118, 1530mm</strong> dal piede. Totale 4 fori per MA.<br><br>
+    <strong>Le cerniere non richiedono fori passanti</strong>: si avvitano con le loro viti alla fine del montaggio.<br><br>
     <strong>Pioli (PP e PA):</strong> 2 fori ø8.5mm alle estremità, a <strong>10mm dal bordo</strong>, al centro della sezione da 30mm.<br><br>
     <em>💡 Tip: fai i fori su una superficie di sacrificio (un vecchio tavolo o pezzo di legno sotto). Usa una morsa se possibile. La punta deve uscire pulita senza strappare il legno — se esce "con la barba", gira il pezzo e completa il foro dall'altro lato.</em></li>
 
@@ -580,10 +573,11 @@ footer{text-align:center;padding:1.5rem 0;border-top:1px solid var(--bd);margin-
     Prima di assemblare il tutto, passa <strong>2 mani di impregnante bianco per esterno</strong> su entrambi i telai e su tutte le doghe. Asciuga almeno 4 ore tra le mani. Seconda mano = leggera carteggiatura 180 prima.<br><br>
     <em>💡 Tip: mani sottili, mai troppa vernice. L'impregnante penetra nel legno: troppa quantità colerà invece di assorbirsi. Usa un pennello piatto da 40mm.</em></li>
 
-    <li><strong>Step 7 — Unisci i 2 telai con la cerniera in cima.</strong><br><br>
-    Alza i 2 telai e mettili uno davanti all'altro. Fai combaciare i fori della cerniera in cima (posteriore a 1570mm, anteriore a 1648mm dal piede).<br><br>
-    Infila la barra filettata M8 da 500mm. Metti: <strong>rondella + dado</strong> esterno da un lato, poi attraversa MP-sx → MA-sx → MA-dx → MP-dx, poi <strong>rondella + dado autobloccante</strong> dall'altro lato. Stringi il dado autobloccante ma non troppo — i telai devono poter ruotare liberamente uno rispetto all'altro.<br><br>
-    <em>💡 Tip: usa dadi AUTOBLOCCANTI (con anello di nylon) non dadi normali, altrimenti con i movimenti di apertura/chiusura si svitano da soli.</em></li>
+    <li><strong>Step 7 — Unisci i 2 telai con le 2 cerniere in cima.</strong><br><br>
+    Alza i 2 telai e posizionali come un libro aperto di 90° (uno verticale contro il muro, l'altro orizzontale sulla terra). L'estremità alta dei montanti posteriori deve essere a contatto con l'estremità alta dei montanti anteriori.<br><br>
+    Appoggia una <strong>cerniera piatta 40×40mm</strong> a cavallo tra MP-sx (sulla faccia superiore, vicino alla cima) e MA-sx (sulla stessa faccia). La cerniera deve essere posizionata con il perno allineato esattamente con il punto di giunzione. Avvita le 8 viti (4 per lato) che vengono con la cerniera.<br><br>
+    Ripeti lo stesso per la cerniera destra tra MP-dx e MA-dx.<br><br>
+    <em>💡 Tip: prima di avvitare, apri e chiudi i 2 telai a mano per verificare che i montanti non si incastrino né lascino uno spazio. Regola la posizione della cerniera di qualche mm se serve.</em></li>
 
     <li><strong>Step 8 — Fissa le doghe dei ripiani al piolo posteriore.</strong><br><br>
     Per ogni ripiano (R1-R4):<br>
@@ -608,7 +602,7 @@ footer{text-align:center;padding:1.5rem 0;border-top:1px solid var(--bd);margin-
     <em>💡 Tip: su balcone scoperto, ogni 1-2 anni dai una mano di impregnante in più per proteggere dall'umidità. Se vedi che una doga si imbarca, toglila e sostituisci solo quella.</em></li>
   </ol>
 
-  <div class="tip warn"><strong>Regole legno esterno:</strong> Pre-fora SEMPRE · Colla vinilica RESISTENTE all'acqua (D3 minimo) · Dadi AUTOBLOCCANTI · 2+ mani di impregnante</div>
+  <div class="tip warn"><strong>Regole legno esterno:</strong> Pre-fora SEMPRE · Colla vinilica RESISTENTE all'acqua (D3 minimo) · Cerniere ben avvitate · 2+ mani di impregnante</div>
 </section>
 
 <!-- 7 ERBE -->
@@ -645,16 +639,15 @@ footer{text-align:center;padding:1.5rem 0;border-top:1px solid var(--bd);margin-
         <tr><td>4× Listello piallato abete 40×20mm, 2m</td><td class="dm">~15</td></tr>
         <tr><td>2× Listello piallato abete 30×20mm, 2m (pioli)</td><td class="dm">~9</td></tr>
         <tr><td>3× Listello piallato abete 10×30mm, 2m (doghe)</td><td class="dm">~15</td></tr>
-        <tr><td>1× Barra filettata zincata M8, 1m</td><td class="dm">~1</td></tr>
-        <tr><td>8× Dadi autobloccanti M8 + 8× rondelle M8</td><td class="dm">~4</td></tr>
+        <tr><td>2× Cerniere piatte 40×40mm (con viti)</td><td class="dm">~3</td></tr>
         <tr><td>Viti legno 3×25mm + 3.5×30mm (2 conf.)</td><td class="dm">~6</td></tr>
         <tr><td>Colla vinilica D3 per esterno</td><td class="dm">~5</td></tr>
         <tr><td>Impregnante bianco esterno 0.75L</td><td class="dm">~10</td></tr>
-        <tr style="font-weight:700;background:var(--sf2)"><td>TOTALE FIORIERA (LM)</td><td class="dm" style="color:var(--ac2)">~€65</td></tr>
+        <tr style="font-weight:700;background:var(--sf2)"><td>TOTALE FIORIERA (LM)</td><td class="dm" style="color:var(--ac2)">~€60</td></tr>
         <tr class="sep"><td colspan="2">ERBE + VASI</td></tr>
         <tr><td>8 piantine dal vivaio</td><td class="dm">~24</td></tr>
         <tr><td>8 vasi con sottovaso + terriccio 20L + perlite</td><td class="dm">~22</td></tr>
-        <tr style="font-weight:700;background:var(--sf2)"><td>TOTALE COMPLESSIVO</td><td class="dm" style="color:var(--ac2)">~€111</td></tr>
+        <tr style="font-weight:700;background:var(--sf2)"><td>TOTALE COMPLESSIVO</td><td class="dm" style="color:var(--ac2)">~€106</td></tr>
       </tbody>
     </table>
   </div>
@@ -680,7 +673,7 @@ footer{text-align:center;padding:1.5rem 0;border-top:1px solid var(--bd);margin-
 
 <footer>
   Progetto per Fabio — Fioriera a scala richiudibile — Apr 2026<br>
-  <span style="color:var(--ac2)">1600×500×410mm · Abete bianco · Richiudibile ~60mm · Perni M8 · 8 erbe 🌿</span>
+  <span style="color:var(--ac2)">1600×500×410mm · Abete bianco · Pieghevole a libro · Cerniere ×2 · 8 erbe 🌿</span>
 </footer>
 </div>
 
@@ -689,9 +682,7 @@ const ITEMS=[
 {cat:"LEGNO — MONTANTI",name:"Listello abete 20×40mm, 2m (piallato o grezzo)",detail:"Per montanti post+ant. Tagli: 2×1600mm + 2×1650mm. OBI ha solo grezzo (€2,69, basta carteggiare di più). LM ha piallato €3,85.",qty:"Qtà: 4",price:"~€2,69-3,85 cad.",url:"https://www.obi-italia.it/search/listello%20abete%2020x40"},
 {cat:"LEGNO — PIOLI",name:"Listello piallato abete 20×30mm, 2m",detail:"Per gli 8 pioli (410mm ciascuno). OBI €2,79 vs LM €4,45. OBI conviene molto.",qty:"Qtà: 2",price:"~€2,79-4,45 cad.",url:"https://www.obi-italia.it/search/listello%20abete%20piallato%2020x30"},
 {cat:"LEGNO — DOGHE",name:"Listello piallato abete 10×30mm, 2m",detail:"Per le 16 doghe dei ripiani. OBI €2,69 vs LM €4,99. OBI conviene molto.",qty:"Qtà: 3",price:"~€2,69-4,99 cad.",url:"https://www.obi-italia.it/search/listello%20abete%20piallato%2010x30"},
-{cat:"CERNIERA",name:"Barra filettata zincata M8, 1m",detail:"Cerniera in cima tra i 2 telai. Taglia a 500mm con seghetto.",qty:"Qtà: 1",price:"~€0,90",url:"https://www.leroymerlin.it/search?q=barra+filettata+zincata+M8+1m"},
-{cat:"CERNIERA",name:"Dadi autobloccanti M8",detail:"2 per la cerniera + scorta. Con anello nylon, non si svitano.",qty:"Conf. 8-10 pz",price:"~€2",url:"https://www.leroymerlin.it/search?q=dadi+autobloccanti+M8"},
-{cat:"CERNIERA",name:"Rondelle M8 (piatte)",detail:"2 per la cerniera + scorta. Distribuiscono il carico.",qty:"Conf. 10 pz",price:"~€2",url:"https://www.leroymerlin.it/search?q=rondelle+piatte+M8"},
+{cat:"CERNIERE",name:"Cerniere piatte 40×40mm acciaio zincato",detail:"Unione dei 2 telai in cima. Viti incluse. LM €1,29 cad.",qty:"Qtà: 2",price:"~€1,29 cad.",url:"https://www.leroymerlin.it/search?q=cerniera+piatta+mobili+40x40"},
 {cat:"FERRAMENTA",name:"Viti legno 3×25mm (conf. 50)",detail:"Per fissare le doghe ai pioli posteriori. 16 viti totali.",qty:"Qtà: 1",price:"~€3",url:"https://www.leroymerlin.it/search?q=viti+legno+3x25"},
 {cat:"FERRAMENTA",name:"Viti legno 3.5×30mm (conf. 50)",detail:"Per bloccare i pioli nei montanti. 16 viti totali.",qty:"Qtà: 1",price:"~€3",url:"https://www.leroymerlin.it/search?q=viti+legno+3.5x30"},
 {cat:"FERRAMENTA",name:"Colla vinilica D3 (resistente acqua)",detail:"Per giunzioni piolo-montante. Classe D3 minimo per esterno.",qty:"Qtà: 1",price:"~€5",url:"https://www.leroymerlin.it/search?q=colla+vinilica+D3+esterno"},
