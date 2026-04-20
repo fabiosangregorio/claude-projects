@@ -36,6 +36,16 @@ header p{color:var(--tx2);font-size:.9rem;max-width:420px;margin:0 auto}
 .status-completato{border:1px solid var(--ac2);color:var(--ac2);background:rgba(63,185,80,.1)}
 .status-pianificato{border:1px solid var(--ac);color:var(--ac);background:rgba(88,166,255,.1)}
 .status-in-corso{border:1px solid var(--wn);color:var(--wn);background:rgba(240,136,62,.1)}
+.status-idea{border:1px solid var(--pd);color:var(--pd);background:rgba(210,168,255,.1)}
+
+/* Upcoming projects section */
+.section-title{font-family:'Space Mono',monospace;font-size:.75rem;font-weight:700;color:var(--tx2);text-transform:uppercase;letter-spacing:1.5px;margin:2.5rem 0 1rem;padding-top:1.5rem;border-top:1px dashed var(--bd);display:flex;align-items:center;gap:.6rem}
+.section-title::before{content:'';display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--pd)}
+.section-desc{font-size:.8rem;color:var(--tx2);margin:-.4rem 0 1rem;line-height:1.5}
+.card-upcoming{opacity:.78;cursor:default}
+.card-upcoming:hover,.card-upcoming:active{border-color:var(--pd);transform:none;box-shadow:none;opacity:1}
+.card-upcoming .card-name{color:var(--pd)}
+.card-upcoming .card-arrow{display:none}
 
 /* Loading & error states */
 .loader{text-align:center;padding:3rem 0;color:var(--tx2)}
@@ -64,6 +74,10 @@ footer a{color:var(--ac);text-decoration:none}
   <div class="loader"><div class="spinner"></div><br>Caricamento progetti...</div>
 </div>
 
+<h2 class="section-title">Prossimi progetti</h2>
+<p class="section-desc">Idee in lista d'attesa, non ancora pianificate in dettaglio.</p>
+<div class="grid" id="grid-upcoming"></div>
+
 <footer>
   <a href="https://github.com/fabiosangregorio/claude-projects" target="_blank" rel="noopener">fabiosangregorio/claude-projects</a> — GitHub Pages
 </footer>
@@ -89,6 +103,16 @@ const BASE = `https://fabiosangregorio.github.io/claude-projects`;
 const API  = `https://api.github.com/repos/${REPO}/contents`;
 // Folders to exclude from project listing
 const EXCLUDE = new Set(['.git', '.github', 'node_modules', 'assets']);
+
+// Prossimi progetti — idee in lista, non ancora pianificate in dettaglio.
+// Quando un progetto viene pianificato, crea la cartella e rimuovilo da qui.
+const UPCOMING = [
+  {
+    name: 'Attaccapanni camera da letto',
+    desc: 'Attaccapanni da parete o a piantana per la camera da letto',
+    tags: ['camera', 'parete'],
+  },
+];
 
 async function load() {
   const grid = document.getElementById('grid');
@@ -154,7 +178,25 @@ function formatName(slug) {
   return slug.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
 }
 
+function renderUpcoming() {
+  const el = document.getElementById('grid-upcoming');
+  if (!UPCOMING.length) { el.style.display = 'none'; return; }
+  el.innerHTML = UPCOMING.map(p => {
+    const tagsHtml = (p.tags || []).map(t => `<span class="badge">${t}</span>`).join('');
+    const statusHtml = `<span class="status status-idea">💡 Idea</span>`;
+    return `
+      <div class="card card-upcoming">
+        <div class="card-top">
+          <span class="card-name">${p.name}</span>
+        </div>
+        <div class="card-desc">${p.desc}</div>
+        <div class="card-footer">${statusHtml}${tagsHtml}</div>
+      </div>`;
+  }).join('');
+}
+
 load();
+renderUpcoming();
 </script>
 </body>
 </html>
