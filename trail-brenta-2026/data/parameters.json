@@ -54,7 +54,7 @@
   ],
   "training_zones": {
     "fcmax_bpm": 181,
-    "fcmax_source": "stimata (formula Tanaka). Da validare nei prossimi mesi: la massima osservata nel run del 1 maggio è 176, già al 97% — il valore reale è plausibilmente tra 181 e 188.",
+    "fcmax_source": "Valore 181 ereditato dall'orologio Garmin (visibile nel run del 2026-05-01 come hrmax_est_used). ATTENZIONE: l'etichetta 'Tanaka' precedente era inaccurata — la formula Tanaka per 28 anni dà ~188, non 181. La massima osservata nel run del 1 maggio è 176 (97% di 181), plausibile ma non risolutiva. Il valore reale è plausibilmente tra 181 e 188; lo valideremo con i prossimi mesi di dati.",
     "maf_ceiling_bpm": 152,
     "maf_note": "Formula Maffetone (180 - età). Tetto operativo in Fase 1: tutto sotto questa FC.",
     "zones": [
@@ -69,30 +69,30 @@
       {
         "id": "z2",
         "min_bpm": 120,
-        "max_bpm": 145,
+        "max_bpm": 152,
         "label": "Fondo aerobico",
-        "use": "lunghi, corse facili (quasi tutto il volume)",
+        "use": "lunghi, corse facili (quasi tutto il volume) — top di Z2 = MAF",
         "color": "#58a6ff"
       },
       {
         "id": "z3",
-        "min_bpm": 145,
-        "max_bpm": 162,
+        "min_bpm": 152,
+        "max_bpm": 165,
         "label": "Soglia aerobica",
         "use": "medio, tempo run (introdotto in Fase 3)",
         "color": "#d2a8ff"
       },
       {
         "id": "z4",
-        "min_bpm": 162,
-        "max_bpm": 173,
+        "min_bpm": 165,
+        "max_bpm": 175,
         "label": "Soglia anaerobica",
         "use": "ripetute (raro, solo in Fase 3)",
         "color": "#f0883e"
       },
       {
         "id": "z5",
-        "min_bpm": 173,
+        "min_bpm": 175,
         "max_bpm": 181,
         "label": "VO2max",
         "use": "vietata fino a Fase 3, e poi solo in dosi minime",
@@ -126,7 +126,7 @@
           1,
           5
         ],
-        "start_date": "2026-05-04",
+        "start_date": "2026-05-02",
         "end_date": "2026-06-07",
         "focus": "Ricostruire il motore aerobico distrutto dai 13 mesi di stop. Tutto sotto MAF (152 bpm).",
         "key_objective": "Portare il decoupling Pa:Hr da 12.6% a sotto 8% su un lungo di 60+ min.",
@@ -219,7 +219,7 @@
         "start_date": "2026-05-02",
         "end_date": "2026-05-10",
         "label": "Doppio carico montagna + baseline",
-        "narrative": "Settimana speciale a 9 giorni. Si parte dallo stress del run di giovedì 1 maggio (TRIMP 179, FC al 93% FCmax — da assorbire) seguito subito da 23 km / 1900 m D+ in due giorni di hike (sab 2 + dom 3, già pianificato). È un volume montano enorme per chi viene da 13 mesi di stop, ma è tutto Z1-Z2 — esattamente il tipo di carico che costruisce la base aerobica. La parte critica è il recupero muscolare: i DOMS arriveranno martedì-mercoledì. Sabato 9 chiude la settimana con la baseline ad Albenza (~600 m D+) per provare le La Sportiva.",
+        "narrative": "Settimana speciale a 9 giorni. Si parte dallo stress del run di venerdì 1 maggio (TRIMP 179, FC al 93% FCmax — da assorbire) seguito subito da 23 km / 1900 m D+ in due giorni di hike (sab 2 + dom 3, già pianificato). È un volume montano enorme per chi viene da 13 mesi di stop, ma è tutto Z1-Z2 — esattamente il tipo di carico che costruisce la base aerobica. La parte critica è il recupero muscolare: i DOMS arriveranno martedì-mercoledì. Sabato 9 chiude la settimana con la baseline ad Albenza (~600 m D+) per provare le La Sportiva.",
         "sessions": [
           {
             "type": "hike",
