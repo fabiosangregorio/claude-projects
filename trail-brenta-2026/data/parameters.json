@@ -1,981 +1,214 @@
 {
-  "_schema_version": "2.0",
-  "_description": "Stato + piano completo (18 settimane). Aggiornare 'last_updated' a ogni revisione. Le sessioni della fase corrente sono dettagliate; le fasi successive si calibrano alla fine di ogni fase con i dati reali.",
+  "_schema_version": "1.1",
+  "_description": "Stato e calibrazione. Aggiornare 'last_updated' a ogni revisione. Le fasi 2-4 sono volutamente macro: si dettagliano alla calibrazione di fine fase precedente.",
   "last_updated": "2026-05-01",
-  "calibration_source": "intake-iniziale + run-baseline-strada-2026-05-01 + risposte intake del 2026-05-01",
+  "calibration_source": "intake-iniziale + analisi run baseline 2026-05-01",
   "preparation_tasks": [
-    {
-      "category": "burocrazia",
-      "task": "Visita medica agonistica",
-      "deadline": "2026-05-31",
-      "status": "pending",
-      "priority": "urgente",
-      "note": "Obbligatoria per iscriversi. Richiede ECG sotto sforzo. Prenotare subito."
-    },
-    {
-      "category": "burocrazia",
-      "task": "Iscrizione gara DBT 21K",
-      "deadline": "2026-06-30",
-      "status": "pending",
-      "priority": "alta",
-      "note": "Edizioni precedenti sold out — iscriversi appena disponibile la visita."
-    },
-    {
-      "category": "attrezzatura",
-      "task": "Provare scarpe La Sportiva su sentiero",
-      "deadline": "2026-05-15",
-      "status": "pending",
-      "note": "Test integrato nella baseline trail di sabato 9 maggio."
-    },
-    {
-      "category": "attrezzatura",
-      "task": "Zaino idratazione (5-10L)",
-      "deadline": "2026-07-31",
-      "status": "pending",
-      "note": "Necessario per fase 2 in poi (lunghi >90 min su sentiero)."
-    },
-    {
-      "category": "attrezzatura",
-      "task": "Giacca antivento",
-      "deadline": "2026-07-31",
-      "status": "pending"
-    },
-    {
-      "category": "attrezzatura",
-      "task": "Bicchiere/borraccia pieghevole",
-      "deadline": "2026-08-15",
-      "status": "pending",
-      "note": "Obbligatori in gara per i ristori."
-    },
-    {
-      "category": "attrezzatura",
-      "task": "Telo termico + fischietto",
-      "deadline": "2026-08-15",
-      "status": "pending",
-      "note": "Materiale obbligatorio DBT."
-    }
+    { "category": "burocrazia", "task": "Visita medica agonistica", "deadline": "2026-05-31", "status": "pending", "priority": "urgente", "note": "Obbligatoria per iscriversi. Richiede ECG sotto sforzo. Prenotare subito." },
+    { "category": "burocrazia", "task": "Iscrizione gara DBT 21K", "deadline": "2026-06-30", "status": "pending", "priority": "alta", "note": "Edizioni precedenti sold out — iscriversi appena disponibile la visita." },
+    { "category": "attrezzatura", "task": "Provare scarpe La Sportiva su sentiero", "deadline": "2026-05-15", "status": "pending", "note": "Test in baseline sabato 9 maggio — Canto Alto." },
+    { "category": "attrezzatura", "task": "Zaino idratazione (5-10L)", "deadline": "2026-07-31", "status": "pending" },
+    { "category": "attrezzatura", "task": "Giacca antivento", "deadline": "2026-07-31", "status": "pending" },
+    { "category": "attrezzatura", "task": "Bicchiere/borraccia pieghevole", "deadline": "2026-08-15", "status": "pending" },
+    { "category": "attrezzatura", "task": "Telo termico + fischietto", "deadline": "2026-08-15", "status": "pending" }
   ],
   "training_zones": {
     "fcmax_bpm": 181,
-    "fcmax_source": "Stimata con Tanaka (207 − 0.7×età = 187), arrotondata a 181 dato che la FC max osservata nel run del 1 maggio era 176 (97% di 181, plausibile per sforzo non massimale). Da ricalibrare con un test specifico in fase 2.",
+    "fcmax_source": "stimata (formula Tanaka). Da validare nei prossimi mesi: la massima osservata nel run del 1 maggio è 176, già al 97% — il valore reale è plausibilmente tra 181 e 188.",
     "maf_ceiling_bpm": 152,
-    "maf_note": "Metodo Maffetone (180 − età). Tetto della Z2: tutto il lavoro aerobico va sotto questa FC. È il numero più importante del piano per i prossimi 4 mesi.",
+    "maf_note": "Formula Maffetone (180 - età). Tetto operativo in Fase 1: tutto sotto questa FC.",
     "zones": [
-      {
-        "id": "z1",
-        "min_bpm": 110,
-        "max_bpm": 130,
-        "color": "var(--ac2)",
-        "label": "Recupero attivo",
-        "use": "Camminate post-corsa, defaticamento. Raramente in corsa vera."
-      },
-      {
-        "id": "z2",
-        "min_bpm": 130,
-        "max_bpm": 145,
-        "color": "var(--ac)",
-        "label": "Base aerobica (LIT)",
-        "use": "★ La zona principale. Lunghi, easy, riscaldamento. Devi poter parlare a frasi intere."
-      },
-      {
-        "id": "z3",
-        "min_bpm": 145,
-        "max_bpm": 158,
-        "color": "var(--wn)",
-        "label": "Tempo / cruise (MIT)",
-        "use": "Rara. Da fase 3 in poi. MAF 152 = cuspide Z2/Z3."
-      },
-      {
-        "id": "z4",
-        "min_bpm": 158,
-        "max_bpm": 170,
-        "color": "var(--rd)",
-        "label": "Soglia (HIT)",
-        "use": "Praticamente assente. Solo finali di simulazione gara."
-      },
-      {
-        "id": "z5",
-        "min_bpm": 170,
-        "max_bpm": 181,
-        "color": "var(--rd)",
-        "label": "VO2max",
-        "use": "Mai in questo piano. Obiettivo è finire, non vincere."
-      }
+      { "id": "z1", "min_bpm": 0,   "max_bpm": 120, "label": "Recupero",      "use": "scarico attivo, defaticamento", "color": "#3fb950" },
+      { "id": "z2", "min_bpm": 120, "max_bpm": 145, "label": "Fondo aerobico", "use": "lunghi, corse facili (quasi tutto il volume)", "color": "#58a6ff" },
+      { "id": "z3", "min_bpm": 145, "max_bpm": 162, "label": "Soglia aerobica","use": "medio, tempo run (introdotto in Fase 3)", "color": "#d2a8ff" },
+      { "id": "z4", "min_bpm": 162, "max_bpm": 173, "label": "Soglia anaerobica","use": "ripetute (raro, solo in Fase 3)", "color": "#f0883e" },
+      { "id": "z5", "min_bpm": 173, "max_bpm": 181, "label": "VO2max",         "use": "vietata fino a Fase 3, e poi solo in dosi minime", "color": "#f85149" }
     ]
   },
   "plan": {
     "total_weeks": 18,
-    "race_week_number": 18,
+    "race_date": "2026-09-05",
     "weekly_budget": {
       "running_sessions": 3,
       "strength_sessions": 1,
-      "philosophy": "La tua agenda cambia ogni settimana. Il piano si adatta: ogni settimana hai un budget di 3 corse + 1 forza, distribuibile nei giorni che hai. Il lungo è sacro, l'easy si può accorciare, la forza è la prima a saltare se la settimana è caotica — ma è proprio la sessione che salti più spesso quella che ti serve di più. Regola d'oro: recovery > volume. Salta una sessione piuttosto che farla rotta."
+      "mobility_post_run_min": "5-10",
+      "philosophy": "Architettura a budget settimanale, non a giorni fissi. Distribuisci le sessioni nei giorni che hai, rispettando le regole."
     },
     "rules": [
-      "Il lungo è la sessione sacra. Se la settimana ti consente solo 1 corsa, fai quella.",
-      "Mai due sessioni dure consecutive. Tra forza e lungo: almeno 48h.",
-      "FC sopra 152 in una Z2 = rallenta o cammina. Mai spingere per orgoglio.",
-      "Dolore articolare (ginocchio, caviglia, anca) = stop e valutazione. Non confondere con DOMS muscolare.",
-      "In montagna fasi 1-2: cammina forte in salita, corri in piano e discesa facile.",
-      "Cadenza target: 150 spm in fase 1, 165 in fase 3. Conta i passi per 30 sec ogni tanto.",
-      "Forza idealmente martedì o mercoledì (se lungo sabato). Mai il giorno prima del lungo.",
-      "Se salti una sessione, non la recuperi spostandola. Si va avanti."
+      "Il lungo non si salta. Se devi tagliare la settimana, taglia prima le corse brevi.",
+      "Mai due lavori duri di fila. Tra qualità e qualità, almeno 1 giorno di riposo o Z2 facile.",
+      "FC batte pace. Se al passo target la FC sale di più di 5 bpm sopra il limite di zona, rallenta o inserisci tratti di camminata.",
+      "Indolenzimento muscolare diffuso = ok continuare. Dolore acuto, articolare o asimmetrico = stop e valutazione medica.",
+      "Sonno sotto 6h o malanno in corso = sostituisci la sessione del giorno con riposo o corsa molto facile (max 25 min Z1).",
+      "Calibrazione conservativa: se i numeri vanno meglio del previsto, il volume sale al massimo del +10% settimana su settimana."
     ],
     "phases": [
       {
-        "id": "phase-1",
+        "id": "1-rebuild",
         "number": 1,
-        "name": "Ricostruzione",
+        "name": "Ricostruzione aerobica",
+        "weeks_range": [1, 5],
         "start_date": "2026-05-04",
         "end_date": "2026-06-07",
-        "weeks_range": [
-          1,
-          5
-        ],
-        "long_run_min": [
-          40,
-          80
-        ],
-        "vertical_target_m": [
-          0,
-          200
-        ],
-        "focus": "Ricostruire base aerobica dopo 13 mesi di stop. Tutto Z2, terreno piatto, cadenza in crescita 130→150 spm. Una baseline trail in apertura per avere numeri reali di salita.",
-        "key_objective": "Lungo 80 min Z2 senza camminare + decoupling Pa:Hr sotto 7%"
+        "focus": "Ricostruire il motore aerobico distrutto dai 13 mesi di stop. Tutto sotto MAF (152 bpm).",
+        "key_objective": "Portare il decoupling Pa:Hr da 12.6% a sotto 8% su un lungo di 60+ min.",
+        "long_run_min": [60, 90],
+        "vertical_target_m": [0, 200],
+        "intensity": "100% Z1-Z2, nessuna intensità",
+        "test_at_end": "Ripeti un 10-12 km piatto (stesso percorso del 1 maggio, se possibile). Misura il decoupling. Target: sotto l'8%."
       },
       {
-        "id": "phase-2",
+        "id": "2-base-mountain",
         "number": 2,
         "name": "Base montagna",
+        "weeks_range": [6, 10],
         "start_date": "2026-06-08",
         "end_date": "2026-07-12",
-        "weeks_range": [
-          6,
-          10
-        ],
-        "long_run_min": [
-          80,
-          120
-        ],
-        "vertical_target_m": [
-          200,
-          500
-        ],
-        "focus": "Introduzione progressiva del D+. Una uscita settimanale su sentiero (Albenza, Canto Alto, Resegone bassa). Power hiking in salita, corsa in piano e discesa facile.",
-        "key_objective": "2h consecutive su sentiero ondulato con 500m D+, FC sotto MAF in salita"
+        "focus": "Introdurre il dislivello progressivamente. Costruire la 'gamba da salita' senza ancora cercare velocità.",
+        "key_objective": "Sostenere 1h30 di corsa/cammino con 600 m D+ a FC conversazionale (Z2).",
+        "long_run_min": [75, 110],
+        "vertical_target_m": [200, 700],
+        "intensity": "Quasi tutto Z2. Le salite naturali possono spingere brevemente in Z3 ma in salita CAMMINI quando la FC supera la soglia.",
+        "calibration_note": "Le sessioni dettagliate verranno definite alla fine della Fase 1, sulla base del test."
       },
       {
-        "id": "phase-3",
+        "id": "3-build",
         "number": 3,
         "name": "Build specifico",
+        "weeks_range": [11, 15],
         "start_date": "2026-07-13",
         "end_date": "2026-08-16",
-        "weeks_range": [
-          11,
-          15
-        ],
-        "long_run_min": [
-          100,
-          180
-        ],
-        "vertical_target_m": [
-          400,
-          750
-        ],
-        "focus": "Lunghi specifici verso il 60-70% del target gara (1250m). Discese tecniche, gestione FC sotto fatica, prove gel/sali in corsa. Eventuali vacanze in montagna inglobate qui.",
-        "key_objective": "3h trail con 700m D+ e ultima ora con FC stabile sotto soglia"
+        "focus": "Gara-specifico. Lunghi che simulano frazioni del percorso, discese tecniche, gestione nutrizione e fatica prolungata.",
+        "key_objective": "Completare un lungo da 3h con 800-900 m D+ usando la nutrizione che userai in gara.",
+        "long_run_min": [120, 180],
+        "vertical_target_m": [700, 1000],
+        "intensity": "80/20 polarizzato: 80% Z2, 20% qualità (tempo run brevi 20-30 min in Z3, una volta a settimana).",
+        "vacation_strategy": "Se le vacanze cadono qui e sono in zona montana → blocco massimamente produttivo (lunghi sui sentieri reali). Se sono in città/mare → mantenimento Z2 + scale come surrogato del D+, lungo settimanale non negoziabile.",
+        "calibration_note": "Definito dopo Fase 2."
       },
       {
-        "id": "phase-4",
+        "id": "4-peak-taper",
         "number": 4,
-        "name": "Peak + Taper",
+        "name": "Peak & Taper",
+        "weeks_range": [16, 18],
         "start_date": "2026-08-17",
-        "end_date": "2026-09-06",
-        "weeks_range": [
-          16,
-          18
-        ],
-        "long_run_min": [
-          60,
-          180
-        ],
-        "vertical_target_m": [
-          200,
-          900
-        ],
-        "focus": "Settimana 16: simulazione gara (3h, 850m D+) — ultimo lavoro grosso. Sett 17: scarico al 60%. Sett 18: race week, gambe fresche e mente lucida.",
-        "key_objective": "Arrivare al via riposato, idratato, con piano di gara mentale memorizzato"
+        "end_date": "2026-09-05",
+        "focus": "Affilare la forma, scaricare la fatica residua, arrivare alla linea di partenza fresco e fiducioso.",
+        "key_objective": "Presentarsi a Molveno il 5 settembre con gambe leggere, FC a riposo bassa, sonno ok, nessun dolore.",
+        "long_run_min": [60, 120],
+        "vertical_target_m": [200, 600],
+        "intensity": "Volume in calo progressivo (-30% in sett 17, -50% in sett 18). Mantieni 1 sessione corta in Z3 per non perdere sensazioni.",
+        "calibration_note": "Definito dopo Fase 3."
       }
     ],
-    "milestones": [
-      {
-        "date": "2026-05-09",
-        "label": "Baseline trail al Canto Alto (~750m D+) — primi numeri reali di salita + test scarpe La Sportiva",
-        "type": "test"
-      },
-      {
-        "date": "2026-05-31",
-        "label": "Deadline visita medica agonistica (ECG sotto sforzo)",
-        "type": "burocrazia"
-      },
-      {
-        "date": "2026-06-07",
-        "label": "Fine fase 1 — target: lungo 80 min Z2 + decoupling sotto 7%",
-        "type": "milestone"
-      },
-      {
-        "date": "2026-06-30",
-        "label": "Deadline iscrizione gara DBT 21K",
-        "type": "burocrazia"
-      },
-      {
-        "date": "2026-07-12",
-        "label": "Fine fase 2 — target: 2h trail con 500m D+",
-        "type": "milestone"
-      },
-      {
-        "date": "2026-08-16",
-        "label": "Fine fase 3 — target: 3h trail con 700m D+",
-        "type": "milestone"
-      },
-      {
-        "date": "2026-08-22",
-        "label": "Simulazione gara (3h, 800-900m D+) — ultimo lavoro grosso",
-        "type": "test"
-      },
-      {
-        "date": "2026-09-05",
-        "label": "🏁 RACE DAY — XTERRA Dolomiti di Brenta Trail SHORT 21K",
-        "type": "race"
-      }
-    ],
-    "strength_template": {
-      "frequency": "1×/sett",
-      "duration_min": 25,
-      "best_timing": "Martedì o mercoledì se lungo sabato. MAI il giorno prima del lungo.",
-      "warmup": "5 min: 30 jumping jacks, 15 leg swings per lato, 10 squat a corpo libero.",
-      "kit": "Manubri 20kg Decathlon + tappetino + sedia o gradino robusto per step-up.",
-      "progression": "Settimane 2-5: peso fisso, focus tecnica e completare le serie. Da fase 2: aumenta prima le ripetizioni (8→10), poi le serie (3→4). Il peso si alza solo dopo aver retto 4×10 con buona tecnica.",
-      "exercises": [
-        {
-          "name": "Goblet squat",
-          "sets": "3",
-          "reps": "8 lente",
-          "focus": "Quadricipiti, glutei, core. Manubrio al petto, discesa controllata in 3 secondi."
-        },
-        {
-          "name": "Bulgarian split squat",
-          "sets": "3",
-          "reps": "6 per gamba",
-          "focus": "Monolaterale + equilibrio. Gamba dietro su sedia. La corsa è un mono-arto alla volta: questo è il movimento più specifico."
-        },
-        {
-          "name": "Step-up con ginocchio alto",
-          "sets": "3",
-          "reps": "8 per gamba",
-          "focus": "Specifico salita. Gradino o sedia robusta. Manubrio in mano opposta alla gamba che sale."
-        },
-        {
-          "name": "Romanian deadlift singolo",
-          "sets": "3",
-          "reps": "8 per gamba",
-          "focus": "Catena posteriore (femorali, glutei) — quella che cede al km 14 in gara. Manubrio nella mano della gamba che sta a terra."
-        },
-        {
-          "name": "Calf raise eccentrico",
-          "sets": "3",
-          "reps": "12",
-          "focus": "Salita forte (1 sec), discesa lentissima (4 sec). Polpacci e tendine d'Achille per le discese tecniche di 1250m."
-        },
-        {
-          "name": "Plank (3 posizioni)",
-          "sets": "3",
-          "reps": "30 sec per posizione",
-          "focus": "Core anti-rotazione: frontale, laterale destra, laterale sinistra."
-        },
-        {
-          "name": "Glute bridge singolo",
-          "sets": "3",
-          "reps": "10 per gamba",
-          "focus": "Glutei specifici per corsa. Una gamba a terra, l'altra tesa. Spingi col tallone."
-        }
-      ]
-    },
-    "mobility_template": {
-      "when": "Subito dopo ogni corsa (5-7 min). Anche se la sessione è breve. Diventa essenziale in fase 2-3 con il D+.",
-      "exercises": [
-        {
-          "name": "Foam roll polpacci",
-          "duration": "1 min per gamba"
-        },
-        {
-          "name": "Foam roll quadricipiti",
-          "duration": "1 min per gamba"
-        },
-        {
-          "name": "Lunge stretch (flessori d'anca)",
-          "duration": "30 sec per lato"
-        },
-        {
-          "name": "Figure-4 stretch (glutei + piriforme)",
-          "duration": "30 sec per lato"
-        },
-        {
-          "name": "Stretch polpaccio dritto + piegato",
-          "duration": "30 sec per posizione per lato"
-        }
-      ]
-    },
     "weeks": [
       {
         "number": 1,
-        "phase_id": "phase-1",
-        "start_date": "2026-05-04",
+        "phase_id": "1-rebuild",
+        "start_date": "2026-05-02",
         "end_date": "2026-05-10",
-        "label": "Avvio + baseline trail",
-        "narrative": "Settimana zero del piano. Due corse facili per recuperare dal run del 1 maggio (FC alta, decoupling 12.6%) e sabato la baseline trail al Canto Alto. La forza salta — la introduciamo la prossima settimana.",
+        "label": "Doppio carico montagna + baseline",
+        "narrative": "Settimana speciale a 9 giorni. Si parte dallo stress del run di giovedì 1 maggio (TRIMP 179, FC al 93% FCmax — da assorbire) seguito subito da 23 km / 1900 m D+ in due giorni di hike (sab 2 + dom 3, già pianificato). È un volume montano enorme per chi viene da 13 mesi di stop, ma è tutto Z1-Z2 — esattamente il tipo di carico che costruisce la base aerobica. La parte critica è il recupero muscolare: i DOMS arriveranno martedì-mercoledì. Sabato 9 chiude la settimana con la baseline ad Albenza (~600 m D+) per provare le La Sportiva.",
         "sessions": [
-          {
-            "type": "easy",
-            "duration_min": 30,
-            "intensity": "Z2",
-            "fc_max_bpm": 145,
-            "vertical_m": 0,
-            "notes": "Lun 4 mag · recupero attivo dopo il run del 1 maggio. Passo lentissimo (8:00/km va benissimo). Se la FC sale sopra 145, cammina 1 minuto e riparti. Focus: gambe leggere, non altro."
-          },
-          {
-            "type": "easy",
-            "duration_min": 35,
-            "intensity": "Z2",
-            "fc_max_bpm": 152,
-            "vertical_m": 0,
-            "notes": "Mer 6 mag · corsa facile in piano. Conta i passi per 30 sec a metà corsa, moltiplica per 2: target 145+ spm (15 più della tua media di 130). Se rallenti, fai passi più piccoli, non più lenti."
-          },
-          {
-            "type": "hike_baseline",
-            "duration_min": 180,
-            "intensity": "Z2",
-            "fc_max_bpm": 152,
-            "vertical_m_max": 800,
-            "notes": "Sab 9 mag · CANTO ALTO da Sorisole (~750m D+). Scarpe La Sportiva, zaino leggero, 1L acqua + 2 snack. FC sempre sotto 152 — se la salita è ripida, RALLENTA. È un test di stato, non di limite. Esporta il file Garmin al ritorno + segna sensazioni: comfort scarpe, vesciche, fiato, gambe."
-          }
+          { "type": "hike", "duration_min": 480, "intensity": "Z1-Z2", "fc_max_bpm": 152, "vertical_m": 1900, "notes": "SAB 2 + DOM 3 — Hike 23 km / 1900 m D+ su due giorni. FC sotto MAF 152 sempre, bastoncini se possibile (proteggono le ginocchia in discesa, dove arriveranno i DOMS), idratazione costante con sali, mangia ogni 60 min anche senza fame. Traccia con orologio entrambi i giorni: i numeri di salita reali ci servono per calibrare la fase 2." },
+          { "type": "easy", "duration_min": 25, "intensity": "Z1-Z2 bassa", "fc_max_bpm": 140, "notes": "MER 6 o GIO 7 — Solo se le gambe rispondono. Test pratico: sali le scale di casa, se è doloroso o rigido salta la corsa e fai 30 min di camminata. Niente eroismi a 4 mesi dalla gara." },
+          { "type": "hike_baseline", "duration_min": 180, "intensity": "Z2/MAF", "fc_max_bpm": 152, "vertical_m": 600, "notes": "SAB 9 — Albenza. FC sotto 152 sempre, in salita CAMMINI senza vergogna se sale. Provare le scarpe La Sportiva: occhio a vesciche, sfregamenti, stabilità in discesa. GPS attivo, non spegnere alle pause. Acqua + snack salato." }
         ],
-        "strength": false,
-        "strength_note": "Salta in week 1: priorità recovery + baseline. Inizia da settimana 2.",
-        "milestone": "Baseline trail #1 — primi numeri reali di salita"
+        "strength": null,
+        "strength_note": "Saltata. Tre uscite montagna in 8 giorni sono il carico massimo possibile per il rientro. Sostituire con 5-10 min di mobility le sere dei giorni di hike e il giorno dopo.",
+        "milestone": "Hike 1900 m D+ (2-3) + baseline Albenza (9)"
       },
       {
         "number": 2,
-        "phase_id": "phase-1",
+        "phase_id": "1-rebuild",
         "start_date": "2026-05-11",
         "end_date": "2026-05-17",
-        "label": "Avvio strutturato",
-        "narrative": "Si parte sul serio. Tre corse Z2/MAF, prima sessione di forza monolaterale. Il lungo passa a 60 min — primo vero test della tenuta aerobica.",
+        "label": "Inizia il lavoro vero",
         "sessions": [
-          {
-            "type": "easy",
-            "duration_min": 35,
-            "intensity": "Z2",
-            "fc_max_bpm": 152,
-            "vertical_m": 0,
-            "notes": "Easy infrasettimanale. Cadenza target 150 spm (conta 25 passi in 10 sec)."
-          },
-          {
-            "type": "easy",
-            "duration_min": 40,
-            "intensity": "Z2",
-            "fc_max_bpm": 152,
-            "vertical_m": 0,
-            "notes": "Easy con focus respirazione: prova naso-naso almeno 10 min. Se non riesci, sei sopra Z2 — rallenta."
-          },
-          {
-            "type": "long",
-            "duration_min": 60,
-            "intensity": "Z2",
-            "fc_max_bpm": 152,
-            "vertical_m": 0,
-            "notes": "Primo lungo del piano. Tutto Z2, in piano. Se devi camminare cammina (meglio camminare a 145 che correre a 165). Obiettivo: arrivare con la FC stabile, non in deriva."
-          }
+          { "type": "easy", "duration_min": 30, "intensity": "Z2", "fc_max_bpm": 145, "notes": "Tutto piatto. Concentrati sulla cadenza: prova ad alzarla da 130 verso 140 spm con passi più corti." },
+          { "type": "easy", "duration_min": 35, "intensity": "Z2", "fc_max_bpm": 145, "notes": "Stesso obiettivo cadenza. Se hai un metronomo o playlist a 140 BPM, usali." },
+          { "type": "long", "duration_min": 50, "intensity": "Z2", "fc_max_bpm": 152, "vertical_m_max": 100, "notes": "Lungo della settimana. Piatto. Continuativo se possibile, altrimenti run/walk con brevi tratti di camminata ogni 8-10 min." }
         ],
-        "strength": true,
-        "milestone": ""
+        "strength": "full-body-base",
+        "milestone": null
       },
       {
         "number": 3,
-        "phase_id": "phase-1",
+        "phase_id": "1-rebuild",
         "start_date": "2026-05-18",
         "end_date": "2026-05-24",
-        "label": "Volume in crescita",
-        "narrative": "Volume +15%. La differenza la fa il lungo, che cresce a 70 min. Cadenza obiettivo: 150 spm tenuta per tutta la sessione.",
+        "label": "Costruzione",
         "sessions": [
-          {
-            "type": "easy",
-            "duration_min": 35,
-            "intensity": "Z2",
-            "fc_max_bpm": 152,
-            "vertical_m": 0,
-            "notes": "Easy + 4 allunghi di 20 sec a fine corsa (non sprint, solo gambe veloci). Recupero camminato 90 sec tra uno e l'altro."
-          },
-          {
-            "type": "easy",
-            "duration_min": 45,
-            "intensity": "Z2",
-            "fc_max_bpm": 152,
-            "vertical_m": 0,
-            "notes": "Easy progressivo: ultimi 10 min al limite alto della Z2 (145), non oltre."
-          },
-          {
-            "type": "long",
-            "duration_min": 70,
-            "intensity": "Z2",
-            "fc_max_bpm": 152,
-            "vertical_m": 0,
-            "notes": "Lungo. Tutto Z2 senza eccezioni. A metà sessione controlla il decoupling: se la FC è 5+ bpm sopra l'inizio a parità di passo, rallenta."
-          }
+          { "type": "easy", "duration_min": 30, "intensity": "Z2", "fc_max_bpm": 145, "notes": "Cadenza target 142-145 spm." },
+          { "type": "easy", "duration_min": 40, "intensity": "Z2", "fc_max_bpm": 145, "notes": "Continuativo. Se la FC deriva, fermati 30 sec, riparti." },
+          { "type": "long", "duration_min": 60, "intensity": "Z2", "fc_max_bpm": 152, "vertical_m_max": 150, "notes": "Lungo. 60 min puliti. Nutrizione: prova un sorso d'acqua ogni 15 min." }
         ],
-        "strength": true,
-        "milestone": ""
+        "strength": "full-body-base",
+        "milestone": null
       },
       {
         "number": 4,
-        "phase_id": "phase-1",
+        "phase_id": "1-rebuild",
         "start_date": "2026-05-25",
         "end_date": "2026-05-31",
-        "label": "Consolidamento — DEADLINE visita medica",
-        "narrative": "⚠ Settimana di consolidamento: stesso volume di sett 3 ma qualità migliore (cadenza, FC stabile). Domenica 31 è la deadline visita medica.",
+        "label": "Visita medica week",
         "sessions": [
-          {
-            "type": "easy",
-            "duration_min": 40,
-            "intensity": "Z2",
-            "fc_max_bpm": 152,
-            "vertical_m": 0,
-            "notes": "Easy. Test mentale: corri SOLO a sensazione i primi 20 min, poi guarda la FC. Quanto sei vicino a 140?"
-          },
-          {
-            "type": "easy",
-            "duration_min": 45,
-            "intensity": "Z2",
-            "fc_max_bpm": 152,
-            "vertical_m": 0,
-            "notes": "Easy con 6 allunghi di 20 sec a fine corsa. Spm target durante allunghi: 170+."
-          },
-          {
-            "type": "long",
-            "duration_min": 75,
-            "intensity": "Z2",
-            "fc_max_bpm": 152,
-            "vertical_m": 0,
-            "notes": "Lungo penultimo di fase 1. Test specifico: gli ultimi 15 min devono avere FC media uguale o INFERIORE ai primi 15. Se la FC sale di 10+, base aerobica ancora fragile."
-          }
+          { "type": "easy", "duration_min": 30, "intensity": "Z2", "fc_max_bpm": 145 },
+          { "type": "easy", "duration_min": 40, "intensity": "Z2", "fc_max_bpm": 145, "notes": "Cadenza 145+ spm." },
+          { "type": "long", "duration_min": 70, "intensity": "Z2", "fc_max_bpm": 152, "vertical_m_max": 200, "notes": "Lungo. Se hai energia, scegli un percorso con 100-200 m D+ totali (non più). Test del primo dislivello vero." }
         ],
-        "strength": true,
-        "milestone": "Visita medica entro 31 maggio"
+        "strength": "full-body-base",
+        "milestone": "Visita medica agonistica entro il 31"
       },
       {
         "number": 5,
-        "phase_id": "phase-1",
+        "phase_id": "1-rebuild",
         "start_date": "2026-06-01",
         "end_date": "2026-06-07",
-        "label": "Test fase 1: lungo 80 min",
-        "narrative": "Settimana di chiusura fase 1. Le brevi si accorciano per arrivare freschi al lungo da 80 min — il banco di prova della base aerobica ricostruita.",
+        "label": "Test fine Fase 1",
         "sessions": [
-          {
-            "type": "easy",
-            "duration_min": 30,
-            "intensity": "Z2",
-            "fc_max_bpm": 145,
-            "vertical_m": 0,
-            "notes": "Easy corto pre-lungo. Niente sforzi, niente allunghi."
-          },
-          {
-            "type": "easy",
-            "duration_min": 35,
-            "intensity": "Z2",
-            "fc_max_bpm": 145,
-            "vertical_m": 0,
-            "notes": "Easy gambe leggere. Mai sopra 145."
-          },
-          {
-            "type": "long",
-            "duration_min": 80,
-            "intensity": "Z2",
-            "fc_max_bpm": 152,
-            "vertical_m": 0,
-            "notes": "★ TEST DI FINE FASE 1. 80 min Z2 senza camminate. Obiettivo decoupling sotto 7%. Esporta il file e ne parliamo: se va bene si passa a fase 2, se no si ripete settimana 5."
-          }
+          { "type": "easy", "duration_min": 30, "intensity": "Z2", "fc_max_bpm": 145 },
+          { "type": "easy", "duration_min": 35, "intensity": "Z2", "fc_max_bpm": 145, "notes": "Sessione corta: 2 giorni prima del test, gambe leggere." },
+          { "type": "test", "duration_min": 80, "intensity": "Z2 controllato", "fc_max_bpm": 150, "notes": "TEST. Ripeti il percorso del run del 1 maggio (o equivalente piatto, 10-12 km). Stesso profilo. FC media target: 140-148. Misureremo il decoupling: target sotto 8% (vs 12.6% del 1 maggio)." }
         ],
-        "strength": true,
-        "milestone": "Test 80' Z2 — passaggio a fase 2"
-      },
-      {
-        "number": 6,
-        "phase_id": "phase-2",
-        "start_date": "2026-06-08",
-        "end_date": "2026-06-14",
-        "label": "Prima salita strutturata",
-        "narrative": "Inizia la fase 2: il lungo va in montagna. Prima uscita su sentiero ondulato, D+ moderato (~250m). Power hiking in salita, corsa in piano.",
-        "sessions": [
-          {
-            "type": "easy",
-            "duration_min": 35,
-            "intensity": "Z2",
-            "fc_max_bpm": 152,
-            "vertical_m": 0,
-            "notes": "Easy piatto. Recupero gambe."
-          },
-          {
-            "type": "easy",
-            "duration_min": 45,
-            "intensity": "Z2",
-            "fc_max_bpm": 152,
-            "vertical_m": 0,
-            "notes": "Easy con tratti collinari leggeri (50-100m D+ totali). FC max 152 — se sale, cammina."
-          },
-          {
-            "type": "long",
-            "duration_min": 90,
-            "intensity": "Z2",
-            "fc_max_bpm": 152,
-            "vertical_m": 250,
-            "notes": "LUNGO TRAIL #1. Sentiero facile vicino casa (Canto Alto basso, Albenza bassa). Cammina TUTTE le salite ripide (>10%), corri piano e discese facili. Zaino con 1L acqua. FC < MAF anche in salita camminata."
-          }
-        ],
-        "strength": true,
-        "milestone": ""
-      },
-      {
-        "number": 7,
-        "phase_id": "phase-2",
-        "start_date": "2026-06-15",
-        "end_date": "2026-06-21",
-        "label": "D+ in crescita",
-        "narrative": "Lungo a 100 min con 350m D+. Inizia a sentire le gambe in discesa: è normale, è la specificità che entra.",
-        "sessions": [
-          {
-            "type": "easy",
-            "duration_min": 40,
-            "intensity": "Z2",
-            "fc_max_bpm": 152,
-            "vertical_m": 0,
-            "notes": "Easy piatto. Cadenza 155+."
-          },
-          {
-            "type": "easy",
-            "duration_min": 50,
-            "intensity": "Z2",
-            "fc_max_bpm": 152,
-            "vertical_m": 100,
-            "notes": "Easy con 6 brevi salite (30-50m D+ ciascuna): cammina forte in salita, riprendi corsa in cresta e discesa."
-          },
-          {
-            "type": "long",
-            "duration_min": 100,
-            "intensity": "Z2",
-            "fc_max_bpm": 152,
-            "vertical_m": 350,
-            "notes": "Lungo trail con 350m D+. Stesso principio: cammina forte in salita ripida. Mangia 1 barretta a metà sessione (test gestione cibo)."
-          }
-        ],
-        "strength": true,
-        "milestone": ""
-      },
-      {
-        "number": 8,
-        "phase_id": "phase-2",
-        "start_date": "2026-06-22",
-        "end_date": "2026-06-28",
-        "label": "Crescita controllata + DEADLINE iscrizione",
-        "narrative": "Lungo a 110 min con 450m D+. Domenica 30 giugno è deadline iscrizione gara: fallo lunedì appena hai la visita medica.",
-        "sessions": [
-          {
-            "type": "easy",
-            "duration_min": 40,
-            "intensity": "Z2",
-            "fc_max_bpm": 152,
-            "vertical_m": 0,
-            "notes": "Easy piatto."
-          },
-          {
-            "type": "easy",
-            "duration_min": 50,
-            "intensity": "Z2",
-            "fc_max_bpm": 152,
-            "vertical_m": 150,
-            "notes": "Easy collinare. Test power hiking: in salita > 10% cammina e tieni la FC sotto 145."
-          },
-          {
-            "type": "long",
-            "duration_min": 110,
-            "intensity": "Z2",
-            "fc_max_bpm": 152,
-            "vertical_m": 450,
-            "notes": "Lungo trail con 450m D+. Gestione: 1 gel + 1 barretta + 1L acqua. Discesa: appoggio metà piede, non tallone (test scarpe con discese più tecniche)."
-          }
-        ],
-        "strength": true,
-        "milestone": "Iscrizione DBT 21K entro 30 giugno"
-      },
-      {
-        "number": 9,
-        "phase_id": "phase-2",
-        "start_date": "2026-06-29",
-        "end_date": "2026-07-05",
-        "label": "Picco fase 2 — 2h trail",
-        "narrative": "Picco volumetrico fase 2: lungo a 120 min con 500m D+. Banco di prova: tenuta aerobica + gestione discesa in stanchezza.",
-        "sessions": [
-          {
-            "type": "easy",
-            "duration_min": 35,
-            "intensity": "Z2",
-            "fc_max_bpm": 152,
-            "vertical_m": 0,
-            "notes": "Easy corto pre-lungo. Recupero massimo."
-          },
-          {
-            "type": "easy",
-            "duration_min": 50,
-            "intensity": "Z2",
-            "fc_max_bpm": 152,
-            "vertical_m": 100,
-            "notes": "Easy con allunghi: 6×30 sec veloci con recupero corsa lenta. NON sprint, solo gambe rapide."
-          },
-          {
-            "type": "long",
-            "duration_min": 120,
-            "intensity": "Z2",
-            "fc_max_bpm": 152,
-            "vertical_m": 500,
-            "notes": "★ TEST FASE 2: 2h trail con 500m D+. Idealmente Albenza completa o Resegone basso. Gestione gara: 2 gel + 2 barrette + 1.5L acqua. Esporta dati per check decoupling e gestione D+."
-          }
-        ],
-        "strength": true,
-        "milestone": "Test 2h con 500m D+"
-      },
-      {
-        "number": 10,
-        "phase_id": "phase-2",
-        "start_date": "2026-07-06",
-        "end_date": "2026-07-12",
-        "label": "Deload + chiusura fase 2",
-        "narrative": "Settimana di scarico: -30% volume per assorbire il carico delle ultime 4 settimane. Fase 2 chiude.",
-        "sessions": [
-          {
-            "type": "easy",
-            "duration_min": 30,
-            "intensity": "Z2",
-            "fc_max_bpm": 145,
-            "vertical_m": 0,
-            "notes": "Easy molto corto. Gambe leggere, niente sforzi."
-          },
-          {
-            "type": "easy",
-            "duration_min": 40,
-            "intensity": "Z2",
-            "fc_max_bpm": 152,
-            "vertical_m": 50,
-            "notes": "Easy con poco D+. Riposo attivo."
-          },
-          {
-            "type": "long",
-            "duration_min": 80,
-            "intensity": "Z2",
-            "fc_max_bpm": 152,
-            "vertical_m": 300,
-            "notes": "Lungo deload: 80 min trail con 300m D+. Corsa rilassata, no allunghi, FC bassa. Recovery completo per fase 3."
-          }
-        ],
-        "strength": true,
-        "milestone": "Fine fase 2 → fase 3 build specifico"
-      },
-      {
-        "number": 11,
-        "phase_id": "phase-3",
-        "start_date": "2026-07-13",
-        "end_date": "2026-07-19",
-        "label": "Build specifico — 130 min, 550m D+",
-        "narrative": "Inizia fase 3: i lunghi vanno verso la specificità gara (1250m D+, 5h max). Discese tecniche, gestione fatica.",
-        "sessions": [
-          {
-            "type": "easy",
-            "duration_min": 40,
-            "intensity": "Z2",
-            "fc_max_bpm": 152,
-            "vertical_m": 0,
-            "notes": "Easy piatto. Recupero gambe e cadenza."
-          },
-          {
-            "type": "easy",
-            "duration_min": 55,
-            "intensity": "Z2",
-            "fc_max_bpm": 152,
-            "vertical_m": 200,
-            "notes": "Easy collinare con power hiking specifico: 4 ripetute di salita di 3-4 min camminando forte, poi recupero in discesa."
-          },
-          {
-            "type": "long",
-            "duration_min": 130,
-            "intensity": "Z2",
-            "fc_max_bpm": 152,
-            "vertical_m": 550,
-            "notes": "Lungo trail con 550m D+. Inizia a usare i bastoncini se li hai. Discese: cerca tratti più tecnici (radici, sassi). 2 gel + 2 barrette."
-          }
-        ],
-        "strength": true,
-        "milestone": ""
-      },
-      {
-        "number": 12,
-        "phase_id": "phase-3",
-        "start_date": "2026-07-20",
-        "end_date": "2026-07-26",
-        "label": "Volume specifico — 150 min, 650m D+",
-        "narrative": "Lungo a 150 min con 650m D+. Inizio a sentire la fatica accumulata: è il segnale che il piano funziona, non che ti sta rompendo.",
-        "sessions": [
-          {
-            "type": "easy",
-            "duration_min": 40,
-            "intensity": "Z2",
-            "fc_max_bpm": 152,
-            "vertical_m": 0,
-            "notes": "Easy piatto. Test: 30 sec di passo veloce ogni 5 min, recupero a passo facile. Chiamali 'pickup', non sprint."
-          },
-          {
-            "type": "easy",
-            "duration_min": 55,
-            "intensity": "Z2",
-            "fc_max_bpm": 152,
-            "vertical_m": 250,
-            "notes": "Easy collinare con power hiking. Cadenza salita: 100-110 spm (è normale che scenda)."
-          },
-          {
-            "type": "long",
-            "duration_min": 150,
-            "intensity": "Z2",
-            "fc_max_bpm": 152,
-            "vertical_m": 650,
-            "notes": "Lungo trail. 2.5h. Idealmente Resegone o Presolana bassa. 3 gel + 2 barrette + sali. Test reale dell'autonomia alimentare in corsa."
-          }
-        ],
-        "strength": true,
-        "milestone": ""
-      },
-      {
-        "number": 13,
-        "phase_id": "phase-3",
-        "start_date": "2026-07-27",
-        "end_date": "2026-08-02",
-        "label": "Crescita — 165 min, 700m D+",
-        "narrative": "Volume in crescita: 165 min trail. Vacanze possibili: se in montagna, GRANDE — i lunghi diventano scoperta. Se in pianura/mare, gestire il caldo è la priorità.",
-        "sessions": [
-          {
-            "type": "easy",
-            "duration_min": 45,
-            "intensity": "Z2",
-            "fc_max_bpm": 152,
-            "vertical_m": 50,
-            "notes": "Easy. Vacanze? Adatta orario alle ore fresche (prima delle 9 o dopo le 19)."
-          },
-          {
-            "type": "easy",
-            "duration_min": 60,
-            "intensity": "Z2",
-            "fc_max_bpm": 152,
-            "vertical_m": 300,
-            "notes": "Easy collinare lungo. Power hiking ripetute: 5 salite da 3-4 min."
-          },
-          {
-            "type": "long",
-            "duration_min": 165,
-            "intensity": "Z2",
-            "fc_max_bpm": 152,
-            "vertical_m": 700,
-            "notes": "Lungo trail 2h45'. Idealmente terreno simile a Brenta (Dolomiti se in vacanza lì). Gestione completa: 3-4 gel, 2-3 barrette, 1.5-2L acqua + sali."
-          }
-        ],
-        "strength": true,
-        "milestone": ""
-      },
-      {
-        "number": 14,
-        "phase_id": "phase-3",
-        "start_date": "2026-08-03",
-        "end_date": "2026-08-09",
-        "label": "Picco fase 3 — 180 min, 750m D+",
-        "narrative": "Picco assoluto fase 3: 3h trail con 750m D+. È il 60% del D+ gara. Se reggi questo, la gara è fattibile.",
-        "sessions": [
-          {
-            "type": "easy",
-            "duration_min": 40,
-            "intensity": "Z2",
-            "fc_max_bpm": 152,
-            "vertical_m": 0,
-            "notes": "Easy molto rilassato pre-lungo."
-          },
-          {
-            "type": "easy",
-            "duration_min": 50,
-            "intensity": "Z2",
-            "fc_max_bpm": 152,
-            "vertical_m": 200,
-            "notes": "Easy collinare di scarico mentale. Niente intensità."
-          },
-          {
-            "type": "long",
-            "duration_min": 180,
-            "intensity": "Z2",
-            "fc_max_bpm": 152,
-            "vertical_m": 750,
-            "notes": "★ TEST FASE 3: 3h trail con 750m D+. Banco di prova autonomia. Replica esattamente alimentazione gara: stessi gel, stessa frequenza, stessa idratazione. Esporta tutto."
-          }
-        ],
-        "strength": true,
-        "milestone": "Test 3h con 750m D+"
-      },
-      {
-        "number": 15,
-        "phase_id": "phase-3",
-        "start_date": "2026-08-10",
-        "end_date": "2026-08-16",
-        "label": "Deload prima del peak",
-        "narrative": "Scarico controllato dopo il picco di sett 14. Volume -40%. Le gambe devono essere pronte per la simulazione gara.",
-        "sessions": [
-          {
-            "type": "easy",
-            "duration_min": 35,
-            "intensity": "Z2",
-            "fc_max_bpm": 145,
-            "vertical_m": 0,
-            "notes": "Easy corto. Sgombra le gambe."
-          },
-          {
-            "type": "easy",
-            "duration_min": 45,
-            "intensity": "Z2",
-            "fc_max_bpm": 152,
-            "vertical_m": 150,
-            "notes": "Easy collinare leggero."
-          },
-          {
-            "type": "long",
-            "duration_min": 100,
-            "intensity": "Z2",
-            "fc_max_bpm": 152,
-            "vertical_m": 400,
-            "notes": "Lungo deload: 100 min con 400m D+. Recovery più che stimolo. Niente test, solo movimento."
-          }
-        ],
-        "strength": true,
-        "milestone": "Fine fase 3 → peak + taper"
-      },
-      {
-        "number": 16,
-        "phase_id": "phase-4",
-        "start_date": "2026-08-17",
-        "end_date": "2026-08-23",
-        "label": "🎯 SIMULAZIONE GARA",
-        "narrative": "L'ultimo grande lavoro. Simulazione gara: 3h con 850m D+. Tutto identico al giorno della gara — abbigliamento, alimentazione, attrezzatura, orari. Da qui in giù si scarica.",
-        "sessions": [
-          {
-            "type": "easy",
-            "duration_min": 40,
-            "intensity": "Z2",
-            "fc_max_bpm": 152,
-            "vertical_m": 0,
-            "notes": "Easy. Tieni le gambe attive ma riposate."
-          },
-          {
-            "type": "easy",
-            "duration_min": 50,
-            "intensity": "Z2",
-            "fc_max_bpm": 152,
-            "vertical_m": 200,
-            "notes": "Easy collinare medio. Ultima sessione collinare prima della simulazione."
-          },
-          {
-            "type": "long",
-            "duration_min": 180,
-            "intensity": "Z2",
-            "fc_max_bpm": 152,
-            "vertical_m": 850,
-            "notes": "★ SIMULAZIONE GARA. 3h, 850m D+ (≈70% gara). Sabato 22 agosto. Stessa attrezzatura, stessa alimentazione, stesso orario di partenza (10:00). Indossa tutto: scarpe, calze, zaino, tutto. È l'ultimo big workout: nessun lavoro grosso fino al 5 settembre."
-          }
-        ],
-        "strength": true,
-        "milestone": "Simulazione gara — 22 ago"
-      },
-      {
-        "number": 17,
-        "phase_id": "phase-4",
-        "start_date": "2026-08-24",
-        "end_date": "2026-08-30",
-        "label": "Taper — volume al 60%",
-        "narrative": "Scarico graduale. Volume -40% rispetto a sett 16. Mantenere l'intensità in qualche allungo per tenere svegli i muscoli, ma volume basso. Le gambe si caricano di freschezza.",
-        "sessions": [
-          {
-            "type": "easy",
-            "duration_min": 35,
-            "intensity": "Z2",
-            "fc_max_bpm": 152,
-            "vertical_m": 0,
-            "notes": "Easy corto con 4 allunghi di 30 sec a fine corsa. Spm 170+ negli allunghi."
-          },
-          {
-            "type": "easy",
-            "duration_min": 45,
-            "intensity": "Z2",
-            "fc_max_bpm": 152,
-            "vertical_m": 200,
-            "notes": "Easy collinare breve. Mantenere abitudine al D+, non stimolo."
-          },
-          {
-            "type": "long",
-            "duration_min": 90,
-            "intensity": "Z2",
-            "fc_max_bpm": 152,
-            "vertical_m": 400,
-            "notes": "Ultimo lungo prima della gara. 90 min con 400m D+. Rilassato, NESSUN test, NESSUNO sforzo. Lascia tutto in tasca per il 5 settembre."
-          }
-        ],
-        "strength": true,
-        "milestone": ""
-      },
-      {
-        "number": 18,
-        "phase_id": "phase-4",
-        "start_date": "2026-08-31",
-        "end_date": "2026-09-06",
-        "label": "🏁 RACE WEEK",
-        "narrative": "Si gareggia sabato 5 settembre. Volume al 30%. Riposo > tutto. Carboidrati su (ma non strafogarsi), idratazione alta, sonno 8+ h/notte.",
-        "sessions": [
-          {
-            "type": "easy",
-            "duration_min": 25,
-            "intensity": "Z2",
-            "fc_max_bpm": 145,
-            "vertical_m": 0,
-            "notes": "Lun 31 ago · easy cortissimo. Gambe pronte ma fresche."
-          },
-          {
-            "type": "easy",
-            "duration_min": 20,
-            "intensity": "Z2",
-            "fc_max_bpm": 145,
-            "vertical_m": 0,
-            "notes": "Mer 2 set · 20 min con 4 allunghi di 20 sec. Ultima volta che corri prima della gara. Gambe vive, non stanche."
-          },
-          {
-            "type": "long",
-            "duration_min": 180,
-            "intensity": "Z2",
-            "vertical_m": 1250,
-            "notes": "🏁 SAB 5 SETTEMBRE — XTERRA DBT 21K. Partenza ore 10:00 da Molveno. 21 km, 1250m D+, cancello a 3h al Rifugio Croz dell'Altissimo. Strategia: prime 2h facili (FC 130-145), camminata in tutte le salite >8%, gestione gel ogni 30 min, sali al ristoro. Obiettivo: passare il cancello e arrivare al traguardo entro le 5h."
-          }
-        ],
-        "strength": false,
-        "strength_note": "Niente forza in race week. Solo movimento e recupero.",
-        "milestone": "🏁 RACE DAY 5 settembre"
+        "strength": "full-body-base",
+        "milestone": "Test decoupling fine Fase 1"
       }
-    ]
+    ],
+    "milestones": [
+      { "date": "2026-05-09", "label": "Baseline trail (Canto Alto, ~700 m D+)", "type": "test" },
+      { "date": "2026-05-31", "label": "Visita medica agonistica — deadline", "type": "burocrazia" },
+      { "date": "2026-06-07", "label": "Test fine Fase 1: 10K piatto, target decoupling sotto 8%", "type": "test" },
+      { "date": "2026-06-30", "label": "Iscrizione gara — deadline", "type": "burocrazia" },
+      { "date": "2026-07-12", "label": "Fine Base montagna: 1h30 con 600 m D+ in Z2", "type": "milestone" },
+      { "date": "2026-08-09", "label": "Simulazione 75% (3h, 800-900 m D+)", "type": "test" },
+      { "date": "2026-09-05", "label": "GARA — XTERRA DBT 21K", "type": "race" }
+    ],
+    "strength_template": {
+      "frequency": "1x/settimana",
+      "best_timing": "Giorno dopo il lungo, oppure giornata con corsa breve facile. Mai prima del lungo.",
+      "duration_min": 25,
+      "warmup": "5 min: 20 jumping jack + 10 air squat + 10 bird-dog/lato + cerchi anche.",
+      "exercises": [
+        { "name": "Goblet squat (manubrio davanti al petto)", "sets": 3, "reps": "12", "focus": "Quadricipiti, glutei, core. Base della discesa." },
+        { "name": "Split squat bulgaro (piede dietro su sedia)", "sets": 3, "reps": "10/lato", "focus": "Monolaterale, eccentrico — è LA discesa." },
+        { "name": "Step-up alto (gradino o sedia robusta) con manubri", "sets": 3, "reps": "10/lato", "focus": "Replica esattamente il gesto della salita." },
+        { "name": "Calf raise eccentrici (sui gradini, scendere lentamente)", "sets": 3, "reps": "15", "focus": "Soleo, prevenzione tendinite achillea — il punto debole tipico del trailer." },
+        { "name": "Plank (gomiti)", "sets": 3, "reps": "45 sec", "focus": "Core stabile = postura in salita." },
+        { "name": "Glute bridge a una gamba", "sets": 3, "reps": "10/lato", "focus": "Glutei, stabilità laterale del bacino in discesa." }
+      ],
+      "progression": "Aggiungi 1 rep ogni 2 settimane fino a 15. Quando raggiungi 15 a tutti gli esercizi, aumenta peso manubri di 2-4 kg.",
+      "kit": "Manubri Decathlon 20 kg totali — sufficienti per tutta la preparazione."
+    },
+    "mobility_template": {
+      "when": "Subito dopo ogni corsa, anche solo 5 min. Non lo skip-pare per pigrizia.",
+      "exercises": [
+        { "name": "Foam roll (o bottiglia) quadricipiti", "duration": "1 min/lato" },
+        { "name": "Stretching polpacci a muro", "duration": "30 sec/lato" },
+        { "name": "Hip flexor stretch (affondo basso)", "duration": "30 sec/lato" },
+        { "name": "Stretch piriforme (figure 4 a terra)", "duration": "30 sec/lato" },
+        { "name": "Cat-cow + stretching schiena bassa", "duration": "1 min" }
+      ]
+    }
   }
 }
