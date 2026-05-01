@@ -103,6 +103,11 @@ section.live .s-title::before{background:var(--ac2);box-shadow:0 0 0 0 rgba(63,1
 .sess-meta{font-family:'Space Mono',monospace;font-size:.7rem;color:var(--tx2)}
 .sess-notes{font-size:.82rem;color:var(--tx2);line-height:1.5;margin-top:.3rem}
 
+/* Route link (es. tour Komoot) */
+.sess-route{display:inline-flex;align-items:center;gap:.4rem;margin-top:.55rem;padding:.45rem .7rem;background:var(--sf2);border:1px solid var(--bd);border-radius:6px;text-decoration:none;color:var(--ac);font-family:'Space Mono',monospace;font-size:.75rem;font-weight:700;transition:border-color .2s,background .2s}
+.sess-route:hover{border-color:var(--ac);background:rgba(88,166,255,.08)}
+.sess-route-icon{font-size:.85rem}
+
 /* Gear checklist */
 .gear{margin-top:.6rem;padding:.7rem .85rem;background:rgba(240,136,62,.05);border:1px solid rgba(240,136,62,.25);border-radius:6px}
 .gear-title{font-family:'Space Mono',monospace;font-size:.65rem;color:var(--wn);text-transform:uppercase;letter-spacing:1px;margin-bottom:.55rem;font-weight:700}
@@ -313,6 +318,12 @@ function renderSession(s) {
       `).join('')}
     </div>` : '';
 
+  const routeHtml = s.route_url ? `
+    <a class="sess-route" href="${s.route_url}" target="_blank" rel="noopener">
+      <span class="sess-route-icon">↗</span>
+      <span class="sess-route-text">${s.route_name || 'Apri percorso'}</span>
+    </a>` : '';
+
   return `
     <div class="sess">
       <div class="sess-head">
@@ -321,6 +332,7 @@ function renderSession(s) {
         <span class="sess-meta">· ${meta.join(' · ')}</span>
       </div>
       ${s.notes ? `<div class="sess-notes">${s.notes}</div>` : ''}
+      ${routeHtml}
       ${gearHtml}
     </div>
   `;
