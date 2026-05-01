@@ -63,52 +63,11 @@ section.warn .s-title::before{background:var(--wn)}
 .prio-alta{background:rgba(240,136,62,.15);color:var(--wn);border:1px solid var(--wn)}
 .prio-media{background:rgba(88,166,255,.1);color:var(--ac);border:1px solid var(--ac)}
 
-/* Phase */
-.phase{position:relative;padding:1rem 1.1rem;background:var(--sf);border:1px solid var(--bd);border-radius:10px;margin-bottom:.7rem}
-.phase-head{display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;margin-bottom:.5rem}
-.phase-name{font-family:'Space Mono',monospace;font-weight:700;color:var(--ac2);font-size:1rem}
-.phase-num{font-family:'Space Mono',monospace;font-size:.65rem;color:var(--tx2);text-transform:uppercase;letter-spacing:1px}
-.phase-weeks{font-family:'Space Mono',monospace;font-size:.7rem;color:var(--tx2);margin-bottom:.5rem}
-.phase-goal{font-size:.88rem;margin-bottom:.7rem;color:var(--tx)}
-.phase-stats{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:.5rem}
-.stat{font-family:'Space Mono',monospace;font-size:.7rem;padding:.25rem .55rem;border-radius:6px;background:var(--sf2);border:1px solid var(--bd);color:var(--tx2)}
-.stat strong{color:var(--tx);font-weight:700}
-.phase-detail{font-size:.82rem;color:var(--tx2);line-height:1.5;margin-top:.5rem}
-.phase-detail span{color:var(--tx)}
-.phase.current{border-color:var(--ac2);box-shadow:0 0 0 1px var(--ac2)}
-.phase.current .phase-num{color:var(--ac2)}
-
-/* Timeline */
-.tl{position:relative;padding-left:1.3rem}
-.tl::before{content:'';position:absolute;left:5px;top:6px;bottom:6px;width:2px;background:var(--bd)}
-.ms{position:relative;padding:.6rem 0 .6rem 0}
-.ms::before{content:'';position:absolute;left:-1.3rem;top:.85rem;width:12px;height:12px;border-radius:50%;background:var(--sf);border:2px solid var(--bd)}
-.ms.urgente::before{border-color:var(--rd);background:var(--rd)}
-.ms.alta::before{border-color:var(--wn)}
-.ms.race::before{border-color:var(--ac2);background:var(--ac2)}
-.ms-date{font-family:'Space Mono',monospace;font-size:.7rem;color:var(--tx2);margin-bottom:.15rem}
-.ms-title{font-size:.9rem;font-weight:500}
-
-/* Splits table */
-.splits{width:100%;border-collapse:collapse;font-size:.82rem}
-.splits th{text-align:left;font-family:'Space Mono',monospace;font-size:.65rem;color:var(--tx2);text-transform:uppercase;letter-spacing:1px;padding:.5rem .6rem;border-bottom:1px solid var(--bd)}
-.splits td{padding:.65rem .6rem;border-bottom:1px solid var(--bd);font-family:'Space Mono',monospace}
-.splits tr:last-child td{border-bottom:none}
-.splits tr.cancello{background:rgba(248,81,73,.06)}
-.splits tr.cancello td:first-child{color:var(--rd);font-weight:700}
-.splits .lim{color:var(--rd);font-weight:700}
-
 /* Profile compact */
 .profile-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:.5rem}
 .pf{background:var(--sf);border:1px solid var(--bd);border-radius:8px;padding:.6rem .7rem}
 .pf-lbl{font-family:'Space Mono',monospace;font-size:.6rem;color:var(--tx2);text-transform:uppercase;letter-spacing:1px;margin-bottom:.15rem}
 .pf-val{font-size:.85rem;color:var(--tx);font-weight:500}
-
-/* Principles */
-.principles{list-style:none}
-.principles li{padding:.6rem 0;border-bottom:1px solid var(--bd);font-size:.88rem;display:flex;gap:.6rem;align-items:flex-start}
-.principles li:last-child{border-bottom:none}
-.principles li::before{content:'→';color:var(--ac2);font-family:'Space Mono',monospace;font-weight:700;flex-shrink:0;margin-top:1px}
 
 /* Loading & error */
 .loader{text-align:center;padding:3rem 0;color:var(--tx2)}
@@ -159,11 +118,7 @@ function render(app, profile, params) {
     renderHero(profile, params),
     renderTasks(params),
     renderRaceInfo(profile),
-    renderProfile(profile),
-    renderPhases(params),
-    renderMilestones(params),
-    renderSplits(params),
-    renderPrinciples(params)
+    renderProfile(profile)
   ].join('');
 }
 
@@ -255,97 +210,6 @@ function renderProfile(profile) {
         <div class="pf"><div class="pf-lbl">Gare passate</div><div class="pf-val">${e.running.race_history}</div></div>
         <div class="pf"><div class="pf-lbl">Trail running</div><div class="pf-val">${e.mountain.trail_running}</div></div>
       </div>
-    </section>
-  `;
-}
-
-function renderPhases(params) {
-  const today = new Date();
-  const phases = params.phases.map(p => {
-    const [start, end] = p.dates.split(' → ').map(d => new Date(d));
-    const isCurrent = today >= start && today <= end;
-    return `
-      <div class="phase ${isCurrent ? 'current' : ''}">
-        <div class="phase-head">
-          <div>
-            <div class="phase-num">Fase ${p.id} · sett. ${p.weeks}${isCurrent ? ' · IN CORSO' : ''}</div>
-            <div class="phase-name">${p.name}</div>
-          </div>
-        </div>
-        <div class="phase-weeks">${p.dates}</div>
-        <div class="phase-goal">${p.goal}</div>
-        <div class="phase-stats">
-          <span class="stat">Volume <strong>${p.weekly_volume_km} km/sett</strong></span>
-          <span class="stat">Lungo <strong>${p.long_run_target}</strong></span>
-        </div>
-        <div class="phase-detail"><strong style="font-family:'Space Mono',monospace;font-size:.7rem;color:var(--tx2);text-transform:uppercase;letter-spacing:1px">Dislivello:</strong> <span>${p.elevation_focus}</span></div>
-        <div class="phase-detail"><strong style="font-family:'Space Mono',monospace;font-size:.7rem;color:var(--tx2);text-transform:uppercase;letter-spacing:1px">Sessione chiave:</strong> <span>${p.key_session}</span></div>
-        ${p.risk ? `<div class="phase-detail" style="color:var(--wn)">⚠ ${p.risk}</div>` : ''}
-      </div>
-    `;
-  }).join('');
-
-  return `
-    <section>
-      <h2 class="s-title">Le 5 fasi del piano</h2>
-      ${phases}
-    </section>
-  `;
-}
-
-function renderMilestones(params) {
-  const items = params.milestones.map(m => {
-    const cls = m.priority === 'URGENTE' || m.priority === 'urgente' ? 'urgente'
-              : m.priority === 'RACE DAY' ? 'race'
-              : (m.priority === 'alta' ? 'alta' : '');
-    return `
-      <div class="ms ${cls}">
-        <div class="ms-date">Sett. ${m.week} · ${formatItalianDate(m.date, true)}</div>
-        <div class="ms-title">${m.milestone}</div>
-      </div>
-    `;
-  }).join('');
-  return `
-    <section>
-      <h2 class="s-title">Milestone</h2>
-      <div class="card"><div class="tl">${items}</div></div>
-    </section>
-  `;
-}
-
-function renderSplits(params) {
-  const e = params.estimated_finish_time;
-  const rows = e.splits_estimate.map(s => {
-    const isCancello = !!s.limit;
-    return `
-      <tr class="${isCancello ? 'cancello' : ''}">
-        <td>${s.checkpoint}</td>
-        <td>${s.estimated}</td>
-        <td>${s.limit ? `<span class="lim">${s.limit}</span>` : '—'}</td>
-      </tr>
-    `;
-  }).join('');
-  return `
-    <section>
-      <h2 class="s-title">Tempo stimato e split</h2>
-      <div class="card">
-        <div style="font-family:'Space Mono',monospace;font-size:1.05rem;font-weight:700;color:var(--ac2);margin-bottom:.3rem">Target: ${e.target_window}</div>
-        <div style="font-size:.82rem;color:var(--tx2);margin-bottom:1rem;line-height:1.5">${e.rationale}</div>
-        <table class="splits">
-          <thead><tr><th>Checkpoint</th><th>Stima</th><th>Limite</th></tr></thead>
-          <tbody>${rows}</tbody>
-        </table>
-      </div>
-    </section>
-  `;
-}
-
-function renderPrinciples(params) {
-  const items = params.key_principles.map(p => `<li>${p}</li>`).join('');
-  return `
-    <section>
-      <h2 class="s-title">Principi guida</h2>
-      <div class="card"><ul class="principles">${items}</ul></div>
     </section>
   `;
 }
