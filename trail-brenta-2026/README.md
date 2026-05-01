@@ -51,7 +51,20 @@ Sezioni: `athlete`, `experience`, `availability`, `health`, `equipment`, `race_t
 
 **Sempre aggiornare il campo `last_updated`** quando si modifica.
 
-Sezioni attuali: `preparation_tasks`. Cresceranno quando definiremo il piano (fasi, milestone, zone, ecc.).
+Sezioni (schema 2.0):
+- `preparation_tasks` — checklist burocrazia + attrezzatura, con `priority` e `deadline`.
+- `training_zones` — zone FC (5 zone Karvonen), `fcmax_bpm`, `maf_ceiling_bpm`, sorgente FCmax.
+- `plan` — piano completo:
+  - `total_weeks`, `race_week_number`
+  - `weekly_budget` — `running_sessions`, `strength_sessions`, `philosophy`
+  - `rules` — array di regole d'ingaggio
+  - `phases` — 4 fasi (Ricostruzione, Base montagna, Build specifico, Peak+Taper) con `weeks_range`, `long_run_min`, `vertical_target_m`, `focus`, `key_objective`
+  - `milestones` — eventi puntuali (test, deadline burocrazia, race) con `type`
+  - `weeks` — 18 settimane: ognuna ha `phase_id`, `start_date`, `end_date`, `label`, `narrative`, `sessions[]`, `strength` (bool), `strength_note`, `milestone`
+  - `strength_template` — 1 routine riusabile (7 esercizi, 25 min)
+  - `mobility_template` — 5 esercizi post-corsa
+
+Tipi di sessione validi: `easy`, `long`, `test`, `hike_baseline`, `strength`. La pagina rende automaticamente la settimana corrente (o la prossima/ultima definita).
 
 ### `data/runs/`
 
