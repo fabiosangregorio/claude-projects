@@ -25,6 +25,22 @@ Quando lavori in questa repo, **preferisci sempre rimuovere o modificare codice 
 
 ---
 
+## Tema chiaro/scuro
+
+Tutte le pagine usano `theme.css` + `theme.js` nella root. Lo storage (`localStorage.theme`) è condiviso tra le pagine perché stesso origin. Il bottone toggle viene iniettato in alto a destra da `theme.js`.
+
+**Ogni nuova pagina** deve includere queste 3 righe nel `<head>` subito dopo `<meta name="theme-color">`:
+
+```html
+<script>document.documentElement.setAttribute('data-theme',localStorage.getItem('theme')||'dark')</script>
+<link rel="stylesheet" href="/claude-projects/theme.css">
+<script src="/claude-projects/theme.js" defer></script>
+```
+
+Le variabili CSS (`--bg`, `--sf`, `--tx`, ecc.) restano invariate: `theme.css` le ridefinisce con `html[data-theme="light"]`. Non duplicare la logica del toggle nelle pagine.
+
+---
+
 ## Come usare questa repo
 
 Ogni progetto ha la sua cartella con un `index.html` che viene servito su GitHub Pages.
