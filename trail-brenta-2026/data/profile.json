@@ -1,0 +1,84 @@
+{
+  "_schema_version": "1.0",
+  "_description": "Dati statici dell'atleta e dell'obiettivo gara. Modificare solo se cambiano dati anagrafici o se viene scelta una gara diversa.",
+  "athlete": {
+    "name": "Fabio",
+    "age": 28,
+    "sex": "M",
+    "weight_kg": 67,
+    "height_cm": 180,
+    "bmi": 20.7,
+    "location": {
+      "city": "Treviglio",
+      "province": "BG",
+      "terrain": "pianura padana",
+      "elevation_access": "30-60 min auto verso Orobie / Bergamo Alta / Albenza / Resegone / Presolana"
+    }
+  },
+  "experience": {
+    "running": {
+      "level": "principiante",
+      "regular_running_history": "mai/quasi mai",
+      "max_recent_run_km": "5-10",
+      "current_freq_per_week": "1-2",
+      "race_history": "5-10K strada"
+    },
+    "mountain": {
+      "hiking": "regolare",
+      "max_elevation_recent_m": "700-1200",
+      "trail_running": "mai"
+    },
+    "other_sports": "nessuno strutturato"
+  },
+  "availability": {
+    "weekly_hours": "~3 + lungo bisettimanale (flessibile, da estendere a settimanale nel build)",
+    "days_per_week": 3,
+    "weekend_long_run": "variabile",
+    "constraints": "1-2 settimane di vacanza estive (da definire)"
+  },
+  "health": {
+    "injuries": "nessuno",
+    "cardio_resp": "nessuno",
+    "agonistic_medical_certificate": {
+      "status": "da fare",
+      "note": "Obbligatoria per iscriversi. Richiede ECG sotto sforzo. Prenotare entro maggio."
+    }
+  },
+  "equipment": {
+    "trail_shoes": {
+      "status": "ricevute (regalo, La Sportiva), non ancora provate",
+      "model": "?"
+    },
+    "missing": [
+      "zaino idratazione (5-10L)",
+      "borraccia/bicchiere pieghevole",
+      "giacca antivento",
+      "fischietto",
+      "telo termico",
+      "bastoncini (opzionali ma consigliati)",
+      "GPS watch (opzionale)"
+    ]
+  },
+  "race_target": {
+    "event": "XTERRA Dolomiti di Brenta Trail – SHORT 21K",
+    "edition": 2026,
+    "date": "2026-09-05",
+    "weekday": "sabato",
+    "location": "Molveno (TN)",
+    "distance_km": 21,
+    "elevation_gain_m": 1250,
+    "start_time": "10:00",
+    "max_time_hours": 5,
+    "cancello_orario": {
+      "checkpoint": "Rifugio Croz dell'Altissimo",
+      "limit": "3h00' / ore 13:00"
+    },
+    "min_age": 18,
+    "itra_points": 1,
+    "registration_fee_eur_2025": 40,
+    "official_url": "https://www.dolomitidibrentatrail.it/en/routes/xterra21k/",
+    "goal": "finire entro i cancelli",
+    "route_summary": "Lago di Molveno → via Marocchi → Malga Andalo (km 6, +522m) → sent. 332 → variante DBT K21 → Rif. Selvata (ristoro) → Rif. Croz dell'Altissimo (CANCELLO) → Sentiero delle Grotte → Rif. Montanara → Pradel → Molveno"
+  },
+  "nutrition_experience": "da imparare (gel, sali, idratazione in corsa lunga)"
+}
