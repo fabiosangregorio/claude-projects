@@ -135,9 +135,9 @@ Fabio non sa nulla di falegnameria. Le istruzioni devono essere:
 ### 6. Output HTML
 
 L'HTML deve contenere:
-- **Freccia "← Progetti" nell'header** — link di ritorno all'indice (`https://fabiosangregorio.github.io/claude-projects/`). Usa questo snippet nell'header, subito prima dell'`<h1>`:
+- **Freccia "← Progetti" nell'header** — link relativo di ritorno all'indice (`../`). Usa questo snippet nell'header, subito prima dell'`<h1>`:
   ```html
-  <a class="back" href="https://fabiosangregorio.github.io/claude-projects/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>Progetti</a>
+  <a class="back" href="../"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>Progetti</a>
   ```
   E nel CSS la classe `.back`:
   ```css

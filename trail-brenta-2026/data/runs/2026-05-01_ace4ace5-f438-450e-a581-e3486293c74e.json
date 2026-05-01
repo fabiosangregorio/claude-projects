@@ -1,0 +1,287 @@
+{
+  "schema_version": 1,
+  "id": "ace4ace5-f438-450e-a581-e3486293c74e",
+  "start": "2026-05-01T07:10:55.338Z",
+  "ai_analysis": {
+    "model": "claude-opus-4-7",
+    "generated_at": "2026-05-01T20:55:00Z",
+    "prompt_version": 1,
+    "classification": {
+      "workout_type": "non strutturato",
+      "primary_benefit": "base aerobica",
+      "training_effect_aerobic": 3.5,
+      "training_effect_anaerobic": 3.0
+    },
+    "execution": {
+      "intent_inferred": "rientro alla corsa, lungo facile",
+      "execution_quality": 2,
+      "primary_failure_mode": "sovraccarico",
+      "failure_confidence": 0.85
+    },
+    "trail_specificity": {
+      "score": 1,
+      "vertical_load_pct_of_race": 5.6,
+      "notes": "Asfalto piatto, 70 m di dislivello positivo (D+) su 11.5 km. Lontanissimo dalle richieste della Dolomiti di Brenta Trail (DBT) 21K."
+    },
+    "headline": "Primo run dopo 13 mesi di stop \u2014 partito troppo forte, frequenza cardiaca (FC) schizzata in Z4/Z5, crollato al km 5 con camminate ripetute. \u00c8 un rientro, non un allenamento.",
+    "strengths": [
+      "Coperti 11.5 km nonostante un anno fermo \u2014 nessun abbandono",
+      "Ultimo km recuperato a 7:23 con frequenza cardiaca (FC) tornata in Z2",
+      "Cadenza tenuta intorno a 130 passi per minuto (spm) quando si correva davvero"
+    ],
+    "concerns": [
+      {
+        "area": "deriva cardiaca (decoupling Pa:Hr)",
+        "severity": 5,
+        "note": "Rapporto passo-frequenza cardiaca (Pa:Hr) al 12.6% \u2014 base aerobica persa. Obiettivo sotto il 5%; oltre il 10% la FC va in deriva pesante rispetto al passo."
+      },
+      {
+        "area": "distribuzione delle intensit\u00e0",
+        "severity": 5,
+        "note": "57% del tempo in Z4\u2013Z5, solo 31% in bassa intensit\u00e0 (LIT, low-intensity training). Distribuzione da alta intensit\u00e0 (HIT) su quello che doveva essere tutto facile."
+      },
+      {
+        "area": "gestione del passo",
+        "severity": 4,
+        "note": "Km 1\u20134 a 5:50\u20136:30 con FC fino a 169 (93% della frequenza cardiaca massima, FCmax). Apertura troppo aggressiva."
+      }
+    ],
+    "narrative": "Considera questa uscita una baseline, non un allenamento. Dopo 13 mesi di stop le gambe hanno corso 4 km sotto i 6:00 prima che il sistema cardiovascolare reagisse: frequenza cardiaca (FC) al 93% della FC massima (FCmax) gi\u00e0 al km 2 e seconda met\u00e0 sgretolata con il 17% del tempo a camminare.\n\nI numeri raccontano decondizionamento, non stimolo allenante. Una deriva cardiaca (decoupling Pa:Hr) del 12.6% \u2014 molto sopra la soglia di 5% che indica una buona durata aerobica \u2014 significa che il cuore si \u00e8 impennato rispetto al passo nella seconda met\u00e0. Il 35% del tempo in Z5 e solo il 31% in bassa intensit\u00e0 (LIT) confermano che lo sforzo \u00e8 stato vissuto come intenso anche se l'intento era facile.\n\nIl messaggio della corsa \u00e8 chiaro: la base aerobica va ricostruita prima di qualunque lavoro specifico. Le gambe ricordano la meccanica (cadenza 130 passi al minuto stabile quando si correva), ma il motore aerobico oggi non regge il passo che le gambe vorrebbero tenere."
+  },
+  "totals": {
+    "distance_km": 11.51,
+    "duration_sec": 4892,
+    "avg_pace_min_per_km": 7.081,
+    "gap_min_per_km": 6.95,
+    "ef": 0.959,
+    "avg_hr": 150,
+    "max_hr_observed": 176,
+    "hrmax_est_used": 181,
+    "ascent_m": 70,
+    "elev_min_m": 123,
+    "elev_max_m": 146,
+    "steps": 10565,
+    "avg_cadence_spm": 129.6,
+    "avg_stride_cm": 109
+  },
+  "derived": {
+    "trimp": 179,
+    "polarization_3z": {
+      "lit_pct": 31.4,
+      "mit_pct": 33.2,
+      "hit_pct": 35.4
+    },
+    "maf": {
+      "ceiling_bpm": 152,
+      "time_below_pct": 36.7
+    },
+    "vertical": {
+      "vam_m_per_h": 52,
+      "ascent_m_per_h": 52,
+      "descent_m_per_h": 54
+    },
+    "grade_distribution": {
+      "flat_lt_2": 76.3,
+      "rolling_2_5": 9.7,
+      "uphill_5_10": 0.6,
+      "steep_gt_10": 0,
+      "down_2_5": 11.1,
+      "down_5_10": 2.1,
+      "down_gt_10": 0.2
+    },
+    "climb_efficiency": {
+      "ef_uphill": 1.012,
+      "uphill_time_sec": 28
+    },
+    "race_match": {
+      "vertical_match_pct": 5.6,
+      "duration_match_pct": 27.2
+    }
+  },
+  "decoupling": {
+    "first_half": {
+      "gap_min_per_km": 7.764,
+      "hr": 152
+    },
+    "second_half": {
+      "gap_min_per_km": 9.069,
+      "hr": 148
+    },
+    "pct": 12.6
+  },
+  "pace_variability": {
+    "cv_overall_pct": 33.42,
+    "cv_running_only_pct": 34.26
+  },
+  "split_balance": {
+    "first_half_sec": 2002,
+    "second_half_sec": 2699,
+    "diff_pct": 34.82
+  },
+  "hr_zones": [
+    {
+      "zone": 1,
+      "time_sec": 154
+    },
+    {
+      "zone": 2,
+      "time_sec": 708
+    },
+    {
+      "zone": 3,
+      "time_sec": 608
+    },
+    {
+      "zone": 4,
+      "time_sec": 1983
+    },
+    {
+      "zone": 5,
+      "time_sec": 1437
+    }
+  ],
+  "walks_summary": {
+    "count": 5,
+    "total_walk_sec": 834,
+    "walk_pct": 17.3
+  },
+  "walk_breaks": [
+    {
+      "started_sec": 1930,
+      "duration_sec": 278,
+      "avg_cadence_spm": 107.6,
+      "at_km": 5.15
+    },
+    {
+      "started_sec": 2274,
+      "duration_sec": 90,
+      "avg_cadence_spm": 111.9,
+      "at_km": 5.78
+    },
+    {
+      "started_sec": 2803,
+      "duration_sec": 103,
+      "avg_cadence_spm": 112.4,
+      "at_km": 7.09
+    },
+    {
+      "started_sec": 3112,
+      "duration_sec": 204,
+      "avg_cadence_spm": 110.8,
+      "at_km": 8.01
+    },
+    {
+      "started_sec": 3815,
+      "duration_sec": 159,
+      "avg_cadence_spm": 88.2,
+      "at_km": 9.29
+    }
+  ],
+  "splits": [
+    {
+      "km": 1,
+      "duration_sec": 368.1,
+      "pace_min_per_km": 6.134,
+      "gap_min_per_km": 6.1,
+      "avg_hr": 137,
+      "pct_hrmax": 75.5,
+      "ef": 1.199
+    },
+    {
+      "km": 2,
+      "duration_sec": 350.5,
+      "pace_min_per_km": 5.842,
+      "gap_min_per_km": 5.744,
+      "avg_hr": 169,
+      "pct_hrmax": 93.4,
+      "ef": 1.03
+    },
+    {
+      "km": 3,
+      "duration_sec": 388,
+      "pace_min_per_km": 6.467,
+      "gap_min_per_km": 6.342,
+      "avg_hr": 163,
+      "pct_hrmax": 89.9,
+      "ef": 0.969
+    },
+    {
+      "km": 4,
+      "duration_sec": 353.3,
+      "pace_min_per_km": 5.888,
+      "gap_min_per_km": 5.809,
+      "avg_hr": 153,
+      "pct_hrmax": 84.7,
+      "ef": 1.123
+    },
+    {
+      "km": 5,
+      "duration_sec": 542,
+      "pace_min_per_km": 9.033,
+      "gap_min_per_km": 8.889,
+      "avg_hr": 136,
+      "pct_hrmax": 75.1,
+      "ef": 0.828
+    },
+    {
+      "km": 6,
+      "duration_sec": 424.3,
+      "pace_min_per_km": 7.072,
+      "gap_min_per_km": 7.01,
+      "avg_hr": 159,
+      "pct_hrmax": 87.8,
+      "ef": 0.898
+    },
+    {
+      "km": 7,
+      "duration_sec": 397,
+      "pace_min_per_km": 6.617,
+      "gap_min_per_km": 6.959,
+      "avg_hr": 162,
+      "pct_hrmax": 89.2,
+      "ef": 0.89
+    },
+    {
+      "km": 8,
+      "duration_sec": 388,
+      "pace_min_per_km": 6.467,
+      "gap_min_per_km": 6.612,
+      "avg_hr": 160,
+      "pct_hrmax": 88.6,
+      "ef": 0.943
+    },
+    {
+      "km": 9,
+      "duration_sec": 479.4,
+      "pace_min_per_km": 7.99,
+      "gap_min_per_km": 7.958,
+      "avg_hr": 144,
+      "pct_hrmax": 79.8,
+      "ef": 0.87
+    },
+    {
+      "km": 10,
+      "duration_sec": 566.5,
+      "pace_min_per_km": 9.442,
+      "gap_min_per_km": 9.461,
+      "avg_hr": 132,
+      "pct_hrmax": 72.8,
+      "ef": 0.802
+    },
+    {
+      "km": 11,
+      "duration_sec": 443.5,
+      "pace_min_per_km": 7.392,
+      "gap_min_per_km": 7.493,
+      "avg_hr": 148,
+      "pct_hrmax": 81.7,
+      "ef": 0.903
+    }
+  ],
+  "remainder": {
+    "km": 0.51,
+    "duration_sec": 191.1,
+    "pace_min_per_km": 6.205,
+    "gap_min_per_km": 6.605
+  }
+}

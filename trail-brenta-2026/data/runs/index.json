@@ -1,0 +1,7 @@
+{
+  "_schema_version": "1.0",
+  "_description": "Manifest dei run. Aggiungere qui il filename (relativo a data/runs/) di ogni nuovo run JSON. Ordine: dal più recente al più vecchio (ma il list page riordina comunque per data).",
+  "runs": [
+    "2026-05-01_ace4ace5-f438-450e-a581-e3486293c74e.json"
+  ]
+}

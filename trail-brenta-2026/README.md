@@ -12,11 +12,16 @@ Questa sezione segue un'architettura **data-driven** diversa dai progetti DIY: i
 
 ```
 trail-brenta-2026/
-├── index.html              ← Solo presentazione. Carica i JSON e li renderizza.
+├── index.html              ← Home. Sintesi piano + tasks + profilo.
+├── runs.html               ← Lista di tutti gli allenamenti.
+├── run.html                ← Dettaglio singolo allenamento (?id=<filename-senza-.json>).
 ├── README.md               ← Questo file.
 └── data/
     ├── profile.json        ← Dati statici (atleta + obiettivo gara). Cambia raramente.
-    └── parameters.json     ← Parametri di calibrazione del piano. Cambia spesso.
+    ├── parameters.json     ← Parametri di calibrazione del piano. Cambia spesso.
+    └── runs/
+        ├── index.json      ← Manifest: elenco dei file run. AGGIORNARE a ogni nuovo run.
+        └── <date>_<uuid>.json  ← Un file per allenamento (workout + analisi AI).
 ```
 
 ### Perché questa separazione
@@ -47,6 +52,14 @@ Sezioni: `athlete`, `experience`, `availability`, `health`, `equipment`, `race_t
 **Sempre aggiornare il campo `last_updated`** quando si modifica.
 
 Sezioni attuali: `preparation_tasks`. Cresceranno quando definiremo il piano (fasi, milestone, zone, ecc.).
+
+### `data/runs/`
+
+Cartella con un JSON per allenamento (workout grezzo + analisi AI). Filename: `<YYYY-MM-DD>_<uuid>.json`.
+
+- **Sorgenti**: i JSON sono generati esternamente (parsing Garmin/Strava + analisi AI). Non si modificano a mano.
+- **Manifest `data/runs/index.json`**: elenca i filename. Lo statico hosting non può listare cartelle, quindi **ogni nuovo run va aggiunto qui**.
+- **Schema**: ogni run contiene `start`, `totals`, `derived`, `decoupling`, `splits`, `walk_breaks`, `hr_zones`, e `ai_analysis` (headline, classification, execution, concerns, strengths, narrative, next_session).
 
 ---
 

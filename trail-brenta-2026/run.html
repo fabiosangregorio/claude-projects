@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DBT 21K — Allenamento</title>
+<meta name="theme-color" content="#0e1117">
+<script>document.documentElement.setAttribute('data-theme',localStorage.getItem('theme')||'dark')</script>
+<link rel="stylesheet" href="/claude-projects/theme.css">
+<script src="/claude-projects/theme.js" defer></script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0e1117;--sf:#161b22;--sf2:#1c2230;--bd:#2a3040;--tx:#e6edf3;--tx2:#8b949e;--ac:#58a6ff;--ac2:#3fb950;--wn:#f0883e;--rd:#f85149;--pd:#d2a8ff}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--tx);line-height:1.6;min-height:100vh;-webkit-font-smoothing:antialiased}
+.c{max-width:760px;margin:0 auto;padding:1.5rem 1rem 3rem}
+
+.back{display:inline-flex;align-items:center;gap:.35rem;font-family:'Space Mono',monospace;font-size:.75rem;color:var(--tx2);text-decoration:none;padding:.35rem .6rem;border-radius:6px;border:1px solid var(--bd);background:var(--sf);transition:border-color .2s,color .2s;margin-bottom:1.5rem}
+.back:hover{border-color:var(--ac);color:var(--ac)}
+.back svg{width:14px;height:14px}
+
+.hero{margin-bottom:2rem}
+.kicker{font-family:'Space Mono',monospace;font-size:.7rem;color:var(--ac2);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:.5rem}
+.hero h1{font-family:'Space Mono',monospace;font-size:clamp(1.4rem,4.5vw,2rem);font-weight:700;letter-spacing:-.5px;line-height:1.25;margin-bottom:.7rem;color:var(--tx)}
+.hero-sub{color:var(--tx2);font-size:.85rem;font-family:'Space Mono',monospace}
+
+section{margin:2rem 0}
+.s-title{font-family:'Space Mono',monospace;font-size:.75rem;color:var(--tx2);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:.4rem;display:flex;align-items:center;gap:.5rem}
+.s-title::before{content:'';display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--ac)}
+.s-desc{font-size:.78rem;color:var(--tx2);line-height:1.5;margin-bottom:.9rem}
+.metric-help{font-family:'DM Sans',sans-serif;font-size:.7rem;color:var(--tx2);line-height:1.4;margin-top:.35rem;padding-top:.35rem;border-top:1px dashed var(--bd)}
+
+.card{background:var(--sf);border:1px solid var(--bd);border-radius:10px;padding:1rem 1.1rem;margin-bottom:.7rem}
+.card.alert{border-color:var(--rd);background:linear-gradient(180deg,rgba(248,81,73,.05),var(--sf))}
+.card.warn{border-color:var(--wn);background:linear-gradient(180deg,rgba(240,136,62,.05),var(--sf))}
+.card.good{border-color:var(--ac2);background:linear-gradient(180deg,rgba(63,185,80,.05),var(--sf))}
+
+.metrics{display:grid;grid-template-columns:repeat(2,1fr);gap:.5rem}
+.metric{background:var(--sf);border:1px solid var(--bd);border-radius:8px;padding:.7rem .8rem}
+.metric-lbl{font-family:'Space Mono',monospace;font-size:.6rem;color:var(--tx2);text-transform:uppercase;letter-spacing:1px;margin-bottom:.2rem}
+.metric-val{font-family:'Space Mono',monospace;font-size:1rem;font-weight:700;color:var(--tx)}
+.metric-val.acc{color:var(--ac)}
+.metric-val.good{color:var(--ac2)}
+.metric-val.warn{color:var(--wn)}
+.metric-val.bad{color:var(--rd)}
+.metric-sub{font-family:'Space Mono',monospace;font-size:.65rem;color:var(--tx2);margin-top:.15rem}
+
+.headline{font-size:1rem;line-height:1.5;color:var(--tx);font-weight:500}
+.narrative{font-size:.9rem;line-height:1.65;color:var(--tx);white-space:pre-wrap}
+
+.list{list-style:none;padding:0;margin:0}
+.list li{padding:.55rem 0;border-bottom:1px solid var(--bd);font-size:.9rem;line-height:1.5}
+.list li:last-child{border-bottom:none}
+.list .l-tag{font-family:'Space Mono',monospace;font-size:.65rem;color:var(--tx2);text-transform:uppercase;letter-spacing:.5px;margin-right:.4rem}
+.sev{font-family:'Space Mono',monospace;font-size:.6rem;padding:.1rem .4rem;border-radius:4px;border:1px solid;margin-right:.4rem;font-weight:700}
+.sev-1,.sev-2{color:var(--ac2);border-color:var(--ac2)}
+.sev-3{color:var(--wn);border-color:var(--wn)}
+.sev-4,.sev-5{color:var(--rd);border-color:var(--rd)}
+
+table{width:100%;border-collapse:collapse;font-family:'Space Mono',monospace;font-size:.78rem}
+th,td{text-align:right;padding:.4rem .3rem;border-bottom:1px solid var(--bd)}
+th:first-child,td:first-child{text-align:left}
+th{color:var(--tx2);font-size:.65rem;text-transform:uppercase;letter-spacing:.5px;font-weight:700}
+
+.zstack{display:flex;width:100%;height:22px;border-radius:4px;overflow:hidden;background:var(--sf2);border:1px solid var(--bd)}
+.zseg{height:100%;display:flex;align-items:center;justify-content:center;font-family:'Space Mono',monospace;font-size:.62rem;color:#0e1117;font-weight:700;min-width:0;overflow:hidden;white-space:nowrap}
+.zseg.z1{background:#1f6feb;color:#fff}
+.zseg.z2{background:#3fb950}
+.zseg.z3{background:#d29922}
+.zseg.z4{background:#f0883e}
+.zseg.z5{background:#f85149;color:#fff}
+.zlegend{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:.6rem;font-family:'Space Mono',monospace;font-size:.7rem;color:var(--tx2)}
+.zleg-item{display:flex;align-items:center;gap:.35rem}
+.zleg-dot{width:10px;height:10px;border-radius:2px;flex-shrink:0}
+.zleg-dot.z1{background:#1f6feb}
+.zleg-dot.z2{background:#3fb950}
+.zleg-dot.z3{background:#d29922}
+.zleg-dot.z4{background:#f0883e}
+.zleg-dot.z5{background:#f85149}
+
+/* Grade-distribution stacked bar — descents (cool) → flat (neutral) → climbs (warm) */
+.zseg.gd-down-gt-10,.zleg-dot.gd-down-gt-10{background:#0a3069;color:#fff}
+.zseg.gd-down-5-10,.zleg-dot.gd-down-5-10{background:#1f6feb;color:#fff}
+.zseg.gd-down-2-5,.zleg-dot.gd-down-2-5{background:#79c0ff}
+.zseg.gd-flat,.zleg-dot.gd-flat{background:#6e7681;color:#fff}
+.zseg.gd-rolling,.zleg-dot.gd-rolling{background:#d29922}
+.zseg.gd-uphill,.zleg-dot.gd-uphill{background:#f0883e}
+.zseg.gd-steep,.zleg-dot.gd-steep{background:#f85149;color:#fff}
+
+.polar-row{display:flex;gap:.4rem;margin-top:.4rem}
+.polar-cell{flex:1;text-align:center;padding:.5rem;background:var(--sf2);border:1px solid var(--bd);border-radius:6px}
+.polar-pct{font-family:'Space Mono',monospace;font-size:1.1rem;font-weight:700}
+.polar-pct.lit{color:var(--ac2)}
+.polar-pct.mit{color:var(--wn)}
+.polar-pct.hit{color:var(--rd)}
+.polar-lbl{font-family:'Space Mono',monospace;font-size:.6rem;color:var(--tx2);text-transform:uppercase;letter-spacing:1px;margin-top:.15rem}
+
+.walk-item{display:grid;grid-template-columns:1fr auto;gap:.5rem;padding:.45rem 0;border-bottom:1px solid var(--bd);font-family:'Space Mono',monospace;font-size:.78rem}
+.walk-item:last-child{border-bottom:none}
+.walk-where{color:var(--tx)}
+.walk-how{color:var(--tx2);text-align:right}
+
+.next-card{background:linear-gradient(180deg,rgba(88,166,255,.06),var(--sf));border-color:var(--ac)}
+.next-type{font-family:'Space Mono',monospace;font-size:.65rem;color:var(--ac);text-transform:uppercase;letter-spacing:1px;margin-bottom:.3rem}
+.next-presc{font-size:.92rem;line-height:1.5;color:var(--tx);margin-bottom:.4rem}
+.next-after{font-family:'Space Mono',monospace;font-size:.7rem;color:var(--tx2)}
+
+.loader{text-align:center;padding:3rem 0;color:var(--tx2)}
+.spinner{display:inline-block;width:20px;height:20px;border:2px solid var(--bd);border-top-color:var(--ac);border-radius:50%;animation:spin .6s linear infinite;margin-bottom:.6rem}
+@keyframes spin{to{transform:rotate(360deg)}}
+.error{padding:1.5rem;color:var(--rd);font-size:.85rem;background:rgba(248,81,73,.05);border:1px solid var(--rd);border-radius:10px;text-align:center}
+
+footer{margin-top:3rem;padding-top:1.5rem;border-top:1px solid var(--bd);text-align:center;color:var(--tx2);font-size:.72rem}
+footer a{color:var(--ac);text-decoration:none}
+
+@media(max-width:480px){
+  .metrics{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body>
+<div class="c">
+  <a class="back" href="./runs.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>Allenamenti</a>
+
+  <div id="app"><div class="loader"><div class="spinner"></div><br>Caricamento allenamento...</div></div>
+
+  <footer>
+    <a href="https://github.com/fabiosangregorio/claude-projects/tree/main/trail-brenta-2026" target="_blank" rel="noopener">trail-brenta-2026</a>
+    · <span id="generatedAt">—</span>
+  </footer>
+</div>
+
+<script>
+const BASE = './data/runs/';
+
+async function load() {
+  const app = document.getElementById('app');
+  const raw = location.hash.slice(1) || new URLSearchParams(location.search).get('id') || '';
+  const id = raw ? decodeURIComponent(raw) : '';
+  if (!id) {
+    app.innerHTML = `<div class="error">Run non specificato. Torna alla <a href="./runs.html">lista allenamenti</a>.</div>`;
+    return;
+  }
+  const safe = id.replace(/[^a-zA-Z0-9_\-.]/g, '');
+  if (safe !== id) {
+    app.innerHTML = `<div class="error">ID non valido.</div>`;
+    return;
+  }
+  try {
+    const run = await fetch(BASE + safe + '.json').then(r => {
+      if (!r.ok) throw new Error('run: ' + r.status);
+      return r.json();
+    });
+    render(app, run);
+    if (run.ai_analysis && run.ai_analysis.generated_at) {
+      document.getElementById('generatedAt').textContent =
+        'analisi generata ' + run.ai_analysis.generated_at.slice(0, 10);
+    }
+  } catch (err) {
+    app.innerHTML = `<div class="error">Errore caricamento: ${err.message}</div>`;
+  }
+}
+
+function render(app, run) {
+  const a = run.ai_analysis || {};
+  const t = run.totals || {};
+  app.innerHTML = [
+    renderHero(run, t),
+    renderHeadline(a),
+    renderClassification(a),
+    renderNarrative(a),
+    renderConcerns(a),
+    renderStrengths(a),
+    renderNextSession(a),
+    renderTotals(t),
+    renderPolarization(run.derived, run.hr_zones, t.duration_sec),
+    renderDerived(run.derived),
+    renderDecoupling(run.decoupling),
+    renderSplits(run.splits, run.remainder),
+    renderWalks(run.walk_breaks, run.walks_summary)
+  ].filter(Boolean).join('');
+}
+
+/* ── Sections ──────────────────────────────────────────────── */
+
+function renderHero(run, t) {
+  return `
+    <div class="hero">
+      <div class="kicker">Allenamento</div>
+      <h1>${formatItalianDateLong(run.start)}</h1>
+      <p class="hero-sub">${formatTime(run.start)} · ${t.distance_km ? t.distance_km.toFixed(2) + ' km' : ''} · ${t.duration_sec ? formatDuration(t.duration_sec) : ''}${t.ascent_m != null ? ' · +' + t.ascent_m + ' m' : ''}</p>
+    </div>
+  `;
+}
+
+function renderHeadline(a) {
+  if (!a.headline) return '';
+  const exec = a.execution || {};
+  const q = exec.execution_quality;
+  const cls = q <= 2 ? 'alert' : q === 3 ? 'warn' : 'good';
+  return `
+    <section>
+      <h2 class="s-title">Sintesi</h2>
+      <p class="s-desc">Riassunto in una frase di com'è andata l'uscita. Il colore riflette la qualità d'esecuzione (rosso = obiettivo mancato, verde = ben eseguita).</p>
+      <div class="card ${cls}">
+        <div class="headline">${a.headline}</div>
+      </div>
+    </section>
+  `;
+}
+
+function renderTotals(t) {
+  const items = [
+    { lbl: 'Distanza', val: t.distance_km != null ? t.distance_km.toFixed(2) + ' km' : null },
+    { lbl: 'Durata', val: t.duration_sec != null ? formatDuration(t.duration_sec) : null },
+    { lbl: 'Passo medio', val: t.avg_pace_min_per_km != null ? formatPace(t.avg_pace_min_per_km) + '/km' : null, help: 'Tempo per coprire 1 km. Min:sec/km.' },
+    { lbl: 'GAP', val: t.gap_min_per_km != null ? formatPace(t.gap_min_per_km) + '/km' : null, help: 'Grade-Adjusted Pace: il passo "come se fosse tutto in piano". Toglie il vantaggio delle discese e l\'handicap delle salite, così puoi confrontare uscite con dislivello diverso.' },
+    { lbl: 'FC media', val: t.avg_hr != null ? t.avg_hr + ' bpm' : null, sub: t.hrmax_est_used ? Math.round(t.avg_hr / t.hrmax_est_used * 100) + '% HRmax' : null },
+    { lbl: 'FC max', val: t.max_hr_observed != null ? t.max_hr_observed + ' bpm' : null },
+    { lbl: 'Dislivello +', val: t.ascent_m != null ? '+' + t.ascent_m + ' m' : null, sub: t.elev_min_m != null ? t.elev_min_m + '-' + t.elev_max_m + ' m' : null },
+    { lbl: 'Cadenza', val: t.avg_cadence_spm != null ? t.avg_cadence_spm.toFixed(0) + ' spm' : null, sub: t.avg_stride_cm ? t.avg_stride_cm + ' cm passo' : null, help: 'Passi al minuto. Riferimento: 170-180 spm corsa efficiente; sotto 160 in genere indica passo troppo lungo o stanchezza.' },
+    { lbl: 'EF', val: t.ef != null ? t.ef.toFixed(2) : null, help: 'Efficiency Factor: velocità / FC. Più alto = corri più veloce a parità di sforzo cardiaco. Sale con la base aerobica.' },
+    { lbl: 'Passi', val: t.steps != null ? t.steps.toLocaleString('it-IT') : null }
+  ].filter(i => i.val != null);
+
+  return `
+    <section>
+      <h2 class="s-title">Totali</h2>
+      <p class="s-desc">I numeri grezzi della corsa. Le sottolabel grigie riportano un valore correlato (es. % FCmax, range altimetrico).</p>
+      <div class="metrics">
+        ${items.map(metricCard).join('')}
+      </div>
+    </section>
+  `;
+}
+
+function metricCard(i) {
+  return `
+    <div class="metric">
+      <div class="metric-lbl">${i.lbl}</div>
+      <div class="metric-val ${i.color || ''}">${i.val}</div>
+      ${i.sub ? `<div class="metric-sub">${i.sub}</div>` : ''}
+      ${i.help ? `<div class="metric-help">${i.help}</div>` : ''}
+    </div>
+  `;
+}
+
+function renderClassification(a) {
+  const c = a.classification || {};
+  const e = a.execution || {};
+  const ts = a.trail_specificity || {};
+  const items = [
+    { lbl: 'Tipo', val: c.workout_type, color: 'acc', help: 'Categoria della seduta: easy, lungo, intervalli, tempo, unstructured (= corsa libera senza schema preciso), ecc.' },
+    { lbl: 'Beneficio primario', val: c.primary_benefit, color: 'acc', help: 'Cosa allena di più: base (fondo aerobico), tempo (soglia), VO2max, forza, recupero…' },
+    { lbl: 'TE aerobico', val: c.training_effect_aerobic != null ? c.training_effect_aerobic + '/5' : null, help: 'Stimolo allenante sul sistema aerobico (scala Garmin). 1=nessuno · 2=mantenimento · 3=miglioramento · 4=alto · 5=eccessivo.' },
+    { lbl: 'TE anaerobico', val: c.training_effect_anaerobic != null ? c.training_effect_anaerobic + '/5' : null, help: 'Stimolo allenante sul sistema anaerobico (sprint, salite ripide). Stessa scala 0-5.' },
+    { lbl: 'Intento', val: e.intent_inferred, help: 'Cosa l\'AI pensa che volessi fare (dedotto da andatura, FC, contesto).' },
+    { lbl: 'Qualità esecuzione', val: e.execution_quality != null ? e.execution_quality + '/5' : null, color: e.execution_quality <= 2 ? 'bad' : e.execution_quality === 3 ? 'warn' : 'good', help: 'Quanto bene hai rispettato l\'intento. 1-2 = obiettivo mancato, 3 = parziale, 4-5 = ben eseguita.' },
+    { lbl: 'Failure mode', val: e.primary_failure_mode, color: e.primary_failure_mode ? 'warn' : null, sub: e.failure_confidence != null ? 'conf ' + (e.failure_confidence * 100).toFixed(0) + '%' : null, help: 'Modo principale in cui l\'uscita è "fallita": overload (troppo intensa), pacing (gestione passo), undercooked (troppo blanda)…' },
+    { lbl: 'Specificità trail', val: ts.score != null ? ts.score + '/5' : null, sub: ts.vertical_load_pct_of_race != null ? ts.vertical_load_pct_of_race + '% D+ gara' : null, color: ts.score <= 2 ? 'warn' : 'good', help: 'Quanto questa uscita assomiglia alle richieste della DBT 21K (dislivello, pendenze, durata). 1 = molto distante, 5 = simulazione gara.' }
+  ].filter(i => i.val != null);
+
+  if (items.length === 0) return '';
+
+  return `
+    <section>
+      <h2 class="s-title">Classificazione</h2>
+      <p class="s-desc">Come l'AI ha etichettato e valutato la seduta. "Intento" è cosa pensa che volessi fare; "Qualità" è quanto ci sei riuscito.</p>
+      <div class="metrics">
+        ${items.map(metricCard).join('')}
+      </div>
+      ${ts.notes ? `<div class="card" style="margin-top:.7rem;font-size:.85rem;color:var(--tx2)">${ts.notes}</div>` : ''}
+    </section>
+  `;
+}
+
+function renderPolarization(d, zones, totalSec) {
+  if (!d && !zones) return '';
+  const p = d && d.polarization_3z;
+  const zonesHtml = zones && zones.length && totalSec ? `
+    <div class="zstack">
+      ${zones.map(z => {
+        const pct = z.time_sec / totalSec * 100;
+        return `<div class="zseg z${z.zone}" style="width:${pct.toFixed(2)}%" title="Z${z.zone} · ${pct.toFixed(0)}% · ${formatDuration(z.time_sec)}">${pct >= 6 ? pct.toFixed(0) + '%' : ''}</div>`;
+      }).join('')}
+    </div>
+    <div class="zlegend">
+      ${zones.map(z => {
+        const pct = z.time_sec / totalSec * 100;
+        return `<div class="zleg-item"><span class="zleg-dot z${z.zone}"></span>Z${z.zone} ${pct.toFixed(0)}% · ${formatDuration(z.time_sec)}</div>`;
+      }).join('')}
+    </div>
+  ` : '';
+
+  const polHtml = p ? `
+    <div class="polar-row">
+      <div class="polar-cell"><div class="polar-pct lit">${p.lit_pct}%</div><div class="polar-lbl">LIT</div></div>
+      <div class="polar-cell"><div class="polar-pct mit">${p.mit_pct}%</div><div class="polar-lbl">MIT</div></div>
+      <div class="polar-cell"><div class="polar-pct hit">${p.hit_pct}%</div><div class="polar-lbl">HIT</div></div>
+    </div>
+  ` : '';
+
+  return `
+    <section>
+      <h2 class="s-title">Distribuzione FC</h2>
+      <p class="s-desc">Quanto tempo hai passato in ciascuna zona di frequenza cardiaca.<br>
+      <strong>Z1</strong> recupero · <strong>Z2</strong> fondo facile · <strong>Z3</strong> medio · <strong>Z4</strong> soglia · <strong>Z5</strong> massimale.<br>
+      In basso la sintesi 3-zone: <strong>LIT</strong> (Low Intensity, sotto la soglia aerobica) · <strong>MIT</strong> (Moderate, zona "grigia") · <strong>HIT</strong> (High, sopra la soglia anaerobica). Per costruire fondo l'obiettivo è ~80% LIT / ~20% HIT, evitando troppa MIT.</p>
+      <div class="card">
+        ${zonesHtml}
+        ${polHtml}
+      </div>
+    </section>
+  `;
+}
+
+function renderConcerns(a) {
+  const c = a.concerns || [];
+  if (c.length === 0) return '';
+  return `
+    <section>
+      <h2 class="s-title">Punti critici</h2>
+      <p class="s-desc">Aspetti da correggere o tenere d'occhio. La <strong>severità</strong> va da 1 (lieve) a 5 (grave). 4-5 = priorità.</p>
+      <div class="card alert">
+        <ul class="list">
+          ${c.map(x => `
+            <li>
+              <span class="sev sev-${x.severity}">sev ${x.severity}</span>
+              <span class="l-tag">${x.area}</span>
+              ${x.note}
+            </li>
+          `).join('')}
+        </ul>
+      </div>
+    </section>
+  `;
+}
+
+function renderStrengths(a) {
+  const s = a.strengths || [];
+  if (s.length === 0) return '';
+  return `
+    <section>
+      <h2 class="s-title">Punti di forza</h2>
+      <p class="s-desc">Cosa ha funzionato. Da consolidare nelle uscite future.</p>
+      <div class="card good">
+        <ul class="list">
+          ${s.map(x => `<li>${x}</li>`).join('')}
+        </ul>
+      </div>
+    </section>
+  `;
+}
+
+function renderNarrative(a) {
+  if (!a.narrative) return '';
+  return `
+    <section>
+      <h2 class="s-title">Analisi</h2>
+      <p class="s-desc">Lettura tecnica completa: cos'è successo, perché, e cosa cambia per il piano.</p>
+      <div class="card">
+        <div class="narrative">${a.narrative}</div>
+      </div>
+    </section>
+  `;
+}
+
+function renderNextSession(a) {
+  const n = a.next_session;
+  if (!n) return '';
+  return `
+    <section>
+      <h2 class="s-title">Prossima uscita</h2>
+      <p class="s-desc">Prescrizione concreta per la prossima seduta, calibrata sul recupero stimato dopo questa.</p>
+      <div class="card next-card">
+        <div class="next-type">${n.type || ''}${a.recovery_hours ? ` · recupero ${a.recovery_hours}h` : ''}</div>
+        ${n.prescription ? `<div class="next-presc">${n.prescription}</div>` : ''}
+        ${n.earliest_after_hours != null ? `<div class="next-after">non prima di ${n.earliest_after_hours}h dal termine</div>` : ''}
+      </div>
+    </section>
+  `;
+}
+
+function renderDerived(d) {
+  if (!d) return '';
+  const items = [
+    { lbl: 'TRIMP', val: d.trimp, help: 'Training Impulse: carico totale dell\'uscita (intensità × durata, pesato per FC). Riferimento: <100 leggero, 100-200 medio, >200 alto.' },
+    { lbl: 'MAF ceiling', val: d.maf && d.maf.ceiling_bpm ? d.maf.ceiling_bpm + ' bpm' : null, sub: d.maf && d.maf.time_below_pct != null ? d.maf.time_below_pct + '% sotto' : null, help: 'Soglia di Maffetone (≈ 180 - età): tetto FC per allenare il fondo aerobico puro. La sub indica quanta parte dell\'uscita hai passato sotto questo tetto.' },
+    { lbl: 'VAM', val: d.vertical && d.vertical.vam_m_per_h != null ? d.vertical.vam_m_per_h + ' m/h' : null, help: 'Velocità Ascensionale Media: metri di dislivello positivo per ora. Riferimento trail amatoriale: 400-800 m/h in salita sostenuta.' },
+    { lbl: 'EF salita', val: d.climb_efficiency && d.climb_efficiency.ef_uphill != null ? d.climb_efficiency.ef_uphill.toFixed(2) : null, sub: d.climb_efficiency && d.climb_efficiency.uphill_time_sec ? formatDuration(d.climb_efficiency.uphill_time_sec) + ' in salita' : null, help: 'Efficiency Factor calcolato solo sui tratti in salita (>5%). Indicatore di forza specifica per il dislivello.' },
+    { lbl: 'Match D+ gara', val: d.race_match && d.race_match.vertical_match_pct != null ? d.race_match.vertical_match_pct + '%' : null, help: 'Quanto del dislivello della DBT 21K hai coperto in questa uscita. 100% = sessione di simulazione gara per la salita.' },
+    { lbl: 'Match durata', val: d.race_match && d.race_match.duration_match_pct != null ? d.race_match.duration_match_pct + '%' : null, help: 'Quanto della durata stimata della gara hai coperto. Lungo target: avvicinarsi al 70-100% nelle settimane finali.' }
+  ].filter(i => i.val != null);
+
+  if (items.length === 0 && !d.grade_distribution) return '';
+
+  const gd = d.grade_distribution;
+  const gdSegs = gd ? [
+    { key: 'down_gt_10', cls: 'gd-down-gt-10', lbl: 'Discesa &gt;10%', val: gd.down_gt_10 },
+    { key: 'down_5_10',  cls: 'gd-down-5-10',  lbl: 'Discesa 5-10%',  val: gd.down_5_10 },
+    { key: 'down_2_5',   cls: 'gd-down-2-5',   lbl: 'Discesa 2-5%',   val: gd.down_2_5 },
+    { key: 'flat_lt_2',  cls: 'gd-flat',       lbl: 'Piano &lt;2%',   val: gd.flat_lt_2 },
+    { key: 'rolling_2_5',cls: 'gd-rolling',    lbl: 'Mosso 2-5%',     val: gd.rolling_2_5 },
+    { key: 'uphill_5_10',cls: 'gd-uphill',     lbl: 'Salita 5-10%',   val: gd.uphill_5_10 },
+    { key: 'steep_gt_10',cls: 'gd-steep',      lbl: 'Ripido &gt;10%', val: gd.steep_gt_10 }
+  ].filter(s => s.val != null && s.val > 0) : [];
+
+  const gdHtml = gdSegs.length ? `
+    <div class="card" style="margin-top:.7rem">
+      <div class="metric-lbl" style="margin-bottom:.5rem">Distribuzione pendenza</div>
+      <p class="s-desc" style="margin-bottom:.6rem">Ripartizione del tempo per tipo di terreno (basato sulla pendenza istantanea). Da sinistra (discese) a destra (salite). Più "Salita" e "Ripido" = più specificità trail.</p>
+      <div class="zstack">
+        ${gdSegs.map(s => `<div class="zseg ${s.cls}" style="width:${s.val.toFixed(2)}%" title="${s.lbl} · ${s.val}%">${s.val >= 6 ? s.val.toFixed(0) + '%' : ''}</div>`).join('')}
+      </div>
+      <div class="zlegend">
+        ${gdSegs.map(s => `<div class="zleg-item"><span class="zleg-dot ${s.cls}"></span>${s.lbl} ${s.val}%</div>`).join('')}
+      </div>
+    </div>
+  ` : '';
+
+  return `
+    <section>
+      <h2 class="s-title">Metriche derivate</h2>
+      <p class="s-desc">Indicatori calcolati dai dati grezzi. Servono a misurare carico, efficienza e specificità rispetto alla gara.</p>
+      ${items.length ? `<div class="metrics">
+        ${items.map(metricCard).join('')}
+      </div>` : ''}
+      ${gdHtml}
+    </section>
+  `;
+}
+
+function renderDecoupling(d) {
+  if (!d) return '';
+  const cls = d.pct >= 10 ? 'bad' : d.pct >= 5 ? 'warn' : 'good';
+  return `
+    <section>
+      <h2 class="s-title">Decoupling Pa:Hr</h2>
+      <p class="s-desc">Quanto la FC "scappa" rispetto al passo nella seconda metà dell'uscita. Test classico di base aerobica: confronta passo/FC della prima metà con la seconda. <strong>&lt;5%</strong> = base solida · <strong>5-10%</strong> = da migliorare · <strong>&gt;10%</strong> = aerobico scarico o hai spinto troppo.</p>
+      <div class="card">
+        <div class="metrics">
+          <div class="metric"><div class="metric-lbl">Decoupling</div><div class="metric-val ${cls}">${d.pct}%</div><div class="metric-sub">target &lt;5%</div></div>
+          <div class="metric"><div class="metric-lbl">Prima metà</div><div class="metric-val">${formatPace(d.first_half.gap_min_per_km)}/km</div><div class="metric-sub">${d.first_half.hr} bpm</div></div>
+          <div class="metric"><div class="metric-lbl">Seconda metà</div><div class="metric-val">${formatPace(d.second_half.gap_min_per_km)}/km</div><div class="metric-sub">${d.second_half.hr} bpm</div></div>
+        </div>
+      </div>
+    </section>
+  `;
+}
+
+function renderSplits(splits, remainder) {
+  if (!splits || splits.length === 0) return '';
+  return `
+    <section>
+      <h2 class="s-title">Split per km</h2>
+      <p class="s-desc">Andamento km per km. <strong>Passo</strong> = tempo reale. <strong>GAP</strong> = passo corretto per la pendenza. <strong>%FCmax</strong> = % della FC massima stimata. <strong>EF</strong> = efficienza aerobica del km.</p>
+      <div class="card" style="overflow-x:auto">
+        <table>
+          <tr><th>Km</th><th>Passo</th><th>GAP</th><th>FC</th><th>%HRmax</th><th>EF</th></tr>
+          ${splits.map(s => `
+            <tr>
+              <td>${s.km}</td>
+              <td>${formatPace(s.pace_min_per_km)}</td>
+              <td>${formatPace(s.gap_min_per_km)}</td>
+              <td>${s.avg_hr}</td>
+              <td>${s.pct_hrmax}%</td>
+              <td>${s.ef.toFixed(2)}</td>
+            </tr>
+          `).join('')}
+          ${remainder && remainder.km ? `
+            <tr style="color:var(--tx2)">
+              <td>+${remainder.km.toFixed(2)}</td>
+              <td>${formatPace(remainder.pace_min_per_km)}</td>
+              <td>${formatPace(remainder.gap_min_per_km)}</td>
+              <td colspan="3">${formatDuration(remainder.duration_sec)}</td>
+            </tr>
+          ` : ''}
+        </table>
+      </div>
+    </section>
+  `;
+}
+
+function renderWalks(breaks, summary) {
+  if (!breaks || breaks.length === 0) return '';
+  return `
+    <section>
+      <h2 class="s-title">Pause / camminate</h2>
+      <p class="s-desc">Tratti rilevati come camminata (cadenza ≪ 160 spm) o ferma. Non è male in salita o nel trail; in piano segnala fatica o pacing aggressivo.</p>
+      <div class="card warn">
+        ${summary ? `<div class="metric-sub" style="margin-bottom:.5rem">
+          ${summary.count} pause · ${formatDuration(summary.total_walk_sec)} totali · ${summary.walk_pct}% del tempo
+        </div>` : ''}
+        ${breaks.map(b => `
+          <div class="walk-item">
+            <div class="walk-where">km ${b.at_km} · ${formatDuration(b.duration_sec)}</div>
+            <div class="walk-how">${b.avg_cadence_spm.toFixed(0)} spm</div>
+          </div>
+        `).join('')}
+      </div>
+    </section>
+  `;
+}
+
+/* ── Helpers ───────────────────────────────────────────────── */
+
+function formatItalianDateLong(iso) {
+  const months = ['gennaio','febbraio','marzo','aprile','maggio','giugno','luglio','agosto','settembre','ottobre','novembre','dicembre'];
+  const days = ['domenica','lunedì','martedì','mercoledì','giovedì','venerdì','sabato'];
+  const d = new Date(iso);
+  return `${days[d.getDay()]} ${d.getDate()} ${months[d.getMonth()]} ${d.getFullYear()}`;
+}
+
+function formatTime(iso) {
+  const d = new Date(iso);
+  return `${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`;
+}
+
+function formatDuration(sec) {
+  const h = Math.floor(sec / 3600);
+  const m = Math.floor((sec % 3600) / 60);
+  const s = Math.floor(sec % 60);
+  if (h > 0) return `${h}h${String(m).padStart(2,'0')}'`;
+  return `${m}:${String(s).padStart(2,'0')}`;
+}
+
+function formatPace(minPerKm) {
+  const m = Math.floor(minPerKm);
+  const s = Math.round((minPerKm - m) * 60);
+  return `${m}:${String(s).padStart(2,'0')}`;
+}
+
+load();
+</script>
+</body>
+</html>

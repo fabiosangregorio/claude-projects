@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DBT 21K — Allenamenti</title>
+<meta name="theme-color" content="#0e1117">
+<script>document.documentElement.setAttribute('data-theme',localStorage.getItem('theme')||'dark')</script>
+<link rel="stylesheet" href="/claude-projects/theme.css">
+<script src="/claude-projects/theme.js" defer></script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0e1117;--sf:#161b22;--sf2:#1c2230;--bd:#2a3040;--tx:#e6edf3;--tx2:#8b949e;--ac:#58a6ff;--ac2:#3fb950;--wn:#f0883e;--rd:#f85149;--pd:#d2a8ff}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--tx);line-height:1.6;min-height:100vh;-webkit-font-smoothing:antialiased}
+.c{max-width:760px;margin:0 auto;padding:1.5rem 1rem 3rem}
+
+.back{display:inline-flex;align-items:center;gap:.35rem;font-family:'Space Mono',monospace;font-size:.75rem;color:var(--tx2);text-decoration:none;padding:.35rem .6rem;border-radius:6px;border:1px solid var(--bd);background:var(--sf);transition:border-color .2s,color .2s;margin-bottom:1.5rem}
+.back:hover{border-color:var(--ac);color:var(--ac)}
+.back svg{width:14px;height:14px}
+
+.hero{margin-bottom:2rem}
+.kicker{font-family:'Space Mono',monospace;font-size:.7rem;color:var(--ac2);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:.5rem}
+.hero h1{font-family:'Space Mono',monospace;font-size:clamp(1.6rem,5vw,2.4rem);font-weight:700;letter-spacing:-1px;line-height:1.15;margin-bottom:.5rem;background:linear-gradient(135deg,var(--ac2),var(--ac));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-sub{color:var(--tx2);font-size:.9rem}
+
+.s-title{font-family:'Space Mono',monospace;font-size:.75rem;color:var(--tx2);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:1rem;display:flex;align-items:center;gap:.5rem}
+.s-title::before{content:'';display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--ac)}
+
+.run-card{display:block;background:var(--sf);border:1px solid var(--bd);border-radius:10px;padding:1rem 1.1rem;margin-bottom:.7rem;text-decoration:none;color:inherit;transition:border-color .2s,transform .2s}
+.run-card:hover{border-color:var(--ac)}
+.run-head{display:flex;justify-content:space-between;align-items:flex-start;gap:.6rem;margin-bottom:.5rem}
+.run-date{font-family:'Space Mono',monospace;font-size:.72rem;color:var(--tx2);text-transform:uppercase;letter-spacing:1px}
+.run-quality{font-family:'Space Mono',monospace;font-size:.65rem;padding:.15rem .45rem;border-radius:4px;text-transform:uppercase;letter-spacing:.5px;font-weight:700;flex-shrink:0;border:1px solid}
+.q-1,.q-2{background:rgba(248,81,73,.1);color:var(--rd);border-color:var(--rd)}
+.q-3{background:rgba(240,136,62,.1);color:var(--wn);border-color:var(--wn)}
+.q-4,.q-5{background:rgba(63,185,80,.1);color:var(--ac2);border-color:var(--ac2)}
+.run-headline{font-size:.95rem;line-height:1.45;margin-bottom:.6rem;color:var(--tx)}
+.run-stats{display:flex;flex-wrap:wrap;gap:.4rem .9rem;font-family:'Space Mono',monospace;font-size:.72rem;color:var(--tx2)}
+.run-stats strong{color:var(--tx);font-weight:700}
+.tag{font-family:'Space Mono',monospace;font-size:.6rem;padding:.15rem .45rem;border-radius:4px;text-transform:uppercase;letter-spacing:.5px;font-weight:700;background:var(--sf2);color:var(--tx2);border:1px solid var(--bd)}
+
+.empty{padding:2rem;text-align:center;color:var(--tx2);background:var(--sf);border:1px solid var(--bd);border-radius:10px}
+.loader{text-align:center;padding:3rem 0;color:var(--tx2)}
+.spinner{display:inline-block;width:20px;height:20px;border:2px solid var(--bd);border-top-color:var(--ac);border-radius:50%;animation:spin .6s linear infinite;margin-bottom:.6rem}
+@keyframes spin{to{transform:rotate(360deg)}}
+.error{padding:1.5rem;color:var(--rd);font-size:.85rem;background:rgba(248,81,73,.05);border:1px solid var(--rd);border-radius:10px;text-align:center}
+
+footer{margin-top:3rem;padding-top:1.5rem;border-top:1px solid var(--bd);text-align:center;color:var(--tx2);font-size:.72rem}
+footer a{color:var(--ac);text-decoration:none}
+</style>
+</head>
+<body>
+<div class="c">
+  <a class="back" href="./"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>Piano</a>
+
+  <div class="hero">
+    <div class="kicker">Log allenamenti</div>
+    <h1>Allenamenti</h1>
+    <p class="hero-sub" id="subline">Storico delle uscite registrate.</p>
+  </div>
+
+  <div id="app"><div class="loader"><div class="spinner"></div><br>Caricamento allenamenti...</div></div>
+
+  <footer>
+    <a href="https://github.com/fabiosangregorio/claude-projects/tree/main/trail-brenta-2026" target="_blank" rel="noopener">trail-brenta-2026</a>
+  </footer>
+</div>
+
+<script>
+const BASE = './data/runs/';
+
+async function loadAll() {
+  const app = document.getElementById('app');
+  try {
+    const manifest = await fetch(BASE + 'index.json').then(r => {
+      if (!r.ok) throw new Error('manifest: ' + r.status);
+      return r.json();
+    });
+    const files = manifest.runs || [];
+    if (files.length === 0) {
+      app.innerHTML = `<div class="empty">Nessun allenamento ancora registrato.</div>`;
+      return;
+    }
+    const runs = await Promise.all(files.map(f =>
+      fetch(BASE + f).then(r => {
+        if (!r.ok) throw new Error(f + ': ' + r.status);
+        return r.json().then(j => ({ ...j, _file: f }));
+      })
+    ));
+    runs.sort((a, b) => new Date(b.start) - new Date(a.start));
+    document.getElementById('subline').textContent =
+      `${runs.length} ${runs.length === 1 ? 'uscita registrata' : 'uscite registrate'}.`;
+    app.innerHTML = runs.map(renderCard).join('');
+  } catch (err) {
+    app.innerHTML = `<div class="error">Errore caricamento: ${err.message}</div>`;
+  }
+}
+
+function renderCard(run) {
+  const id = run._file.replace(/\.json$/, '');
+  const a = run.ai_analysis || {};
+  const t = run.totals || {};
+  const cls = a.classification || {};
+  const exec = a.execution || {};
+  const quality = exec.execution_quality;
+
+  return `
+    <a class="run-card" href="./run.html#${encodeURIComponent(id)}">
+      <div class="run-head">
+        <div>
+          <div class="run-date">${formatItalianDate(run.start)} · ${formatTime(run.start)}</div>
+        </div>
+        ${quality ? `<span class="run-quality q-${quality}">${quality}/5</span>` : ''}
+      </div>
+      ${a.headline ? `<div class="run-headline">${a.headline}</div>` : ''}
+      <div class="run-stats">
+        ${t.distance_km != null ? `<span><strong>${t.distance_km.toFixed(2)}</strong> km</span>` : ''}
+        ${t.duration_sec != null ? `<span><strong>${formatDuration(t.duration_sec)}</strong></span>` : ''}
+        ${t.avg_pace_min_per_km != null ? `<span><strong>${formatPace(t.avg_pace_min_per_km)}</strong>/km</span>` : ''}
+        ${t.ascent_m != null ? `<span>+<strong>${t.ascent_m}</strong> m</span>` : ''}
+        ${t.avg_hr != null ? `<span><strong>${t.avg_hr}</strong> bpm</span>` : ''}
+      </div>
+      <div class="run-stats" style="margin-top:.5rem">
+        ${cls.workout_type ? `<span class="tag">${cls.workout_type}</span>` : ''}
+        ${cls.primary_benefit ? `<span class="tag">${cls.primary_benefit}</span>` : ''}
+        ${exec.primary_failure_mode ? `<span class="tag" style="color:var(--wn);border-color:var(--wn)">${exec.primary_failure_mode}</span>` : ''}
+      </div>
+    </a>
+  `;
+}
+
+function formatItalianDate(iso) {
+  const months = ['gen','feb','mar','apr','mag','giu','lug','ago','set','ott','nov','dic'];
+  const d = new Date(iso);
+  return `${d.getDate()} ${months[d.getMonth()]} ${d.getFullYear()}`;
+}
+
+function formatTime(iso) {
+  const d = new Date(iso);
+  return `${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`;
+}
+
+function formatDuration(sec) {
+  const h = Math.floor(sec / 3600);
+  const m = Math.floor((sec % 3600) / 60);
+  const s = Math.floor(sec % 60);
+  return h > 0 ? `${h}h${String(m).padStart(2,'0')}` : `${m}:${String(s).padStart(2,'0')}`;
+}
+
+function formatPace(minPerKm) {
+  const m = Math.floor(minPerKm);
+  const s = Math.round((minPerKm - m) * 60);
+  return `${m}:${String(s).padStart(2,'0')}`;
+}
+
+loadAll();
+</script>
+</body>
+</html>
