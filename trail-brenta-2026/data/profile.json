@@ -40,7 +40,7 @@
     "injuries": "nessuno",
     "cardio_resp": "nessuno",
     "agonistic_medical_certificate": {
-      "status": "da fare",
+      "status": "pending",
       "note": "Obbligatoria per iscriversi. Richiede ECG sotto sforzo. Prenotare entro maggio."
     }
   },
