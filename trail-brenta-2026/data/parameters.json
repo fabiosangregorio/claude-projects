@@ -6,7 +6,7 @@
   "preparation_tasks": [
     { "category": "burocrazia", "task": "Visita medica agonistica", "deadline": "2026-05-31", "status": "pending", "priority": "urgente", "note": "Obbligatoria per iscriversi. Richiede ECG sotto sforzo. Prenotare subito." },
     { "category": "burocrazia", "task": "Iscrizione gara DBT 21K", "deadline": "2026-06-30", "status": "pending", "priority": "alta", "note": "Edizioni precedenti sold out — iscriversi appena disponibile la visita." },
-    { "category": "attrezzatura", "task": "Provare scarpe La Sportiva su sentiero", "deadline": "2026-05-15", "status": "pending", "note": "Test in baseline sabato 9 maggio — Canto Alto." },
+    { "category": "attrezzatura", "task": "Provare scarpe La Sportiva su sentiero", "deadline": "2026-05-15", "status": "pending", "note": "Test in baseline sabato 9 maggio — Albenza." },
     { "category": "attrezzatura", "task": "Zaino idratazione (5-10L)", "deadline": "2026-07-31", "status": "pending" },
     { "category": "attrezzatura", "task": "Giacca antivento", "deadline": "2026-07-31", "status": "pending" },
     { "category": "attrezzatura", "task": "Bicchiere/borraccia pieghevole", "deadline": "2026-08-15", "status": "pending" },
@@ -176,7 +176,7 @@
       }
     ],
     "milestones": [
-      { "date": "2026-05-09", "label": "Baseline trail (Canto Alto, ~700 m D+)", "type": "test" },
+      { "date": "2026-05-09", "label": "Baseline trail (Albenza, ~600 m D+)", "type": "test" },
       { "date": "2026-05-31", "label": "Visita medica agonistica — deadline", "type": "burocrazia" },
       { "date": "2026-06-07", "label": "Test fine Fase 1: 10K piatto, target decoupling sotto 8%", "type": "test" },
       { "date": "2026-06-30", "label": "Iscrizione gara — deadline", "type": "burocrazia" },
