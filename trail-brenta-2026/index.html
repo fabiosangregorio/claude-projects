@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DBT 21K — Piano di allenamento</title>
+<meta name="theme-color" content="#0e1117">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0e1117;--sf:#161b22;--sf2:#1c2230;--bd:#2a3040;--tx:#e6edf3;--tx2:#8b949e;--ac:#58a6ff;--ac2:#3fb950;--wn:#f0883e;--rd:#f85149;--pd:#d2a8ff}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--tx);line-height:1.6;min-height:100vh;-webkit-font-smoothing:antialiased}
+.c{max-width:760px;margin:0 auto;padding:1.5rem 1rem 3rem}
+
+/* Back link */
+.back{display:inline-flex;align-items:center;gap:.35rem;font-family:'Space Mono',monospace;font-size:.75rem;color:var(--tx2);text-decoration:none;padding:.35rem .6rem;border-radius:6px;border:1px solid var(--bd);background:var(--sf);transition:border-color .2s,color .2s;margin-bottom:1.5rem}
+.back:hover{border-color:var(--ac);color:var(--ac)}
+.back svg{width:14px;height:14px}
+
+/* Hero */
+.hero{margin-bottom:2rem}
+.kicker{font-family:'Space Mono',monospace;font-size:.7rem;color:var(--ac2);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:.5rem}
+.hero h1{font-family:'Space Mono',monospace;font-size:clamp(1.6rem,5vw,2.4rem);font-weight:700;letter-spacing:-1px;line-height:1.15;margin-bottom:.5rem;background:linear-gradient(135deg,var(--ac2),var(--ac));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-sub{color:var(--tx2);font-size:.9rem;margin-bottom:1.2rem}
+
+/* Countdown */
+.countdown{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:.5rem}
+.cd-box{flex:1;min-width:60px;background:var(--sf);border:1px solid var(--bd);border-radius:10px;padding:.7rem .5rem;text-align:center}
+.cd-num{font-family:'Space Mono',monospace;font-size:1.6rem;font-weight:700;color:var(--ac2);line-height:1}
+.cd-lbl{font-family:'Space Mono',monospace;font-size:.6rem;color:var(--tx2);text-transform:uppercase;letter-spacing:1px;margin-top:.2rem}
+
+/* Section */
+section{margin:2rem 0}
+.s-title{font-family:'Space Mono',monospace;font-size:.75rem;color:var(--tx2);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:1rem;display:flex;align-items:center;gap:.5rem}
+.s-title::before{content:'';display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--ac)}
+section.urgent .s-title::before{background:var(--rd)}
+section.warn .s-title::before{background:var(--wn)}
+
+/* Card */
+.card{background:var(--sf);border:1px solid var(--bd);border-radius:10px;padding:1rem 1.1rem;margin-bottom:.7rem}
+.card.alert{border-color:var(--rd);background:linear-gradient(180deg,rgba(248,81,73,.05),var(--sf))}
+.card.warn{border-color:var(--wn);background:linear-gradient(180deg,rgba(240,136,62,.05),var(--sf))}
+
+/* Race info grid */
+.info-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.5rem}
+.info-cell{background:var(--sf);border:1px solid var(--bd);border-radius:8px;padding:.7rem .8rem}
+.info-lbl{font-family:'Space Mono',monospace;font-size:.6rem;color:var(--tx2);text-transform:uppercase;letter-spacing:1px;margin-bottom:.2rem}
+.info-val{font-family:'Space Mono',monospace;font-size:.95rem;font-weight:700;color:var(--tx)}
+.info-val.acc{color:var(--ac)}
+
+/* Tasks */
+.task{display:flex;align-items:flex-start;gap:.7rem;padding:.7rem 0;border-bottom:1px solid var(--bd)}
+.task:last-child{border-bottom:none}
+.task-check{flex-shrink:0;width:18px;height:18px;border-radius:4px;border:2px solid var(--bd);margin-top:2px;background:var(--bg)}
+.task.done .task-check{background:var(--ac2);border-color:var(--ac2)}
+.task.done .task-check::after{content:'✓';color:var(--bg);font-weight:700;display:block;text-align:center;line-height:14px;font-size:11px}
+.task-body{flex:1;min-width:0}
+.task-title{font-size:.92rem;font-weight:500}
+.task.done .task-title{color:var(--tx2);text-decoration:line-through}
+.task-meta{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap;margin-top:.2rem;font-size:.72rem;color:var(--tx2);font-family:'Space Mono',monospace}
+.prio{font-family:'Space Mono',monospace;font-size:.6rem;padding:.15rem .45rem;border-radius:4px;text-transform:uppercase;letter-spacing:.5px;font-weight:700}
+.prio-urgente{background:rgba(248,81,73,.15);color:var(--rd);border:1px solid var(--rd)}
+.prio-alta{background:rgba(240,136,62,.15);color:var(--wn);border:1px solid var(--wn)}
+.prio-media{background:rgba(88,166,255,.1);color:var(--ac);border:1px solid var(--ac)}
+
+/* Phase */
+.phase{position:relative;padding:1rem 1.1rem;background:var(--sf);border:1px solid var(--bd);border-radius:10px;margin-bottom:.7rem}
+.phase-head{display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;margin-bottom:.5rem}
+.phase-name{font-family:'Space Mono',monospace;font-weight:700;color:var(--ac2);font-size:1rem}
+.phase-num{font-family:'Space Mono',monospace;font-size:.65rem;color:var(--tx2);text-transform:uppercase;letter-spacing:1px}
+.phase-weeks{font-family:'Space Mono',monospace;font-size:.7rem;color:var(--tx2);margin-bottom:.5rem}
+.phase-goal{font-size:.88rem;margin-bottom:.7rem;color:var(--tx)}
+.phase-stats{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:.5rem}
+.stat{font-family:'Space Mono',monospace;font-size:.7rem;padding:.25rem .55rem;border-radius:6px;background:var(--sf2);border:1px solid var(--bd);color:var(--tx2)}
+.stat strong{color:var(--tx);font-weight:700}
+.phase-detail{font-size:.82rem;color:var(--tx2);line-height:1.5;margin-top:.5rem}
+.phase-detail span{color:var(--tx)}
+.phase.current{border-color:var(--ac2);box-shadow:0 0 0 1px var(--ac2)}
+.phase.current .phase-num{color:var(--ac2)}
+
+/* Timeline */
+.tl{position:relative;padding-left:1.3rem}
+.tl::before{content:'';position:absolute;left:5px;top:6px;bottom:6px;width:2px;background:var(--bd)}
+.ms{position:relative;padding:.6rem 0 .6rem 0}
+.ms::before{content:'';position:absolute;left:-1.3rem;top:.85rem;width:12px;height:12px;border-radius:50%;background:var(--sf);border:2px solid var(--bd)}
+.ms.urgente::before{border-color:var(--rd);background:var(--rd)}
+.ms.alta::before{border-color:var(--wn)}
+.ms.race::before{border-color:var(--ac2);background:var(--ac2)}
+.ms-date{font-family:'Space Mono',monospace;font-size:.7rem;color:var(--tx2);margin-bottom:.15rem}
+.ms-title{font-size:.9rem;font-weight:500}
+
+/* Splits table */
+.splits{width:100%;border-collapse:collapse;font-size:.82rem}
+.splits th{text-align:left;font-family:'Space Mono',monospace;font-size:.65rem;color:var(--tx2);text-transform:uppercase;letter-spacing:1px;padding:.5rem .6rem;border-bottom:1px solid var(--bd)}
+.splits td{padding:.65rem .6rem;border-bottom:1px solid var(--bd);font-family:'Space Mono',monospace}
+.splits tr:last-child td{border-bottom:none}
+.splits tr.cancello{background:rgba(248,81,73,.06)}
+.splits tr.cancello td:first-child{color:var(--rd);font-weight:700}
+.splits .lim{color:var(--rd);font-weight:700}
+
+/* Profile compact */
+.profile-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:.5rem}
+.pf{background:var(--sf);border:1px solid var(--bd);border-radius:8px;padding:.6rem .7rem}
+.pf-lbl{font-family:'Space Mono',monospace;font-size:.6rem;color:var(--tx2);text-transform:uppercase;letter-spacing:1px;margin-bottom:.15rem}
+.pf-val{font-size:.85rem;color:var(--tx);font-weight:500}
+
+/* Principles */
+.principles{list-style:none}
+.principles li{padding:.6rem 0;border-bottom:1px solid var(--bd);font-size:.88rem;display:flex;gap:.6rem;align-items:flex-start}
+.principles li:last-child{border-bottom:none}
+.principles li::before{content:'→';color:var(--ac2);font-family:'Space Mono',monospace;font-weight:700;flex-shrink:0;margin-top:1px}
+
+/* Loading & error */
+.loader{text-align:center;padding:3rem 0;color:var(--tx2)}
+.spinner{display:inline-block;width:20px;height:20px;border:2px solid var(--bd);border-top-color:var(--ac);border-radius:50%;animation:spin .6s linear infinite;margin-bottom:.6rem}
+@keyframes spin{to{transform:rotate(360deg)}}
+.error{padding:1.5rem;color:var(--rd);font-size:.85rem;background:rgba(248,81,73,.05);border:1px solid var(--rd);border-radius:10px;text-align:center}
+
+footer{margin-top:3rem;padding-top:1.5rem;border-top:1px solid var(--bd);text-align:center;color:var(--tx2);font-size:.72rem}
+footer a{color:var(--ac);text-decoration:none}
+
+@media(max-width:480px){
+  .info-grid{grid-template-columns:1fr 1fr}
+  .cd-num{font-size:1.4rem}
+}
+</style>
+</head>
+<body>
+<div class="c">
+  <a class="back" href="https://fabiosangregorio.github.io/claude-projects/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>Progetti</a>
+
+  <div id="app"><div class="loader"><div class="spinner"></div><br>Caricamento dati...</div></div>
+
+  <footer>
+    <a href="https://github.com/fabiosangregorio/claude-projects/tree/main/trail-brenta-2026" target="_blank" rel="noopener">trail-brenta-2026</a>
+    · <span id="lastUpdated">—</span>
+  </footer>
+</div>
+
+<script>
+const BASE = './data/';
+
+async function loadAll() {
+  const app = document.getElementById('app');
+  try {
+    const [profile, params] = await Promise.all([
+      fetch(BASE + 'profile.json').then(r => { if (!r.ok) throw new Error('profile.json: ' + r.status); return r.json(); }),
+      fetch(BASE + 'parameters.json').then(r => { if (!r.ok) throw new Error('parameters.json: ' + r.status); return r.json(); })
+    ]);
+    render(app, profile, params);
+    document.getElementById('lastUpdated').textContent = 'parametri aggiornati ' + params.last_updated;
+  } catch (err) {
+    app.innerHTML = `<div class="error">Errore caricamento dati: ${err.message}</div>`;
+  }
+}
+
+function render(app, profile, params) {
+  app.innerHTML = [
+    renderHero(profile, params),
+    renderTasks(params),
+    renderRaceInfo(profile),
+    renderProfile(profile),
+    renderPhases(params),
+    renderMilestones(params),
+    renderSplits(params),
+    renderPrinciples(params)
+  ].join('');
+}
+
+/* ── Sections ──────────────────────────────────────────────── */
+
+function renderHero(profile, params) {
+  const r = profile.race_target;
+  const cd = countdown(r.date);
+  return `
+    <div class="hero">
+      <div class="kicker">Piano di allenamento</div>
+      <h1>${r.event}</h1>
+      <p class="hero-sub">${formatItalianDate(r.date)} · ${r.location} · ${r.distance_km} km · ${r.elevation_gain_m} m D+ · obiettivo: <strong>${r.goal}</strong></p>
+      <div class="countdown">
+        <div class="cd-box"><div class="cd-num">${cd.weeks}</div><div class="cd-lbl">settimane</div></div>
+        <div class="cd-box"><div class="cd-num">${cd.daysRem}</div><div class="cd-lbl">+ giorni</div></div>
+        <div class="cd-box"><div class="cd-num">${cd.totalDays}</div><div class="cd-lbl">tot giorni</div></div>
+      </div>
+    </div>
+  `;
+}
+
+function renderTasks(params) {
+  const urgent = params.preparation_tasks.filter(t => t.priority === 'urgente' && t.status !== 'done');
+  const open = params.preparation_tasks.filter(t => t.status !== 'done');
+  const done = params.preparation_tasks.filter(t => t.status === 'done');
+  const isUrgent = urgent.length > 0;
+
+  const taskHtml = open.concat(done).map(t => `
+    <div class="task ${t.status === 'done' ? 'done' : ''}">
+      <div class="task-check"></div>
+      <div class="task-body">
+        <div class="task-title">${t.task}</div>
+        <div class="task-meta">
+          ${t.priority ? `<span class="prio prio-${t.priority}">${t.priority}</span>` : ''}
+          <span>${t.category}</span>
+          ${t.deadline ? `<span>· entro ${formatItalianDate(t.deadline, true)}</span>` : ''}
+        </div>
+        ${t.note ? `<div class="task-meta" style="margin-top:.3rem">${t.note}</div>` : ''}
+      </div>
+    </div>
+  `).join('');
+
+  return `
+    <section class="${isUrgent ? 'urgent' : ''}">
+      <h2 class="s-title">Stato preparazione ${isUrgent ? '— azioni urgenti' : ''}</h2>
+      <div class="card ${isUrgent ? 'alert' : ''}">
+        ${taskHtml}
+      </div>
+    </section>
+  `;
+}
+
+function renderRaceInfo(profile) {
+  const r = profile.race_target;
+  return `
+    <section>
+      <h2 class="s-title">Obiettivo gara</h2>
+      <div class="info-grid">
+        <div class="info-cell"><div class="info-lbl">Data</div><div class="info-val acc">${formatItalianDate(r.date)}</div></div>
+        <div class="info-cell"><div class="info-lbl">Partenza</div><div class="info-val">${r.start_time}</div></div>
+        <div class="info-cell"><div class="info-lbl">Distanza</div><div class="info-val">${r.distance_km} km</div></div>
+        <div class="info-cell"><div class="info-lbl">Dislivello</div><div class="info-val">+${r.elevation_gain_m} m</div></div>
+        <div class="info-cell"><div class="info-lbl">Tempo max</div><div class="info-val">${r.max_time_hours}h</div></div>
+        <div class="info-cell"><div class="info-lbl">Cancello</div><div class="info-val" style="font-size:.78rem">${r.cancello_orario.checkpoint}<br><span style="color:var(--rd)">${r.cancello_orario.limit}</span></div></div>
+      </div>
+      <div class="card" style="margin-top:.7rem">
+        <div class="info-lbl" style="margin-bottom:.4rem">Percorso</div>
+        <div style="font-size:.82rem;color:var(--tx2);line-height:1.55">${r.route_summary}</div>
+        <div style="margin-top:.7rem"><a href="${r.official_url}" target="_blank" rel="noopener" style="font-family:'Space Mono',monospace;font-size:.75rem;color:var(--ac);text-decoration:none">→ sito ufficiale</a></div>
+      </div>
+    </section>
+  `;
+}
+
+function renderProfile(profile) {
+  const a = profile.athlete;
+  const e = profile.experience;
+  return `
+    <section>
+      <h2 class="s-title">Profilo atleta</h2>
+      <div class="profile-grid">
+        <div class="pf"><div class="pf-lbl">Età</div><div class="pf-val">${a.age} anni</div></div>
+        <div class="pf"><div class="pf-lbl">Peso × Altezza</div><div class="pf-val">${a.weight_kg} kg × ${a.height_cm} cm</div></div>
+        <div class="pf"><div class="pf-lbl">BMI</div><div class="pf-val">${a.bmi}</div></div>
+        <div class="pf"><div class="pf-lbl">Località</div><div class="pf-val">${a.location.city} (${a.location.province})</div></div>
+        <div class="pf"><div class="pf-lbl">Corsa</div><div class="pf-val">${e.running.level} · ${e.running.current_freq_per_week}/sett</div></div>
+        <div class="pf"><div class="pf-lbl">Hiking</div><div class="pf-val">${e.mountain.hiking} · max ${e.mountain.max_elevation_recent_m} m</div></div>
+        <div class="pf"><div class="pf-lbl">Gare passate</div><div class="pf-val">${e.running.race_history}</div></div>
+        <div class="pf"><div class="pf-lbl">Trail running</div><div class="pf-val">${e.mountain.trail_running}</div></div>
+      </div>
+    </section>
+  `;
+}
+
+function renderPhases(params) {
+  const today = new Date();
+  const phases = params.phases.map(p => {
+    const [start, end] = p.dates.split(' → ').map(d => new Date(d));
+    const isCurrent = today >= start && today <= end;
+    return `
+      <div class="phase ${isCurrent ? 'current' : ''}">
+        <div class="phase-head">
+          <div>
+            <div class="phase-num">Fase ${p.id} · sett. ${p.weeks}${isCurrent ? ' · IN CORSO' : ''}</div>
+            <div class="phase-name">${p.name}</div>
+          </div>
+        </div>
+        <div class="phase-weeks">${p.dates}</div>
+        <div class="phase-goal">${p.goal}</div>
+        <div class="phase-stats">
+          <span class="stat">Volume <strong>${p.weekly_volume_km} km/sett</strong></span>
+          <span class="stat">Lungo <strong>${p.long_run_target}</strong></span>
+        </div>
+        <div class="phase-detail"><strong style="font-family:'Space Mono',monospace;font-size:.7rem;color:var(--tx2);text-transform:uppercase;letter-spacing:1px">Dislivello:</strong> <span>${p.elevation_focus}</span></div>
+        <div class="phase-detail"><strong style="font-family:'Space Mono',monospace;font-size:.7rem;color:var(--tx2);text-transform:uppercase;letter-spacing:1px">Sessione chiave:</strong> <span>${p.key_session}</span></div>
+        ${p.risk ? `<div class="phase-detail" style="color:var(--wn)">⚠ ${p.risk}</div>` : ''}
+      </div>
+    `;
+  }).join('');
+
+  return `
+    <section>
+      <h2 class="s-title">Le 5 fasi del piano</h2>
+      ${phases}
+    </section>
+  `;
+}
+
+function renderMilestones(params) {
+  const items = params.milestones.map(m => {
+    const cls = m.priority === 'URGENTE' || m.priority === 'urgente' ? 'urgente'
+              : m.priority === 'RACE DAY' ? 'race'
+              : (m.priority === 'alta' ? 'alta' : '');
+    return `
+      <div class="ms ${cls}">
+        <div class="ms-date">Sett. ${m.week} · ${formatItalianDate(m.date, true)}</div>
+        <div class="ms-title">${m.milestone}</div>
+      </div>
+    `;
+  }).join('');
+  return `
+    <section>
+      <h2 class="s-title">Milestone</h2>
+      <div class="card"><div class="tl">${items}</div></div>
+    </section>
+  `;
+}
+
+function renderSplits(params) {
+  const e = params.estimated_finish_time;
+  const rows = e.splits_estimate.map(s => {
+    const isCancello = !!s.limit;
+    return `
+      <tr class="${isCancello ? 'cancello' : ''}">
+        <td>${s.checkpoint}</td>
+        <td>${s.estimated}</td>
+        <td>${s.limit ? `<span class="lim">${s.limit}</span>` : '—'}</td>
+      </tr>
+    `;
+  }).join('');
+  return `
+    <section>
+      <h2 class="s-title">Tempo stimato e split</h2>
+      <div class="card">
+        <div style="font-family:'Space Mono',monospace;font-size:1.05rem;font-weight:700;color:var(--ac2);margin-bottom:.3rem">Target: ${e.target_window}</div>
+        <div style="font-size:.82rem;color:var(--tx2);margin-bottom:1rem;line-height:1.5">${e.rationale}</div>
+        <table class="splits">
+          <thead><tr><th>Checkpoint</th><th>Stima</th><th>Limite</th></tr></thead>
+          <tbody>${rows}</tbody>
+        </table>
+      </div>
+    </section>
+  `;
+}
+
+function renderPrinciples(params) {
+  const items = params.key_principles.map(p => `<li>${p}</li>`).join('');
+  return `
+    <section>
+      <h2 class="s-title">Principi guida</h2>
+      <div class="card"><ul class="principles">${items}</ul></div>
+    </section>
+  `;
+}
+
+/* ── Helpers ───────────────────────────────────────────────── */
+
+function countdown(targetISO) {
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const target = new Date(targetISO);
+  const totalDays = Math.max(0, Math.ceil((target - today) / 86400000));
+  const weeks = Math.floor(totalDays / 7);
+  const daysRem = totalDays % 7;
+  return { weeks, daysRem, totalDays };
+}
+
+function formatItalianDate(iso, short = false) {
+  const months = ['gen','feb','mar','apr','mag','giu','lug','ago','set','ott','nov','dic'];
+  const monthsLong = ['gennaio','febbraio','marzo','aprile','maggio','giugno','luglio','agosto','settembre','ottobre','novembre','dicembre'];
+  const d = new Date(iso);
+  return `${d.getDate()} ${(short ? months : monthsLong)[d.getMonth()]} ${d.getFullYear()}`;
+}
+
+loadAll();
+</script>
+</body>
+</html>
