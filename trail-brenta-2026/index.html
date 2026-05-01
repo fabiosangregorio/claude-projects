@@ -103,6 +103,16 @@ section.live .s-title::before{background:var(--ac2);box-shadow:0 0 0 0 rgba(63,1
 .sess-meta{font-family:'Space Mono',monospace;font-size:.7rem;color:var(--tx2)}
 .sess-notes{font-size:.82rem;color:var(--tx2);line-height:1.5;margin-top:.3rem}
 
+/* Gear checklist */
+.gear{margin-top:.6rem;padding:.7rem .85rem;background:rgba(240,136,62,.05);border:1px solid rgba(240,136,62,.25);border-radius:6px}
+.gear-title{font-family:'Space Mono',monospace;font-size:.65rem;color:var(--wn);text-transform:uppercase;letter-spacing:1px;margin-bottom:.55rem;font-weight:700}
+.gear-cat{margin-bottom:.5rem}
+.gear-cat:last-child{margin-bottom:0}
+.gear-cat-title{font-family:'Space Mono',monospace;font-size:.7rem;color:var(--tx);font-weight:700;margin-bottom:.2rem}
+.gear-items{list-style:none;padding-left:0;margin:0}
+.gear-items li{font-size:.78rem;color:var(--tx2);line-height:1.55;padding:.12rem 0 .12rem 1rem;position:relative}
+.gear-items li::before{content:'·';position:absolute;left:.35rem;color:var(--wn);font-weight:700}
+
 /* Phases timeline */
 .phase{display:grid;grid-template-columns:auto 1fr;gap:.8rem;padding:.85rem 0;border-bottom:1px solid var(--bd);align-items:flex-start}
 .phase:last-child{border-bottom:none}
@@ -292,6 +302,17 @@ function renderSession(s) {
   if (s.vertical_m) meta.push(`+${s.vertical_m} m`);
   else if (s.vertical_m_max) meta.push(`+${s.vertical_m_max} m max`);
 
+  const gearHtml = (s.gear_checklist && s.gear_checklist.length) ? `
+    <div class="gear">
+      <div class="gear-title">Cosa portare</div>
+      ${s.gear_checklist.map(g => `
+        <div class="gear-cat">
+          <div class="gear-cat-title">${g.category}</div>
+          <ul class="gear-items">${g.items.map(i => `<li>${i}</li>`).join('')}</ul>
+        </div>
+      `).join('')}
+    </div>` : '';
+
   return `
     <div class="sess">
       <div class="sess-head">
@@ -300,6 +321,7 @@ function renderSession(s) {
         <span class="sess-meta">· ${meta.join(' · ')}</span>
       </div>
       ${s.notes ? `<div class="sess-notes">${s.notes}</div>` : ''}
+      ${gearHtml}
     </div>
   `;
 }
