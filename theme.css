@@ -1,0 +1,34 @@
+/* Light theme — overrides default :root vars from each page.
+   Higher specificity (html[data-theme=light]) so works regardless of source order. */
+html[data-theme="light"]{
+  --bg:#ffffff;
+  --sf:#f6f8fa;
+  --sf2:#eaeef2;
+  --bd:#d0d7de;
+  --tx:#1f2328;
+  --tx2:#656d76;
+  --ac:#0969da;
+  --ac2:#1a7f37;
+  --wn:#9a6700;
+  --rd:#cf222e;
+  --pd:#8250df;
+  /* DIY palette (mobile-lavatrice) — darker for contrast on light bg */
+  --pa:#0550ae;
+  --pb:#116329;
+  --pc:#7d4e00;
+  --pe:#a40e26;
+}
+
+/* Toggle button — injected by theme.js */
+.theme-toggle{
+  position:fixed;top:.75rem;right:.75rem;width:36px;height:36px;
+  background:var(--sf);border:1px solid var(--bd);border-radius:50%;
+  color:var(--tx2);display:flex;align-items:center;justify-content:center;
+  cursor:pointer;-webkit-tap-highlight-color:transparent;z-index:1000;
+  transition:border-color .2s,color .2s;padding:0
+}
+.theme-toggle:hover,.theme-toggle:focus-visible{border-color:var(--ac);color:var(--ac);outline:none}
+.theme-toggle svg{width:16px;height:16px}
+@supports(top:env(safe-area-inset-top)){
+  .theme-toggle{top:max(.75rem,env(safe-area-inset-top))}
+}
