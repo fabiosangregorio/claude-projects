@@ -226,8 +226,10 @@
             "duration_min": 480,
             "intensity": "Z1-Z2",
             "fc_max_bpm": 152,
-            "vertical_m": 1900,
-            "notes": "SAB 2 + DOM 3 — Hike 23 km / 1900 m D+ su due giorni. FC sotto MAF 152 sempre, bastoncini se possibile (proteggono le ginocchia in discesa, dove arriveranno i DOMS), idratazione costante con sali, mangia ogni 60 min anche senza fame. Traccia con orologio entrambi i giorni: i numeri di salita reali ci servono per calibrare la fase 2."
+            "vertical_m": 1910,
+            "notes": "SAB 2 + DOM 3 — Hike con bivacco su 2 giorni. GIORNO 1 (sab): 13.1 km, +1640 m / -440 m, ~7h15. È il giorno toccante: 1640 m D+ in un colpo è ~30% oltre il tuo max storico recente. GIORNO 2 (dom): 10.1 km, +270 m / -1470 m, ~4h37. Quasi tutto in discesa, attenzione a quadricipiti, ginocchia e vesciche. Regole non negoziabili: (1) FC sotto MAF 152 sempre — in salita CAMMINI lentamente; (2) mangia ogni 60 min anche senza fame, sali nell'acqua; (3) bandiera bianca consapevole — se al primo terzo del giorno 1 sei già spappolato, tornare indietro è una decisione adulta, il piano sopravvive a un sabato dimezzato, non a un infortunio a 4 mesi dalla gara. Bastoncini se possibile (per la salita del giorno 1 e soprattutto per la mega-discesa del giorno 2). GPS attivo entrambi i giorni — i numeri reali ci servono per calibrare la fase 2.",
+            "route_url": "https://www.komoot.com/it-it/collection/4301343/-bivacco",
+            "route_name": "Bivacco — 23,3 km / 1910 m D+ in 2 giorni"
           },
           {
             "type": "easy",
