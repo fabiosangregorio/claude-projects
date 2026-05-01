@@ -97,6 +97,7 @@ section.live .s-title::before{background:var(--ac2);box-shadow:0 0 0 0 rgba(63,1
 .sess-type-long{background:rgba(88,166,255,.15);color:var(--ac);border:1px solid var(--ac)}
 .sess-type-test{background:rgba(210,168,255,.15);color:var(--pd);border:1px solid var(--pd)}
 .sess-type-hike_baseline{background:rgba(240,136,62,.15);color:var(--wn);border:1px solid var(--wn)}
+.sess-type-hike{background:rgba(139,148,158,.12);color:var(--tx2);border:1px solid var(--tx2)}
 .sess-type-strength{background:rgba(248,81,73,.15);color:var(--rd);border:1px solid var(--rd)}
 .sess-dur{font-family:'Space Mono',monospace;font-size:.85rem;font-weight:700;color:var(--tx)}
 .sess-meta{font-family:'Space Mono',monospace;font-size:.7rem;color:var(--tx2)}
@@ -283,7 +284,7 @@ function renderCurrentWeek(params) {
 }
 
 function renderSession(s) {
-  const types = { easy:'facile', long:'lungo', test:'test', hike_baseline:'baseline trail', strength:'forza' };
+  const types = { easy:'facile', long:'lungo', test:'test', hike_baseline:'baseline trail', hike:'hike', strength:'forza' };
   const typeLabel = types[s.type] || s.type;
   const meta = [];
   if (s.intensity) meta.push(s.intensity);
