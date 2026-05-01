@@ -19,6 +19,12 @@ Il repo ospita diversi tipi di progetto. Ognuno ha le sue convenzioni, documenta
 
 ---
 
+## Principio generale: meno codice, non più
+
+Quando lavori in questa repo, **preferisci sempre rimuovere o modificare codice esistente piuttosto che aggiungerne**. Tieni i file lean e corti. Aggiungi solo se strettamente necessario per quello che l'utente ha chiesto. Se non sai se qualcosa serve, non aggiungerlo: l'utente lo chiederà.
+
+---
+
 ## Come usare questa repo
 
 Ogni progetto ha la sua cartella con un `index.html` che viene servito su GitHub Pages.
