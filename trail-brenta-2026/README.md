@@ -41,14 +41,12 @@ Sezioni: `athlete`, `experience`, `availability`, `health`, `equipment`, `race_t
 ### `data/parameters.json`
 
 **Parametri di calibrazione** del piano — la parte viva. Si aggiorna ogni volta che:
-- Si calibra il piano dopo un test
 - Si segna una task come completata (es. visita medica fatta)
-- Si rivedono i volumi di una fase
-- Si modificano le milestone
+- Si calibra il piano dopo un test (quando il piano sarà definito)
 
 **Sempre aggiornare il campo `last_updated`** quando si modifica.
 
-Sezioni: `training_philosophy`, `weekly_structure`, `phases` (5 fasi), `training_zones`, `milestones`, `estimated_finish_time`, `key_principles`, `preparation_tasks`.
+Sezioni attuali: `preparation_tasks`. Cresceranno quando definiremo il piano (fasi, milestone, zone, ecc.).
 
 ---
 
