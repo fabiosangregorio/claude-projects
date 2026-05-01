@@ -1,0 +1,160 @@
+{
+  "_schema_version": "1.0",
+  "_description": "Parametri di calibrazione del piano di allenamento. Possono cambiare nel tempo in base al feedback (test, sensazioni, infortuni, vacanze). Modificare 'last_updated' a ogni revisione.",
+  "last_updated": "2026-05-01",
+  "calibration_source": "intake-iniziale",
+  "weeks_to_race": 18,
+  "race_date": "2026-09-05",
+  "training_philosophy": {
+    "approach": "polarizzato — 80% facile (Z1-Z2), 20% specifico/qualità",
+    "primary_principle": "se hai dubbi, vai più lento — è la regola che evita gli infortuni nei principianti",
+    "weekly_volume_increase_max_pct": 10,
+    "deload_pattern": "ogni 3 settimane di carico, 1 settimana di scarico (-30% volume)"
+  },
+  "weekly_structure": {
+    "sessions_per_week": 3,
+    "typical_pattern": [
+      {
+        "slot": "infrasettimanale 1",
+        "type": "facile aerobico",
+        "duration_min": "40-60",
+        "zone": "Z2",
+        "terrain": "pianura/asfalto"
+      },
+      {
+        "slot": "infrasettimanale 2",
+        "type": "qualità (collinette/scale/forza specifica)",
+        "duration_min": "45-60",
+        "zone": "Z2 + Z3-Z4 in ripetute",
+        "terrain": "collina o palestra/scale"
+      },
+      {
+        "slot": "weekend",
+        "type": "lungo (variabile per fase)",
+        "duration_min": "60-180",
+        "zone": "Z2",
+        "terrain": "pianura inizialmente, poi sentiero con dislivello"
+      }
+    ]
+  },
+  "phases": [
+    {
+      "id": 1,
+      "name": "Base",
+      "weeks": "1-4",
+      "dates": "2026-05-04 → 2026-05-31",
+      "goal": "abituare il corpo a correre 3 volte a settimana, costruire volume aerobico, niente fretta",
+      "weekly_volume_km": "10 → 18",
+      "long_run_target": "60 → 80 min, terreno facile",
+      "elevation_focus": "minimo, max 200-400 m D+ nel lungo",
+      "key_session": "lungo lento in pianura o collina dolce, sempre conversazionale",
+      "risk": "infortuni da carico troppo rapido — vai piano e riposa"
+    },
+    {
+      "id": 2,
+      "name": "Base+",
+      "weeks": "5-8",
+      "dates": "2026-06-01 → 2026-06-28",
+      "goal": "introdurre dislivello regolare, costruire forza specifica gambe",
+      "weekly_volume_km": "18 → 24",
+      "long_run_target": "90 → 120 min, sentiero con dislivello",
+      "elevation_focus": "lungo in collina 400-700 m D+",
+      "key_session": "uscita sentiero + 1 sessione collinette o scale",
+      "risk": "discese tecniche — quadricipiti non abituati"
+    },
+    {
+      "id": 3,
+      "name": "Build specifico",
+      "weeks": "9-13",
+      "dates": "2026-06-29 → 2026-08-02",
+      "goal": "simulare fatica gara, allenare power-hiking, gestione discesa tecnica",
+      "weekly_volume_km": "24 → 32",
+      "long_run_target": "150 → 210 min, terreno tecnico",
+      "elevation_focus": "lungo 700-1000 m D+",
+      "key_session": "lungo con power-hiking + discesa tecnica + gestione nutrizione",
+      "risk": "sovrallenamento se si saltano gli scarichi"
+    },
+    {
+      "id": 4,
+      "name": "Peak",
+      "weeks": "14-16",
+      "dates": "2026-08-03 → 2026-08-23",
+      "goal": "massimo carico, prova generale completa di gara",
+      "weekly_volume_km": "32 → 36",
+      "long_run_target": "180-240 min, race rehearsal",
+      "elevation_focus": "lungo 1000-1200 m D+ (vicino al D+ gara)",
+      "key_session": "race rehearsal con kit completo, alimentazione gara, attrezzatura definitiva",
+      "risk": "sopravvalutarsi nelle ultime settimane — mantieni la disciplina"
+    },
+    {
+      "id": 5,
+      "name": "Taper",
+      "weeks": "17-18",
+      "dates": "2026-08-24 → 2026-09-05",
+      "goal": "scarico, recupero, gestione mentale, freschezza al via",
+      "weekly_volume_km": "20 → 12",
+      "long_run_target": "60 min, scarico",
+      "elevation_focus": "minimo, gambe fresche",
+      "key_session": "ultimo lungo a 14gg dalla gara (90 min con dislivello moderato), poi solo richiamo",
+      "risk": "sentirsi 'sfatti' o ansiosi nelle ultime 2 settimane: è normale, fidati del taper"
+    }
+  ],
+  "training_zones": {
+    "method": "RPE + frequenza cardiaca stimata (FCmax stimata 192 bpm con formula Tanaka)",
+    "estimated_max_hr": 192,
+    "zones": [
+      { "id": "Z1", "name": "Recupero", "rpe": "1-3", "hr_pct": "<70%", "hr_bpm": "<134", "feel": "passo conversazionale, respiro nasale" },
+      { "id": "Z2", "name": "Aerobico/base", "rpe": "3-4", "hr_pct": "70-80%", "hr_bpm": "134-154", "feel": "frasi brevi parlate — zona principale di allenamento" },
+      { "id": "Z3", "name": "Tempo", "rpe": "5-6", "hr_pct": "80-87%", "hr_bpm": "154-167", "feel": "respiro impegnato, parole singole" },
+      { "id": "Z4", "name": "Soglia", "rpe": "7-8", "hr_pct": "87-93%", "hr_bpm": "167-179", "feel": "molto duro, sostenibile pochi minuti" },
+      { "id": "Z5", "name": "VO2max", "rpe": "9-10", "hr_pct": ">93%", "hr_bpm": ">179", "feel": "massimale, ripetute corte" }
+    ],
+    "default_target": "Z2 nell'80% dei km totali, Z3-Z4 solo nelle sessioni qualità"
+  },
+  "milestones": [
+    { "week": 1, "date": "2026-05-08", "milestone": "Prenotare visita medica agonistica", "priority": "URGENTE" },
+    { "week": 1, "date": "2026-05-08", "milestone": "Provare scarpe La Sportiva su sentiero facile", "priority": "alta" },
+    { "week": 2, "date": "2026-05-15", "milestone": "Test run 5 km — calibrare passo aerobico (Z2)", "priority": "alta" },
+    { "week": 4, "date": "2026-05-31", "milestone": "Primo lungo 80 min completato", "priority": "media" },
+    { "week": 5, "date": "2026-06-07", "milestone": "Iscrizione gara DBT 21K (appena disponibile la visita)", "priority": "URGENTE" },
+    { "week": 6, "date": "2026-06-14", "milestone": "Prima uscita 90 min con 500 m D+ in Orobie", "priority": "media" },
+    { "week": 8, "date": "2026-06-28", "milestone": "Acquistare zaino idratazione + iniziare a usarlo in allenamento", "priority": "alta" },
+    { "week": 10, "date": "2026-07-12", "milestone": "Lungo 2h con 700 m D+", "priority": "media" },
+    { "week": 12, "date": "2026-07-26", "milestone": "Lungo 2h30 con 900 m D+ + test gel/sali", "priority": "alta" },
+    { "week": 14, "date": "2026-08-09", "milestone": "Race rehearsal — 21k con 1000 m D+, kit gara completo", "priority": "alta" },
+    { "week": 16, "date": "2026-08-23", "milestone": "Ultimo lungo (90 min), poi inizia il taper", "priority": "media" },
+    { "week": 18, "date": "2026-09-05", "milestone": "🏔️ GARA — Dolomiti di Brenta Trail 21K", "priority": "RACE DAY" }
+  ],
+  "estimated_finish_time": {
+    "target_window": "3h45' – 4h30'",
+    "rationale": "Principiante con ottima base hiking. Cancello al km ~9 in 3h è il vincolo critico — bisogna gestire la prima parte senza partire troppo cauti.",
+    "splits_estimate": [
+      { "checkpoint": "Malga Andalo (km 6)", "estimated": "1h00 – 1h15" },
+      { "checkpoint": "Rif. Selvata", "estimated": "1h45 – 2h00" },
+      { "checkpoint": "Rif. Croz Altissimo (CANCELLO)", "estimated": "2h15 – 2h45", "limit": "3h00 ⚠️" },
+      { "checkpoint": "Rif. Montanara", "estimated": "2h45 – 3h15" },
+      { "checkpoint": "Pradel", "estimated": "3h00 – 3h30" },
+      { "checkpoint": "Arrivo Molveno", "estimated": "3h45 – 4h30" }
+    ]
+  },
+  "key_principles": [
+    "L'80% dei km in Z1-Z2 (facile, conversazionale). Vai sempre più lento di quanto vorresti.",
+    "Mai aumentare il volume più del 10% a settimana.",
+    "Una settimana di scarico ogni 3 di carico (volume -30%).",
+    "Power-hiking è un'arma vincente sopra il 12% di pendenza. Va allenato come la corsa.",
+    "La discesa frantuma le gambe più della salita: alleva i quadricipiti eccentricamente (discese tecniche regolari).",
+    "Test della nutrizione SEMPRE in allenamento. Mai 'in gara per la prima volta'.",
+    "Sonno è il primo allenamento: 7-8h/notte non negoziabili.",
+    "Se hai dolore acuto (non semplice fatica) ferma e riposa 48h. Insistere = infortunio."
+  ],
+  "preparation_tasks": [
+    { "category": "burocrazia", "task": "Visita medica agonistica", "deadline": "2026-05-31", "status": "pending", "priority": "urgente" },
+    { "category": "burocrazia", "task": "Iscrizione gara DBT 21K", "deadline": "2026-06-30", "status": "pending", "priority": "alta", "note": "Edizioni precedenti sold out" },
+    { "category": "attrezzatura", "task": "Provare scarpe La Sportiva su sentiero", "deadline": "2026-05-15", "status": "pending" },
+    { "category": "attrezzatura", "task": "Acquistare zaino idratazione (5-10L)", "deadline": "2026-06-30", "status": "pending" },
+    { "category": "attrezzatura", "task": "Giacca antivento", "deadline": "2026-07-31", "status": "pending" },
+    { "category": "attrezzatura", "task": "Bicchiere/borraccia pieghevole", "deadline": "2026-08-15", "status": "pending" },
+    { "category": "attrezzatura", "task": "Telo termico + fischietto", "deadline": "2026-08-15", "status": "pending" },
+    { "category": "competenze", "task": "Imparare gestione gel/sali in corsa lunga", "deadline": "2026-07-31", "status": "pending" }
+  ]
+}
