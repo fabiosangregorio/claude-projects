@@ -1,20 +1,35 @@
 # claude-projects
 
-Repo per progetti DIY pianificati con Claude. Ogni cartella è un progetto con una pagina HTML hostata su GitHub Pages.
+Repo per progetti personali pianificati con Claude. Ogni cartella è un progetto autonomo con una pagina HTML hostata su GitHub Pages.
 
 🔗 **GitHub Pages:** https://fabiosangregorio.github.io/claude-projects/
 
 ---
 
-## Come usare questa repo
+## Tipi di progetto
 
-Ogni progetto ha la sua cartella con un `index.html` che viene servito su GitHub Pages. La pagina contiene tutto: dimensioni, distinta, piano taglio, lista spesa interattiva (con localStorage per spuntare in negozio), istruzioni di montaggio, e budget.
+Il repo ospita diversi tipi di progetto. Ognuno ha le sue convenzioni, documentate nel `README.md` della propria cartella.
+
+| Tipo | Stile | Esempi | Convenzioni in |
+|---|---|---|---|
+| **DIY / falegnameria** | Pagina statica autoportante. Tutti i dati nell'HTML. | `mobile-lavatrice`, `scaffale-erbe` | Sezione "Progetti DIY" sotto |
+| **Sport / allenamento** | Pagina + JSON separati. Layer presentazione vs. dati. | `trail-brenta-2026` | `trail-brenta-2026/README.md` |
+
+**Regola generale:** prima di lavorare in una cartella, leggi il suo `README.md` se esiste, altrimenti applica le convenzioni del tipo che meglio descrive il progetto.
 
 ---
 
-## Istruzioni per Claude: come creare un piano di progetto DIY
+## Come usare questa repo
+
+Ogni progetto ha la sua cartella con un `index.html` che viene servito su GitHub Pages.
+
+---
+
+## Progetti DIY — istruzioni per Claude
 
 Quando Fabio ti chiede di pianificare un nuovo progetto di falegnameria/DIY, segui questa procedura. È il risultato di tutto quello che abbiamo imparato facendo i primi progetti.
+
+> Per progetti **non-DIY** (es. allenamento sportivo) leggi il README della cartella specifica — ogni tipo ha le sue convenzioni.
 
 ### 1. Raccolta vincoli
 
@@ -142,8 +157,9 @@ Stile: dark theme, font Space Mono + DM Sans, colori GitHub-style. Mobile-first.
 
 ## Progetti
 
-| Progetto | Descrizione | Link |
-|---|---|---|
-| [mobile-lavatrice](mobile-lavatrice/) | Mobile a ponte per lavatrice LG F10B8NDA | [Live](https://fabiosangregorio.github.io/claude-projects/mobile-lavatrice/) |
-| [scaffale-erbe](scaffale-erbe/) | Scaffale a scala per erbe aromatiche sul balcone | [Live](https://fabiosangregorio.github.io/claude-projects/scaffale-erbe/) |
+| Progetto | Tipo | Descrizione | Link |
+|---|---|---|---|
+| [mobile-lavatrice](mobile-lavatrice/) | DIY | Mobile a ponte per lavatrice LG F10B8NDA | [Live](https://fabiosangregorio.github.io/claude-projects/mobile-lavatrice/) |
+| [scaffale-erbe](scaffale-erbe/) | DIY | Scaffale a scala per erbe aromatiche sul balcone | [Live](https://fabiosangregorio.github.io/claude-projects/scaffale-erbe/) |
+| [trail-brenta-2026](trail-brenta-2026/) | Sport | Piano allenamento per la Dolomiti di Brenta Trail 21K | [Live](https://fabiosangregorio.github.io/claude-projects/trail-brenta-2026/) |
 
