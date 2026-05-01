@@ -241,8 +241,8 @@
             "duration_min": 180,
             "intensity": "Z2/MAF",
             "fc_max_bpm": 152,
-            "vertical_m": 600,
-            "notes": "SAB 9 — Albenza. FC sotto 152 sempre, in salita CAMMINI senza vergogna se sale. Provare le scarpe La Sportiva: occhio a vesciche, sfregamenti, stabilità in discesa. GPS attivo, non spegnere alle pause. Acqua + snack salato.",
+            "vertical_m": 490,
+            "notes": "SAB 9 — Loop Monte Linzone da Roncola (la 'Cima Albenza' su Komoot è registrata come Monte Linzone). FC sotto 152 sempre, in salita CAMMINI senza vergogna se sale. ATTENZIONE: il tour ha 3 tratti tecnici (sentiero roccioso/esposto): uno lungo da km 1.30 per ~500 m in salita, due brevi da 27 m a km 2.05 e km 3.93. In quei tratti vai a passo lento e metti i piedi con cura — è la prima volta che testi le La Sportiva su sentiero, non è il momento di correre. GPS attivo, non spegnere alle pause. Acqua + snack salato.",
             "gear_checklist": [
               {
                 "category": "Indosso",
@@ -273,7 +273,9 @@
                   "Bandana per il sudore"
                 ]
               }
-            ]
+            ],
+            "route_url": "https://www.komoot.com/smarttour/26057234",
+            "route_name": "Monte Linzone loop da Roncola (6 km, 490 m D+, ~2h38)"
           }
         ],
         "strength": null,
@@ -413,7 +415,7 @@
     "milestones": [
       {
         "date": "2026-05-09",
-        "label": "Baseline trail (Albenza, ~600 m D+)",
+        "label": "Baseline trail (M. Linzone/Albenza, 490 m D+)",
         "type": "test"
       },
       {
