@@ -26,14 +26,13 @@
       "descent_m_per_h_moving": 460
     },
     "grade_distribution": {
-      "down_gt_10": 61.9,
-      "down_5_10": 6.0,
-      "down_2_5": 5.7,
-      "flat_lt_2": 6.6,
-      "rolling_2_5": 2.5,
-      "uphill_5_10": 2.3,
-      "steep_gt_10": 14.9
-    },
-    "grade_distribution_method": "Computed from GPX: aggregated to 30m horizontal segments, moving-only (speed >= 0.3 m/s), 5-pt smoothed elevation. Time-based percentages of moving time."
+      "flat_lt_2": 5.7,
+      "rolling_2_5": 3.6,
+      "uphill_5_10": 1.7,
+      "steep_gt_10": 14.9,
+      "down_2_5": 5.3,
+      "down_5_10": 7.3,
+      "down_gt_10": 61.4
+    }
   }
 }
