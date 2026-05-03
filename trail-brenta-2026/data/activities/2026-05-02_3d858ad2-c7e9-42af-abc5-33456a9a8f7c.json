@@ -25,10 +25,10 @@
       "vam_m_per_h_moving": 465
     },
     "grade_distribution": {
-      "flat_lt_2": 3.1,
-      "rolling_2_5": 4.0,
-      "uphill_5_10": 3.5,
-      "steep_gt_10": 89.4,
+      "flat_lt_2": 2.9,
+      "rolling_2_5": 4.9,
+      "uphill_5_10": 4.1,
+      "steep_gt_10": 88.1,
       "down_2_5": 0.0,
       "down_5_10": 0.0,
       "down_gt_10": 0.0

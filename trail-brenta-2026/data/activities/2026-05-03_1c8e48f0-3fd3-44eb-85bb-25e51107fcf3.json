@@ -26,13 +26,13 @@
       "descent_m_per_h_moving": 460
     },
     "grade_distribution": {
-      "flat_lt_2": 5.7,
-      "rolling_2_5": 3.6,
-      "uphill_5_10": 1.7,
-      "steep_gt_10": 14.9,
-      "down_2_5": 5.3,
-      "down_5_10": 7.3,
-      "down_gt_10": 61.4
+      "flat_lt_2": 6.0,
+      "rolling_2_5": 3.7,
+      "uphill_5_10": 2.1,
+      "steep_gt_10": 11.2,
+      "down_2_5": 5.6,
+      "down_5_10": 6.9,
+      "down_gt_10": 64.4
     }
   }
 }
