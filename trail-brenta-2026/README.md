@@ -61,9 +61,15 @@ Cartella con un JSON per attività (run o hike). Filename: `<YYYY-MM-DD>_<uuid>.
 
 Campi top-level comuni:
 - `schema_version`, `activity_type` (`"run"` | `"hike"`), `id`, `start`, `end`, `title?`, `source?`, `source_url?`, `user_notes?`
+- `category?` (`"training"` default omesso | `"social"` | `"test"`) — vedi sotto
 - `totals` — distanza, durate, dislivello (vedi sotto per differenze run/hike)
 - `derived` — metriche calcolate (vertical, race_match, eccetera)
-- `ai_analysis` — headline, classification, execution, trail_specificity, strengths, concerns, narrative, next_session
+- `ai_analysis?` — headline, classification, execution, trail_specificity, strengths, concerns, narrative, next_session. **Assente per attività `category: "social"`.**
+
+**Campo `category`:**
+- Omesso o `"training"` → attività di allenamento, contribuisce al piano e alle analisi di progresso.
+- `"social"` → uscita non strutturata (es. hike con amici, niente FC). Si registra solo per il **carico settimanale grezzo** (km, tempo, dislivello). **NON contribuisce** a: analisi di progresso, calcolo trend, metriche di specificità trail, calibrazione zone, valutazione esecuzione. Niente `ai_analysis`, niente `derived.race_match`.
+- `"test"` → attività usata come benchmark per calibrare il piano (es. ripetizione del baseline). Riservato per uso futuro.
 
 **Per `activity_type: "run"`** — `totals` include `duration_sec`, `avg_pace_min_per_km`, `gap_min_per_km`, `avg_hr`, `max_hr_observed`, `avg_cadence_spm`, `ef`, `steps`, ecc. Top-level: `splits`, `hr_zones`, `decoupling`, `walk_breaks`, `walks_summary`, `pace_variability`. Sorgente: parsing Garmin/Strava + analisi AI esterna.
 
@@ -130,5 +136,5 @@ La pagina si aggiorna automaticamente al prossimo refresh (i JSON vengono fetcha
 - **Domande chirurgiche:** se Fabio dice "ho fatto un lungo", chiedi solo i dati mancanti (durata, dislivello, sensazioni, passo medio). Non rifare l'intake.
 - **Calibrazione conservativa:** se i numeri vanno meglio del previsto, alza i volumi al massimo del +10%. Mai di più.
 - **Infortuni:** se Fabio segnala dolore, **non** suggerire di "spingere comunque". Riposo + valutazione medica.
-- **Hike vs run:** un hike pianificato Z1-Z2 con dislivello reale è uno stimolo specifico DBT più utile di una corsa piatta forzata. Non considerarli inferiori.
+- **Hike sociali (`category: "social"`):** ignora questi file quando calcoli progressi, trend, decoupling, polarizzazione, specificità trail. Contano *solo* come carico settimanale grezzo (km/tempo/D+). Non scrivere `ai_analysis` per loro né farne riferimento nelle analisi di altre attività.
 - **GPX da Komoot/Garmin/Strava:** parsing locale (Python) — distanza haversine, dislivello con smoothing 5-pt + dead-band 0.5 m, pause = sample con velocità < 0.3 m/s.

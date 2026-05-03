@@ -1,12 +1,14 @@
 {
   "schema_version": 2,
   "activity_type": "hike",
+  "category": "social",
   "id": "1c8e48f0-3fd3-44eb-85bb-25e51107fcf3",
   "start": "2026-05-03T07:49:24+00:00",
   "end": "2026-05-03T13:17:21+00:00",
   "title": "Bivacco Pedrinelli — Giorno 2 (discesa)",
   "source": "komoot",
   "source_url": "https://www.komoot.com/tour/2930672013",
+  "user_notes": "Hike con amici, ritmo tranquillo, senza cardiofrequenzimetro. Pranzo lungo al bivacco e cambio di traccia rispetto al pianificato. Conta come carico settimanale grezzo, non come allenamento specifico per la DBT 21K.",
   "totals": {
     "distance_km": 10.27,
     "duration_sec": 19677,
@@ -22,48 +24,6 @@
     "vertical": {
       "vam_m_per_h_moving": 92,
       "descent_m_per_h_moving": 460
-    },
-    "race_match": {
-      "vertical_match_pct": 22.0,
-      "duration_match_pct": 109.0,
-      "descent_match_pct": 110.0
     }
-  },
-  "user_notes": "Pausa pranzo lunga al bivacco e cambio di traccia rispetto al pianificato: il giro pianificato (10,1 km / 1470 m D-) è stato modificato in corso d'opera.",
-  "ai_analysis": {
-    "model": "claude-opus-4-7",
-    "generated_at": "2026-05-03T00:00:00Z",
-    "prompt_version": 2,
-    "classification": {
-      "workout_type": "hike montano",
-      "primary_benefit": "forza eccentrica discesa + tenuta giornaliera",
-      "training_effect_aerobic": 2.5,
-      "training_effect_anaerobic": 2.0
-    },
-    "execution": {
-      "intent_inferred": "discesa dal bivacco — chiusura del 2 giorni",
-      "execution_quality": 4,
-      "primary_failure_mode": null,
-      "failure_confidence": null
-    },
-    "trail_specificity": {
-      "score": 4,
-      "vertical_load_pct_of_race": 110,
-      "notes": "1372 m D- è ~110% del dislivello negativo della DBT 21K. Stimolo eccentrico sui quadricipiti molto vicino alla richiesta gara, in coda a un giorno con 1075 m D+. È il tipo di carico cumulativo che la gara non richiede (è singola), ma è ottimo per costruire resistenza sulla muscolatura della discesa."
-    },
-    "headline": "1372 m di discesa il giorno dopo 1075 m di salita: stimolo eccentrico forte sui quadricipiti. Pausa pranzo lunga al bivacco con cambio traccia in corso — gestione adulta del carico.",
-    "strengths": [
-      "1372 m D- gestiti senza saltare la giornata: forza eccentrica caricata bene",
-      "Velocità in movimento 3,4 km/h in discesa tecnica — passo controllato, non improvvisato",
-      "Decisione di cambiare traccia + pausa pranzo lunga = ascolto delle gambe, non eroismo"
-    ],
-    "concerns": [
-      {
-        "area": "rapporto pause/movimento",
-        "severity": 2,
-        "note": "2h28 di pausa su 5h27 totali (45%) è alto. Una parte è pranzo al bivacco e ricalcolo traccia, normale. Tienilo a mente come baseline: in gara il tempo cancello al Croz dell'Altissimo è 3h da Molveno — non si potranno fare pause così lunghe."
-      }
-    ],
-    "narrative": "Il giorno 2 è il vero stimolo specifico per la DBT 21K: 1372 m di discesa equivalgono a circa il 110% del dislivello negativo della gara. La forza eccentrica richiesta dai quadricipiti per assorbire l'impatto in discesa prolungata è una capacità che si costruisce solo facendola — e qui l'hai fatta.\n\nIl rapporto pause/movimento (45% del tempo fermo) ha una spiegazione legittima: pranzo al bivacco e cambio di traccia in corso. Non è un fallimento di gestione, è la realtà di un trekking di 2 giorni con bivacco. Però il dato è utile come riferimento: in gara, con un cancello orario a 3h dal via, le pause dovranno essere brevi e funzionali.\n\nNel cumulato dei 2 giorni: 17,3 km, 1348 m D+, 1372 m D-, 5h17 di movimento netto. Per chi è al primo mese di rientro, è un blocco montano serio. Le 48-72h che seguono sono critiche: i DOMS della discesa colpiranno duro mercoledì-giovedì. Salta la corsa di metà settimana se le gambe sono ancora dure: il piano è scritto per essere modulabile."
   }
 }

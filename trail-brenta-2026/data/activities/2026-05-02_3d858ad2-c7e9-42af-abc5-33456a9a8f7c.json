@@ -1,12 +1,14 @@
 {
   "schema_version": 2,
   "activity_type": "hike",
+  "category": "social",
   "id": "3d858ad2-c7e9-42af-abc5-33456a9a8f7c",
   "start": "2026-05-02T09:58:43+00:00",
   "end": "2026-05-02T13:34:39+00:00",
   "title": "Bivacco Pedrinelli — Giorno 1 (salita)",
   "source": "komoot",
   "source_url": "https://www.komoot.com/tour/2929854136",
+  "user_notes": "Hike con amici, ritmo tranquillo, senza cardiofrequenzimetro. Conta come carico settimanale grezzo, non come allenamento specifico per la DBT 21K.",
   "totals": {
     "distance_km": 7.07,
     "duration_sec": 12957,
@@ -21,46 +23,6 @@
   "derived": {
     "vertical": {
       "vam_m_per_h_moving": 465
-    },
-    "race_match": {
-      "vertical_match_pct": 86.0,
-      "duration_match_pct": 72.0
     }
-  },
-  "ai_analysis": {
-    "model": "claude-opus-4-7",
-    "generated_at": "2026-05-03T00:00:00Z",
-    "prompt_version": 2,
-    "classification": {
-      "workout_type": "hike montano",
-      "primary_benefit": "base aerobica + forza specifica salita",
-      "training_effect_aerobic": 3.5,
-      "training_effect_anaerobic": 1.5
-    },
-    "execution": {
-      "intent_inferred": "salita al bivacco — carico montano Z1-Z2 pianificato",
-      "execution_quality": 4,
-      "primary_failure_mode": null,
-      "failure_confidence": null
-    },
-    "trail_specificity": {
-      "score": 4,
-      "vertical_load_pct_of_race": 86,
-      "notes": "1075 m D+ in 7,07 km equivale a ~86% del dislivello positivo della DBT 21K (1250 m D+) coperto in una sola salita pura. Pendenza media 15%. È esattamente il tipo di stimolo specifico che la prima fase del piano cerca: muscolatura della salita sotto carico aerobico prolungato."
-    },
-    "headline": "Salita pulita al bivacco: 1075 m D+ in 2h18 di movimento, VAM 465 m/h. Carico montano sostanzioso, ma a sforzo controllato (Z1-Z2) e su sentiero — esattamente quello che serve a 4 mesi dalla gara.",
-    "strengths": [
-      "VAM 465 m/h in salita prolungata — buon ritmo da hike sostenuto, niente strappi inutili",
-      "1075 m D+ assorbiti senza tagliare il percorso (decisione adulta su giorno 2 ≠ cedimento)",
-      "1h17 di pausa concentrata in vetta/bivacco — recupero attivo, non collassi sul sentiero"
-    ],
-    "concerns": [
-      {
-        "area": "carico singolo molto alto",
-        "severity": 3,
-        "note": "1075 m D+ è il singolo carico montano più grande recente. La risposta muscolare nelle 48-72h va monitorata: DOMS attesi a quadricipiti e polpacci. Se rigidità persistente oltre giovedì, sostituire la corsa di metà settimana con 30 min di camminata o mobility."
-      }
-    ],
-    "narrative": "Carico aerobico in quota di alta qualità. 7,07 km e 1075 m D+ in 2h18 di movimento netto significa 465 m/h di ascesa — ritmo pulito da salita sostenuta, senza strappi che avrebbero fatto schizzare la FC.\n\nLa lettura del dato è incoraggiante: il sistema cardiovascolare ha retto un'ora abbondante in salita continua a passo conversazionale, in netto contrasto col run del 1 maggio dove la FC era esplosa in Z4-Z5 in 2 km. Stessa persona, terreno e intensità diversi: in salita controllata, il motore aerobico c'è.\n\nLa pausa di 1h17 è probabilmente concentrata al bivacco/in vetta (pranzo, foto, recupero). Non è tempo perso: in un hike di questa scala, fermarsi per mangiare e idratarsi è il comportamento corretto, soprattutto se domani c'è ancora da scendere 1370 m. Tienilo come template per la gara: i ristori sono soste produttive, non sprechi."
   }
 }

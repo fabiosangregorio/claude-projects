@@ -38,6 +38,9 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--tx);line-
 .tag{font-family:'Space Mono',monospace;font-size:.6rem;padding:.15rem .45rem;border-radius:4px;text-transform:uppercase;letter-spacing:.5px;font-weight:700;background:var(--sf2);color:var(--tx2);border:1px solid var(--bd)}
 .tag.type-run{color:var(--ac);border-color:var(--ac)}
 .tag.type-hike{color:var(--ac2);border-color:var(--ac2)}
+.tag.cat-social{color:var(--tx2);border-color:var(--tx2);background:transparent}
+.act-card.is-social{opacity:.78}
+.act-card.is-social:hover{opacity:1}
 
 .empty{padding:2rem;text-align:center;color:var(--tx2);background:var(--sf);border:1px solid var(--bd);border-radius:10px}
 .loader{text-align:center;padding:3rem 0;color:var(--tx2)}
@@ -104,10 +107,11 @@ function renderCard(act) {
   const exec = a.execution || {};
   const quality = exec.execution_quality;
   const isHike = act.activity_type === 'hike';
+  const isSocial = act.category === 'social';
   const typeLbl = isHike ? 'hike' : (act.activity_type || 'run');
 
   return `
-    <a class="act-card" href="./activity.html#${encodeURIComponent(id)}">
+    <a class="act-card${isSocial ? ' is-social' : ''}" href="./activity.html#${encodeURIComponent(id)}">
       <div class="act-head">
         <div>
           <div class="act-date">${formatItalianDate(act.start)} · ${formatTime(act.start)}</div>
@@ -126,6 +130,7 @@ function renderCard(act) {
       </div>
       <div class="act-stats" style="margin-top:.5rem">
         <span class="tag type-${typeLbl}">${typeLbl}</span>
+        ${isSocial ? `<span class="tag cat-social">social</span>` : ''}
         ${cls.workout_type ? `<span class="tag">${cls.workout_type}</span>` : ''}
         ${cls.primary_benefit ? `<span class="tag">${cls.primary_benefit}</span>` : ''}
         ${exec.primary_failure_mode ? `<span class="tag" style="color:var(--wn);border-color:var(--wn)">${exec.primary_failure_mode}</span>` : ''}

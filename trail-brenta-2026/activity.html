@@ -168,9 +168,11 @@ function render(app, act) {
   const a = act.ai_analysis || {};
   const t = act.totals || {};
   const isHike = act.activity_type === 'hike';
+  const isSocial = act.category === 'social';
 
   app.innerHTML = [
     renderHero(act, t, isHike),
+    isSocial ? renderSocialBanner() : '',
     renderUserNote(act),
     renderHeadline(a),
     renderClassification(a),
@@ -185,6 +187,17 @@ function render(app, act) {
     isHike ? '' : renderSplits(act.splits, act.remainder),
     isHike ? '' : renderWalks(act.walk_breaks, act.walks_summary)
   ].filter(Boolean).join('');
+}
+
+function renderSocialBanner() {
+  return `
+    <section style="margin-top:1rem">
+      <div class="card" style="border-color:var(--bd);background:var(--sf2)">
+        <div class="metric-lbl" style="margin-bottom:.4rem">Attività non valutata</div>
+        <div style="font-size:.85rem;color:var(--tx2);line-height:1.5">Hike sociale, ritmo tranquillo, senza cardiofrequenzimetro. Considerata solo come carico settimanale grezzo: <strong>non contribuisce</strong> alle analisi di progresso o specificità verso la DBT 21K.</div>
+      </div>
+    </section>
+  `;
 }
 
 /* ── Sections ──────────────────────────────────────────────── */
