@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DBT 21K — Allenamenti</title>
+<title>DBT 21K — Attività</title>
 <meta name="theme-color" content="#0e1117">
 <script>document.documentElement.setAttribute('data-theme',localStorage.getItem('theme')||'dark')</script>
 <link rel="stylesheet" href="/claude-projects/theme.css">
@@ -24,21 +24,20 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--tx);line-
 .hero h1{font-family:'Space Mono',monospace;font-size:clamp(1.6rem,5vw,2.4rem);font-weight:700;letter-spacing:-1px;line-height:1.15;margin-bottom:.5rem;background:linear-gradient(135deg,var(--ac2),var(--ac));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .hero-sub{color:var(--tx2);font-size:.9rem}
 
-.s-title{font-family:'Space Mono',monospace;font-size:.75rem;color:var(--tx2);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:1rem;display:flex;align-items:center;gap:.5rem}
-.s-title::before{content:'';display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--ac)}
-
-.run-card{display:block;background:var(--sf);border:1px solid var(--bd);border-radius:10px;padding:1rem 1.1rem;margin-bottom:.7rem;text-decoration:none;color:inherit;transition:border-color .2s,transform .2s}
-.run-card:hover{border-color:var(--ac)}
-.run-head{display:flex;justify-content:space-between;align-items:flex-start;gap:.6rem;margin-bottom:.5rem}
-.run-date{font-family:'Space Mono',monospace;font-size:.72rem;color:var(--tx2);text-transform:uppercase;letter-spacing:1px}
-.run-quality{font-family:'Space Mono',monospace;font-size:.65rem;padding:.15rem .45rem;border-radius:4px;text-transform:uppercase;letter-spacing:.5px;font-weight:700;flex-shrink:0;border:1px solid}
+.act-card{display:block;background:var(--sf);border:1px solid var(--bd);border-radius:10px;padding:1rem 1.1rem;margin-bottom:.7rem;text-decoration:none;color:inherit;transition:border-color .2s}
+.act-card:hover{border-color:var(--ac)}
+.act-head{display:flex;justify-content:space-between;align-items:flex-start;gap:.6rem;margin-bottom:.5rem}
+.act-date{font-family:'Space Mono',monospace;font-size:.72rem;color:var(--tx2);text-transform:uppercase;letter-spacing:1px}
+.act-quality{font-family:'Space Mono',monospace;font-size:.65rem;padding:.15rem .45rem;border-radius:4px;text-transform:uppercase;letter-spacing:.5px;font-weight:700;flex-shrink:0;border:1px solid}
 .q-1,.q-2{background:rgba(248,81,73,.1);color:var(--rd);border-color:var(--rd)}
 .q-3{background:rgba(240,136,62,.1);color:var(--wn);border-color:var(--wn)}
 .q-4,.q-5{background:rgba(63,185,80,.1);color:var(--ac2);border-color:var(--ac2)}
-.run-headline{font-size:.95rem;line-height:1.45;margin-bottom:.6rem;color:var(--tx)}
-.run-stats{display:flex;flex-wrap:wrap;gap:.4rem .9rem;font-family:'Space Mono',monospace;font-size:.72rem;color:var(--tx2)}
-.run-stats strong{color:var(--tx);font-weight:700}
+.act-headline{font-size:.95rem;line-height:1.45;margin-bottom:.6rem;color:var(--tx)}
+.act-stats{display:flex;flex-wrap:wrap;gap:.4rem .9rem;font-family:'Space Mono',monospace;font-size:.72rem;color:var(--tx2)}
+.act-stats strong{color:var(--tx);font-weight:700}
 .tag{font-family:'Space Mono',monospace;font-size:.6rem;padding:.15rem .45rem;border-radius:4px;text-transform:uppercase;letter-spacing:.5px;font-weight:700;background:var(--sf2);color:var(--tx2);border:1px solid var(--bd)}
+.tag.type-run{color:var(--ac);border-color:var(--ac)}
+.tag.type-hike{color:var(--ac2);border-color:var(--ac2)}
 
 .empty{padding:2rem;text-align:center;color:var(--tx2);background:var(--sf);border:1px solid var(--bd);border-radius:10px}
 .loader{text-align:center;padding:3rem 0;color:var(--tx2)}
@@ -55,12 +54,12 @@ footer a{color:var(--ac);text-decoration:none}
   <a class="back" href="./"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>Piano</a>
 
   <div class="hero">
-    <div class="kicker">Log allenamenti</div>
-    <h1>Allenamenti</h1>
-    <p class="hero-sub" id="subline">Storico delle uscite registrate.</p>
+    <div class="kicker">Log attività</div>
+    <h1>Attività</h1>
+    <p class="hero-sub" id="subline">Storico delle uscite registrate (run + hike).</p>
   </div>
 
-  <div id="app"><div class="loader"><div class="spinner"></div><br>Caricamento allenamenti...</div></div>
+  <div id="app"><div class="loader"><div class="spinner"></div><br>Caricamento attività...</div></div>
 
   <footer>
     <a href="https://github.com/fabiosangregorio/claude-projects/tree/main/trail-brenta-2026" target="_blank" rel="noopener">trail-brenta-2026</a>
@@ -68,7 +67,7 @@ footer a{color:var(--ac);text-decoration:none}
 </div>
 
 <script>
-const BASE = './data/runs/';
+const BASE = './data/activities/';
 
 async function loadAll() {
   const app = document.getElementById('app');
@@ -77,51 +76,56 @@ async function loadAll() {
       if (!r.ok) throw new Error('manifest: ' + r.status);
       return r.json();
     });
-    const files = manifest.runs || [];
+    const files = manifest.activities || manifest.runs || [];
     if (files.length === 0) {
-      app.innerHTML = `<div class="empty">Nessun allenamento ancora registrato.</div>`;
+      app.innerHTML = `<div class="empty">Nessuna attività ancora registrata.</div>`;
       return;
     }
-    const runs = await Promise.all(files.map(f =>
+    const items = await Promise.all(files.map(f =>
       fetch(BASE + f).then(r => {
         if (!r.ok) throw new Error(f + ': ' + r.status);
         return r.json().then(j => ({ ...j, _file: f }));
       })
     ));
-    runs.sort((a, b) => new Date(b.start) - new Date(a.start));
+    items.sort((a, b) => new Date(b.start) - new Date(a.start));
     document.getElementById('subline').textContent =
-      `${runs.length} ${runs.length === 1 ? 'uscita registrata' : 'uscite registrate'}.`;
-    app.innerHTML = runs.map(renderCard).join('');
+      `${items.length} ${items.length === 1 ? 'uscita registrata' : 'uscite registrate'}.`;
+    app.innerHTML = items.map(renderCard).join('');
   } catch (err) {
     app.innerHTML = `<div class="error">Errore caricamento: ${err.message}</div>`;
   }
 }
 
-function renderCard(run) {
-  const id = run._file.replace(/\.json$/, '');
-  const a = run.ai_analysis || {};
-  const t = run.totals || {};
+function renderCard(act) {
+  const id = act._file.replace(/\.json$/, '');
+  const a = act.ai_analysis || {};
+  const t = act.totals || {};
   const cls = a.classification || {};
   const exec = a.execution || {};
   const quality = exec.execution_quality;
+  const isHike = act.activity_type === 'hike';
+  const typeLbl = isHike ? 'hike' : (act.activity_type || 'run');
 
   return `
-    <a class="run-card" href="./run.html#${encodeURIComponent(id)}">
-      <div class="run-head">
+    <a class="act-card" href="./activity.html#${encodeURIComponent(id)}">
+      <div class="act-head">
         <div>
-          <div class="run-date">${formatItalianDate(run.start)} · ${formatTime(run.start)}</div>
+          <div class="act-date">${formatItalianDate(act.start)} · ${formatTime(act.start)}</div>
         </div>
-        ${quality ? `<span class="run-quality q-${quality}">${quality}/5</span>` : ''}
+        ${quality ? `<span class="act-quality q-${quality}">${quality}/5</span>` : ''}
       </div>
-      ${a.headline ? `<div class="run-headline">${a.headline}</div>` : ''}
-      <div class="run-stats">
+      ${a.headline ? `<div class="act-headline">${a.headline}</div>` : (act.title ? `<div class="act-headline">${act.title}</div>` : '')}
+      <div class="act-stats">
         ${t.distance_km != null ? `<span><strong>${t.distance_km.toFixed(2)}</strong> km</span>` : ''}
         ${t.duration_sec != null ? `<span><strong>${formatDuration(t.duration_sec)}</strong></span>` : ''}
-        ${t.avg_pace_min_per_km != null ? `<span><strong>${formatPace(t.avg_pace_min_per_km)}</strong>/km</span>` : ''}
+        ${!isHike && t.avg_pace_min_per_km != null ? `<span><strong>${formatPace(t.avg_pace_min_per_km)}</strong>/km</span>` : ''}
+        ${isHike && t.avg_speed_kmh_moving != null ? `<span><strong>${t.avg_speed_kmh_moving.toFixed(1)}</strong> km/h</span>` : ''}
         ${t.ascent_m != null ? `<span>+<strong>${t.ascent_m}</strong> m</span>` : ''}
-        ${t.avg_hr != null ? `<span><strong>${t.avg_hr}</strong> bpm</span>` : ''}
+        ${isHike && t.descent_m != null && t.descent_m > 0 ? `<span>−<strong>${t.descent_m}</strong> m</span>` : ''}
+        ${!isHike && t.avg_hr != null ? `<span><strong>${t.avg_hr}</strong> bpm</span>` : ''}
       </div>
-      <div class="run-stats" style="margin-top:.5rem">
+      <div class="act-stats" style="margin-top:.5rem">
+        <span class="tag type-${typeLbl}">${typeLbl}</span>
         ${cls.workout_type ? `<span class="tag">${cls.workout_type}</span>` : ''}
         ${cls.primary_benefit ? `<span class="tag">${cls.primary_benefit}</span>` : ''}
         ${exec.primary_failure_mode ? `<span class="tag" style="color:var(--wn);border-color:var(--wn)">${exec.primary_failure_mode}</span>` : ''}

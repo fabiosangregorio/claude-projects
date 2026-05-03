@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DBT 21K — Allenamento</title>
+<title>DBT 21K — Attività</title>
 <meta name="theme-color" content="#0e1117">
 <script>document.documentElement.setAttribute('data-theme',localStorage.getItem('theme')||'dark')</script>
 <link rel="stylesheet" href="/claude-projects/theme.css">
@@ -23,6 +23,8 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--tx);line-
 .kicker{font-family:'Space Mono',monospace;font-size:.7rem;color:var(--ac2);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:.5rem}
 .hero h1{font-family:'Space Mono',monospace;font-size:clamp(1.4rem,4.5vw,2rem);font-weight:700;letter-spacing:-.5px;line-height:1.25;margin-bottom:.7rem;color:var(--tx)}
 .hero-sub{color:var(--tx2);font-size:.85rem;font-family:'Space Mono',monospace}
+.source-link{display:inline-flex;align-items:center;gap:.3rem;font-family:'Space Mono',monospace;font-size:.7rem;color:var(--ac);text-decoration:none;margin-top:.5rem;padding:.25rem .5rem;border:1px solid var(--bd);border-radius:5px;background:var(--sf)}
+.source-link:hover{border-color:var(--ac)}
 
 section{margin:2rem 0}
 .s-title{font-family:'Space Mono',monospace;font-size:.75rem;color:var(--tx2);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:.4rem;display:flex;align-items:center;gap:.5rem}
@@ -78,7 +80,6 @@ th{color:var(--tx2);font-size:.65rem;text-transform:uppercase;letter-spacing:.5p
 .zleg-dot.z4{background:#f0883e}
 .zleg-dot.z5{background:#f85149}
 
-/* Grade-distribution stacked bar — descents (cool) → flat (neutral) → climbs (warm) */
 .zseg.gd-down-gt-10,.zleg-dot.gd-down-gt-10{background:#0a3069;color:#fff}
 .zseg.gd-down-5-10,.zleg-dot.gd-down-5-10{background:#1f6feb;color:#fff}
 .zseg.gd-down-2-5,.zleg-dot.gd-down-2-5{background:#79c0ff}
@@ -105,6 +106,8 @@ th{color:var(--tx2);font-size:.65rem;text-transform:uppercase;letter-spacing:.5p
 .next-presc{font-size:.92rem;line-height:1.5;color:var(--tx);margin-bottom:.4rem}
 .next-after{font-family:'Space Mono',monospace;font-size:.7rem;color:var(--tx2)}
 
+.user-note{background:var(--sf2);border-left:3px solid var(--ac);padding:.7rem .9rem;font-size:.85rem;color:var(--tx);font-style:italic;border-radius:0 6px 6px 0}
+
 .loader{text-align:center;padding:3rem 0;color:var(--tx2)}
 .spinner{display:inline-block;width:20px;height:20px;border:2px solid var(--bd);border-top-color:var(--ac);border-radius:50%;animation:spin .6s linear infinite;margin-bottom:.6rem}
 @keyframes spin{to{transform:rotate(360deg)}}
@@ -120,9 +123,9 @@ footer a{color:var(--ac);text-decoration:none}
 </head>
 <body>
 <div class="c">
-  <a class="back" href="./runs.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>Allenamenti</a>
+  <a class="back" href="./activities.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>Attività</a>
 
-  <div id="app"><div class="loader"><div class="spinner"></div><br>Caricamento allenamento...</div></div>
+  <div id="app"><div class="loader"><div class="spinner"></div><br>Caricamento attività...</div></div>
 
   <footer>
     <a href="https://github.com/fabiosangregorio/claude-projects/tree/main/trail-brenta-2026" target="_blank" rel="noopener">trail-brenta-2026</a>
@@ -131,14 +134,14 @@ footer a{color:var(--ac);text-decoration:none}
 </div>
 
 <script>
-const BASE = './data/runs/';
+const BASE = './data/activities/';
 
 async function load() {
   const app = document.getElementById('app');
   const raw = location.hash.slice(1) || new URLSearchParams(location.search).get('id') || '';
   const id = raw ? decodeURIComponent(raw) : '';
   if (!id) {
-    app.innerHTML = `<div class="error">Run non specificato. Torna alla <a href="./runs.html">lista allenamenti</a>.</div>`;
+    app.innerHTML = `<div class="error">Attività non specificata. Torna alla <a href="./activities.html">lista</a>.</div>`;
     return;
   }
   const safe = id.replace(/[^a-zA-Z0-9_\-.]/g, '');
@@ -147,49 +150,78 @@ async function load() {
     return;
   }
   try {
-    const run = await fetch(BASE + safe + '.json').then(r => {
-      if (!r.ok) throw new Error('run: ' + r.status);
+    const act = await fetch(BASE + safe + '.json').then(r => {
+      if (!r.ok) throw new Error('attività: ' + r.status);
       return r.json();
     });
-    render(app, run);
-    if (run.ai_analysis && run.ai_analysis.generated_at) {
+    render(app, act);
+    if (act.ai_analysis && act.ai_analysis.generated_at) {
       document.getElementById('generatedAt').textContent =
-        'analisi generata ' + run.ai_analysis.generated_at.slice(0, 10);
+        'analisi generata ' + act.ai_analysis.generated_at.slice(0, 10);
     }
   } catch (err) {
     app.innerHTML = `<div class="error">Errore caricamento: ${err.message}</div>`;
   }
 }
 
-function render(app, run) {
-  const a = run.ai_analysis || {};
-  const t = run.totals || {};
+function render(app, act) {
+  const a = act.ai_analysis || {};
+  const t = act.totals || {};
+  const isHike = act.activity_type === 'hike';
+
   app.innerHTML = [
-    renderHero(run, t),
+    renderHero(act, t, isHike),
+    renderUserNote(act),
     renderHeadline(a),
     renderClassification(a),
     renderNarrative(a),
     renderConcerns(a),
     renderStrengths(a),
     renderNextSession(a),
-    renderTotals(t),
-    renderPolarization(run.derived, run.hr_zones, t.duration_sec),
-    renderDerived(run.derived),
-    renderDecoupling(run.decoupling),
-    renderSplits(run.splits, run.remainder),
-    renderWalks(run.walk_breaks, run.walks_summary)
+    renderTotals(t, isHike),
+    isHike ? '' : renderPolarization(act.derived, act.hr_zones, t.duration_sec),
+    renderDerived(act.derived),
+    isHike ? '' : renderDecoupling(act.decoupling),
+    isHike ? '' : renderSplits(act.splits, act.remainder),
+    isHike ? '' : renderWalks(act.walk_breaks, act.walks_summary)
   ].filter(Boolean).join('');
 }
 
 /* ── Sections ──────────────────────────────────────────────── */
 
-function renderHero(run, t) {
+function renderHero(act, t, isHike) {
+  const kicker = isHike ? 'Hike' : 'Allenamento';
+  const subParts = [
+    formatTime(act.start),
+    t.distance_km != null ? t.distance_km.toFixed(2) + ' km' : null,
+    t.duration_sec != null ? formatDuration(t.duration_sec) + (isHike ? ' totale' : '') : null,
+    t.ascent_m != null ? '+' + t.ascent_m + ' m' : null,
+    isHike && t.descent_m != null && t.descent_m > 0 ? '−' + t.descent_m + ' m' : null
+  ].filter(Boolean).join(' · ');
+
+  const sourceLink = act.source_url ? `
+    <a class="source-link" href="${act.source_url}" target="_blank" rel="noopener">
+      ↗ ${act.source || 'sorgente'}
+    </a>
+  ` : '';
+
   return `
     <div class="hero">
-      <div class="kicker">Allenamento</div>
-      <h1>${formatItalianDateLong(run.start)}</h1>
-      <p class="hero-sub">${formatTime(run.start)} · ${t.distance_km ? t.distance_km.toFixed(2) + ' km' : ''} · ${t.duration_sec ? formatDuration(t.duration_sec) : ''}${t.ascent_m != null ? ' · +' + t.ascent_m + ' m' : ''}</p>
+      <div class="kicker">${kicker}</div>
+      <h1>${formatItalianDateLong(act.start)}${act.title ? `<br><span style="font-size:.7em;color:var(--tx2);font-weight:400">${act.title}</span>` : ''}</h1>
+      <p class="hero-sub">${subParts}</p>
+      ${sourceLink}
     </div>
+  `;
+}
+
+function renderUserNote(act) {
+  if (!act.user_notes) return '';
+  return `
+    <section>
+      <h2 class="s-title">Nota</h2>
+      <div class="user-note">${act.user_notes}</div>
+    </section>
   `;
 }
 
@@ -209,8 +241,16 @@ function renderHeadline(a) {
   `;
 }
 
-function renderTotals(t) {
-  const items = [
+function renderTotals(t, isHike) {
+  const items = isHike ? [
+    { lbl: 'Distanza', val: t.distance_km != null ? t.distance_km.toFixed(2) + ' km' : null },
+    { lbl: 'Durata totale', val: t.duration_sec != null ? formatDuration(t.duration_sec) : null, help: 'Da inizio a fine attività, pause incluse.' },
+    { lbl: 'In movimento', val: t.duration_moving_sec != null ? formatDuration(t.duration_moving_sec) : null, help: 'Tempo di effettivo movimento (esclude soste).' },
+    { lbl: 'Pause', val: t.pause_sec != null ? formatDuration(t.pause_sec) : null, sub: t.pause_sec != null && t.duration_sec ? Math.round(t.pause_sec / t.duration_sec * 100) + '% del totale' : null, help: 'Tempo fermo (pranzo, foto, soste).' },
+    { lbl: 'Velocità media', val: t.avg_speed_kmh_moving != null ? t.avg_speed_kmh_moving.toFixed(2) + ' km/h' : null, help: 'Calcolata sul tempo di movimento. Per hike in montagna: 3-4 km/h è un buon ritmo sostenuto.' },
+    { lbl: 'Dislivello +', val: t.ascent_m != null ? '+' + t.ascent_m + ' m' : null, sub: t.elev_min_m != null ? t.elev_min_m + '-' + t.elev_max_m + ' m' : null },
+    { lbl: 'Dislivello −', val: t.descent_m != null ? '−' + t.descent_m + ' m' : null }
+  ].filter(i => i.val != null) : [
     { lbl: 'Distanza', val: t.distance_km != null ? t.distance_km.toFixed(2) + ' km' : null },
     { lbl: 'Durata', val: t.duration_sec != null ? formatDuration(t.duration_sec) : null },
     { lbl: 'Passo medio', val: t.avg_pace_min_per_km != null ? formatPace(t.avg_pace_min_per_km) + '/km' : null, help: 'Tempo per coprire 1 km. Min:sec/km.' },
@@ -223,10 +263,11 @@ function renderTotals(t) {
     { lbl: 'Passi', val: t.steps != null ? t.steps.toLocaleString('it-IT') : null }
   ].filter(i => i.val != null);
 
+  if (items.length === 0) return '';
   return `
     <section>
       <h2 class="s-title">Totali</h2>
-      <p class="s-desc">I numeri grezzi della corsa. Le sottolabel grigie riportano un valore correlato (es. % FCmax, range altimetrico).</p>
+      <p class="s-desc">${isHike ? 'I numeri grezzi dell\'uscita. La distinzione tra durata totale e movimento è significativa per gli hike: pause lunghe sono normali, ma utili da tracciare.' : 'I numeri grezzi della corsa. Le sottolabel grigie riportano un valore correlato (es. % FCmax, range altimetrico).'}</p>
       <div class="metrics">
         ${items.map(metricCard).join('')}
       </div>
@@ -250,7 +291,7 @@ function renderClassification(a) {
   const e = a.execution || {};
   const ts = a.trail_specificity || {};
   const items = [
-    { lbl: 'Tipo', val: c.workout_type, color: 'acc', help: 'Categoria della seduta: easy, lungo, intervalli, tempo, unstructured (= corsa libera senza schema preciso), ecc.' },
+    { lbl: 'Tipo', val: c.workout_type, color: 'acc', help: 'Categoria della seduta: easy, lungo, intervalli, tempo, hike, ecc.' },
     { lbl: 'Beneficio primario', val: c.primary_benefit, color: 'acc', help: 'Cosa allena di più: base (fondo aerobico), tempo (soglia), VO2max, forza, recupero…' },
     { lbl: 'TE aerobico', val: c.training_effect_aerobic != null ? c.training_effect_aerobic + '/5' : null, help: 'Stimolo allenante sul sistema aerobico (scala Garmin). 1=nessuno · 2=mantenimento · 3=miglioramento · 4=alto · 5=eccessivo.' },
     { lbl: 'TE anaerobico', val: c.training_effect_anaerobic != null ? c.training_effect_anaerobic + '/5' : null, help: 'Stimolo allenante sul sistema anaerobico (sprint, salite ripide). Stessa scala 0-5.' },
@@ -294,18 +335,16 @@ function renderPolarization(d, zones, totalSec) {
 
   const polHtml = p ? `
     <div class="polar-row">
-      <div class="polar-cell"><div class="polar-pct lit">${p.lit_pct}%</div><div class="polar-lbl">LIT</div></div>
-      <div class="polar-cell"><div class="polar-pct mit">${p.mit_pct}%</div><div class="polar-lbl">MIT</div></div>
-      <div class="polar-cell"><div class="polar-pct hit">${p.hit_pct}%</div><div class="polar-lbl">HIT</div></div>
+      <div class="polar-cell"><div class="polar-pct lit">${p.lit_pct}%</div><div class="polar-lbl">LIT (Z1-Z2)</div></div>
+      <div class="polar-cell"><div class="polar-pct mit">${p.mit_pct}%</div><div class="polar-lbl">MIT (Z3)</div></div>
+      <div class="polar-cell"><div class="polar-pct hit">${p.hit_pct}%</div><div class="polar-lbl">HIT (Z4-Z5)</div></div>
     </div>
   ` : '';
 
   return `
     <section>
-      <h2 class="s-title">Distribuzione FC</h2>
-      <p class="s-desc">Quanto tempo hai passato in ciascuna zona di frequenza cardiaca.<br>
-      <strong>Z1</strong> recupero · <strong>Z2</strong> fondo facile · <strong>Z3</strong> medio · <strong>Z4</strong> soglia · <strong>Z5</strong> massimale.<br>
-      In basso la sintesi 3-zone: <strong>LIT</strong> (Low Intensity, sotto la soglia aerobica) · <strong>MIT</strong> (Moderate, zona "grigia") · <strong>HIT</strong> (High, sopra la soglia anaerobica). Per costruire fondo l'obiettivo è ~80% LIT / ~20% HIT, evitando troppa MIT.</p>
+      <h2 class="s-title">Distribuzione intensità</h2>
+      <p class="s-desc">Come si è distribuito lo sforzo nelle 5 zone FC. Polarizzato 80/20 (LIT alto, HIT moderato, MIT basso) è il modello consigliato per l'endurance.</p>
       <div class="card">
         ${zonesHtml}
         ${polHtml}
@@ -386,10 +425,11 @@ function renderDerived(d) {
   const items = [
     { lbl: 'TRIMP', val: d.trimp, help: 'Training Impulse: carico totale dell\'uscita (intensità × durata, pesato per FC). Riferimento: <100 leggero, 100-200 medio, >200 alto.' },
     { lbl: 'MAF ceiling', val: d.maf && d.maf.ceiling_bpm ? d.maf.ceiling_bpm + ' bpm' : null, sub: d.maf && d.maf.time_below_pct != null ? d.maf.time_below_pct + '% sotto' : null, help: 'Soglia di Maffetone (≈ 180 - età): tetto FC per allenare il fondo aerobico puro. La sub indica quanta parte dell\'uscita hai passato sotto questo tetto.' },
-    { lbl: 'VAM', val: d.vertical && d.vertical.vam_m_per_h != null ? d.vertical.vam_m_per_h + ' m/h' : null, help: 'Velocità Ascensionale Media: metri di dislivello positivo per ora. Riferimento trail amatoriale: 400-800 m/h in salita sostenuta.' },
-    { lbl: 'EF salita', val: d.climb_efficiency && d.climb_efficiency.ef_uphill != null ? d.climb_efficiency.ef_uphill.toFixed(2) : null, sub: d.climb_efficiency && d.climb_efficiency.uphill_time_sec ? formatDuration(d.climb_efficiency.uphill_time_sec) + ' in salita' : null, help: 'Efficiency Factor calcolato solo sui tratti in salita (>5%). Indicatore di forza specifica per il dislivello.' },
-    { lbl: 'Match D+ gara', val: d.race_match && d.race_match.vertical_match_pct != null ? d.race_match.vertical_match_pct + '%' : null, help: 'Quanto del dislivello della DBT 21K hai coperto in questa uscita. 100% = sessione di simulazione gara per la salita.' },
-    { lbl: 'Match durata', val: d.race_match && d.race_match.duration_match_pct != null ? d.race_match.duration_match_pct + '%' : null, help: 'Quanto della durata stimata della gara hai coperto. Lungo target: avvicinarsi al 70-100% nelle settimane finali.' }
+    { lbl: 'VAM', val: d.vertical && (d.vertical.vam_m_per_h_moving || d.vertical.vam_m_per_h) ? (d.vertical.vam_m_per_h_moving || d.vertical.vam_m_per_h) + ' m/h' : null, help: 'Velocità di Ascesa Media: metri di dislivello positivo per ora. In hike sostenuto: 300-500 m/h è buono; oltre 600 m/h è aggressivo.' },
+    { lbl: 'EF salita', val: d.climb_efficiency && d.climb_efficiency.ef_uphill ? d.climb_efficiency.ef_uphill.toFixed(2) : null, help: 'Efficiency Factor calcolato solo nei tratti in salita. Indica quanto efficacemente sali rispetto alla FC.' },
+    { lbl: 'Match D+ gara', val: d.race_match && d.race_match.vertical_match_pct != null ? d.race_match.vertical_match_pct + '%' : null, help: 'Quanto del dislivello positivo della DBT 21K hai coperto in questa uscita. 100% = sessione di simulazione gara per la salita.' },
+    { lbl: 'Match D− gara', val: d.race_match && d.race_match.descent_match_pct != null ? d.race_match.descent_match_pct + '%' : null, help: 'Quanto del dislivello negativo della DBT 21K hai coperto. Discese lunghe = stimolo eccentrico per i quadricipiti.' },
+    { lbl: 'Match durata', val: d.race_match && d.race_match.duration_match_pct != null ? d.race_match.duration_match_pct + '%' : null, help: 'Quanto della durata stimata della gara hai coperto.' }
   ].filter(i => i.val != null);
 
   if (items.length === 0 && !d.grade_distribution) return '';

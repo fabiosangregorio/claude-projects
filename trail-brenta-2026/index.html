@@ -208,23 +208,23 @@ const BASE = './data/';
 async function loadAll() {
   const app = document.getElementById('app');
   try {
-    const [profile, params, runsManifest] = await Promise.all([
+    const [profile, params, activitiesManifest] = await Promise.all([
       fetch(BASE + 'profile.json').then(r => { if (!r.ok) throw new Error('profile.json: ' + r.status); return r.json(); }),
       fetch(BASE + 'parameters.json').then(r => { if (!r.ok) throw new Error('parameters.json: ' + r.status); return r.json(); }),
-      fetch(BASE + 'runs/index.json').then(r => r.ok ? r.json() : { runs: [] }).catch(() => ({ runs: [] }))
+      fetch(BASE + 'activities/index.json').then(r => r.ok ? r.json() : { activities: [] }).catch(() => ({ activities: [] }))
     ]);
-    render(app, profile, params, runsManifest);
+    render(app, profile, params, activitiesManifest);
     document.getElementById('lastUpdated').textContent = 'parametri aggiornati ' + params.last_updated;
   } catch (err) {
     app.innerHTML = `<div class="error">Errore caricamento dati: ${err.message}</div>`;
   }
 }
 
-function render(app, profile, params, runsManifest) {
+function render(app, profile, params, activitiesManifest) {
   app.innerHTML = [
     renderHero(profile, params),
     renderCurrentWeek(params),
-    renderRunsLink(runsManifest),
+    renderActivitiesLink(activitiesManifest),
     renderTasks(params),
     renderPhases(params),
     renderMilestones(params),
@@ -338,13 +338,14 @@ function renderSession(s) {
   `;
 }
 
-function renderRunsLink(manifest) {
-  const n = (manifest && manifest.runs) ? manifest.runs.length : 0;
+function renderActivitiesLink(manifest) {
+  const list = (manifest && (manifest.activities || manifest.runs)) || [];
+  const n = list.length;
   const sub = n === 0 ? 'nessuna uscita registrata' : (n === 1 ? '1 uscita registrata' : `${n} uscite registrate`);
   return `
-    <a class="nav-card" href="./runs.html">
+    <a class="nav-card" href="./activities.html">
       <div>
-        <div class="nav-card-title">Allenamenti</div>
+        <div class="nav-card-title">Attività</div>
         <div class="nav-card-sub">${sub}</div>
       </div>
       <div class="nav-card-arrow">→</div>

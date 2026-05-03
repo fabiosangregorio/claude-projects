@@ -13,15 +13,15 @@ Questa sezione segue un'architettura **data-driven** diversa dai progetti DIY: i
 ```
 trail-brenta-2026/
 ├── index.html              ← Home. Sintesi piano + tasks + profilo.
-├── runs.html               ← Lista di tutti gli allenamenti.
-├── run.html                ← Dettaglio singolo allenamento (?id=<filename-senza-.json>).
+├── activities.html         ← Lista di tutte le attività (run + hike).
+├── activity.html           ← Dettaglio singola attività (#<filename-senza-.json>).
 ├── README.md               ← Questo file.
 └── data/
     ├── profile.json        ← Dati statici (atleta + obiettivo gara). Cambia raramente.
     ├── parameters.json     ← Parametri di calibrazione del piano. Cambia spesso.
-    └── runs/
-        ├── index.json      ← Manifest: elenco dei file run. AGGIORNARE a ogni nuovo run.
-        └── <date>_<uuid>.json  ← Un file per allenamento (workout + analisi AI).
+    └── activities/
+        ├── index.json      ← Manifest: elenco dei file attività. AGGIORNARE a ogni nuovo log.
+        └── <date>_<uuid>.json  ← Un file per attività (run o hike).
 ```
 
 ### Perché questa separazione
@@ -47,40 +47,45 @@ Sezioni: `athlete`, `experience`, `availability`, `health`, `equipment`, `race_t
 
 **Parametri di calibrazione** del piano — la parte viva. Si aggiorna ogni volta che:
 - Si segna una task come completata (es. visita medica fatta)
-- Si calibra il piano dopo un test (quando il piano sarà definito)
+- Si calibra il piano dopo un test
 
 **Sempre aggiornare il campo `last_updated`** quando si modifica.
 
-Sezioni (schema 2.0):
-- `preparation_tasks` — checklist burocrazia + attrezzatura, con `priority` e `deadline`.
-- `training_zones` — zone FC (5 zone Karvonen), `fcmax_bpm`, `maf_ceiling_bpm`, sorgente FCmax.
-- `plan` — piano completo:
-  - `total_weeks`, `race_week_number`
-  - `weekly_budget` — `running_sessions`, `strength_sessions`, `philosophy`
-  - `rules` — array di regole d'ingaggio
-  - `phases` — 4 fasi (Ricostruzione, Base montagna, Build specifico, Peak+Taper) con `weeks_range`, `long_run_min`, `vertical_target_m`, `focus`, `key_objective`
-  - `milestones` — eventi puntuali (test, deadline burocrazia, race) con `type`
-  - `weeks` — 18 settimane: ognuna ha `phase_id`, `start_date`, `end_date`, `label`, `narrative`, `sessions[]`, `strength` (bool), `strength_note`, `milestone`
-  - `strength_template` — 1 routine riusabile (7 esercizi, 25 min)
-  - `mobility_template` — 5 esercizi post-corsa
+Sezioni principali: `preparation_tasks`, `training_zones`, `plan` (con `phases`, `weeks`, `milestones`, `strength_template`, `mobility_template`).
 
-Tipi di sessione validi: `easy`, `long`, `test`, `hike_baseline`, `strength`. La pagina rende automaticamente la settimana corrente (o la prossima/ultima definita).
+### `data/activities/`
 
-### `data/runs/`
+Cartella con un JSON per attività (run o hike). Filename: `<YYYY-MM-DD>_<uuid>.json`.
 
-Cartella con un JSON per allenamento (workout grezzo + analisi AI). Filename: `<YYYY-MM-DD>_<uuid>.json`.
+**Schema unificato (schema_version: 2)**: un solo formato per run e hike, distinti dal campo `activity_type`.
 
-- **Sorgenti**: i JSON sono generati esternamente (parsing Garmin/Strava + analisi AI). Non si modificano a mano.
-- **Manifest `data/runs/index.json`**: elenca i filename. Lo statico hosting non può listare cartelle, quindi **ogni nuovo run va aggiunto qui**.
-- **Schema**: ogni run contiene `start`, `totals`, `derived`, `decoupling`, `splits`, `walk_breaks`, `hr_zones`, e `ai_analysis` (headline, classification, execution, concerns, strengths, narrative, next_session).
+Campi top-level comuni:
+- `schema_version`, `activity_type` (`"run"` | `"hike"`), `id`, `start`, `end`, `title?`, `source?`, `source_url?`, `user_notes?`
+- `totals` — distanza, durate, dislivello (vedi sotto per differenze run/hike)
+- `derived` — metriche calcolate (vertical, race_match, eccetera)
+- `ai_analysis` — headline, classification, execution, trail_specificity, strengths, concerns, narrative, next_session
+
+**Per `activity_type: "run"`** — `totals` include `duration_sec`, `avg_pace_min_per_km`, `gap_min_per_km`, `avg_hr`, `max_hr_observed`, `avg_cadence_spm`, `ef`, `steps`, ecc. Top-level: `splits`, `hr_zones`, `decoupling`, `walk_breaks`, `walks_summary`, `pace_variability`. Sorgente: parsing Garmin/Strava + analisi AI esterna.
+
+**Per `activity_type: "hike"`** — `totals` include `duration_sec` (= totale, start→end), `duration_moving_sec`, `pause_sec`, `descent_m`, `avg_speed_kmh_moving`. Niente `splits`/`hr_zones`/`decoupling`. Sorgente tipica: GPX da Komoot.
+
+**Manifest `data/activities/index.json`**: elenca i filename. Lo statico hosting non può listare cartelle, quindi **ogni nuova attività va aggiunta qui** nell'array `activities`.
 
 ---
 
 ## Convenzioni per evoluzioni future
 
-### Aggiungere un nuovo tipo di dato
+### Aggiungere un nuovo tipo di attività
 
-Es. log allenamenti, diario sensazioni, lista spesa attrezzatura dettagliata.
+Se in futuro servono altri tipi (es. `bike`, `strength_log`, `swim`), basta:
+1. Aggiungere il valore a `activity_type`
+2. Definire i campi specifici nel `totals` (mantenendo i comuni)
+3. In `activity.html`, gestire le sezioni nel dispatcher `render()` con la guard appropriata
+4. **Aggiornare questo README** con il nuovo tipo
+
+### Aggiungere un nuovo tipo di dato (non attività)
+
+Es. log sensazioni, lista spesa attrezzatura dettagliata.
 
 1. Crea `data/<nome>.json` con un campo `_schema_version` e `_description`.
 2. In `index.html`, aggiungi una `fetch` nel blocco di caricamento iniziale.
@@ -93,13 +98,14 @@ Es. log allenamenti, diario sensazioni, lista spesa attrezzatura dettagliata.
 - ❌ Mai mettere dati nell'HTML. Se vedi un valore hardcoded nella pagina che dovrebbe vivere nei JSON, spostalo.
 - ❌ Mai modificare l'HTML per aggiornare i dati: modifica il JSON.
 - ❌ Mai duplicare dati tra `profile.json` e `parameters.json`. Se non sai dove mettere un campo, vince `parameters.json` se può cambiare.
+- ❌ Mai aggiungere file/sezioni "appena utili": il principio del progetto è preferire rimuovere/modificare invece di aggiungere. Mantenere i file leggeri.
 
 ### Stile codice
 
 - Vanilla JS, no framework, no build step (la pagina deve funzionare aprendola direttamente o via GitHub Pages).
 - Stessi font e palette del resto del repo (Space Mono + DM Sans, dark theme GitHub-style — vedi `../README.md`).
 - Mobile-first: la pagina deve essere ottima su iPhone.
-- Niente `localStorage` per i dati (vivono nei JSON, versionati). `localStorage` solo per UI ephemera (es. accordion aperti).
+- Niente `localStorage` per i dati (vivono nei JSON, versionati). `localStorage` solo per UI ephemera.
 
 ---
 
@@ -117,10 +123,12 @@ La pagina si aggiorna automaticamente al prossimo refresh (i JSON vengono fetcha
 
 ## Note per Claude (sessioni future)
 
-- **Prima di modificare:** leggi sempre lo stato corrente di `profile.json` e `parameters.json`.
+- **Prima di modificare:** leggi sempre lo stato corrente di `profile.json`, `parameters.json` e `data/activities/index.json`.
 - **Patch chirurgiche:** modifica solo i campi rilevanti, non riscrivere l'intero JSON.
 - **`last_updated`:** aggiornalo a ogni modifica di `parameters.json`.
 - **Validazione:** dopo ogni push, verifica che la pagina renderizzi senza errori (apri la URL live).
 - **Domande chirurgiche:** se Fabio dice "ho fatto un lungo", chiedi solo i dati mancanti (durata, dislivello, sensazioni, passo medio). Non rifare l'intake.
 - **Calibrazione conservativa:** se i numeri vanno meglio del previsto, alza i volumi al massimo del +10%. Mai di più.
 - **Infortuni:** se Fabio segnala dolore, **non** suggerire di "spingere comunque". Riposo + valutazione medica.
+- **Hike vs run:** un hike pianificato Z1-Z2 con dislivello reale è uno stimolo specifico DBT più utile di una corsa piatta forzata. Non considerarli inferiori.
+- **GPX da Komoot/Garmin/Strava:** parsing locale (Python) — distanza haversine, dislivello con smoothing 5-pt + dead-band 0.5 m, pause = sample con velocità < 0.3 m/s.
