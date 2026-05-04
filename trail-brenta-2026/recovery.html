@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DBT 21K — Recovery</title>
+<meta name="theme-color" content="#0e1117">
+<script>document.documentElement.setAttribute('data-theme',localStorage.getItem('theme')||'dark')</script>
+<link rel="stylesheet" href="/claude-projects/theme.css">
+<script src="/claude-projects/theme.js" defer></script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0e1117;--sf:#161b22;--sf2:#1c2230;--bd:#2a3040;--tx:#e6edf3;--tx2:#8b949e;--ac:#58a6ff;--ac2:#3fb950;--wn:#f0883e;--rd:#f85149;--pd:#d2a8ff}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--tx);line-height:1.6;min-height:100vh;-webkit-font-smoothing:antialiased}
+.c{max-width:760px;margin:0 auto;padding:1.5rem 1rem 3rem}
+
+.back{display:inline-flex;align-items:center;gap:.35rem;font-family:'Space Mono',monospace;font-size:.75rem;color:var(--tx2);text-decoration:none;padding:.35rem .6rem;border-radius:6px;border:1px solid var(--bd);background:var(--sf);transition:border-color .2s,color .2s;margin-bottom:1.5rem}
+.back:hover{border-color:var(--ac);color:var(--ac)}
+.back svg{width:14px;height:14px}
+
+.hero{margin-bottom:2rem}
+.kicker{font-family:'Space Mono',monospace;font-size:.7rem;color:var(--ac2);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:.5rem}
+.hero h1{font-family:'Space Mono',monospace;font-size:clamp(1.4rem,4.5vw,2rem);font-weight:700;letter-spacing:-.5px;line-height:1.25;margin-bottom:.5rem;color:var(--tx)}
+.hero-sub{color:var(--tx2);font-size:.85rem;margin-bottom:1rem}
+.scope{background:rgba(88,166,255,.06);border:1px solid rgba(88,166,255,.28);border-radius:8px;padding:.7rem .85rem;font-size:.8rem;color:var(--tx);line-height:1.55}
+.scope strong{color:var(--ac);font-family:'Space Mono',monospace;font-size:.65rem;text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:.25rem}
+
+section{margin:2rem 0}
+.s-title{font-family:'Space Mono',monospace;font-size:.75rem;color:var(--tx2);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:1rem;display:flex;align-items:center;gap:.5rem}
+.s-title::before{content:'';display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--ac)}
+
+.intro{background:var(--sf);border:1px solid var(--bd);border-radius:10px;padding:1rem 1.1rem;font-size:.88rem;color:var(--tx);line-height:1.6}
+.intro p{margin-bottom:.7rem}
+.intro p:last-child{margin-bottom:0}
+.intro strong{color:var(--ac2)}
+
+details{background:var(--sf);border:1px solid var(--bd);border-radius:10px;margin-bottom:.7rem}
+details[open]{border-color:var(--ac)}
+summary{padding:.85rem 1.1rem;cursor:pointer;font-family:'Space Mono',monospace;font-size:.8rem;font-weight:700;color:var(--tx);display:flex;justify-content:space-between;align-items:center;gap:.7rem;list-style:none;-webkit-tap-highlight-color:transparent}
+summary::-webkit-details-marker{display:none}
+summary::after{content:'+';color:var(--ac);font-size:1.2rem;font-weight:400;transition:transform .2s;flex-shrink:0}
+details[open] summary::after{transform:rotate(45deg)}
+details > div{padding:0 1.1rem 1rem}
+.sm-rank{font-family:'Space Mono',monospace;font-size:.65rem;color:var(--bg);background:var(--ac2);padding:.18rem .42rem;border-radius:4px;font-weight:700;letter-spacing:.5px;flex-shrink:0}
+.sm-rank.r2{background:var(--ac)}
+.sm-rank.r3{background:var(--pd)}
+.sm-rank.r4{background:var(--wn)}
+.sm-rank.r5{background:var(--tx2)}
+.sm-title{flex:1;min-width:0}
+.summary-sub{display:block;font-family:'DM Sans',sans-serif;font-weight:400;font-size:.72rem;color:var(--tx2);margin-top:.15rem;text-transform:none;letter-spacing:0}
+
+.why{background:var(--sf2);border-radius:6px;padding:.7rem .85rem;margin-bottom:.9rem;font-size:.82rem;color:var(--tx);line-height:1.55}
+.why strong{color:var(--ac);font-family:'Space Mono',monospace;font-size:.7rem;text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:.3rem}
+
+.std{border-left:3px solid var(--ac2);padding:.4rem .8rem;margin-bottom:.9rem;font-size:.82rem;color:var(--tx);line-height:1.55;background:rgba(63,185,80,.04)}
+.std strong{color:var(--ac2);font-family:'Space Mono',monospace;font-size:.7rem;text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:.25rem}
+.std ul{margin:.3rem 0 0 1rem;padding:0}
+.std li{margin-bottom:.2rem}
+
+.howto{font-size:.82rem;color:var(--tx);line-height:1.55}
+.howto strong{color:var(--wn);font-family:'Space Mono',monospace;font-size:.7rem;text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:.3rem}
+.howto ul{margin:.3rem 0 0 1rem;padding:0}
+.howto li{margin-bottom:.3rem}
+
+.dontable{width:100%;border-collapse:collapse;margin-top:.3rem;font-size:.78rem}
+.dontable td{padding:.55rem .5rem;border-bottom:1px solid var(--bd);vertical-align:top;color:var(--tx)}
+.dontable tr:last-child td{border-bottom:none}
+.dontable td:first-child{font-family:'Space Mono',monospace;font-weight:700;width:35%;color:var(--tx)}
+.dontable td:nth-child(2){font-family:'Space Mono',monospace;font-size:.7rem;width:18%;text-transform:uppercase;letter-spacing:.5px}
+.verdict-evita{color:var(--rd)}
+.verdict-ok{color:var(--ac2)}
+.verdict-meh{color:var(--wn)}
+
+.checklist{background:var(--sf);border:1px solid var(--bd);border-radius:10px;padding:1rem 1.1rem}
+.check-row{display:grid;grid-template-columns:auto 1fr;gap:.7rem;align-items:flex-start;padding:.55rem 0;border-bottom:1px solid var(--bd);font-size:.85rem;color:var(--tx);line-height:1.5}
+.check-row:last-child{border-bottom:none}
+.check-when{font-family:'Space Mono',monospace;font-size:.7rem;color:var(--ac);text-transform:uppercase;letter-spacing:.5px;font-weight:700;min-width:5.5rem;padding-top:.15rem}
+
+footer{margin-top:3rem;padding-top:1.5rem;border-top:1px solid var(--bd);text-align:center;color:var(--tx2);font-size:.72rem}
+footer a{color:var(--ac);text-decoration:none}
+.disclaimer{margin-top:1.5rem;padding:.85rem 1.1rem;background:rgba(240,136,62,.06);border:1px solid rgba(240,136,62,.3);border-radius:8px;font-size:.75rem;color:var(--tx2);line-height:1.55}
+.disclaimer strong{color:var(--wn);font-family:'Space Mono',monospace;font-size:.65rem;text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:.25rem}
+</style>
+</head>
+<body>
+<div class="c">
+  <a class="back" href="./"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>Home</a>
+
+  <div class="hero">
+    <div class="kicker">Recovery — guida pratica</div>
+    <h1>Cosa fare dopo l'attività</h1>
+    <p class="hero-sub">Le 5 leve del recupero, in ordine di impatto, con il perché dietro.</p>
+    <div class="scope">
+      <strong>Quando applicare</strong>
+      Vale per run e hike con almeno una di queste: durata &gt; 90 min, D+ &gt; 400 m, FC media in Z3+, o discese tecniche lunghe. Sotto questa soglia: basta mangiare e bere normale, dormire bene.
+    </div>
+  </div>
+
+  <section>
+    <h2 class="s-title">Il principio</h2>
+    <div class="intro">
+      <p>Quando corri o cammini in salita, <strong>distruggi</strong>: micro-lacerazioni nelle fibre muscolari, glicogeno bruciato, liquidi e sali persi, sistema nervoso affaticato.</p>
+      <p>Non diventi più forte mentre corri. Diventi più forte <strong>dopo</strong>, durante il recupero, quando il corpo ricostruisce un po' meglio di prima. Si chiama <strong>supercompensazione</strong>.</p>
+      <p>Conseguenza pratica: se il recupero è scarso il corpo non ricostruisce, o ricostruisce solo per tornare al livello di prima. Allenarti senza recuperare = stress senza adattamento = stagnazione o infortunio.</p>
+      <p>Per chi rientra da uno stop lungo questo è doppiamente vero: ogni stimolo è grosso, e il margine fra "dose giusta" e "troppo" è stretto.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="s-title">Le 5 leve, in ordine di impatto</h2>
+
+    <details open>
+      <summary>
+        <span class="sm-rank">#1</span>
+        <span class="sm-title">Sonno<span class="summary-sub">7.5–9h, sacro la notte dopo i lunghi</span></span>
+      </summary>
+      <div>
+        <div class="why">
+          <strong>Perché</strong>
+          Durante il sonno profondo il corpo rilascia <em>ormone della crescita</em> (GH), il principale segnale di riparazione muscolare. Il sistema glinfatico cerebrale "lava" le scorie dal cervello — chiave per recupero del sistema nervoso. La consolidazione motoria (imparare il gesto della corsa in trail) avviene in fase REM. È la leva singola con più evidenza scientifica.
+        </div>
+        <div class="std">
+          <strong>Standard</strong>
+          <ul>
+            <li><strong>7–9h</strong> per adulti (NSF, National Sleep Foundation).</li>
+            <li>Atleti di endurance: spesso 8–10h. Studio Stanford 2011 (Mah et al.): estendere il sonno a 10h migliora performance, reazione, umore.</li>
+            <li>Una notte sotto 6h dopo un lungo: cortisolo +21%, testosterone −10–15%, ricarica glicogeno rallentata.</li>
+          </ul>
+        </div>
+        <div class="howto">
+          <strong>Cosa faccio io</strong>
+          <ul>
+            <li>La notte <em>dopo</em> un lungo o un hike è non negoziabile.</li>
+            <li>Niente alcol (frammenta il REM).</li>
+            <li>Schermo off 30 min prima di dormire.</li>
+            <li>Stanza fresca (~18°C), buia, silenziosa.</li>
+          </ul>
+        </div>
+      </div>
+    </details>
+
+    <details>
+      <summary>
+        <span class="sm-rank r2">#2</span>
+        <span class="sm-title">Nutrizione post-attività<span class="summary-sub">~25g proteine + carbo entro 60–90 min</span></span>
+      </summary>
+      <div>
+        <div class="why">
+          <strong>Perché — Carboidrati</strong>
+          Il <em>glicogeno</em> (zucchero stoccato in muscoli e fegato) è la benzina della corsa. Un lungo da 90+ min lo svuota all'80%. Riempirlo richiede carbo ingeriti.
+        </div>
+        <div class="why">
+          <strong>Perché — Proteine</strong>
+          Le micro-lacerazioni richiedono aminoacidi per essere riparate. La <em>leucina</em> (un aminoacido) è il "trigger" che attiva la sintesi proteica muscolare (MPS).
+        </div>
+        <div class="std">
+          <strong>Standard ISSN (International Society of Sports Nutrition, 2017)</strong>
+          <ul>
+            <li>Carbo: <strong>1.0–1.2 g/kg all'ora</strong> per le prime 4h dopo sessioni esaurienti. Per 67 kg ≈ 70–80 g/h.</li>
+            <li>Proteine: <strong>0.25–0.40 g/kg per pasto</strong>, ogni 3–4h, per 24–48h. Per 67 kg ≈ 20–25 g.</li>
+            <li>Dose con almeno 2.5–3 g di leucina = ~25g whey, ~100g pollo, 3–4 uova, 200g yogurt greco.</li>
+            <li>Totale giornaliero: 1.6–2.0 g/kg/giorno = 110–135 g per 67 kg.</li>
+          </ul>
+        </div>
+        <div class="why" style="background:rgba(240,136,62,.06)">
+          <strong style="color:var(--wn)">La "finestra anabolica" è una leggenda</strong>
+          La meta-analisi Aragon &amp; Schoenfeld 2013 ha smontato il "30 min o niente". La finestra è larga 2–3 ore. Conta più la <em>dose totale giornaliera</em> che il timing perfetto al minuto.
+        </div>
+        <div class="howto">
+          <strong>Snack pratici (~25g proteine + carbo)</strong>
+          <ul>
+            <li>Yogurt greco grande + miele + frutta + granola.</li>
+            <li>Panino prosciutto/uova + frutta.</li>
+            <li>Frullato latte + banana + 30g whey.</li>
+            <li>Riso/pasta con pollo, tonno, o legumi.</li>
+          </ul>
+        </div>
+      </div>
+    </details>
+
+    <details>
+      <summary>
+        <span class="sm-rank r3">#3</span>
+        <span class="sm-title">Idratazione + sali<span class="summary-sub">1.25–1.5× il peso perso, con sodio</span></span>
+      </summary>
+      <div>
+        <div class="why">
+          <strong>Perché</strong>
+          Sudando perdi acqua <em>e</em> sali (soprattutto sodio, ~500–1500 mg per litro di sudore — varia molto). Disidratazione del 2% del peso corporeo → −10–15% di performance e recupero rallentato. Il sodio è critico: senza sodio l'acqua bevuta non viene trattenuta (la pisci subito).
+        </div>
+        <div class="std">
+          <strong>Standard ACSM (Position Stand on Fluid Replacement, 2007)</strong>
+          <ul>
+            <li><strong>1.25–1.5 litri</strong> di liquidi per ogni kg di peso perso post-attività.</li>
+            <li>Sodio: <strong>300–700 mg/litro</strong> per sessioni &gt; 1h o se vedi cristalli di sale su pelle/maglietta.</li>
+          </ul>
+        </div>
+        <div class="howto">
+          <strong>Cosa faccio io</strong>
+          <ul>
+            <li>Pesati prima e dopo i lunghi una volta — vedrai quanto perdi (in genere 0.5–1.5 kg).</li>
+            <li>Reintegra fino al peso pre +25%.</li>
+            <li>Sodio: pizzico di sale nell'acqua, brodo, o prodotti specifici (Maurten, SaltStick). Anche un pacchetto di patatine fa il lavoro.</li>
+          </ul>
+        </div>
+        <div class="why" style="background:rgba(248,81,73,.06)">
+          <strong style="color:var(--rd)">Falsa sicurezza</strong>
+          Bere solo acqua dopo un lungo molto sudato → <em>iponatriemia</em> (sodio diluito nel sangue). Raro ma possibile se bevi 2L+ di sola acqua subito dopo.
+        </div>
+      </div>
+    </details>
+
+    <details>
+      <summary>
+        <span class="sm-rank r4">#4</span>
+        <span class="sm-title">Recovery attivo<span class="summary-sub">camminata 15–30 min il giorno dopo</span></span>
+      </summary>
+      <div>
+        <div class="why">
+          <strong>Perché</strong>
+          Dopo eccentrica pesante (= discese lunghe, hike) i muscoli accumulano scorie metaboliche e infiammazione locale. Movimento leggero aumenta il flusso sanguigno → flush delle scorie → DOMS si risolvono prima. Stare fermi al divano = scorie ristagnano.
+        </div>
+        <div class="std">
+          <strong>Standard</strong>
+          <ul>
+            <li>Meta-analisi Dupuy et al. 2018 (Frontiers in Physiology, 99 studi): il recovery attivo a bassa intensità è fra gli interventi con evidenza più solida per ridurre DOMS e affaticamento percepito.</li>
+          </ul>
+        </div>
+        <div class="howto">
+          <strong>Dose</strong>
+          <ul>
+            <li><strong>15–30 min</strong> di camminata o pedalata facilissima.</li>
+            <li>FC sotto 110 bpm (Z1).</li>
+            <li>Il giorno <em>dopo</em> il lungo/hike, non subito dopo.</li>
+            <li><em>Non</em> corsa Z2 — quella è già allenamento.</li>
+          </ul>
+        </div>
+      </div>
+    </details>
+
+    <details>
+      <summary>
+        <span class="sm-rank r5">#5</span>
+        <span class="sm-title">Mobility / stretching<span class="summary-sub">5–10 min post-corsa</span></span>
+      </summary>
+      <div>
+        <div class="why">
+          <strong>Perché (e perché NON)</strong>
+          Lo stretching post-allenamento <em>non</em> previene infortuni (Cochrane review 2011). Serve per: mantenere il range articolare (anche se corri solo, le anche si chiudono nel tempo), rilassamento del sistema nervoso, transizione verso il sonno, lavoro su punti deboli tipici del runner (flessori dell'anca corti, polpacci rigidi).
+        </div>
+        <div class="std">
+          <strong>Standard ACSM</strong>
+          <ul>
+            <li>Stretching statico <strong>dopo</strong> l'attività, non prima (riduce la potenza muscolare per ~30 min).</li>
+            <li>10–30 sec per esercizio, 2–4 ripetizioni.</li>
+            <li>Foam rolling 1–2 min per gruppo: evidenza moderata per ridurre DOMS (Wiewelhove et al. 2019).</li>
+          </ul>
+        </div>
+        <div class="howto">
+          <strong>Cosa faccio io</strong>
+          <ul>
+            <li>Vedi il <a href="./plan.html" style="color:var(--ac)">mobility template nel piano</a> (5 esercizi, ~5 min).</li>
+            <li>Subito dopo la corsa, oppure la sera a letto. La cosa che NON va bene è skipparla per pigrizia.</li>
+          </ul>
+        </div>
+      </div>
+    </details>
+  </section>
+
+  <section>
+    <h2 class="s-title">Le leve secondarie / contestate</h2>
+    <div class="checklist">
+      <table class="dontable">
+        <tr>
+          <td>Bagno freddo / ice bath</td>
+          <td class="verdict-evita">Smussa adattamento</td>
+          <td>Riduce DOMS nel breve, ma blunts ipertrofia e gain aerobici (Roberts et al. 2015). Usa solo prima di gare importanti, mai in allenamento.</td>
+        </tr>
+        <tr>
+          <td>Doccia di contrasto</td>
+          <td class="verdict-meh">Effetto modesto</td>
+          <td>Forse leggermente meglio del solo freddo, evidenza debole.</td>
+        </tr>
+        <tr>
+          <td>Compressione (calze)</td>
+          <td class="verdict-meh">Effetto piccolo</td>
+          <td>Riduce gonfiore percepito. Marginale su recupero oggettivo. Utile in viaggio post-gara.</td>
+        </tr>
+        <tr>
+          <td>Massaggio</td>
+          <td class="verdict-ok">Funziona</td>
+          <td>Riduce DOMS e migliora percezione di recupero (Dupuy 2018). Costoso. Foam rolling è il sostituto economico.</td>
+        </tr>
+        <tr>
+          <td>NSAID (ibuprofene)</td>
+          <td class="verdict-evita">EVITA</td>
+          <td>Smussa la sintesi proteica e l'adattamento (Lilja et al. 2018). Solo per dolore acuto o infortunio diagnosticato, mai "preventivo".</td>
+        </tr>
+        <tr>
+          <td>Alcol</td>
+          <td class="verdict-evita">Sabota</td>
+          <td>Frammenta REM, riduce MPS del 30%, disidrata. Birra post-gara una tantum ok. Quotidianamente no.</td>
+        </tr>
+        <tr>
+          <td>Stretching pre-attività</td>
+          <td class="verdict-evita">Inutile</td>
+          <td>Statico riduce performance per 30 min. Sostituisci con riscaldamento dinamico.</td>
+        </tr>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="s-title">Checklist per dopo un lungo / hike duro</h2>
+    <div class="checklist">
+      <div class="check-row">
+        <div class="check-when">0–60 min</div>
+        <div>Snack o pasto con <strong>~25g proteine + carbo</strong>. Bevi 500–750 ml d'acqua con un pizzico di sale.</div>
+      </div>
+      <div class="check-row">
+        <div class="check-when">1–3h</div>
+        <div>Pasto vero con carbo abbondanti + proteine. Continua a bere finché la pipì non torna chiara.</div>
+      </div>
+      <div class="check-row">
+        <div class="check-when">Sera</div>
+        <div>Mobility 5–10 min. Niente alcol. A letto presto: punta a 8h+ di sonno.</div>
+      </div>
+      <div class="check-row">
+        <div class="check-when">D+1</div>
+        <div>Camminata facile <strong>20–30 min</strong> (FC &lt; 110). Foam roll quad + polpacci 2 min ciascuno se DOMS.</div>
+      </div>
+      <div class="check-row">
+        <div class="check-when">D+2</div>
+        <div>Se DOMS persistono, altri 30 min di camminata o easy run molto leggero. Niente lavori duri.</div>
+      </div>
+      <div class="check-row">
+        <div class="check-when">Sempre</div>
+        <div>Niente NSAID preventivi, niente bagno freddo. Se senti dolore <em>acuto, articolare o asimmetrico</em> → stop e valutazione medica (vedi regole nel piano).</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="disclaimer">
+    <strong>Disclaimer</strong>
+    Questa guida sintetizza linee guida ACSM, ISSN, e meta-analisi citate. Non sostituisce il parere di un medico o nutrizionista sportivo. In caso di dolore persistente o sintomi anomali, fermati e fatti vedere.
+  </div>
+
+  <footer>
+    <a href="https://github.com/fabiosangregorio/claude-projects/tree/main/trail-brenta-2026" target="_blank" rel="noopener">trail-brenta-2026</a>
+  </footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DBT 21K — Piano settimana</title>
+<meta name="theme-color" content="#0e1117">
+<script>document.documentElement.setAttribute('data-theme',localStorage.getItem('theme')||'dark')</script>
+<link rel="stylesheet" href="/claude-projects/theme.css">
+<script src="/claude-projects/theme.js" defer></script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0e1117;--sf:#161b22;--sf2:#1c2230;--bd:#2a3040;--tx:#e6edf3;--tx2:#8b949e;--ac:#58a6ff;--ac2:#3fb950;--wn:#f0883e;--rd:#f85149;--pd:#d2a8ff}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--tx);line-height:1.6;min-height:100vh;-webkit-font-smoothing:antialiased}
+.c{max-width:760px;margin:0 auto;padding:1.5rem 1rem 3rem}
+
+.back{display:inline-flex;align-items:center;gap:.35rem;font-family:'Space Mono',monospace;font-size:.75rem;color:var(--tx2);text-decoration:none;padding:.35rem .6rem;border-radius:6px;border:1px solid var(--bd);background:var(--sf);transition:border-color .2s,color .2s;margin-bottom:1.5rem}
+.back:hover{border-color:var(--ac);color:var(--ac)}
+.back svg{width:14px;height:14px}
+
+section{margin:2rem 0}
+.s-title{font-family:'Space Mono',monospace;font-size:.75rem;color:var(--tx2);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:1rem;display:flex;align-items:center;gap:.5rem}
+.s-title::before{content:'';display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--ac2);box-shadow:0 0 0 0 rgba(63,185,80,.5);animation:pulse 2s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(63,185,80,.5)}70%{box-shadow:0 0 0 6px rgba(63,185,80,0)}100%{box-shadow:0 0 0 0 rgba(63,185,80,0)}}
+
+.card{background:var(--sf);border:1px solid var(--bd);border-radius:10px;padding:1rem 1.1rem;margin-bottom:.7rem}
+.card.live{border-color:var(--ac2);background:linear-gradient(180deg,rgba(63,185,80,.06),var(--sf))}
+
+.week-head{display:flex;justify-content:space-between;align-items:flex-start;gap:.8rem;flex-wrap:wrap;margin-bottom:.6rem}
+.week-num{font-family:'Space Mono',monospace;font-size:.7rem;color:var(--tx2);text-transform:uppercase;letter-spacing:1px}
+.week-label{font-family:'Space Mono',monospace;font-size:1.05rem;font-weight:700;color:var(--tx);margin-top:.15rem}
+.week-dates{font-family:'Space Mono',monospace;font-size:.72rem;color:var(--tx2);text-align:right}
+.week-narr{font-size:.85rem;color:var(--tx2);line-height:1.55;padding:.7rem .85rem;background:var(--sf2);border-left:2px solid var(--ac2);border-radius:4px;margin-bottom:.9rem}
+
+.sess{padding:.85rem 0;border-bottom:1px solid var(--bd)}
+.sess:last-of-type{border-bottom:none}
+.sess-head{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;margin-bottom:.35rem}
+.sess-type{font-family:'Space Mono',monospace;font-size:.6rem;text-transform:uppercase;letter-spacing:.8px;font-weight:700;padding:.18rem .5rem;border-radius:4px;cursor:help;position:relative;display:inline-block}
+.sess-type[data-tooltip]:hover::after,
+.sess-type[data-tooltip]:focus::after{content:attr(data-tooltip);position:absolute;bottom:calc(100% + 8px);left:0;background:var(--sf2);border:1px solid var(--bd);border-radius:6px;padding:.55rem .7rem;font-family:'DM Sans',sans-serif;font-size:.75rem;font-weight:400;color:var(--tx);text-transform:none;letter-spacing:0;line-height:1.45;width:max-content;max-width:240px;z-index:10;box-shadow:0 4px 16px rgba(0,0,0,.4);pointer-events:none;white-space:normal}
+.sess-type-easy{background:rgba(63,185,80,.15);color:var(--ac2);border:1px solid var(--ac2)}
+.sess-type-long{background:rgba(88,166,255,.15);color:var(--ac);border:1px solid var(--ac)}
+.sess-type-test{background:rgba(210,168,255,.15);color:var(--pd);border:1px solid var(--pd)}
+.sess-type-hike{background:rgba(139,148,158,.12);color:var(--tx2);border:1px solid var(--tx2)}
+.sess-type-strength{background:rgba(248,81,73,.15);color:var(--rd);border:1px solid var(--rd)}
+.sess-dur{font-family:'Space Mono',monospace;font-size:.85rem;font-weight:700;color:var(--tx)}
+.sess-meta{font-family:'Space Mono',monospace;font-size:.7rem;color:var(--tx2)}
+.sess-when{font-family:'Space Mono',monospace;font-size:.6rem;font-weight:700;color:var(--tx);background:var(--sf2);border:1px solid var(--bd);border-radius:4px;padding:.18rem .45rem;text-transform:uppercase;letter-spacing:.8px;white-space:nowrap;margin-left:auto}
+.sess-notes{font-size:.82rem;color:var(--tx2);line-height:1.5;margin-top:.3rem}
+
+.sess-routes{display:flex;flex-direction:column;gap:.4rem;margin-top:.55rem;align-items:flex-start}
+.sess-route{display:inline-flex;align-items:center;gap:.4rem;padding:.45rem .7rem;background:var(--sf2);border:1px solid var(--bd);border-radius:6px;text-decoration:none;color:var(--ac);font-family:'Space Mono',monospace;font-size:.75rem;font-weight:700;transition:border-color .2s,background .2s}
+.sess-route:hover{border-color:var(--ac);background:rgba(88,166,255,.08)}
+.sess-route-icon{font-size:.85rem}
+
+.gear{margin-top:.6rem;padding:.7rem .85rem;background:rgba(240,136,62,.05);border:1px solid rgba(240,136,62,.25);border-radius:6px}
+.gear-title{font-family:'Space Mono',monospace;font-size:.65rem;color:var(--wn);text-transform:uppercase;letter-spacing:1px;margin-bottom:.55rem;font-weight:700}
+.gear-cat{margin-bottom:.5rem}
+.gear-cat:last-child{margin-bottom:0}
+.gear-cat-title{font-family:'Space Mono',monospace;font-size:.7rem;color:var(--tx);font-weight:700;margin-bottom:.2rem}
+.gear-items{list-style:none;padding-left:0;margin:0}
+.gear-items li{font-size:.78rem;color:var(--tx2);line-height:1.55;padding:.12rem 0 .12rem 1rem;position:relative}
+.gear-items li::before{content:'·';position:absolute;left:.35rem;color:var(--wn);font-weight:700}
+
+.gd{margin-top:.7rem;padding:.7rem .85rem;background:var(--sf2);border:1px solid var(--bd);border-radius:6px}
+.gd-title{font-family:'Space Mono',monospace;font-size:.65rem;color:var(--tx2);text-transform:uppercase;letter-spacing:1px;margin-bottom:.55rem;font-weight:700}
+.gd-row{margin-bottom:.55rem}
+.gd-row:last-of-type{margin-bottom:0}
+.gd-row-lbl{font-family:'Space Mono',monospace;font-size:.62rem;color:var(--tx2);text-transform:uppercase;letter-spacing:.8px;margin-bottom:.25rem;display:flex;justify-content:space-between;align-items:baseline;gap:.5rem}
+.gd-row-lbl strong{color:var(--tx);font-weight:700}
+.gd-row-lbl em{font-style:normal;font-size:.6rem;color:var(--tx2)}
+.zstack{display:flex;width:100%;height:18px;border-radius:4px;overflow:hidden;background:var(--bg);border:1px solid var(--bd)}
+.zseg{height:100%;display:flex;align-items:center;justify-content:center;font-family:'Space Mono',monospace;font-size:.58rem;color:#0e1117;font-weight:700;min-width:0;overflow:hidden;white-space:nowrap}
+.zseg.gd-down-gt-10{background:#0a3069;color:#fff}
+.zseg.gd-down-5-10{background:#1f6feb;color:#fff}
+.zseg.gd-down-2-5{background:#79c0ff}
+.zseg.gd-flat{background:#6e7681;color:#fff}
+.zseg.gd-rolling{background:#d29922}
+.zseg.gd-uphill{background:#f0883e}
+.zseg.gd-steep{background:#f85149;color:#fff}
+.zlegend{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.55rem;font-family:'Space Mono',monospace;font-size:.65rem;color:var(--tx2)}
+.zleg-item{display:flex;align-items:center;gap:.3rem}
+.zleg-dot{width:9px;height:9px;border-radius:2px;flex-shrink:0}
+.zleg-dot.gd-down-gt-10{background:#0a3069}
+.zleg-dot.gd-down-5-10{background:#1f6feb}
+.zleg-dot.gd-down-2-5{background:#79c0ff}
+.zleg-dot.gd-flat{background:#6e7681}
+.zleg-dot.gd-rolling{background:#d29922}
+.zleg-dot.gd-uphill{background:#f0883e}
+.zleg-dot.gd-steep{background:#f85149}
+.gd-note{font-size:.75rem;color:var(--tx2);line-height:1.5;margin-top:.55rem;padding-top:.55rem;border-top:1px solid var(--bd)}
+
+.nav-card{display:flex;align-items:center;justify-content:space-between;background:var(--sf);border:1px solid var(--bd);border-radius:10px;padding:.9rem 1.1rem;text-decoration:none;color:inherit;transition:border-color .2s;margin-bottom:.7rem}
+.nav-card:hover{border-color:var(--ac)}
+.nav-card-title{font-family:'Space Mono',monospace;font-size:.9rem;color:var(--tx);font-weight:700}
+.nav-card-sub{font-family:'Space Mono',monospace;font-size:.7rem;color:var(--tx2);margin-top:.15rem}
+.nav-card-arrow{color:var(--ac);font-family:'Space Mono',monospace;font-size:1rem}
+
+.week-pager{display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-top:1.2rem}
+.week-pager .nav-card{margin-bottom:0}
+.week-pager .nav-card.prev{justify-content:flex-start;gap:.7rem}
+.week-pager .nav-card.next{justify-content:flex-end;gap:.7rem;text-align:right}
+.week-pager .nav-card.prev .nav-card-arrow{order:-1}
+
+.loader{text-align:center;padding:3rem 0;color:var(--tx2)}
+.spinner{display:inline-block;width:20px;height:20px;border:2px solid var(--bd);border-top-color:var(--ac);border-radius:50%;animation:spin .6s linear infinite;margin-bottom:.6rem}
+@keyframes spin{to{transform:rotate(360deg)}}
+.error{padding:1.5rem;color:var(--rd);font-size:.85rem;background:rgba(248,81,73,.05);border:1px solid var(--rd);border-radius:10px;text-align:center}
+
+footer{margin-top:3rem;padding-top:1.5rem;border-top:1px solid var(--bd);text-align:center;color:var(--tx2);font-size:.72rem}
+footer a{color:var(--ac);text-decoration:none}
+
+@media(max-width:480px){
+  .week-dates{text-align:left;width:100%}
+}
+</style>
+</head>
+<body>
+<div class="c">
+  <a class="back" href="./"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>Piano</a>
+
+  <div id="app"><div class="loader"><div class="spinner"></div><br>Caricamento dati...</div></div>
+
+  <footer>
+    <a href="https://github.com/fabiosangregorio/claude-projects/tree/main/trail-brenta-2026" target="_blank" rel="noopener">trail-brenta-2026</a>
+  </footer>
+</div>
+
+<script>
+const BASE = './data/';
+let PLAN = null;
+let PROFILE = null;
+
+async function loadAll() {
+  const app = document.getElementById('app');
+  try {
+    [PLAN, PROFILE] = await Promise.all([
+      fetch(BASE + 'plan.json').then(r => { if (!r.ok) throw new Error('plan.json: ' + r.status); return r.json(); }),
+      fetch(BASE + 'profile.json').then(r => { if (!r.ok) throw new Error('profile.json: ' + r.status); return r.json(); })
+    ]);
+    renderRoute();
+  } catch (err) {
+    app.innerHTML = `<div class="error">Errore caricamento dati: ${err.message}</div>`;
+  }
+}
+
+function renderRoute() {
+  const app = document.getElementById('app');
+  const weeks = (PLAN && PLAN.weeks) || [];
+  const n = parseInt(location.hash.slice(1), 10);
+  const week = weeks.find(w => w.number === n);
+
+  if (!week) {
+    app.innerHTML = `<div class="error">Settimana non trovata. <a href="./" style="color:var(--ac)">Torna al piano</a></div>`;
+    document.title = 'DBT 21K — Piano settimana';
+    return;
+  }
+
+  const phase = PLAN.phases.find(p => p.id === week.phase_id);
+  const today = todayISO();
+  const isCurrent = today >= week.start_date && today <= week.end_date;
+
+  document.title = `DBT 21K — Settimana ${week.number}`;
+
+  const sessHtml = (week.sessions || []).map(renderSession).join('');
+  const strengthHtml = week.strength
+    ? `<div class="sess">
+         <div class="sess-head">
+           <span class="sess-type sess-type-strength" data-tooltip="${TYPE_DESCRIPTIONS.strength}" tabindex="0" aria-label="forza: ${TYPE_DESCRIPTIONS.strength}">forza</span>
+           <span class="sess-dur">~25 min</span>
+           <span class="sess-meta">full-body · vedi piano principale</span>
+         </div>
+         <div class="sess-notes">Template completo nella sezione "Forza & mobility" della <a href="./plan.html" style="color:var(--ac)">pagina piano</a>. 1 sessione. Mai prima del lungo.</div>
+       </div>`
+    : (week.strength_note ? `<div class="sess">
+         <div class="sess-head">
+           <span class="sess-type sess-type-strength" data-tooltip="${TYPE_DESCRIPTIONS.strength}" tabindex="0" aria-label="forza: ${TYPE_DESCRIPTIONS.strength}">forza</span>
+           <span class="sess-meta">· saltata</span>
+         </div>
+         <div class="sess-notes" style="color:var(--wn)">⚠ ${week.strength_note}</div>
+       </div>` : '');
+
+  const prev = weeks.find(w => w.number === week.number - 1);
+  const next = weeks.find(w => w.number === week.number + 1);
+  const pagerHtml = `
+    <div class="week-pager">
+      ${prev ? `
+        <a class="nav-card prev" href="#${prev.number}">
+          <div class="nav-card-arrow">←</div>
+          <div>
+            <div class="nav-card-title">Settimana ${prev.number}</div>
+            <div class="nav-card-sub">${prev.label || ''}</div>
+          </div>
+        </a>` : '<div></div>'}
+      ${next ? `
+        <a class="nav-card next" href="#${next.number}">
+          <div>
+            <div class="nav-card-title">Settimana ${next.number}</div>
+            <div class="nav-card-sub">${next.label || ''}</div>
+          </div>
+          <div class="nav-card-arrow">→</div>
+        </a>` : '<div></div>'}
+    </div>
+  `;
+
+  app.innerHTML = `
+    <section${isCurrent ? ' class="live"' : ''}>
+      <h2 class="s-title">${isCurrent ? 'Settimana corrente' : 'Piano settimana'}</h2>
+      <div class="card${isCurrent ? ' live' : ''}">
+        <div class="week-head">
+          <div>
+            <div class="week-num">${phase ? phase.name : ''} · settimana ${week.number}/${PLAN.total_weeks}</div>
+            <div class="week-label">${week.label || ''}</div>
+          </div>
+          <div class="week-dates">${formatItalianDate(week.start_date, true)}<br>↓<br>${formatItalianDate(week.end_date, true)}</div>
+        </div>
+        ${week.narrative ? `<div class="week-narr">${week.narrative}</div>` : ''}
+        ${sessHtml}
+        ${strengthHtml}
+      </div>
+      ${pagerHtml}
+    </section>
+  `;
+
+  window.scrollTo(0, 0);
+}
+
+const TYPE_LABELS = { easy:'facile', long:'lungo', test:'test', hike:'hike', strength:'forza' };
+const TYPE_DESCRIPTIONS = {
+  easy: 'Corsa breve a bassa intensità (Z1-Z2 bassa), ritmo conversazionale. Stimolo aerobico minimo, recupero attivo.',
+  long: 'Corsa lunga aerobica in Z1-Z2. Costruisce capacità aerobica — di solito il workout chiave della settimana.',
+  test: 'Sessione di misurazione: FC, decoupling, sensazioni. Riferimento per calibrare le settimane successive.',
+  hike: 'Cammino in montagna in Z1-Z2. Costruisce volume e gambe da salita senza stress da intensità di corsa.',
+  strength: 'Sessione di forza full-body. Vedi template completo nella pagina piano.'
+};
+
+function renderSession(s) {
+  const typeLabel = TYPE_LABELS[s.type] || s.type;
+  const typeDesc = TYPE_DESCRIPTIONS[s.type] || '';
+  const meta = [];
+  if (s.intensity) meta.push(s.intensity);
+  if (s.fc_max_bpm) meta.push(`FC max ${s.fc_max_bpm}`);
+  if (s.vertical_m) meta.push(`+${s.vertical_m} m`);
+  else if (s.vertical_m_max) meta.push(`+${s.vertical_m_max} m max`);
+
+  const gearHtml = (s.gear_checklist && s.gear_checklist.length) ? `
+    <div class="gear">
+      <div class="gear-title">Cosa portare</div>
+      ${s.gear_checklist.map(g => `
+        <div class="gear-cat">
+          <div class="gear-cat-title">${g.category}</div>
+          <ul class="gear-items">${g.items.map(i => `<li>${i}</li>`).join('')}</ul>
+        </div>
+      `).join('')}
+    </div>` : '';
+
+  const gdHtml = renderGradeDistribution(s.grade_distribution);
+
+  const routesHtml = (s.routes && s.routes.length) ? `
+    <div class="sess-routes">
+      ${s.routes.map(r => `
+        <a class="sess-route" href="${r.url}" target="_blank" rel="noopener">
+          <span class="sess-route-icon">↗</span>
+          <span class="sess-route-text">${r.name || 'Apri percorso'}</span>
+        </a>
+      `).join('')}
+    </div>` : '';
+
+  return `
+    <div class="sess">
+      <div class="sess-head">
+        <span class="sess-type sess-type-${s.type}"${typeDesc ? ` data-tooltip="${typeDesc}" tabindex="0" aria-label="${typeLabel}: ${typeDesc}"` : ''}>${typeLabel}</span>
+        <span class="sess-dur">${s.duration_min} min</span>
+        <span class="sess-meta">· ${meta.join(' · ')}</span>
+        ${s.when ? `<span class="sess-when">${s.when}</span>` : ''}
+      </div>
+      ${s.notes ? `<div class="sess-notes">${s.notes}</div>` : ''}
+      ${routesHtml}
+      ${gdHtml}
+      ${gearHtml}
+    </div>
+  `;
+}
+
+function renderGradeDistribution(gd) {
+  if (!gd) return '';
+  const race = PROFILE && PROFILE.race_target && PROFILE.race_target.course_profile_2025
+    && PROFILE.race_target.course_profile_2025.grade_distribution;
+  if (!race) return '';
+
+  const segs = [
+    { key: 'down_gt_10', cls: 'gd-down-gt-10', lbl: 'Disc &gt;10%' },
+    { key: 'down_5_10',  cls: 'gd-down-5-10',  lbl: 'Disc 5-10%' },
+    { key: 'down_2_5',   cls: 'gd-down-2-5',   lbl: 'Disc 2-5%' },
+    { key: 'flat_lt_2',  cls: 'gd-flat',       lbl: 'Piano &lt;2%' },
+    { key: 'rolling_2_5',cls: 'gd-rolling',    lbl: 'Mosso 2-5%' },
+    { key: 'uphill_5_10',cls: 'gd-uphill',     lbl: 'Sal 5-10%' },
+    { key: 'steep_gt_10',cls: 'gd-steep',      lbl: 'Ripido &gt;10%' }
+  ];
+
+  const stack = (dist) => `<div class="zstack">${
+    segs.map(s => {
+      const v = dist[s.key];
+      if (v == null || v <= 0) return '';
+      return `<div class="zseg ${s.cls}" style="width:${v.toFixed(2)}%" title="${s.lbl} · ${v}%">${v >= 7 ? Math.round(v) + '%' : ''}</div>`;
+    }).join('')
+  }</div>`;
+
+  const totalSession = segs.reduce((a, s) => a + (gd[s.key] || 0), 0);
+  const cosineSim = (() => {
+    let dot = 0, na = 0, nb = 0;
+    segs.forEach(s => {
+      const a = gd[s.key] || 0, b = race[s.key] || 0;
+      dot += a * b; na += a * a; nb += b * b;
+    });
+    return (na && nb) ? (dot / Math.sqrt(na * nb)) : 0;
+  })();
+  const tvDist = segs.reduce((a, s) => a + Math.abs((gd[s.key] || 0) - (race[s.key] || 0)), 0) / 2;
+
+  const legend = segs.filter(s => (gd[s.key] || 0) > 0 || (race[s.key] || 0) > 0)
+    .map(s => `<div class="zleg-item"><span class="zleg-dot ${s.cls}"></span>${s.lbl}</div>`).join('');
+
+  return `
+    <div class="gd">
+      <div class="gd-title">Distribuzione pendenza vs gara</div>
+      <div class="gd-row">
+        <div class="gd-row-lbl"><strong>Sessione</strong><em>${totalSession ? '~' + Math.round(totalSession) + '% del tracciato' : ''}</em></div>
+        ${stack(gd)}
+      </div>
+      <div class="gd-row">
+        <div class="gd-row-lbl"><strong>DBT 21K (gara)</strong><em>21 km · +1212 m</em></div>
+        ${stack(race)}
+      </div>
+      <div class="zlegend">${legend}</div>
+      <div class="gd-note">
+        <strong style="color:var(--tx)">Match:</strong> cosine ${cosineSim.toFixed(2)} · sovrapposizione ${(100 - tvDist).toFixed(0)}%
+        ${gd.vs_race_note ? `<br>${gd.vs_race_note}` : ''}
+      </div>
+    </div>
+  `;
+}
+
+function todayISO() {
+  const d = new Date();
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, '0');
+  const day = String(d.getDate()).padStart(2, '0');
+  return `${y}-${m}-${day}`;
+}
+
+function formatItalianDate(iso, short = false) {
+  const months = ['gen','feb','mar','apr','mag','giu','lug','ago','set','ott','nov','dic'];
+  const monthsLong = ['gennaio','febbraio','marzo','aprile','maggio','giugno','luglio','agosto','settembre','ottobre','novembre','dicembre'];
+  const d = new Date(iso);
+  return `${d.getDate()} ${(short ? months : monthsLong)[d.getMonth()]} ${d.getFullYear()}`;
+}
+
+window.addEventListener('hashchange', () => { if (PLAN) renderRoute(); });
+loadAll();
+</script>
+</body>
+</html>

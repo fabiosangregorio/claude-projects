@@ -130,20 +130,6 @@ section.live .s-title::before{background:var(--ac2);box-shadow:0 0 0 0 rgba(63,1
 .phase-focus{font-size:.82rem;color:var(--tx2);line-height:1.5;margin-bottom:.4rem}
 .phase-kpi{font-family:'Space Mono',monospace;font-size:.7rem;color:var(--ac);background:rgba(88,166,255,.08);border:1px solid rgba(88,166,255,.2);border-radius:4px;padding:.4rem .55rem;line-height:1.5}
 
-/* Milestones */
-.ms{display:flex;align-items:flex-start;gap:.7rem;padding:.6rem 0;border-bottom:1px solid var(--bd)}
-.ms:last-child{border-bottom:none}
-.ms.past{opacity:.5}
-.ms-date{font-family:'Space Mono',monospace;font-size:.7rem;color:var(--tx);min-width:5.2rem;font-weight:700}
-.ms-date small{display:block;font-size:.6rem;color:var(--tx2);font-weight:400;margin-top:.1rem;text-transform:uppercase;letter-spacing:.5px}
-.ms-body{flex:1;min-width:0}
-.ms-label{font-size:.85rem;color:var(--tx)}
-.ms-type{display:inline-block;font-family:'Space Mono',monospace;font-size:.55rem;text-transform:uppercase;letter-spacing:.8px;padding:.12rem .4rem;border-radius:3px;margin-top:.2rem;font-weight:700}
-.ms-type-test{background:rgba(210,168,255,.12);color:var(--pd)}
-.ms-type-burocrazia{background:rgba(240,136,62,.12);color:var(--wn)}
-.ms-type-milestone{background:rgba(63,185,80,.12);color:var(--ac2)}
-.ms-type-race{background:rgba(248,81,73,.15);color:var(--rd);font-weight:700}
-
 /* Zones table */
 .zone-row{display:grid;grid-template-columns:auto auto 1fr;gap:.7rem;align-items:center;padding:.5rem 0;border-bottom:1px solid var(--bd);font-size:.78rem}
 .zone-row:last-child{border-bottom:none}
@@ -221,27 +207,26 @@ const BASE = './data/';
 async function loadAll() {
   const app = document.getElementById('app');
   try {
-    const [profile, params, activitiesManifest] = await Promise.all([
+    const [profile, plan, todo, activitiesManifest] = await Promise.all([
       fetch(BASE + 'profile.json').then(r => { if (!r.ok) throw new Error('profile.json: ' + r.status); return r.json(); }),
-      fetch(BASE + 'parameters.json').then(r => { if (!r.ok) throw new Error('parameters.json: ' + r.status); return r.json(); }),
+      fetch(BASE + 'plan.json').then(r => { if (!r.ok) throw new Error('plan.json: ' + r.status); return r.json(); }),
+      fetch(BASE + 'todo.json').then(r => { if (!r.ok) throw new Error('todo.json: ' + r.status); return r.json(); }),
       fetch(BASE + 'activities/index.json').then(r => r.ok ? r.json() : { activities: [] }).catch(() => ({ activities: [] }))
     ]);
-    render(app, profile, params, activitiesManifest);
-    document.getElementById('lastUpdated').textContent = 'parametri aggiornati ' + params.last_updated;
+    render(app, profile, plan, todo, activitiesManifest);
+    document.getElementById('lastUpdated').textContent = 'piano aggiornato ' + plan.last_updated;
   } catch (err) {
     app.innerHTML = `<div class="error">Errore caricamento dati: ${err.message}</div>`;
   }
 }
 
-function render(app, profile, params, activitiesManifest) {
+function render(app, profile, plan, todo, activitiesManifest) {
   app.innerHTML = [
-    renderHero(profile, params),
-    renderCurrentWeek(params),
+    renderHero(profile, plan),
+    renderPlanLink(plan),
     renderActivitiesLink(activitiesManifest),
-    renderTasks(params),
-    renderPhases(params),
-    renderMilestones(params),
-    renderRefSection(params),
+    renderRecoveryLink(),
+    renderTasks(todo),
     renderRaceInfo(profile),
     renderProfile(profile)
   ].join('');
@@ -249,7 +234,7 @@ function render(app, profile, params, activitiesManifest) {
 
 /* ── Sections ──────────────────────────────────────────────── */
 
-function renderHero(profile, params) {
+function renderHero(profile, plan) {
   const r = profile.race_target;
   const cd = countdown(r.date);
   return `
@@ -264,90 +249,37 @@ function renderHero(profile, params) {
   `;
 }
 
-function renderCurrentWeek(params) {
-  if (!params.plan || !params.plan.weeks || !params.plan.weeks.length) return '';
-
-  const today = todayISO();
-  const weeks = params.plan.weeks;
-  let week = weeks.find(w => today >= w.start_date && today <= w.end_date);
-  let label = 'Settimana corrente';
-
-  if (!week) {
-    const next = weeks.find(w => w.start_date > today);
-    if (next) { week = next; label = 'Prossima settimana'; }
-    else { week = weeks[weeks.length - 1]; label = 'Ultima settimana definita'; }
+function renderPlanLink(plan) {
+  let sub = '';
+  if (plan && plan.weeks && plan.weeks.length) {
+    const today = todayISO();
+    const weeks = plan.weeks;
+    let week = weeks.find(w => today >= w.start_date && today <= w.end_date)
+      || weeks.find(w => w.start_date > today)
+      || weeks[weeks.length - 1];
+    const phase = plan.phases.find(p => p.id === week.phase_id);
+    sub = `${phase ? phase.name + ' · ' : ''}sett ${week.number}/${plan.total_weeks}`;
   }
-
-  const phase = params.plan.phases.find(p => p.id === week.phase_id);
-  const sessHtml = (week.sessions || []).map(renderSession).join('');
-  const strengthHtml = week.strength
-    ? `<div class="sess">
-         <div class="sess-head">
-           <span class="sess-type sess-type-strength">forza</span>
-           <span class="sess-dur">~25 min</span>
-           <span class="sess-meta">full-body · vedi sotto</span>
-         </div>
-         <div class="sess-notes">Template completo nella sezione "Forza & mobility" più sotto. 1 sessione. Mai prima del lungo.</div>
-       </div>`
-    : (week.strength_note ? `<div class="sess"><div class="sess-notes" style="color:var(--wn)">⚠ ${week.strength_note}</div></div>` : '');
-
   return `
-    <section class="live">
-      <h2 class="s-title">${label}</h2>
-      <div class="card live">
-        <div class="week-head">
-          <div>
-            <div class="week-num">${phase ? phase.name : ''} · settimana ${week.number}/${params.plan.total_weeks}</div>
-            <div class="week-label">${week.label || ''}</div>
-          </div>
-          <div class="week-dates">${formatItalianDate(week.start_date, true)}<br>↓<br>${formatItalianDate(week.end_date, true)}</div>
-        </div>
-        ${week.narrative ? `<div class="week-narr">${week.narrative}</div>` : ''}
-        ${sessHtml}
-        ${strengthHtml}
-        ${week.milestone ? `<div style="margin-top:.8rem;padding:.55rem .7rem;background:rgba(210,168,255,.08);border:1px solid var(--pd);border-radius:6px;font-size:.78rem;color:var(--pd);font-family:'Space Mono',monospace">★ ${week.milestone}</div>` : ''}
+    <a class="nav-card" href="./plan.html">
+      <div>
+        <div class="nav-card-title">Piano</div>
+        ${sub ? `<div class="nav-card-sub">${sub}</div>` : ''}
       </div>
-    </section>
+      <div class="nav-card-arrow">→</div>
+    </a>
   `;
 }
 
-function renderSession(s) {
-  const types = { easy:'facile', long:'lungo', test:'test', hike_baseline:'baseline trail', hike:'hike', strength:'forza' };
-  const typeLabel = types[s.type] || s.type;
-  const meta = [];
-  if (s.intensity) meta.push(s.intensity);
-  if (s.fc_max_bpm) meta.push(`FC max ${s.fc_max_bpm}`);
-  if (s.vertical_m) meta.push(`+${s.vertical_m} m`);
-  else if (s.vertical_m_max) meta.push(`+${s.vertical_m_max} m max`);
-
-  const gearHtml = (s.gear_checklist && s.gear_checklist.length) ? `
-    <div class="gear">
-      <div class="gear-title">Cosa portare</div>
-      ${s.gear_checklist.map(g => `
-        <div class="gear-cat">
-          <div class="gear-cat-title">${g.category}</div>
-          <ul class="gear-items">${g.items.map(i => `<li>${i}</li>`).join('')}</ul>
-        </div>
-      `).join('')}
-    </div>` : '';
-
-  const routeHtml = s.route_url ? `
-    <a class="sess-route" href="${s.route_url}" target="_blank" rel="noopener">
-      <span class="sess-route-icon">↗</span>
-      <span class="sess-route-text">${s.route_name || 'Apri percorso'}</span>
-    </a>` : '';
-
+function renderRecoveryLink() {
   return `
-    <div class="sess">
-      <div class="sess-head">
-        <span class="sess-type sess-type-${s.type}">${typeLabel}</span>
-        <span class="sess-dur">${s.duration_min} min</span>
-        <span class="sess-meta">· ${meta.join(' · ')}</span>
+    <a class="nav-card" href="./recovery.html">
+      <div>
+        <div class="nav-card-title">Recovery</div>
+        <div class="nav-card-sub">guida pratica · cosa fare dopo l'attività</div>
       </div>
-      ${s.notes ? `<div class="sess-notes">${s.notes}</div>` : ''}
-      ${routeHtml}
-      ${gearHtml}
-    </div>
+      <div class="nav-card-arrow">→</div>
+    </a>
   `;
 }
 
@@ -366,10 +298,11 @@ function renderActivitiesLink(manifest) {
   `;
 }
 
-function renderTasks(params) {
-  const urgent = params.preparation_tasks.filter(t => t.priority === 'urgente' && t.status !== 'done');
-  const open = params.preparation_tasks.filter(t => t.status !== 'done');
-  const done = params.preparation_tasks.filter(t => t.status === 'done');
+function renderTasks(todo) {
+  const tasks = (todo && todo.tasks) || [];
+  const urgent = tasks.filter(t => t.priority === 'urgente' && t.status !== 'done');
+  const open = tasks.filter(t => t.status !== 'done');
+  const done = tasks.filter(t => t.status === 'done');
   const isUrgent = urgent.length > 0;
 
   const taskHtml = open.concat(done).map(t => `
@@ -393,148 +326,6 @@ function renderTasks(params) {
       <div class="card ${isUrgent ? 'alert' : ''}">
         ${taskHtml}
       </div>
-    </section>
-  `;
-}
-
-function renderPhases(params) {
-  if (!params.plan || !params.plan.phases) return '';
-  const today = todayISO();
-
-  const html = params.plan.phases.map(p => {
-    let cls = '';
-    if (today > p.end_date) cls = 'past';
-    else if (today >= p.start_date && today <= p.end_date) cls = 'current';
-
-    return `
-      <div class="phase ${cls}">
-        <div class="phase-num">${p.number}</div>
-        <div>
-          <div class="phase-name">${p.name}</div>
-          <div class="phase-dates">${formatItalianDate(p.start_date, true)} → ${formatItalianDate(p.end_date, true)} · sett ${p.weeks_range[0]}-${p.weeks_range[1]} · lungo ${p.long_run_min[0]}-${p.long_run_min[1]} min · D+ ${p.vertical_target_m[0]}-${p.vertical_target_m[1]} m</div>
-          <div class="phase-focus">${p.focus}</div>
-          <div class="phase-kpi">★ ${p.key_objective}</div>
-        </div>
-      </div>
-    `;
-  }).join('');
-
-  return `
-    <section>
-      <h2 class="s-title">Le 4 fasi</h2>
-      <div class="card">${html}</div>
-    </section>
-  `;
-}
-
-function renderMilestones(params) {
-  if (!params.plan || !params.plan.milestones) return '';
-  const today = todayISO();
-  const sorted = [...params.plan.milestones].sort((a,b) => a.date.localeCompare(b.date));
-
-  const html = sorted.map(m => {
-    const past = m.date < today;
-    const days = Math.ceil((new Date(m.date) - new Date(today)) / 86400000);
-    const dayLbl = past ? '' : (days === 0 ? 'oggi' : days === 1 ? 'domani' : `tra ${days} gg`);
-
-    return `
-      <div class="ms ${past ? 'past' : ''}">
-        <div class="ms-date">${formatItalianDate(m.date, true)}<small>${dayLbl}</small></div>
-        <div class="ms-body">
-          <div class="ms-label">${m.label}</div>
-          <span class="ms-type ms-type-${m.type}">${m.type}</span>
-        </div>
-      </div>
-    `;
-  }).join('');
-
-  return `
-    <section>
-      <h2 class="s-title">Milestone</h2>
-      <div class="card">${html}</div>
-    </section>
-  `;
-}
-
-function renderRefSection(params) {
-  const z = params.training_zones;
-  const s = params.plan.strength_template;
-  const m = params.plan.mobility_template;
-  const rules = params.plan.rules || [];
-  const budget = params.plan.weekly_budget;
-
-  const zonesHtml = (z && z.zones) ? z.zones.map(zone => `
-    <div class="zone-row">
-      <div class="zone-id" style="color:${zone.color}">${zone.id.toUpperCase()}</div>
-      <div class="zone-bpm">${zone.min_bpm}–${zone.max_bpm} bpm</div>
-      <div><span class="zone-lbl">${zone.label}</span><span class="zone-use">${zone.use}</span></div>
-    </div>
-  `).join('') : '';
-
-  const exHtml = (s && s.exercises) ? s.exercises.map(e => `
-    <div class="ex">
-      <div class="ex-name">${e.name}</div>
-      <div class="ex-meta">${e.sets} × ${e.reps}</div>
-      <div class="ex-focus">${e.focus}</div>
-    </div>
-  `).join('') : '';
-
-  const mobHtml = (m && m.exercises) ? m.exercises.map(e => `
-    <div class="ex">
-      <div class="ex-name">${e.name}</div>
-      <div class="ex-meta">${e.duration}</div>
-    </div>
-  `).join('') : '';
-
-  const rulesHtml = rules.map(r => `<div class="rule">${r}</div>`).join('');
-
-  return `
-    <section>
-      <h2 class="s-title">Riferimenti tecnici</h2>
-
-      <details>
-        <summary>
-          <span>Budget settimanale & regole<span class="summary-sub">${budget.running_sessions} corse + ${budget.strength_sessions} forza · ${rules.length} regole d'ingaggio</span></span>
-        </summary>
-        <div>
-          <div style="font-size:.82rem;color:var(--tx2);line-height:1.55;margin-bottom:.9rem;padding:.7rem;background:var(--sf2);border-radius:6px">${budget.philosophy}</div>
-          ${rulesHtml}
-        </div>
-      </details>
-
-      <details>
-        <summary>
-          <span>Zone di frequenza cardiaca<span class="summary-sub">FCmax ${z.fcmax_bpm} · MAF ${z.maf_ceiling_bpm} · 5 zone</span></span>
-        </summary>
-        <div>
-          <div style="font-size:.75rem;color:var(--tx2);margin-bottom:.7rem;line-height:1.5"><em>${z.fcmax_source}</em></div>
-          ${zonesHtml}
-          <div style="margin-top:.8rem;font-size:.78rem;color:var(--ac2);font-family:'Space Mono',monospace">★ MAF ${z.maf_ceiling_bpm} bpm: ${z.maf_note}</div>
-        </div>
-      </details>
-
-      <details>
-        <summary>
-          <span>Forza<span class="summary-sub">${s.frequency} · ${s.duration_min} min · ${s.exercises.length} esercizi</span></span>
-        </summary>
-        <div>
-          <div style="font-size:.78rem;color:var(--tx2);margin-bottom:.5rem"><strong>Quando:</strong> ${s.best_timing}</div>
-          <div style="font-size:.78rem;color:var(--tx2);margin-bottom:.5rem"><strong>Riscaldamento:</strong> ${s.warmup}</div>
-          <div style="font-size:.78rem;color:var(--tx2);margin-bottom:.9rem"><strong>Kit:</strong> ${s.kit}</div>
-          ${exHtml}
-          <div style="margin-top:.8rem;font-size:.78rem;color:var(--ac2);font-family:'Space Mono',monospace">★ Progressione: ${s.progression}</div>
-        </div>
-      </details>
-
-      <details>
-        <summary>
-          <span>Mobility post-corsa<span class="summary-sub">${m.exercises.length} esercizi · ~5 min</span></span>
-        </summary>
-        <div>
-          <div style="font-size:.78rem;color:var(--tx2);margin-bottom:.7rem">${m.when}</div>
-          ${mobHtml}
-        </div>
-      </details>
     </section>
   `;
 }

@@ -12,13 +12,17 @@ Questa sezione segue un'architettura **data-driven** diversa dai progetti DIY: i
 
 ```
 trail-brenta-2026/
-├── index.html              ← Home. Sintesi piano + tasks + profilo.
+├── index.html              ← Home. Tasks + obiettivo gara + profilo + link a piano e attività.
+├── plan.html               ← Indice del piano (fasi, milestone, riferimenti tecnici, link a settimana).
+├── week.html               ← Dettaglio piano settimanale (#<numero-settimana>).
 ├── activities.html         ← Lista di tutte le attività (run + hike).
 ├── activity.html           ← Dettaglio singola attività (#<filename-senza-.json>).
+├── recovery.html           ← Guida pratica al recupero post-attività (statica, no JSON).
 ├── README.md               ← Questo file.
 └── data/
-    ├── profile.json        ← Dati statici (atleta + obiettivo gara). Cambia raramente.
-    ├── parameters.json     ← Parametri di calibrazione del piano. Cambia spesso.
+    ├── profile.json        ← Atleta + obiettivo gara + zone FC calibrate.
+    ├── plan.json           ← Struttura del piano (fasi, settimane, milestone, template).
+    ├── todo.json           ← Task list di preparazione.
     └── activities/
         ├── index.json      ← Manifest: elenco dei file attività. AGGIORNARE a ogni nuovo log.
         └── <date>_<uuid>.json  ← Un file per attività (run o hike).
@@ -36,22 +40,27 @@ trail-brenta-2026/
 
 ### `data/profile.json`
 
-Dati **statici** dell'atleta e dell'obiettivo gara. Si modifica solo quando:
+Dati dell'atleta e dell'obiettivo gara. Si modifica quando:
 - Cambiano i dati anagrafici (peso, infortuni cronici nuovi, ecc.)
 - Si aggiorna lo status di un'attrezzatura (es. "scarpe provate")
 - Si cambia obiettivo gara (raro)
+- Si ricalibrano le zone di FC dopo un test (FCmax, MAF, bande)
 
-Sezioni: `athlete`, `experience`, `availability`, `health`, `equipment`, `race_target`, `nutrition_experience`.
+Sezioni: `athlete`, `experience`, `availability`, `health`, `calibration_source`, `training_zones`, `equipment`, `race_target`, `nutrition_experience`.
 
-### `data/parameters.json`
+### `data/plan.json`
 
-**Parametri di calibrazione** del piano — la parte viva. Si aggiorna ogni volta che:
-- Si segna una task come completata (es. visita medica fatta)
-- Si calibra il piano dopo un test
+**Struttura del piano** — il blueprint prescrittivo. Si aggiorna quando si ridisegna il piano (fasi, settimane, milestone, template forza/mobility).
 
 **Sempre aggiornare il campo `last_updated`** quando si modifica.
 
-Sezioni principali: `preparation_tasks`, `training_zones`, `plan` (con `phases`, `weeks`, `milestones`, `strength_template`, `mobility_template`).
+Chiavi top-level: `total_weeks`, `race_date`, `weekly_budget`, `rules`, `phases`, `weeks`, `milestones`, `strength_template`, `mobility_template`.
+
+### `data/todo.json`
+
+**Task list di preparazione** (burocrazia, equipment, test). Si aggiorna ogni volta che si segna una task come completata o se ne aggiunge una nuova.
+
+Chiavi: `last_updated`, `tasks` (array con `category`, `task`, `deadline?`, `status`, `priority?`, `note?`).
 
 ### `data/activities/`
 
@@ -103,7 +112,7 @@ Es. log sensazioni, lista spesa attrezzatura dettagliata.
 
 - ❌ Mai mettere dati nell'HTML. Se vedi un valore hardcoded nella pagina che dovrebbe vivere nei JSON, spostalo.
 - ❌ Mai modificare l'HTML per aggiornare i dati: modifica il JSON.
-- ❌ Mai duplicare dati tra `profile.json` e `parameters.json`. Se non sai dove mettere un campo, vince `parameters.json` se può cambiare.
+- ❌ Mai duplicare dati tra `profile.json` e `plan.json`. Profilo = chi sei (anagrafica + zone FC + obiettivo gara); plan = come ti alleni (fasi/settimane/template).
 - ❌ Mai aggiungere file/sezioni "appena utili": il principio del progetto è preferire rimuovere/modificare invece di aggiungere. Mantenere i file leggeri.
 
 ### Stile codice
@@ -121,7 +130,7 @@ Quando vuoi calibrare il piano dopo un test/lungo/sensazione:
 
 1. Apri una nuova chat con Claude.
 2. Dì cosa è successo (es. "ho fatto il primo lungo di 80 min, sensazioni ottime — passo medio 6:30/km").
-3. Claude leggerà `parameters.json`, applicherà la modifica, aggiornerà `last_updated`, pusherà su GitHub.
+3. Claude leggerà `plan.json` (e/o `profile.json` se cambiano le zone FC), applicherà la modifica, aggiornerà `last_updated`, pusherà su GitHub.
 
 La pagina si aggiorna automaticamente al prossimo refresh (i JSON vengono fetchati ogni volta).
 
@@ -129,9 +138,9 @@ La pagina si aggiorna automaticamente al prossimo refresh (i JSON vengono fetcha
 
 ## Note per Claude (sessioni future)
 
-- **Prima di modificare:** leggi sempre lo stato corrente di `profile.json`, `parameters.json` e `data/activities/index.json`.
+- **Prima di modificare:** leggi sempre lo stato corrente di `profile.json`, `plan.json`, `todo.json` e `data/activities/index.json`.
 - **Patch chirurgiche:** modifica solo i campi rilevanti, non riscrivere l'intero JSON.
-- **`last_updated`:** aggiornalo a ogni modifica di `parameters.json`.
+- **`last_updated`:** aggiornalo nel file modificato (`plan.json`, `profile.json` o `todo.json`).
 - **Validazione:** dopo ogni push, verifica che la pagina renderizzi senza errori (apri la URL live).
 - **Domande chirurgiche:** se Fabio dice "ho fatto un lungo", chiedi solo i dati mancanti (durata, dislivello, sensazioni, passo medio). Non rifare l'intake.
 - **Calibrazione conservativa:** se i numeri vanno meglio del previsto, alza i volumi al massimo del +10%. Mai di più.

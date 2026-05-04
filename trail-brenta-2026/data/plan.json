@@ -1,0 +1,285 @@
+{
+  "_schema_version": "1.1",
+  "_description": "Struttura del piano di allenamento: fasi, settimane, template forza/mobility, budget e regole.",
+  "last_updated": "2026-05-01",
+  "total_weeks": 18,
+  "race_date": "2026-09-05",
+  "weekly_budget": {
+    "running_sessions": 3,
+    "strength_sessions": 1,
+    "mobility_post_run_min": "5-10",
+    "philosophy": "Architettura a budget settimanale, non a giorni fissi. Distribuisci le sessioni nei giorni che hai, rispettando le regole."
+  },
+  "rules": [
+    "Il lungo non si salta. Se devi tagliare la settimana, taglia prima le corse brevi.",
+    "Mai due lavori duri di fila. Tra qualità e qualità, almeno 1 giorno di riposo o Z2 facile.",
+    "FC batte pace. Se al passo target la FC sale di più di 5 bpm sopra il limite di zona, rallenta o inserisci tratti di camminata.",
+    "Indolenzimento muscolare diffuso = ok continuare. Dolore acuto, articolare o asimmetrico = stop e valutazione medica.",
+    "Sonno sotto 6h o malanno in corso = sostituisci la sessione del giorno con riposo o corsa molto facile (max 25 min Z1).",
+    "Calibrazione conservativa: se i numeri vanno meglio del previsto, il volume sale al massimo del +10% settimana su settimana."
+  ],
+  "phases": [
+    {
+      "id": "1-rebuild",
+      "number": 1,
+      "name": "Ricostruzione aerobica",
+      "weeks_range": [
+        1,
+        5
+      ],
+      "start_date": "2026-05-02",
+      "end_date": "2026-06-07",
+      "focus": "Ricostruire il motore aerobico distrutto dai 13 mesi di stop. Tutto sotto MAF (152 bpm).",
+      "key_objective": "Portare il decoupling Pa:Hr da 12.6% a sotto 8% su un lungo di 60+ min.",
+      "long_run_min": [
+        60,
+        90
+      ],
+      "vertical_target_m": [
+        0,
+        200
+      ],
+      "intensity": "100% Z1-Z2, nessuna intensità",
+      "test_at_end": "Ripeti un 10-12 km piatto (stesso percorso del 1 maggio, se possibile). Misura il decoupling. Target: sotto l'8%."
+    },
+    {
+      "id": "2-base-mountain",
+      "number": 2,
+      "name": "Base montagna",
+      "weeks_range": [
+        6,
+        10
+      ],
+      "start_date": "2026-06-08",
+      "end_date": "2026-07-12",
+      "focus": "Introdurre il dislivello progressivamente. Costruire la 'gamba da salita' senza ancora cercare velocità.",
+      "key_objective": "Sostenere 1h30 di corsa/cammino con 600 m D+ a FC conversazionale (Z2).",
+      "long_run_min": [
+        75,
+        110
+      ],
+      "vertical_target_m": [
+        200,
+        700
+      ],
+      "intensity": "Quasi tutto Z2. Le salite naturali possono spingere brevemente in Z3 ma in salita CAMMINI quando la FC supera la soglia.",
+      "calibration_note": "Le sessioni dettagliate verranno definite alla fine della Fase 1, sulla base del test."
+    },
+    {
+      "id": "3-build",
+      "number": 3,
+      "name": "Build specifico",
+      "weeks_range": [
+        11,
+        15
+      ],
+      "start_date": "2026-07-13",
+      "end_date": "2026-08-16",
+      "focus": "Gara-specifico. Lunghi che simulano frazioni del percorso, discese tecniche, gestione nutrizione e fatica prolungata.",
+      "key_objective": "Completare un lungo da 3h con 800-900 m D+ usando la nutrizione che userai in gara.",
+      "long_run_min": [
+        120,
+        180
+      ],
+      "vertical_target_m": [
+        700,
+        1000
+      ],
+      "intensity": "80/20 polarizzato: 80% Z2, 20% qualità (tempo run brevi 20-30 min in Z3, una volta a settimana).",
+      "vacation_strategy": "Se le vacanze cadono qui e sono in zona montana → blocco massimamente produttivo (lunghi sui sentieri reali). Se sono in città/mare → mantenimento Z2 + scale come surrogato del D+, lungo settimanale non negoziabile.",
+      "calibration_note": "Definito dopo Fase 2."
+    },
+    {
+      "id": "4-peak-taper",
+      "number": 4,
+      "name": "Peak & Taper",
+      "weeks_range": [
+        16,
+        18
+      ],
+      "start_date": "2026-08-17",
+      "end_date": "2026-09-05",
+      "focus": "Affilare la forma, scaricare la fatica residua, arrivare alla linea di partenza fresco e fiducioso.",
+      "key_objective": "Presentarsi a Molveno il 5 settembre con gambe leggere, FC a riposo bassa, sonno ok, nessun dolore.",
+      "long_run_min": [
+        60,
+        120
+      ],
+      "vertical_target_m": [
+        200,
+        600
+      ],
+      "intensity": "Volume in calo progressivo (-30% in sett 17, -50% in sett 18). Mantieni 1 sessione corta in Z3 per non perdere sensazioni.",
+      "calibration_note": "Definito dopo Fase 3."
+    }
+  ],
+  "weeks": [
+    {
+      "number": 1,
+      "phase_id": "1-rebuild",
+      "start_date": "2026-05-02",
+      "end_date": "2026-05-10",
+      "label": "Doppio carico montagna + baseline",
+      "narrative": "Settimana di apertura a 9 giorni, costruita attorno al carico montano già a calendario. Il volume è enorme per chi rientra da 13 mesi di stop, ma sotto MAF è tutto Z1-Z2: stimola la base aerobica senza creare stress da intensità. La variabile critica è il recupero — i DOMS dell'hike arriveranno tra martedì e mercoledì, da gestire con mobility e zero corsa. La baseline finale fissa il riferimento misurato (FC, decoupling, sensazioni in salita) su cui taremo le settimane successive.",
+      "sessions": [
+        {
+          "type": "hike",
+          "duration_min": 480,
+          "intensity": "Z1-Z2",
+          "fc_max_bpm": 152,
+          "vertical_m": 1910,
+          "when": "SAB 2 + DOM 3",
+          "notes": "Hike con bivacco su 2 giorni. GIORNO 1 (sab): 13.1 km, +1640 m / -440 m, ~7h15. È il giorno toccante: 1640 m D+ in un colpo è ~30% oltre il tuo max storico recente. GIORNO 2 (dom): 10.1 km, +270 m / -1470 m, ~4h37. Quasi tutto in discesa, attenzione a quadricipiti, ginocchia e vesciche.",
+          "routes": [
+            {
+              "url": "https://www.komoot.com/it-it/tour/2929854136",
+              "name": "Giorno 1 — sab 2"
+            },
+            {
+              "url": "https://www.komoot.com/it-it/tour/2930672013",
+              "name": "Giorno 2 — dom 3"
+            }
+          ]
+        },
+        {
+          "type": "easy",
+          "duration_min": 25,
+          "intensity": "Z1-Z2 bassa",
+          "fc_max_bpm": 140,
+          "when": "MER 6 o GIO 7",
+          "notes": "Solo se le gambe rispondono. Test pratico: sali le scale di casa, se è doloroso o rigido salta la corsa e fai 30 min di camminata. Niente eroismi a 4 mesi dalla gara."
+        },
+        {
+          "type": "test",
+          "duration_min": 180,
+          "intensity": "Z2/MAF",
+          "fc_max_bpm": 152,
+          "vertical_m": 490,
+          "when": "SAB 9",
+          "notes": "Loop Monte Linzone da Roncola (la 'Cima Albenza' su Komoot è registrata come Monte Linzone). FC sotto 152 sempre, in salita CAMMINI senza vergogna se sale. ATTENZIONE: il tour ha 3 tratti tecnici (sentiero roccioso/esposto): uno lungo da km 1.30 per ~500 m in salita, due brevi da 27 m a km 2.05 e km 3.93. In quei tratti vai a passo lento e metti i piedi con cura — è la prima volta che testi le La Sportiva su sentiero, non è il momento di correre. GPS attivo, non spegnere alle pause. Acqua + snack salato.",
+          "gear_checklist": [
+            {
+              "category": "Indosso",
+              "items": [
+                "Scarpe La Sportiva (le scarpe da testare!)",
+                "Calze trail tecniche, no cotone",
+                "Maglia tecnica + pantaloncini",
+                "Cappellino o buff"
+              ]
+            },
+            {
+              "category": "Zaino",
+              "items": [
+                "Acqua 1–1,5 L con un pizzico di sali",
+                "Barretta + frutta secca (o un gel se ce l'hai)",
+                "Telefono carico",
+                "Orologio GPS carico",
+                "Cerotti Compeed (scarpe nuove = vesciche probabili)",
+                "Crema solare (maggio scotta già in quota)",
+                "Giacca antivento leggera (la cima è ventosa)",
+                "Documento + qualche euro"
+              ]
+            },
+            {
+              "category": "Opzionali ma utili",
+              "items": [
+                "Bastoncini (proteggono ginocchia in discesa)",
+                "Bandana per il sudore"
+              ]
+            }
+          ],
+          "routes": [
+            {
+              "url": "https://www.komoot.com/smarttour/26057234",
+              "name": "Monte Linzone loop da Roncola (6 km, 490 m D+, ~2h38)"
+            }
+          ],
+          "grade_distribution": {
+            "_source": "Calcolata dalle coordinate del komoot smarttour 26057234, stesso algoritmo del GPX Brenta (smoothing 7-pt + dead-band 0.5m, finestra ~25m).",
+            "flat_lt_2": 1.3,
+            "rolling_2_5": 4.6,
+            "uphill_5_10": 11.8,
+            "steep_gt_10": 32.4,
+            "down_2_5": 6.2,
+            "down_5_10": 12.0,
+            "down_gt_10": 31.8,
+            "vs_race_note": "Stesso DNA della Brenta (cosine 0.96): bimodale ripido-su / ripido-giù. Più denso (8.3 vs 5.8 m D+/100m) e quasi nessun piano (1.3% vs 11.4%). Lab della parte più dura del profilo gara."
+          }
+        }
+      ],
+      "strength": null,
+      "strength_note": "Saltata. Tre uscite montagna in 8 giorni sono il carico massimo possibile per il rientro. Sostituire con 5-10 min di mobility le sere dei giorni di hike e il giorno dopo."
+    }
+  ],
+  "strength_template": {
+    "frequency": "1x/settimana",
+    "best_timing": "Giorno dopo il lungo, oppure giornata con corsa breve facile. Mai prima del lungo.",
+    "duration_min": 25,
+    "warmup": "5 min: 20 jumping jack + 10 air squat + 10 bird-dog/lato + cerchi anche.",
+    "exercises": [
+      {
+        "name": "Goblet squat (manubrio davanti al petto)",
+        "sets": 3,
+        "reps": "12",
+        "focus": "Quadricipiti, glutei, core. Base della discesa."
+      },
+      {
+        "name": "Split squat bulgaro (piede dietro su sedia)",
+        "sets": 3,
+        "reps": "10/lato",
+        "focus": "Monolaterale, eccentrico — è LA discesa."
+      },
+      {
+        "name": "Step-up alto (gradino o sedia robusta) con manubri",
+        "sets": 3,
+        "reps": "10/lato",
+        "focus": "Replica esattamente il gesto della salita."
+      },
+      {
+        "name": "Calf raise eccentrici (sui gradini, scendere lentamente)",
+        "sets": 3,
+        "reps": "15",
+        "focus": "Soleo, prevenzione tendinite achillea — il punto debole tipico del trailer."
+      },
+      {
+        "name": "Plank (gomiti)",
+        "sets": 3,
+        "reps": "45 sec",
+        "focus": "Core stabile = postura in salita."
+      },
+      {
+        "name": "Glute bridge a una gamba",
+        "sets": 3,
+        "reps": "10/lato",
+        "focus": "Glutei, stabilità laterale del bacino in discesa."
+      }
+    ],
+    "progression": "Aggiungi 1 rep ogni 2 settimane fino a 15. Quando raggiungi 15 a tutti gli esercizi, aumenta peso manubri di 2-4 kg.",
+    "kit": "Manubri Decathlon 20 kg totali — sufficienti per tutta la preparazione."
+  },
+  "mobility_template": {
+    "when": "Idealmente subito dopo la corsa (5–10 min, sfrutta il corpo già caldo). In alternativa la sera a letto prima di dormire — va benissimo, perdi un po' l'effetto sul recupero immediato ma guadagni rilassamento e qualità del sonno. L'unica cosa che NON va bene è skipparla per pigrizia.",
+    "exercises": [
+      {
+        "name": "Foam roll (o bottiglia) quadricipiti",
+        "duration": "1 min/lato"
+      },
+      {
+        "name": "Stretching polpacci a muro",
+        "duration": "30 sec/lato"
+      },
+      {
+        "name": "Hip flexor stretch (affondo basso)",
+        "duration": "30 sec/lato"
+      },
+      {
+        "name": "Stretch piriforme (figure 4 a terra)",
+        "duration": "30 sec/lato"
+      },
+      {
+        "name": "Cat-cow + stretching schiena bassa",
+        "duration": "1 min"
+      }
+    ]
+  }
+}

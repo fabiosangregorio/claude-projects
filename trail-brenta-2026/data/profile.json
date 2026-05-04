@@ -44,6 +44,55 @@
       "note": "Obbligatoria per iscriversi. Richiede ECG sotto sforzo. Prenotare entro maggio."
     }
   },
+  "calibration_source": "intake-iniziale + analisi run baseline 2026-05-01",
+  "training_zones": {
+    "fcmax_bpm": 181,
+    "fcmax_source": "Valore 181 ereditato dall'orologio Garmin (visibile nel run del 2026-05-01 come hrmax_est_used). ATTENZIONE: l'etichetta 'Tanaka' precedente era inaccurata — la formula Tanaka per 28 anni dà ~188, non 181. La massima osservata nel run del 1 maggio è 176 (97% di 181), plausibile ma non risolutiva. Il valore reale è plausibilmente tra 181 e 188; lo valideremo con i prossimi mesi di dati.",
+    "maf_ceiling_bpm": 152,
+    "maf_note": "Formula Maffetone (180 - età). Tetto operativo in Fase 1: tutto sotto questa FC.",
+    "zones": [
+      {
+        "id": "z1",
+        "min_bpm": 0,
+        "max_bpm": 120,
+        "label": "Recupero",
+        "use": "scarico attivo, defaticamento",
+        "color": "#3fb950"
+      },
+      {
+        "id": "z2",
+        "min_bpm": 120,
+        "max_bpm": 152,
+        "label": "Fondo aerobico",
+        "use": "lunghi, corse facili (quasi tutto il volume) — top di Z2 = MAF",
+        "color": "#58a6ff"
+      },
+      {
+        "id": "z3",
+        "min_bpm": 152,
+        "max_bpm": 165,
+        "label": "Soglia aerobica",
+        "use": "medio, tempo run (introdotto in Fase 3)",
+        "color": "#d2a8ff"
+      },
+      {
+        "id": "z4",
+        "min_bpm": 165,
+        "max_bpm": 175,
+        "label": "Soglia anaerobica",
+        "use": "ripetute (raro, solo in Fase 3)",
+        "color": "#f0883e"
+      },
+      {
+        "id": "z5",
+        "min_bpm": 175,
+        "max_bpm": 181,
+        "label": "VO2max",
+        "use": "vietata fino a Fase 3, e poi solo in dosi minime",
+        "color": "#f85149"
+      }
+    ]
+  },
   "equipment": {
     "trail_shoes": {
       "status": "ricevute (regalo, La Sportiva), non ancora provate",

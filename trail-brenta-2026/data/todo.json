@@ -1,0 +1,53 @@
+{
+  "_description": "Task list per la preparazione (burocrazia, equipment, test).",
+  "last_updated": "2026-05-01",
+  "tasks": [
+    {
+      "category": "burocrazia",
+      "task": "Visita medica agonistica",
+      "deadline": "2026-05-31",
+      "status": "pending",
+      "priority": "urgente",
+      "note": "Obbligatoria per iscriversi. Richiede ECG sotto sforzo. Prenotare subito."
+    },
+    {
+      "category": "burocrazia",
+      "task": "Iscrizione gara DBT 21K",
+      "deadline": "2026-06-30",
+      "status": "pending",
+      "priority": "alta",
+      "note": "Edizioni precedenti sold out — iscriversi appena disponibile la visita."
+    },
+    {
+      "category": "attrezzatura",
+      "task": "Provare scarpe La Sportiva su sentiero",
+      "deadline": "2026-05-15",
+      "status": "pending",
+      "note": "Test in baseline sabato 9 maggio — Albenza."
+    },
+    {
+      "category": "attrezzatura",
+      "task": "Zaino idratazione (5-10L)",
+      "deadline": "2026-07-31",
+      "status": "pending"
+    },
+    {
+      "category": "attrezzatura",
+      "task": "Giacca antivento",
+      "deadline": "2026-07-31",
+      "status": "pending"
+    },
+    {
+      "category": "attrezzatura",
+      "task": "Bicchiere/borraccia pieghevole",
+      "deadline": "2026-08-15",
+      "status": "pending"
+    },
+    {
+      "category": "attrezzatura",
+      "task": "Telo termico + fischietto",
+      "deadline": "2026-08-15",
+      "status": "pending"
+    }
+  ]
+}

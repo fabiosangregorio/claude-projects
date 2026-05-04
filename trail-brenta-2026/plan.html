@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DBT 21K — Piano</title>
+<meta name="theme-color" content="#0e1117">
+<script>document.documentElement.setAttribute('data-theme',localStorage.getItem('theme')||'dark')</script>
+<link rel="stylesheet" href="/claude-projects/theme.css">
+<script src="/claude-projects/theme.js" defer></script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0e1117;--sf:#161b22;--sf2:#1c2230;--bd:#2a3040;--tx:#e6edf3;--tx2:#8b949e;--ac:#58a6ff;--ac2:#3fb950;--wn:#f0883e;--rd:#f85149;--pd:#d2a8ff}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--tx);line-height:1.6;min-height:100vh;-webkit-font-smoothing:antialiased}
+.c{max-width:760px;margin:0 auto;padding:1.5rem 1rem 3rem}
+
+.back{display:inline-flex;align-items:center;gap:.35rem;font-family:'Space Mono',monospace;font-size:.75rem;color:var(--tx2);text-decoration:none;padding:.35rem .6rem;border-radius:6px;border:1px solid var(--bd);background:var(--sf);transition:border-color .2s,color .2s;margin-bottom:1.5rem}
+.back:hover{border-color:var(--ac);color:var(--ac)}
+.back svg{width:14px;height:14px}
+
+.hero{margin-bottom:2rem}
+.kicker{font-family:'Space Mono',monospace;font-size:.7rem;color:var(--ac2);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:.5rem}
+.hero h1{font-family:'Space Mono',monospace;font-size:clamp(1.4rem,4.5vw,2rem);font-weight:700;letter-spacing:-.5px;line-height:1.25;margin-bottom:.5rem;color:var(--tx)}
+.hero-sub{color:var(--tx2);font-size:.85rem}
+
+section{margin:2rem 0}
+.s-title{font-family:'Space Mono',monospace;font-size:.75rem;color:var(--tx2);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:1rem;display:flex;align-items:center;gap:.5rem}
+.s-title::before{content:'';display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--ac)}
+
+.card{background:var(--sf);border:1px solid var(--bd);border-radius:10px;padding:1rem 1.1rem;margin-bottom:.7rem}
+
+.nav-card{display:flex;align-items:center;justify-content:space-between;background:var(--sf);border:1px solid var(--bd);border-radius:10px;padding:.9rem 1.1rem;text-decoration:none;color:inherit;transition:border-color .2s;margin-bottom:.7rem}
+.nav-card:hover{border-color:var(--ac)}
+.nav-card-title{font-family:'Space Mono',monospace;font-size:.9rem;color:var(--tx);font-weight:700}
+.nav-card-sub{font-family:'Space Mono',monospace;font-size:.7rem;color:var(--tx2);margin-top:.15rem}
+.nav-card-arrow{color:var(--ac);font-family:'Space Mono',monospace;font-size:1rem}
+
+.phase{display:grid;grid-template-columns:auto 1fr;gap:.8rem;padding:.85rem 0;border-bottom:1px solid var(--bd);align-items:flex-start}
+.phase:last-child{border-bottom:none}
+.phase-num{font-family:'Space Mono',monospace;font-size:1.4rem;font-weight:700;color:var(--tx2);min-width:1.8rem;text-align:center;padding-top:.1rem}
+.phase.current .phase-num{color:var(--ac2)}
+.phase.past .phase-num{color:var(--bd)}
+.phase-name{font-family:'Space Mono',monospace;font-size:.9rem;font-weight:700;color:var(--tx)}
+.phase.current .phase-name{color:var(--ac2)}
+.phase-dates{font-family:'Space Mono',monospace;font-size:.68rem;color:var(--tx2);margin-top:.15rem;margin-bottom:.4rem}
+.phase-focus{font-size:.82rem;color:var(--tx2);line-height:1.5;margin-bottom:.55rem}
+.phase-kpi{background:rgba(88,166,255,.08);border:1px solid rgba(88,166,255,.28);border-radius:6px;padding:.55rem .7rem}
+.phase-kpi-lbl{font-family:'Space Mono',monospace;font-size:.6rem;color:var(--ac);text-transform:uppercase;letter-spacing:1px;font-weight:700;margin-bottom:.25rem}
+.phase-kpi-text{font-size:.86rem;color:var(--tx);line-height:1.5}
+.phase.current .phase-kpi{background:rgba(63,185,80,.08);border-color:rgba(63,185,80,.35)}
+.phase.current .phase-kpi-lbl{color:var(--ac2)}
+
+.zone-row{display:grid;grid-template-columns:auto auto 1fr;gap:.7rem;align-items:center;padding:.5rem 0;border-bottom:1px solid var(--bd);font-size:.78rem}
+.zone-row:last-child{border-bottom:none}
+.zone-id{font-family:'Space Mono',monospace;font-weight:700;font-size:.85rem;min-width:1.5rem}
+.zone-bpm{font-family:'Space Mono',monospace;color:var(--tx2);min-width:5.5rem}
+.zone-lbl{color:var(--tx)}
+.zone-use{display:block;font-size:.7rem;color:var(--tx2);margin-top:.15rem}
+
+.ex{padding:.55rem 0;border-bottom:1px solid var(--bd)}
+.ex:last-child{border-bottom:none}
+.ex-name{font-size:.85rem;color:var(--tx);font-weight:500}
+.ex-meta{font-family:'Space Mono',monospace;font-size:.68rem;color:var(--ac);margin-top:.15rem}
+.ex-focus{font-size:.75rem;color:var(--tx2);margin-top:.15rem;line-height:1.45}
+
+.rule{padding:.55rem 0;border-bottom:1px solid var(--bd);font-size:.85rem;color:var(--tx);line-height:1.5}
+.rule:last-child{border-bottom:none}
+.rule::before{content:'→ ';color:var(--ac);font-family:'Space Mono',monospace;font-weight:700}
+
+details{background:var(--sf);border:1px solid var(--bd);border-radius:10px;margin-bottom:.7rem}
+details[open]{border-color:var(--ac)}
+summary{padding:.85rem 1.1rem;cursor:pointer;font-family:'Space Mono',monospace;font-size:.8rem;font-weight:700;color:var(--tx);display:flex;justify-content:space-between;align-items:center;list-style:none;-webkit-tap-highlight-color:transparent}
+summary::-webkit-details-marker{display:none}
+summary::after{content:'+';color:var(--ac);font-size:1.2rem;font-weight:400;transition:transform .2s}
+details[open] summary::after{transform:rotate(45deg)}
+details > div{padding:0 1.1rem 1rem}
+.summary-sub{display:block;font-family:'DM Sans',sans-serif;font-weight:400;font-size:.72rem;color:var(--tx2);margin-top:.15rem;text-transform:none;letter-spacing:0}
+
+.loader{text-align:center;padding:3rem 0;color:var(--tx2)}
+.spinner{display:inline-block;width:20px;height:20px;border:2px solid var(--bd);border-top-color:var(--ac);border-radius:50%;animation:spin .6s linear infinite;margin-bottom:.6rem}
+@keyframes spin{to{transform:rotate(360deg)}}
+.error{padding:1.5rem;color:var(--rd);font-size:.85rem;background:rgba(248,81,73,.05);border:1px solid var(--rd);border-radius:10px;text-align:center}
+
+footer{margin-top:3rem;padding-top:1.5rem;border-top:1px solid var(--bd);text-align:center;color:var(--tx2);font-size:.72rem}
+footer a{color:var(--ac);text-decoration:none}
+</style>
+</head>
+<body>
+<div class="c">
+  <a class="back" href="./"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>Home</a>
+
+  <div id="app"><div class="loader"><div class="spinner"></div><br>Caricamento dati...</div></div>
+
+  <footer>
+    <a href="https://github.com/fabiosangregorio/claude-projects/tree/main/trail-brenta-2026" target="_blank" rel="noopener">trail-brenta-2026</a>
+    · <span id="lastUpdated">—</span>
+  </footer>
+</div>
+
+<script>
+const BASE = './data/';
+
+async function loadAll() {
+  const app = document.getElementById('app');
+  try {
+    const [profile, plan] = await Promise.all([
+      fetch(BASE + 'profile.json').then(r => { if (!r.ok) throw new Error('profile.json: ' + r.status); return r.json(); }),
+      fetch(BASE + 'plan.json').then(r => { if (!r.ok) throw new Error('plan.json: ' + r.status); return r.json(); })
+    ]);
+    render(app, profile, plan);
+    document.getElementById('lastUpdated').textContent = 'piano aggiornato ' + plan.last_updated;
+  } catch (err) {
+    app.innerHTML = `<div class="error">Errore caricamento dati: ${err.message}</div>`;
+  }
+}
+
+function render(app, profile, plan) {
+  app.innerHTML = [
+    renderHero(profile),
+    renderWeekLink(plan),
+    renderPhases(plan),
+    renderRefSection(plan, profile)
+  ].join('');
+}
+
+function renderHero(profile) {
+  const r = profile.race_target;
+  return `
+    <div class="hero">
+      <div class="kicker">Piano di allenamento</div>
+      <h1>DBT 21K · ${r.distance_km} km · +${r.elevation_gain_m} m</h1>
+      <p class="hero-sub">${formatItalianDate(r.date)} · ${r.location} · obiettivo: <strong>${r.goal}</strong></p>
+    </div>
+  `;
+}
+
+function renderWeekLink(plan) {
+  if (!plan || !plan.weeks || !plan.weeks.length) return '';
+
+  const today = todayISO();
+  const weeks = plan.weeks;
+  let week = weeks.find(w => today >= w.start_date && today <= w.end_date);
+  let label = 'Settimana corrente';
+
+  if (!week) {
+    const next = weeks.find(w => w.start_date > today);
+    if (next) { week = next; label = 'Prossima settimana'; }
+    else { week = weeks[weeks.length - 1]; label = 'Ultima settimana'; }
+  }
+
+  const phase = plan.phases.find(p => p.id === week.phase_id);
+  const sub = `${phase ? phase.name + ' · ' : ''}sett ${week.number}/${plan.total_weeks}${week.label ? ' · ' + week.label : ''}`;
+
+  return `
+    <a class="nav-card" href="./week.html#${week.number}">
+      <div>
+        <div class="nav-card-title">${label}</div>
+        <div class="nav-card-sub">${sub}</div>
+      </div>
+      <div class="nav-card-arrow">→</div>
+    </a>
+  `;
+}
+
+function renderPhases(plan) {
+  if (!plan || !plan.phases) return '';
+  const today = todayISO();
+
+  const html = plan.phases.map(p => {
+    let cls = '';
+    if (today > p.end_date) cls = 'past';
+    else if (today >= p.start_date && today <= p.end_date) cls = 'current';
+
+    return `
+      <div class="phase ${cls}">
+        <div class="phase-num">${p.number}</div>
+        <div>
+          <div class="phase-name">${p.name}</div>
+          <div class="phase-dates">${formatItalianDate(p.start_date, true)} → ${formatItalianDate(p.end_date, true)} · sett ${p.weeks_range[0]}-${p.weeks_range[1]} · lungo ${p.long_run_min[0]}-${p.long_run_min[1]} min · D+ ${p.vertical_target_m[0]}-${p.vertical_target_m[1]} m</div>
+          <div class="phase-focus">${p.focus}</div>
+          <div class="phase-kpi">
+            <div class="phase-kpi-lbl">Obiettivo fine fase</div>
+            <div class="phase-kpi-text">${p.key_objective}</div>
+          </div>
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  return `
+    <section>
+      <h2 class="s-title">Le 4 fasi</h2>
+      <div class="card">${html}</div>
+    </section>
+  `;
+}
+
+function renderRefSection(plan, profile) {
+  const z = profile.training_zones;
+  const s = plan.strength_template;
+  const m = plan.mobility_template;
+  const rules = plan.rules || [];
+  const budget = plan.weekly_budget;
+
+  const zonesHtml = (z && z.zones) ? z.zones.map(zone => `
+    <div class="zone-row">
+      <div class="zone-id" style="color:${zone.color}">${zone.id.toUpperCase()}</div>
+      <div class="zone-bpm">${zone.min_bpm}–${zone.max_bpm} bpm</div>
+      <div><span class="zone-lbl">${zone.label}</span><span class="zone-use">${zone.use}</span></div>
+    </div>
+  `).join('') : '';
+
+  const exHtml = (s && s.exercises) ? s.exercises.map(e => `
+    <div class="ex">
+      <div class="ex-name">${e.name}</div>
+      <div class="ex-meta">${e.sets} × ${e.reps}</div>
+      <div class="ex-focus">${e.focus}</div>
+    </div>
+  `).join('') : '';
+
+  const mobHtml = (m && m.exercises) ? m.exercises.map(e => `
+    <div class="ex">
+      <div class="ex-name">${e.name}</div>
+      <div class="ex-meta">${e.duration}</div>
+    </div>
+  `).join('') : '';
+
+  const rulesHtml = rules.map(r => `<div class="rule">${r}</div>`).join('');
+
+  return `
+    <section>
+      <h2 class="s-title">Riferimenti tecnici</h2>
+
+      <details>
+        <summary>
+          <span>Budget settimanale & regole<span class="summary-sub">${budget.running_sessions} corse + ${budget.strength_sessions} forza · ${rules.length} regole d'ingaggio</span></span>
+        </summary>
+        <div>
+          <div style="font-size:.82rem;color:var(--tx2);line-height:1.55;margin-bottom:.9rem;padding:.7rem;background:var(--sf2);border-radius:6px">${budget.philosophy}</div>
+          ${rulesHtml}
+        </div>
+      </details>
+
+      <details>
+        <summary>
+          <span>Zone di frequenza cardiaca<span class="summary-sub">FCmax ${z.fcmax_bpm} · MAF ${z.maf_ceiling_bpm} · 5 zone</span></span>
+        </summary>
+        <div>
+          <div style="font-size:.75rem;color:var(--tx2);margin-bottom:.7rem;line-height:1.5"><em>${z.fcmax_source}</em></div>
+          ${zonesHtml}
+          <div style="margin-top:.8rem;font-size:.78rem;color:var(--ac2);font-family:'Space Mono',monospace">★ MAF ${z.maf_ceiling_bpm} bpm: ${z.maf_note}</div>
+        </div>
+      </details>
+
+      <details>
+        <summary>
+          <span>Forza<span class="summary-sub">${s.frequency} · ${s.duration_min} min · ${s.exercises.length} esercizi</span></span>
+        </summary>
+        <div>
+          <div style="font-size:.78rem;color:var(--tx2);margin-bottom:.5rem"><strong>Quando:</strong> ${s.best_timing}</div>
+          <div style="font-size:.78rem;color:var(--tx2);margin-bottom:.5rem"><strong>Riscaldamento:</strong> ${s.warmup}</div>
+          <div style="font-size:.78rem;color:var(--tx2);margin-bottom:.9rem"><strong>Kit:</strong> ${s.kit}</div>
+          ${exHtml}
+          <div style="margin-top:.8rem;font-size:.78rem;color:var(--ac2);font-family:'Space Mono',monospace">★ Progressione: ${s.progression}</div>
+        </div>
+      </details>
+
+      <details>
+        <summary>
+          <span>Mobility post-corsa<span class="summary-sub">${m.exercises.length} esercizi · ~5 min</span></span>
+        </summary>
+        <div>
+          <div style="font-size:.78rem;color:var(--tx2);margin-bottom:.7rem">${m.when}</div>
+          ${mobHtml}
+        </div>
+      </details>
+    </section>
+  `;
+}
+
+function todayISO() {
+  const d = new Date();
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, '0');
+  const day = String(d.getDate()).padStart(2, '0');
+  return `${y}-${m}-${day}`;
+}
+
+function formatItalianDate(iso, short = false) {
+  const months = ['gen','feb','mar','apr','mag','giu','lug','ago','set','ott','nov','dic'];
+  const monthsLong = ['gennaio','febbraio','marzo','aprile','maggio','giugno','luglio','agosto','settembre','ottobre','novembre','dicembre'];
+  const d = new Date(iso);
+  return `${d.getDate()} ${(short ? months : monthsLong)[d.getMonth()]} ${d.getFullYear()}`;
+}
+
+loadAll();
+</script>
+</body>
+</html>
