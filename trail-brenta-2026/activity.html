@@ -150,16 +150,11 @@ async function load() {
     return;
   }
   try {
-    const [act, profile] = await Promise.all([
-      fetch(BASE + safe + '.json').then(r => {
-        if (!r.ok) throw new Error('attività: ' + r.status);
-        return r.json();
-      }),
-      fetch('./data/profile.json').then(r => r.ok ? r.json() : null).catch(() => null)
-    ]);
-    const raceProfile = profile && profile.race_target && profile.race_target.course_profile_2025
-      ? profile.race_target.course_profile_2025 : null;
-    render(app, act, raceProfile);
+    const act = await fetch(BASE + safe + '.json').then(r => {
+      if (!r.ok) throw new Error('attività: ' + r.status);
+      return r.json();
+    });
+    render(app, act);
     if (act.ai_analysis && act.ai_analysis.generated_at) {
       document.getElementById('generatedAt').textContent =
         'analisi generata ' + act.ai_analysis.generated_at.slice(0, 10);
@@ -169,7 +164,7 @@ async function load() {
   }
 }
 
-function render(app, act, raceProfile) {
+function render(app, act) {
   const a = act.ai_analysis || {};
   const t = act.totals || {};
   const isHike = act.activity_type === 'hike';
@@ -187,7 +182,7 @@ function render(app, act, raceProfile) {
     renderNextSession(a),
     renderTotals(t, isHike),
     isHike ? '' : renderPolarization(act.derived, act.hr_zones, t.duration_sec),
-    renderDerived(act.derived, raceProfile),
+    renderDerived(act.derived),
     isHike ? '' : renderDecoupling(act.decoupling),
     isHike ? '' : renderSplits(act.splits, act.remainder),
     isHike ? '' : renderWalks(act.walk_breaks, act.walks_summary)
@@ -438,7 +433,7 @@ function renderNextSession(a) {
   `;
 }
 
-function renderDerived(d, raceProfile) {
+function renderDerived(d) {
   if (!d) return '';
   const items = [
     { lbl: 'TRIMP', val: d.trimp, help: 'Training Impulse: carico totale dell\'uscita (intensità × durata, pesato per FC). Riferimento: <100 leggero, 100-200 medio, >200 alto.' },
@@ -452,7 +447,8 @@ function renderDerived(d, raceProfile) {
 
   if (items.length === 0 && !d.grade_distribution) return '';
 
-  const buildSegs = (gd) => gd ? [
+  const gd = d.grade_distribution;
+  const gdSegs = gd ? [
     { key: 'down_gt_10', cls: 'gd-down-gt-10', lbl: 'Discesa &gt;10%', val: gd.down_gt_10 },
     { key: 'down_5_10',  cls: 'gd-down-5-10',  lbl: 'Discesa 5-10%',  val: gd.down_5_10 },
     { key: 'down_2_5',   cls: 'gd-down-2-5',   lbl: 'Discesa 2-5%',   val: gd.down_2_5 },
@@ -462,30 +458,16 @@ function renderDerived(d, raceProfile) {
     { key: 'steep_gt_10',cls: 'gd-steep',      lbl: 'Ripido &gt;10%', val: gd.steep_gt_10 }
   ].filter(s => s.val != null && s.val > 0) : [];
 
-  const gd = d.grade_distribution;
-  const gdSegs = buildSegs(gd);
-  const raceGd = raceProfile && raceProfile.grade_distribution ? raceProfile.grade_distribution : null;
-  const raceSegs = buildSegs(raceGd);
-
-  const stackBar = (segs, label) => `
-    <div style="margin-top:.5rem">
-      <div class="metric-lbl" style="margin-bottom:.3rem;color:var(--tx2)">${label}</div>
-      <div class="zstack">
-        ${segs.map(s => `<div class="zseg ${s.cls}" style="width:${s.val.toFixed(2)}%" title="${s.lbl} · ${s.val}%">${s.val >= 6 ? s.val.toFixed(0) + '%' : ''}</div>`).join('')}
-      </div>
-    </div>
-  `;
-
   const gdHtml = gdSegs.length ? `
     <div class="card" style="margin-top:.7rem">
       <div class="metric-lbl" style="margin-bottom:.5rem">Distribuzione pendenza</div>
-      <p class="s-desc" style="margin-bottom:.6rem">Ripartizione per tipo di terreno (basato sulla pendenza locale). Da sinistra (discese) a destra (salite). Più "Salita" e "Ripido" = più specificità trail.${raceSegs.length ? ' Sotto il confronto col profilo della gara.' : ''}</p>
-      ${stackBar(gdSegs, 'Questa uscita')}
-      ${raceSegs.length ? stackBar(raceSegs, 'DBT 21K (edizione 2025, riferimento)') : ''}
-      <div class="zlegend">
-        ${gdSegs.map(s => `<div class="zleg-item"><span class="zleg-dot ${s.cls}"></span>${s.lbl} ${s.val}%${raceGd && raceGd[s.key] != null ? ` <span style="color:var(--tx2)">(gara ${raceGd[s.key]}%)</span>` : ''}</div>`).join('')}
+      <p class="s-desc" style="margin-bottom:.6rem">Ripartizione per tipo di terreno (basato sulla pendenza locale). Da sinistra (discese) a destra (salite). Più "Salita" e "Ripido" = più specificità trail.</p>
+      <div class="zstack">
+        ${gdSegs.map(s => `<div class="zseg ${s.cls}" style="width:${s.val.toFixed(2)}%" title="${s.lbl} · ${s.val}%">${s.val >= 6 ? s.val.toFixed(0) + '%' : ''}</div>`).join('')}
       </div>
-      ${raceProfile && raceProfile._disclaimer ? `<div class="metric-help" style="margin-top:.6rem">${raceProfile._disclaimer}</div>` : ''}
+      <div class="zlegend">
+        ${gdSegs.map(s => `<div class="zleg-item"><span class="zleg-dot ${s.cls}"></span>${s.lbl} ${s.val}%</div>`).join('')}
+      </div>
     </div>
   ` : '';
 

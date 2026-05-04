@@ -183,6 +183,19 @@ details > div{padding:0 1.1rem 1rem}
 footer{margin-top:3rem;padding-top:1.5rem;border-top:1px solid var(--bd);text-align:center;color:var(--tx2);font-size:.72rem}
 footer a{color:var(--ac);text-decoration:none}
 
+.zstack{display:flex;width:100%;height:22px;border-radius:4px;overflow:hidden;background:var(--sf2);border:1px solid var(--bd)}
+.zseg{height:100%;display:flex;align-items:center;justify-content:center;font-family:'Space Mono',monospace;font-size:.62rem;color:#0e1117;font-weight:700;min-width:0;overflow:hidden;white-space:nowrap}
+.zlegend{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:.6rem;font-family:'Space Mono',monospace;font-size:.7rem;color:var(--tx2)}
+.zleg-item{display:flex;align-items:center;gap:.35rem}
+.zleg-dot{width:10px;height:10px;border-radius:2px;flex-shrink:0}
+.zseg.gd-down-gt-10,.zleg-dot.gd-down-gt-10{background:#0a3069;color:#fff}
+.zseg.gd-down-5-10,.zleg-dot.gd-down-5-10{background:#1f6feb;color:#fff}
+.zseg.gd-down-2-5,.zleg-dot.gd-down-2-5{background:#79c0ff}
+.zseg.gd-flat,.zleg-dot.gd-flat{background:#6e7681;color:#fff}
+.zseg.gd-rolling,.zleg-dot.gd-rolling{background:#d29922}
+.zseg.gd-uphill,.zleg-dot.gd-uphill{background:#f0883e}
+.zseg.gd-steep,.zleg-dot.gd-steep{background:#f85149;color:#fff}
+
 @media(max-width:480px){
   .info-grid{grid-template-columns:1fr 1fr}
   .cd-num{font-size:1.4rem}
@@ -528,6 +541,7 @@ function renderRefSection(params) {
 
 function renderRaceInfo(profile) {
   const r = profile.race_target;
+  const cp = r.course_profile_2025;
   return `
     <section>
       <h2 class="s-title">Obiettivo gara</h2>
@@ -544,7 +558,36 @@ function renderRaceInfo(profile) {
         <div style="font-size:.82rem;color:var(--tx2);line-height:1.55">${r.route_summary}</div>
         <div style="margin-top:.7rem"><a href="${r.official_url}" target="_blank" rel="noopener" style="font-family:'Space Mono',monospace;font-size:.75rem;color:var(--ac);text-decoration:none">→ sito ufficiale</a></div>
       </div>
+      ${cp ? renderCourseProfile(cp) : ''}
     </section>
+  `;
+}
+
+function renderCourseProfile(cp) {
+  const gd = cp.grade_distribution;
+  const segs = gd ? [
+    { key: 'down_gt_10', cls: 'gd-down-gt-10', lbl: 'Discesa &gt;10%', val: gd.down_gt_10 },
+    { key: 'down_5_10',  cls: 'gd-down-5-10',  lbl: 'Discesa 5-10%',  val: gd.down_5_10 },
+    { key: 'down_2_5',   cls: 'gd-down-2-5',   lbl: 'Discesa 2-5%',   val: gd.down_2_5 },
+    { key: 'flat_lt_2',  cls: 'gd-flat',       lbl: 'Piano &lt;2%',   val: gd.flat_lt_2 },
+    { key: 'rolling_2_5',cls: 'gd-rolling',    lbl: 'Mosso 2-5%',     val: gd.rolling_2_5 },
+    { key: 'uphill_5_10',cls: 'gd-uphill',     lbl: 'Salita 5-10%',   val: gd.uphill_5_10 },
+    { key: 'steep_gt_10',cls: 'gd-steep',      lbl: 'Ripido &gt;10%', val: gd.steep_gt_10 }
+  ].filter(s => s.val != null && s.val > 0) : [];
+  if (segs.length === 0) return '';
+
+  return `
+    <div class="card" style="margin-top:.7rem">
+      <div class="info-lbl" style="margin-bottom:.4rem">Profilo del percorso (riferimento ed. 2025)</div>
+      <p style="font-size:.78rem;color:var(--tx2);line-height:1.5;margin-bottom:.7rem">Distribuzione del percorso per pendenza, calcolata dal GPX ufficiale dell'edizione 2025. Da sinistra (discese) a destra (salite). Serve come riferimento per capire quali tipi di terreno la gara richiede.</p>
+      <div class="zstack">
+        ${segs.map(s => `<div class="zseg ${s.cls}" style="width:${s.val.toFixed(2)}%" title="${s.lbl} · ${s.val}%">${s.val >= 6 ? s.val.toFixed(0) + '%' : ''}</div>`).join('')}
+      </div>
+      <div class="zlegend">
+        ${segs.map(s => `<div class="zleg-item"><span class="zleg-dot ${s.cls}"></span>${s.lbl} ${s.val}%</div>`).join('')}
+      </div>
+      ${cp._disclaimer ? `<div style="margin-top:.7rem;padding-top:.6rem;border-top:1px dashed var(--bd);font-size:.7rem;color:var(--tx2);line-height:1.45">${cp._disclaimer}</div>` : ''}
+    </div>
   `;
 }
 
