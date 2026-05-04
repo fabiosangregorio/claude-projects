@@ -173,7 +173,7 @@ function render(app, act) {
   app.innerHTML = [
     renderHero(act, t, isHike),
     isSocial ? renderSocialBanner() : '',
-    renderUserNote(act),
+    isSocial ? '' : renderUserNote(act),
     renderHeadline(a),
     renderClassification(a),
     renderNarrative(a),
