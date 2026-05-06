@@ -54,7 +54,9 @@ Sezioni: `athlete`, `experience`, `availability`, `health`, `calibration_source`
 
 **Sempre aggiornare il campo `last_updated`** quando si modifica.
 
-Chiavi top-level: `total_weeks`, `race_date`, `weekly_budget`, `rules`, `phases`, `weeks`, `milestones`, `strength_template`, `mobility_template`.
+Chiavi top-level: `total_weeks`, `race_date`, `weekly_budget`, `weekly_recurring`, `rules`, `phases`, `weeks`, `milestones`, `strength_template`, `mobility_template`.
+
+**`weekly_recurring`** — array di ricorrenze fisse che valgono per ogni settimana del piano (cross-training non strutturato, check-in di tracking). Non sono sessioni di allenamento prescrittive — sono ancore di baseline che `week.html` renderizza in fondo a ogni settimana ("Ricorrenze settimanali fisse"). Campi item: `kind` (`check-in` | `cross-training`), `label`, `day` (LUN/MAR/...), `when?`, `duration_min?`, `intensity?`, `notes?`. Esempi attuali: pesa lunedì, padel mercoledì, bici giovedì.
 
 ### `data/todo.json`
 
