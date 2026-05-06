@@ -8,24 +8,33 @@
     "running_sessions": 3,
     "strength_sessions": 1,
     "mobility_post_run_min": "5-10",
-    "philosophy": "Architettura a budget settimanale, non a giorni fissi. Distribuisci le sessioni nei giorni che hai, rispettando le regole.",
-    "recurring_cross_training": [
-      {
-        "activity": "padel",
-        "day": "MER",
-        "duration_min": 60,
-        "intensity": "bassa/non intensa",
-        "notes": "Lezione settimanale fissa. Lateralità + cambi di direzione caricano i quadricipiti. Nei giorni di DOMS (es. dopo lunghi con tanta discesa) sostituisce la corsa opzionale invece di sommarsi. Mai padel + lavoro running di qualità lo stesso giorno."
-      },
-      {
-        "activity": "bike",
-        "day": "GIO",
-        "duration_min": 30,
-        "intensity": "Z1, no impatto",
-        "notes": "Spostamento lavorativo fisso. Conta come recupero attivo: aiuta drenaggio e circolazione, non interferisce con nessuna sessione adiacente. Compatibile col giorno dopo un lungo o un lavoro duro."
-      }
-    ]
+    "philosophy": "Architettura a budget settimanale, non a giorni fissi. Distribuisci le sessioni nei giorni che hai, rispettando le regole."
   },
+  "weekly_recurring": [
+    {
+      "kind": "check-in",
+      "label": "Pesa",
+      "day": "LUN",
+      "when": "mattina, a digiuno",
+      "notes": "Pesata settimanale per tracciare composizione corporea durante la preparazione. Stesso orario, stesso strumento, stesse condizioni (a digiuno, dopo bagno)."
+    },
+    {
+      "kind": "cross-training",
+      "label": "Padel",
+      "day": "MER",
+      "duration_min": 60,
+      "intensity": "bassa/non intensa",
+      "notes": "Lezione settimanale fissa. Lateralità + cambi di direzione caricano i quadricipiti. Nei giorni di DOMS sostituisce la corsa opzionale invece di sommarsi. Mai padel + lavoro running di qualità lo stesso giorno."
+    },
+    {
+      "kind": "cross-training",
+      "label": "Bici",
+      "day": "GIO",
+      "duration_min": 30,
+      "intensity": "Z1, no impatto",
+      "notes": "Spostamento lavorativo fisso. Conta come recupero attivo: aiuta drenaggio e circolazione, non interferisce con nessuna sessione adiacente."
+    }
+  ],
   "rules": [
     "Il lungo non si salta. Se devi tagliare la settimana, taglia prima le corse brevi.",
     "Mai due lavori duri di fila. Tra qualità e qualità, almeno 1 giorno di riposo o Z2 facile.",
