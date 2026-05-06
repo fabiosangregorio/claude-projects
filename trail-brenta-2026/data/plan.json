@@ -1,14 +1,30 @@
 {
   "_schema_version": "1.1",
   "_description": "Struttura del piano di allenamento: fasi, settimane, template forza/mobility, budget e regole.",
-  "last_updated": "2026-05-01",
+  "last_updated": "2026-05-06",
   "total_weeks": 18,
   "race_date": "2026-09-05",
   "weekly_budget": {
     "running_sessions": 3,
     "strength_sessions": 1,
     "mobility_post_run_min": "5-10",
-    "philosophy": "Architettura a budget settimanale, non a giorni fissi. Distribuisci le sessioni nei giorni che hai, rispettando le regole."
+    "philosophy": "Architettura a budget settimanale, non a giorni fissi. Distribuisci le sessioni nei giorni che hai, rispettando le regole.",
+    "recurring_cross_training": [
+      {
+        "activity": "padel",
+        "day": "MER",
+        "duration_min": 60,
+        "intensity": "bassa/non intensa",
+        "notes": "Lezione settimanale fissa. Lateralità + cambi di direzione caricano i quadricipiti. Nei giorni di DOMS (es. dopo lunghi con tanta discesa) sostituisce la corsa opzionale invece di sommarsi. Mai padel + lavoro running di qualità lo stesso giorno."
+      },
+      {
+        "activity": "bike",
+        "day": "GIO",
+        "duration_min": 30,
+        "intensity": "Z1, no impatto",
+        "notes": "Spostamento lavorativo fisso. Conta come recupero attivo: aiuta drenaggio e circolazione, non interferisce con nessuna sessione adiacente. Compatibile col giorno dopo un lungo o un lavoro duro."
+      }
+    ]
   },
   "rules": [
     "Il lungo non si salta. Se devi tagliare la settimana, taglia prima le corse brevi.",
@@ -120,7 +136,7 @@
       "start_date": "2026-05-02",
       "end_date": "2026-05-10",
       "label": "Doppio carico montagna + baseline",
-      "narrative": "Settimana di apertura a 9 giorni, costruita attorno al carico montano già a calendario. Il volume è enorme per chi rientra da 13 mesi di stop, ma sotto MAF è tutto Z1-Z2: stimola la base aerobica senza creare stress da intensità. La variabile critica è il recupero — i DOMS dell'hike arriveranno tra martedì e mercoledì, da gestire con mobility e zero corsa. La baseline finale fissa il riferimento misurato (FC, decoupling, sensazioni in salita) su cui taremo le settimane successive.",
+      "narrative": "Settimana di apertura a 9 giorni, costruita attorno al carico montano già a calendario. Il volume è enorme per chi rientra da 13 mesi di stop, ma sotto MAF è tutto Z1-Z2: stimola la base aerobica senza creare stress da intensità. La variabile critica è il recupero — i DOMS dell'hike arriveranno tra martedì e mercoledì, da gestire con mobility e zero corsa. Pattern reale della settimana: MER padel 1h soft (sostituisce la corsa opzionale, non si somma — padel + corsa in fase DOMS è troppo); GIO bici 30 min Z1 (recupero attivo, anzi aiuta); VEN riposo totale; SAB test Monte Linzone. La baseline finale fissa il riferimento misurato (FC, decoupling, sensazioni in salita) su cui taremo le settimane successive.",
       "sessions": [
         {
           "type": "hike",
