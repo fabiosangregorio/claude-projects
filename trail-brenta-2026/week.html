@@ -108,6 +108,20 @@ section{margin:2rem 0}
 @keyframes spin{to{transform:rotate(360deg)}}
 .error{padding:1.5rem;color:var(--rd);font-size:.85rem;background:rgba(248,81,73,.05);border:1px solid var(--rd);border-radius:10px;text-align:center}
 
+.recurring{margin-top:1rem;padding-top:.95rem;border-top:1px dashed var(--bd)}
+.recurring-title{font-family:'Space Mono',monospace;font-size:.65rem;color:var(--tx2);text-transform:uppercase;letter-spacing:1px;margin-bottom:.6rem;font-weight:700}
+.recurring-list{display:flex;flex-direction:column;gap:.5rem}
+.recurring-item{display:flex;align-items:flex-start;gap:.55rem;padding:.5rem .65rem;background:var(--sf2);border:1px solid var(--bd);border-radius:6px}
+.recurring-day{font-family:'Space Mono',monospace;font-size:.6rem;font-weight:700;background:var(--bg);border:1px solid var(--bd);border-radius:4px;padding:.2rem .4rem;color:var(--tx);letter-spacing:.8px;flex-shrink:0;margin-top:.1rem}
+.recurring-body{flex:1;min-width:0}
+.recurring-head{display:flex;align-items:center;gap:.45rem;flex-wrap:wrap;margin-bottom:.18rem}
+.recurring-label{font-family:'Space Mono',monospace;font-size:.78rem;font-weight:700;color:var(--tx)}
+.recurring-kind{font-family:'Space Mono',monospace;font-size:.55rem;text-transform:uppercase;letter-spacing:.6px;font-weight:700;padding:.1rem .35rem;border-radius:3px;border:1px solid var(--bd);background:rgba(139,148,158,.1);color:var(--tx2)}
+.recurring-kind.check-in{background:rgba(210,168,255,.1);color:var(--pd);border-color:var(--pd)}
+.recurring-kind.cross-training{background:rgba(63,185,80,.1);color:var(--ac2);border-color:var(--ac2)}
+.recurring-meta{font-family:'Space Mono',monospace;font-size:.65rem;color:var(--tx2)}
+.recurring-notes{font-size:.75rem;color:var(--tx2);line-height:1.45;margin-top:.2rem}
+
 footer{margin-top:3rem;padding-top:1.5rem;border-top:1px solid var(--bd);text-align:center;color:var(--tx2);font-size:.72rem}
 footer a{color:var(--ac);text-decoration:none}
 
@@ -218,6 +232,7 @@ function renderRoute() {
         ${week.narrative ? `<div class="week-narr">${week.narrative}</div>` : ''}
         ${sessHtml}
         ${strengthHtml}
+        ${renderRecurring(PLAN.weekly_recurring)}
       </div>
       ${pagerHtml}
     </section>
@@ -234,6 +249,33 @@ const TYPE_DESCRIPTIONS = {
   hike: 'Cammino in montagna in Z1-Z2. Costruisce volume e gambe da salita senza stress da intensità di corsa.',
   strength: 'Sessione di forza full-body. Vedi template completo nella pagina piano.'
 };
+
+function renderRecurring(items) {
+  if (!items || !items.length) return '';
+  const itemsHtml = items.map(it => {
+    const meta = [];
+    if (it.duration_min) meta.push(`${it.duration_min} min`);
+    if (it.intensity) meta.push(it.intensity);
+    if (it.when) meta.push(it.when);
+    return `
+      <div class="recurring-item">
+        <span class="recurring-day">${it.day}</span>
+        <div class="recurring-body">
+          <div class="recurring-head">
+            <span class="recurring-label">${it.label}</span>
+            <span class="recurring-kind ${it.kind}">${it.kind}</span>
+            ${meta.length ? `<span class="recurring-meta">· ${meta.join(' · ')}</span>` : ''}
+          </div>
+          ${it.notes ? `<div class="recurring-notes">${it.notes}</div>` : ''}
+        </div>
+      </div>`;
+  }).join('');
+  return `
+    <div class="recurring">
+      <div class="recurring-title">Ricorrenze settimanali fisse</div>
+      <div class="recurring-list">${itemsHtml}</div>
+    </div>`;
+}
 
 function renderSession(s) {
   const typeLabel = TYPE_LABELS[s.type] || s.type;
@@ -361,3 +403,4 @@ loadAll();
 </script>
 </body>
 </html>
+
