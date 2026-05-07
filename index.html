@@ -87,89 +87,61 @@ footer a{color:var(--ac);text-decoration:none}
 
 </div>
 <script>
-// Project descriptions — add new projects here or they'll show a default description
-const META = {
-  'mobile-lavatrice': {
-    desc: 'Mobile a ponte per lavatrice LG F10B8NDA',
-    tags: ['truciolare', 'mobile'],
-    status: 'completato'
-  },
-  'scaffale-erbe': {
-    desc: 'Fioriera a scala richiudibile per erbe aromatiche — stile Relaxdays con perni M8',
-    tags: ['balcone', 'fioriera', 'richiudibile'],
-    status: 'pianificato'
-  },
-  'trail-brenta-2026': {
-    desc: 'Piano allenamento per la XTERRA Dolomiti di Brenta Trail 21K — 5 settembre 2026',
-    tags: ['trail', 'allenamento', 'sport'],
-    status: 'in-corso'
-  }
+const STATUS_LABELS = {
+  completato: '✅ Completato',
+  pianificato: '📐 Pianificato',
+  'in-corso': '🔨 In corso'
 };
-
-const REPO = 'fabiosangregorio/claude-projects';
-const API  = `https://api.github.com/repos/${REPO}/contents`;
-// Folders to exclude from project listing
-const EXCLUDE = new Set(['.git', '.github', 'node_modules', 'assets']);
-
-// Prossimi progetti — idee in lista, non ancora pianificate in dettaglio.
-// Quando un progetto viene pianificato, crea la cartella e rimuovilo da qui.
-const UPCOMING = [
-  {
-    name: 'Attaccapanni camera da letto',
-    desc: 'Attaccapanni da parete o a piantana per la camera da letto',
-    tags: ['camera', 'parete'],
-  },
-];
 
 async function load() {
   const grid = document.getElementById('grid');
   const count = document.getElementById('count');
+  const upcomingEl = document.getElementById('grid-upcoming');
 
   try {
-    const res = await fetch(API);
-    if (!res.ok) throw new Error(`GitHub API: ${res.status}`);
-    const items = await res.json();
-
-    // Filter: only directories that contain an index.html (i.e. real projects)
-    const dirs = items.filter(i => i.type === 'dir' && !EXCLUDE.has(i.name));
-
-    // Verify each dir has an index.html
-    const projects = [];
-    for (const dir of dirs) {
-      try {
-        const check = await fetch(`${API}/${dir.name}/index.html`);
-        if (check.ok) projects.push(dir.name);
-      } catch { /* skip */ }
-    }
+    const res = await fetch('./data/projects.json');
+    if (!res.ok) throw new Error(`projects.json: ${res.status}`);
+    const data = await res.json();
+    const projects = data.projects || [];
+    const upcoming = data.upcoming || [];
 
     if (projects.length === 0) {
       grid.innerHTML = '<div class="loader" style="color:var(--tx2)">Nessun progetto trovato.</div>';
       count.textContent = '0 progetti';
-      return;
+    } else {
+      count.textContent = `${projects.length} progett${projects.length === 1 ? 'o' : 'i'}`;
+      grid.innerHTML = projects.map(p => {
+        const tags = p.tags || [];
+        const statusHtml = p.status ? `<span class="status status-${p.status}">${STATUS_LABELS[p.status] || p.status}</span>` : '';
+        const tagsHtml = tags.map(t => `<span class="badge">${t}</span>`).join('');
+        const desc = p.desc || formatName(p.slug);
+        return `
+          <a class="card" href="${p.slug}/">
+            <div class="card-top">
+              <span class="card-name">${formatName(p.slug)}</span>
+              <svg class="card-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </div>
+            <div class="card-desc">${desc}</div>
+            ${(statusHtml || tagsHtml) ? `<div class="card-footer">${statusHtml}${tagsHtml}</div>` : ''}
+          </a>`;
+      }).join('');
     }
 
-    count.textContent = `${projects.length} progett${projects.length === 1 ? 'o' : 'i'}`;
-
-    grid.innerHTML = projects.map(name => {
-      const meta = META[name] || {};
-      const desc = meta.desc || formatName(name);
-      const tags = meta.tags || [];
-      const status = meta.status || '';
-      const statusLabels = { completato: '✅ Completato', pianificato: '📐 Pianificato', 'in-corso': '🔨 In corso' };
-      const statusHtml = status ? `<span class="status status-${status}">${statusLabels[status] || status}</span>` : '';
-      const tagsHtml = tags.map(t => `<span class="badge">${t}</span>`).join('');
-
-      return `
-        <a class="card" href="${name}/">
-          <div class="card-top">
-            <span class="card-name">${formatName(name)}</span>
-            <svg class="card-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-          </div>
-          <div class="card-desc">${desc}</div>
-          ${(statusHtml || tagsHtml) ? `<div class="card-footer">${statusHtml}${tagsHtml}</div>` : ''}
-        </a>`;
-    }).join('');
-
+    if (!upcoming.length) {
+      upcomingEl.style.display = 'none';
+    } else {
+      upcomingEl.innerHTML = upcoming.map(p => {
+        const tagsHtml = (p.tags || []).map(t => `<span class="badge">${t}</span>`).join('');
+        return `
+          <div class="card card-upcoming">
+            <div class="card-top">
+              <span class="card-name">${p.name}</span>
+            </div>
+            <div class="card-desc">${p.desc}</div>
+            <div class="card-footer"><span class="status status-idea">💡 Idea</span>${tagsHtml}</div>
+          </div>`;
+      }).join('');
+    }
   } catch (err) {
     grid.innerHTML = `
       <div class="error">
@@ -185,25 +157,7 @@ function formatName(slug) {
   return slug.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
 }
 
-function renderUpcoming() {
-  const el = document.getElementById('grid-upcoming');
-  if (!UPCOMING.length) { el.style.display = 'none'; return; }
-  el.innerHTML = UPCOMING.map(p => {
-    const tagsHtml = (p.tags || []).map(t => `<span class="badge">${t}</span>`).join('');
-    const statusHtml = `<span class="status status-idea">💡 Idea</span>`;
-    return `
-      <div class="card card-upcoming">
-        <div class="card-top">
-          <span class="card-name">${p.name}</span>
-        </div>
-        <div class="card-desc">${p.desc}</div>
-        <div class="card-footer">${statusHtml}${tagsHtml}</div>
-      </div>`;
-  }).join('');
-}
-
 load();
-renderUpcoming();
 </script>
 </body>
 </html>

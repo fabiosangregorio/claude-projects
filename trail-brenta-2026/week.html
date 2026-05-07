@@ -121,6 +121,8 @@ section{margin:2rem 0}
 .recurring-kind.cross-training{background:rgba(63,185,80,.1);color:var(--ac2);border-color:var(--ac2)}
 .recurring-meta{font-family:'Space Mono',monospace;font-size:.65rem;color:var(--tx2)}
 .recurring-notes{font-size:.75rem;color:var(--tx2);line-height:1.45;margin-top:.2rem}
+.recurring-value{font-family:'Space Mono',monospace;font-size:.75rem;color:var(--ac);margin-top:.25rem;font-weight:500}
+.recurring-value.muted{color:var(--tx2);font-weight:400}
 
 footer{margin-top:3rem;padding-top:1.5rem;border-top:1px solid var(--bd);text-align:center;color:var(--tx2);font-size:.72rem}
 footer a{color:var(--ac);text-decoration:none}
@@ -145,13 +147,15 @@ footer a{color:var(--ac);text-decoration:none}
 const BASE = './data/';
 let PLAN = null;
 let PROFILE = null;
+let WEIGHINS = null;
 
 async function loadAll() {
   const app = document.getElementById('app');
   try {
-    [PLAN, PROFILE] = await Promise.all([
+    [PLAN, PROFILE, WEIGHINS] = await Promise.all([
       fetch(BASE + 'plan.json').then(r => { if (!r.ok) throw new Error('plan.json: ' + r.status); return r.json(); }),
-      fetch(BASE + 'profile.json').then(r => { if (!r.ok) throw new Error('profile.json: ' + r.status); return r.json(); })
+      fetch(BASE + 'profile.json').then(r => { if (!r.ok) throw new Error('profile.json: ' + r.status); return r.json(); }),
+      fetch(BASE + 'weighins.json').then(r => r.ok ? r.json() : null).catch(() => null)
     ]);
     renderRoute();
   } catch (err) {
@@ -232,7 +236,7 @@ function renderRoute() {
         ${week.narrative ? `<div class="week-narr">${week.narrative}</div>` : ''}
         ${sessHtml}
         ${strengthHtml}
-        ${renderRecurring(PLAN.weekly_recurring)}
+        ${renderRecurring(PLAN.weekly_recurring, week, WEIGHINS)}
       </div>
       ${pagerHtml}
     </section>
@@ -250,13 +254,14 @@ const TYPE_DESCRIPTIONS = {
   strength: 'Sessione di forza full-body. Vedi template completo nella pagina piano.'
 };
 
-function renderRecurring(items) {
+function renderRecurring(items, week, weighins) {
   if (!items || !items.length) return '';
   const itemsHtml = items.map(it => {
     const meta = [];
     if (it.duration_min) meta.push(`${it.duration_min} min`);
     if (it.intensity) meta.push(it.intensity);
     if (it.when) meta.push(it.when);
+    const valueLine = recurringValueLine(it, week, weighins);
     return `
       <div class="recurring-item">
         <span class="recurring-day">${it.day}</span>
@@ -266,6 +271,7 @@ function renderRecurring(items) {
             <span class="recurring-kind ${it.kind}">${it.kind}</span>
             ${meta.length ? `<span class="recurring-meta">· ${meta.join(' · ')}</span>` : ''}
           </div>
+          ${valueLine}
           ${it.notes ? `<div class="recurring-notes">${it.notes}</div>` : ''}
         </div>
       </div>`;
@@ -275,6 +281,27 @@ function renderRecurring(items) {
       <div class="recurring-title">Ricorrenze settimanali fisse</div>
       <div class="recurring-list">${itemsHtml}</div>
     </div>`;
+}
+
+function recurringValueLine(item, week, weighins) {
+  if (item.kind !== 'check-in' || item.label !== 'Pesa' || !week) return '';
+  const entries = (weighins && weighins.entries) || [];
+  const hit = entries.find(e => e.date >= week.start_date && e.date <= week.end_date);
+  if (hit) {
+    const parts = [`${hit.weight_kg} kg`];
+    if (hit.body_fat_pct != null) parts.push(`${hit.body_fat_pct}% BF`);
+    if (hit.bmi != null) parts.push(`BMI ${hit.bmi}`);
+    return `<div class="recurring-value">${parts.join(' · ')}</div>`;
+  }
+  const today = todayISO();
+  if (today > week.end_date) return `<div class="recurring-value muted">— saltata</div>`;
+  if (today >= week.start_date) return `<div class="recurring-value muted">in attesa</div>`;
+  return '';
+}
+
+function todayISO() {
+  const d = new Date();
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
 }
 
 function renderSession(s) {

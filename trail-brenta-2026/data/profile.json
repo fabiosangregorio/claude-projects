@@ -2,6 +2,7 @@
   "_schema_version": "1.0",
   "_description": "Dati statici dell'atleta e dell'obiettivo gara. Modificare solo se cambiano dati anagrafici o se viene scelta una gara diversa.",
   "athlete": {
+    "_note": "weight_kg/bmi sono il baseline iniziale al via del piano. Per il peso live vedi data/weighins.json (la home preferisce l'ultima pesata quando disponibile).",
     "name": "Fabio",
     "age": 28,
     "sex": "M",

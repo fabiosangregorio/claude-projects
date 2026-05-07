@@ -1,0 +1,32 @@
+{
+  "_schema_version": "1.0",
+  "_description": "Manifest dei progetti pubblicati sotto claude-projects. Single source of truth per la home (index.html). Quando aggiungi un nuovo progetto, aggiungi una entry in `projects`. Quando una idea passa da bozza a progetto pianificato, spostala da `upcoming` a `projects`. Aggiornare last_updated.",
+  "last_updated": "2026-05-07",
+  "projects": [
+    {
+      "slug": "mobile-lavatrice",
+      "desc": "Mobile a ponte per lavatrice LG F10B8NDA",
+      "tags": ["truciolare", "mobile"],
+      "status": "completato"
+    },
+    {
+      "slug": "scaffale-erbe",
+      "desc": "Fioriera a scala richiudibile per erbe aromatiche — stile Relaxdays con perni M8",
+      "tags": ["balcone", "fioriera", "richiudibile"],
+      "status": "pianificato"
+    },
+    {
+      "slug": "trail-brenta-2026",
+      "desc": "Piano allenamento per la XTERRA Dolomiti di Brenta Trail 21K — 5 settembre 2026",
+      "tags": ["trail", "allenamento", "sport"],
+      "status": "in-corso"
+    }
+  ],
+  "upcoming": [
+    {
+      "name": "Attaccapanni camera da letto",
+      "desc": "Attaccapanni da parete o a piantana per la camera da letto",
+      "tags": ["camera", "parete"]
+    }
+  ]
+}

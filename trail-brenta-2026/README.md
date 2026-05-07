@@ -17,12 +17,14 @@ trail-brenta-2026/
 ├── week.html               ← Dettaglio piano settimanale (#<numero-settimana>).
 ├── activities.html         ← Lista di tutte le attività (run + hike).
 ├── activity.html           ← Dettaglio singola attività (#<filename-senza-.json>).
+├── weighins.html           ← Lista di tutte le pesate settimanali (con summary + delta).
 ├── recovery.html           ← Guida pratica al recupero post-attività (statica, no JSON).
 ├── README.md               ← Questo file.
 └── data/
     ├── profile.json        ← Atleta + obiettivo gara + zone FC calibrate.
     ├── plan.json           ← Struttura del piano (fasi, settimane, milestone, template).
     ├── todo.json           ← Task list di preparazione.
+    ├── weighins.json       ← Pesate settimanali (LUN mattina) da scala 1byone.
     └── activities/
         ├── index.json      ← Manifest: elenco dei file attività. AGGIORNARE a ogni nuovo log.
         └── <date>_<uuid>.json  ← Un file per attività (run o hike).
@@ -63,6 +65,20 @@ Chiavi top-level: `total_weeks`, `race_date`, `weekly_budget`, `weekly_recurring
 **Task list di preparazione** (burocrazia, equipment, test). Si aggiorna ogni volta che si segna una task come completata o se ne aggiunge una nuova.
 
 Chiavi: `last_updated`, `tasks` (array con `category`, `task`, `deadline?`, `status`, `priority?`, `note?`).
+
+### `data/weighins.json`
+
+**Pesate settimanali** durante la preparazione. Una entry per settimana, presa il LUN mattina a digiuno con la scala 1byone Health (ricorrenza fissa nel piano). Sorgente dei valori: `onebyone-cli` (`onebyone records --type body-fat`).
+
+Chiavi: `last_updated`, `source` (`device`, `mac`, `cli`), `entries` (array). Campi entry: `date` (YYYY-MM-DD), `weight_kg`, `body_fat_pct?`, `bmi?`, `muscle_kg?`, `body_water_pct?`, `visceral_fat?`, `bmr_kcal?`. Tutti i campi oltre a `date` e `weight_kg` sono opzionali (per supportare scale future più semplici).
+
+Render:
+- **`index.html` → "Profilo atleta"**: il blocco "Peso × Altezza" preferisce l'ultima entry; "BMI" idem; aggiunge una cella "Body Fat" e una sub-line con la data + delta vs baseline (quando `entries.length >= 2`).
+- **`index.html` → nav-card "Pesate"**: link a `weighins.html` con counter e ultima pesata in subline.
+- **`week.html` → "Ricorrenze settimanali fisse"**: la card "Pesa LUN" mostra `66.4 kg · 13.1% BF · BMI 19.8` se l'entry cade nel range della settimana, "in attesa" se settimana corrente senza entry, "— saltata" se settimana passata senza entry.
+- **`weighins.html`**: lista completa delle pesate (desc per data) con summary in alto (ultimo peso, body fat, BMI, Δ vs inizio) e card per entry con `Δ vs precedente` e `Δ vs inizio`. Mappa ogni entry alla settimana del piano via `plan.json`.
+
+`profile.json.athlete.weight_kg/bmi` restano come **baseline iniziale** (al via del piano, non si aggiornano). La home preferisce `weighins.json` quando disponibile, altrimenti fa fallback a `profile.json`. Niente duplicazione: profile = baseline anagrafico, weighins = serie longitudinale.
 
 ### `data/activities/`
 
