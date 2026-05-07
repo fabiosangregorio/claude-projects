@@ -45,6 +45,15 @@ Le variabili CSS (`--bg`, `--sf`, `--tx`, ecc.) restano invariate: `theme.css` l
 
 Ogni progetto ha la sua cartella con un `index.html` che viene servito su GitHub Pages.
 
+## Manifest progetti — `data/projects.json`
+
+La home (`index.html`) **non** elenca le cartelle via API GitHub (l'endpoint `/contents` non autenticato ha un limite di 60 richieste/ora per IP, troppo basso per uso normale). Si legge invece il manifest statico `data/projects.json`, che è single source of truth per:
+
+- I progetti pubblicati (`projects[]`): `slug`, `desc`, `tags`, `status` (`completato` | `pianificato` | `in-corso`).
+- Le idee non ancora pianificate (`upcoming[]`): `name`, `desc`, `tags`.
+
+Quando aggiungi/togli un progetto, modifica `data/projects.json` e bumpa `last_updated`. Vedi step 7 della procedura DIY più avanti.
+
 ---
 
 ## Progetti DIY — istruzioni per Claude
@@ -164,7 +173,7 @@ Stile: dark theme, font Space Mono + DM Sans, colori GitHub-style. Mobile-first.
 - Crea la cartella `nome-progetto/` nella repo `fabiosangregorio/claude-projects`
 - Metti il file come `index.html`
 - Usa l'API GitHub con il PAT per pushare
-- **Aggiorna il dizionario `META` in `index.html`** (nella root) aggiungendo una entry per il nuovo progetto con descrizione e tag
+- **Aggiungi una entry in `data/projects.json`** (nella root) con `slug`, `desc`, `tags`, `status`. Aggiorna `last_updated`. Se il progetto era in `upcoming`, rimuovilo da lì.
 - La pagina sarà live su `https://fabiosangregorio.github.io/claude-projects/nome-progetto/`
 
 ### 8. Double-check finale

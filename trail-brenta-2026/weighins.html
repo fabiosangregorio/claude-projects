@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DBT 21K — Pesate</title>
+<meta name="theme-color" content="#0e1117">
+<script>document.documentElement.setAttribute('data-theme',localStorage.getItem('theme')||'dark')</script>
+<link rel="stylesheet" href="/claude-projects/theme.css">
+<script src="/claude-projects/theme.js" defer></script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0e1117;--sf:#161b22;--sf2:#1c2230;--bd:#2a3040;--tx:#e6edf3;--tx2:#8b949e;--ac:#58a6ff;--ac2:#3fb950;--wn:#f0883e;--rd:#f85149;--pd:#d2a8ff}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--tx);line-height:1.6;min-height:100vh;-webkit-font-smoothing:antialiased}
+.c{max-width:760px;margin:0 auto;padding:1.5rem 1rem 3rem}
+
+.back{display:inline-flex;align-items:center;gap:.35rem;font-family:'Space Mono',monospace;font-size:.75rem;color:var(--tx2);text-decoration:none;padding:.35rem .6rem;border-radius:6px;border:1px solid var(--bd);background:var(--sf);transition:border-color .2s,color .2s;margin-bottom:1.5rem}
+.back:hover{border-color:var(--ac);color:var(--ac)}
+.back svg{width:14px;height:14px}
+
+.hero{margin-bottom:2rem}
+.kicker{font-family:'Space Mono',monospace;font-size:.7rem;color:var(--pd);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:.5rem}
+.hero h1{font-family:'Space Mono',monospace;font-size:clamp(1.6rem,5vw,2.4rem);font-weight:700;letter-spacing:-1px;line-height:1.15;margin-bottom:.5rem;background:linear-gradient(135deg,var(--pd),var(--ac));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-sub{color:var(--tx2);font-size:.9rem}
+
+.summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:.6rem;margin-bottom:1.5rem}
+.sm{background:var(--sf);border:1px solid var(--bd);border-radius:10px;padding:.7rem .85rem}
+.sm-lbl{font-family:'Space Mono',monospace;font-size:.6rem;color:var(--tx2);text-transform:uppercase;letter-spacing:1px;margin-bottom:.2rem}
+.sm-val{font-family:'Space Mono',monospace;font-size:1rem;font-weight:700;color:var(--tx)}
+.sm-sub{font-family:'Space Mono',monospace;font-size:.65rem;color:var(--tx2);margin-top:.15rem}
+
+.w-card{background:var(--sf);border:1px solid var(--bd);border-radius:10px;padding:1rem 1.1rem;margin-bottom:.7rem}
+.w-head{display:flex;justify-content:space-between;align-items:flex-start;gap:.6rem;margin-bottom:.5rem}
+.w-date{font-family:'Space Mono',monospace;font-size:.72rem;color:var(--tx2);text-transform:uppercase;letter-spacing:1px}
+.w-week{font-family:'Space Mono',monospace;font-size:.6rem;color:var(--tx2);margin-top:.15rem}
+.w-weight{font-family:'Space Mono',monospace;font-size:1.4rem;font-weight:700;color:var(--tx);line-height:1}
+.w-delta{font-family:'Space Mono',monospace;font-size:.65rem;margin-top:.2rem;color:var(--tx2)}
+.w-delta.up{color:var(--wn)}
+.w-delta.down{color:var(--ac2)}
+.w-stats{display:flex;flex-wrap:wrap;gap:.4rem .9rem;font-family:'Space Mono',monospace;font-size:.72rem;color:var(--tx2);margin-top:.55rem}
+.w-stats strong{color:var(--tx);font-weight:700}
+
+.empty{padding:2rem;text-align:center;color:var(--tx2);background:var(--sf);border:1px solid var(--bd);border-radius:10px}
+.loader{text-align:center;padding:3rem 0;color:var(--tx2)}
+.spinner{display:inline-block;width:20px;height:20px;border:2px solid var(--bd);border-top-color:var(--ac);border-radius:50%;animation:spin .6s linear infinite;margin-bottom:.6rem}
+@keyframes spin{to{transform:rotate(360deg)}}
+.error{padding:1.5rem;color:var(--rd);font-size:.85rem;background:rgba(248,81,73,.05);border:1px solid var(--rd);border-radius:10px;text-align:center}
+
+footer{margin-top:3rem;padding-top:1.5rem;border-top:1px solid var(--bd);text-align:center;color:var(--tx2);font-size:.72rem}
+footer a{color:var(--ac);text-decoration:none}
+</style>
+</head>
+<body>
+<div class="c">
+  <a class="back" href="./"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>Piano</a>
+
+  <div class="hero">
+    <div class="kicker">Composizione corporea</div>
+    <h1>Pesate</h1>
+    <p class="hero-sub" id="subline">Pesata settimanale del lunedì mattina, a digiuno.</p>
+  </div>
+
+  <div id="summary"></div>
+  <div id="app"><div class="loader"><div class="spinner"></div><br>Caricamento pesate...</div></div>
+
+  <footer>
+    <a href="https://github.com/fabiosangregorio/claude-projects/tree/main/trail-brenta-2026" target="_blank" rel="noopener">trail-brenta-2026</a>
+  </footer>
+</div>
+
+<script>
+const BASE = './data/';
+
+async function loadAll() {
+  const app = document.getElementById('app');
+  const summaryEl = document.getElementById('summary');
+  try {
+    const [weighins, plan] = await Promise.all([
+      fetch(BASE + 'weighins.json').then(r => {
+        if (!r.ok) throw new Error('weighins.json: ' + r.status);
+        return r.json();
+      }),
+      fetch(BASE + 'plan.json').then(r => r.ok ? r.json() : null).catch(() => null)
+    ]);
+    const entries = (weighins.entries || []).slice().sort((a,b) => a.date.localeCompare(b.date));
+    if (entries.length === 0) {
+      app.innerHTML = `<div class="empty">Nessuna pesata ancora registrata.</div>`;
+      return;
+    }
+    document.getElementById('subline').textContent =
+      `${entries.length} ${entries.length === 1 ? 'pesata registrata' : 'pesate registrate'}.`;
+    summaryEl.innerHTML = renderSummary(entries);
+    const weeks = (plan && plan.weeks) || [];
+    const desc = entries.slice().reverse();
+    app.innerHTML = desc.map((e, i) => renderCard(e, desc[i+1], entries[0], weeks)).join('');
+  } catch (err) {
+    app.innerHTML = `<div class="error">Errore caricamento: ${err.message}</div>`;
+  }
+}
+
+function renderSummary(asc) {
+  const latest = asc[asc.length - 1];
+  const baseline = asc[0];
+  const dWeight = asc.length >= 2 ? latest.weight_kg - baseline.weight_kg : null;
+  const dBf = asc.length >= 2 && latest.body_fat_pct != null && baseline.body_fat_pct != null
+    ? latest.body_fat_pct - baseline.body_fat_pct : null;
+  return `
+    <div class="summary">
+      <div class="sm">
+        <div class="sm-lbl">Ultimo peso</div>
+        <div class="sm-val">${latest.weight_kg} kg</div>
+        <div class="sm-sub">${formatItalianDate(latest.date)}</div>
+      </div>
+      ${latest.body_fat_pct != null ? `
+      <div class="sm">
+        <div class="sm-lbl">Body Fat</div>
+        <div class="sm-val">${latest.body_fat_pct}%</div>
+        ${dBf != null ? `<div class="sm-sub">${signed(dBf, 1)} pp dal via</div>` : ''}
+      </div>` : ''}
+      ${latest.bmi != null ? `
+      <div class="sm">
+        <div class="sm-lbl">BMI</div>
+        <div class="sm-val">${latest.bmi}</div>
+      </div>` : ''}
+      ${dWeight != null ? `
+      <div class="sm">
+        <div class="sm-lbl">Δ vs inizio</div>
+        <div class="sm-val">${signed(dWeight, 1)} kg</div>
+        <div class="sm-sub">baseline ${baseline.weight_kg} kg · ${formatItalianDate(baseline.date)}</div>
+      </div>` : ''}
+    </div>
+  `;
+}
+
+function renderCard(e, prev, baseline, weeks) {
+  const week = weeks.find(w => e.date >= w.start_date && e.date <= w.end_date);
+  const dPrev = prev ? e.weight_kg - prev.weight_kg : null;
+  const dBase = baseline && e !== baseline ? e.weight_kg - baseline.weight_kg : null;
+  const dCls = dPrev == null ? '' : (dPrev > 0 ? 'up' : (dPrev < 0 ? 'down' : ''));
+  const deltaParts = [];
+  if (dPrev != null) deltaParts.push(`${signed(dPrev, 1)} kg vs precedente`);
+  if (dBase != null) deltaParts.push(`${signed(dBase, 1)} kg vs inizio`);
+  return `
+    <div class="w-card">
+      <div class="w-head">
+        <div>
+          <div class="w-date">${formatItalianDate(e.date)}</div>
+          ${week ? `<div class="w-week">settimana ${week.number}/${weeks.length}${week.label ? ' · ' + week.label : ''}</div>` : ''}
+        </div>
+        <div style="text-align:right">
+          <div class="w-weight">${e.weight_kg} kg</div>
+          ${deltaParts.length ? `<div class="w-delta ${dCls}">${deltaParts.join(' · ')}</div>` : ''}
+        </div>
+      </div>
+      <div class="w-stats">
+        ${e.body_fat_pct != null ? `<span><strong>${e.body_fat_pct}%</strong> body fat</span>` : ''}
+        ${e.bmi != null ? `<span>BMI <strong>${e.bmi}</strong></span>` : ''}
+        ${e.muscle_kg != null ? `<span>muscolo <strong>${e.muscle_kg}</strong> kg</span>` : ''}
+        ${e.body_water_pct != null ? `<span>acqua <strong>${e.body_water_pct}%</strong></span>` : ''}
+        ${e.visceral_fat != null ? `<span>visc. <strong>${e.visceral_fat}</strong></span>` : ''}
+        ${e.bmr_kcal != null ? `<span>BMR <strong>${e.bmr_kcal}</strong> kcal</span>` : ''}
+      </div>
+    </div>
+  `;
+}
+
+function signed(n, decimals = 0) {
+  const v = decimals === 0 ? Math.round(n) : Math.round(n * 10**decimals) / 10**decimals;
+  if (v > 0) return `+${v}`;
+  if (v < 0) return `${v}`;
+  return '0';
+}
+
+function formatItalianDate(iso) {
+  const months = ['gen','feb','mar','apr','mag','giu','lug','ago','set','ott','nov','dic'];
+  const d = new Date(iso);
+  return `${d.getDate()} ${months[d.getMonth()]} ${d.getFullYear()}`;
+}
+
+loadAll();
+</script>
+</body>
+</html>
