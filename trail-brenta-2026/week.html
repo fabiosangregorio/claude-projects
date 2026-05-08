@@ -63,6 +63,10 @@ section{margin:2rem 0}
 .gear-items li{font-size:.78rem;color:var(--tx2);line-height:1.55;padding:.12rem 0 .12rem 1rem;position:relative}
 .gear-items li::before{content:'·';position:absolute;left:.35rem;color:var(--wn);font-weight:700}
 
+.nutrition{margin-top:.6rem;padding:.7rem .85rem;background:rgba(63,185,80,.05);border:1px solid rgba(63,185,80,.25);border-radius:6px}
+.nutrition-title{font-family:'Space Mono',monospace;font-size:.65rem;color:var(--ac2);text-transform:uppercase;letter-spacing:1px;margin-bottom:.55rem;font-weight:700}
+.nutrition .gear-items li::before{color:var(--ac2)}
+
 .gd{margin-top:.7rem;padding:.7rem .85rem;background:var(--sf2);border:1px solid var(--bd);border-radius:6px}
 .gd-title{font-family:'Space Mono',monospace;font-size:.65rem;color:var(--tx2);text-transform:uppercase;letter-spacing:1px;margin-bottom:.55rem;font-weight:700}
 .gd-row{margin-bottom:.55rem}
@@ -324,6 +328,17 @@ function renderSession(s) {
       `).join('')}
     </div>` : '';
 
+  const nutritionHtml = (s.nutrition_plan && s.nutrition_plan.length) ? `
+    <div class="nutrition">
+      <div class="nutrition-title">Piano nutrizione e idratazione</div>
+      ${s.nutrition_plan.map(g => `
+        <div class="gear-cat">
+          <div class="gear-cat-title">${g.category}</div>
+          <ul class="gear-items">${g.items.map(i => `<li>${i}</li>`).join('')}</ul>
+        </div>
+      `).join('')}
+    </div>` : '';
+
   const gdHtml = renderGradeDistribution(s.grade_distribution);
 
   const routesHtml = (s.routes && s.routes.length) ? `
@@ -348,6 +363,7 @@ function renderSession(s) {
       ${routesHtml}
       ${gdHtml}
       ${gearHtml}
+      ${nutritionHtml}
     </div>
   `;
 }
@@ -430,4 +446,5 @@ loadAll();
 </script>
 </body>
 </html>
+
 
