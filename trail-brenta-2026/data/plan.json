@@ -196,9 +196,9 @@
               "category": "Zaino",
               "items": [
                 "Acqua 1,5 L: borraccia 1 (500 ml) con 1 bustina Equilibra + 0,5 g sale fino · borracce 2 e 3 (500 ml ciascuna) con 0,5 g sale fino",
-                "Barretta + frutta secca (o un gel se ce l'hai)",
-                "Telefono carico",
-                "Orologio GPS carico",
+                "Frutta secca 60-80 g (mandorle/noci) + cioccolato fondente 70%+ 30-40 g, in sacchetto richiudibile",
+                "AirPods Pro caricate al 100% (sensore HR live)",
+                "iPhone carico in tasca pettorale zaino (display HR + cronometro)",
                 "Cerotti Compeed (scarpe nuove = vesciche probabili)",
                 "Crema solare (maggio scotta già in quota)",
                 "Giacca antivento leggera (la cima è ventosa)",
@@ -252,7 +252,16 @@
             {
               "category": "15-30 min prima di partire",
               "items": [
-                "Mezza barretta o 1 dattero solo se senti fame"
+                "1 quadretto cioccolato fondente 70%+ o 5-6 mandorle, solo se hai fame"
+              ]
+            },
+            {
+              "category": "Snack durante l'attività",
+              "items": [
+                "Min 60-75: 25 g frutta secca + 10 g cioccolato fondente",
+                "Min 120-130: stessa cosa se hai fame",
+                "Z2/MAF allena ossidazione grassi: niente gel/zuccheri rapidi, frutta secca e fondente sono ideali",
+                "Mastica bene e bevi subito dopo per facilitare digestione"
               ]
             },
             {
@@ -281,11 +290,11 @@
             },
             {
               "time": "09:50",
-              "what": "Arrivo a Roncola Sant'Alberto · parcheggio, scarpe, GPS, antivento in zaino"
+              "what": "Arrivo a Roncola Sant'Alberto · parcheggio, scarpe, AirPods + iPhone, antivento in zaino"
             },
             {
               "time": "10:00",
-              "what": "Start attività (2h15 dopo colazione, ok)"
+              "what": "Start attività (2h15 dopo colazione) · avvia tracking HR su iPhone (Apple Workout o Strava con AirPods)"
             },
             {
               "time": "13:00",
