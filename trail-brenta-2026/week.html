@@ -67,6 +67,12 @@ section{margin:2rem 0}
 .nutrition-title{font-family:'Space Mono',monospace;font-size:.65rem;color:var(--ac2);text-transform:uppercase;letter-spacing:1px;margin-bottom:.55rem;font-weight:700}
 .nutrition .gear-items li::before{color:var(--ac2)}
 
+.schedule{margin-top:.6rem;padding:.7rem .85rem;background:rgba(88,166,255,.05);border:1px solid rgba(88,166,255,.25);border-radius:6px}
+.schedule-title{font-family:'Space Mono',monospace;font-size:.65rem;color:var(--ac);text-transform:uppercase;letter-spacing:1px;margin-bottom:.55rem;font-weight:700}
+.sch-row{display:flex;gap:.7rem;font-size:.78rem;line-height:1.55;padding:.12rem 0}
+.sch-time{font-family:'Space Mono',monospace;color:var(--ac);font-weight:700;flex-shrink:0;min-width:5.5rem}
+.sch-what{color:var(--tx2)}
+
 .gd{margin-top:.7rem;padding:.7rem .85rem;background:var(--sf2);border:1px solid var(--bd);border-radius:6px}
 .gd-title{font-family:'Space Mono',monospace;font-size:.65rem;color:var(--tx2);text-transform:uppercase;letter-spacing:1px;margin-bottom:.55rem;font-weight:700}
 .gd-row{margin-bottom:.55rem}
@@ -339,6 +345,17 @@ function renderSession(s) {
       `).join('')}
     </div>` : '';
 
+  const scheduleHtml = (s.schedule && s.schedule.length) ? `
+    <div class="schedule">
+      <div class="schedule-title">Piano orari</div>
+      ${s.schedule.map(r => `
+        <div class="sch-row">
+          <div class="sch-time">${r.time}</div>
+          <div class="sch-what">${r.what}</div>
+        </div>
+      `).join('')}
+    </div>` : '';
+
   const gdHtml = renderGradeDistribution(s.grade_distribution);
 
   const routesHtml = (s.routes && s.routes.length) ? `
@@ -364,6 +381,7 @@ function renderSession(s) {
       ${gdHtml}
       ${gearHtml}
       ${nutritionHtml}
+      ${scheduleHtml}
     </div>
   `;
 }
