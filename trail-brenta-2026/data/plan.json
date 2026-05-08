@@ -232,13 +232,13 @@
           },
           "nutrition_plan": [
             {
-              "category": "Colazione (2-3h prima)",
+              "category": "Colazione ridotta (1h30 prima)",
               "items": [
                 "Avena 70 g",
                 "1 banana matura",
                 "Miele 20 g (1 cucchiaio raso)",
-                "Yogurt greco 0% 125 g",
-                "1 caffè — dose abituale, non aumentarla oggi"
+                "1 caffè — dose abituale, non aumentarla oggi",
+                "NO yogurt — versione leggera per digerire in 1h30"
               ]
             },
             {
@@ -260,6 +260,40 @@
                 "1 bustina Polase Sport in 500-750 ml acqua",
                 "Target sodio: 300-500 mg/h"
               ]
+            }
+          ],
+          "schedule": [
+            {
+              "time": "07:00",
+              "what": "Sveglia · 500 ml acqua + 1 bustina Polase Sport"
+            },
+            {
+              "time": "07:00–07:15",
+              "what": "Colazione ridotta (vedi piano nutrizione)"
+            },
+            {
+              "time": "07:30",
+              "what": "Partenza da Treviglio (zaino e scarpe già pronti dalla sera prima)"
+            },
+            {
+              "time": "08:20",
+              "what": "Arrivo a Roncola Sant'Alberto · parcheggio, scarpe, GPS, antivento in zaino"
+            },
+            {
+              "time": "08:30",
+              "what": "Start attività"
+            },
+            {
+              "time": "11:30",
+              "what": "Fine attività (3h piene, sforabili a 11:45 senza panico)"
+            },
+            {
+              "time": "11:40",
+              "what": "In macchina · cambio veloce, asciugamano sul sedile"
+            },
+            {
+              "time": "12:00",
+              "what": "Arrivo Almè ✓"
             }
           ]
         }
