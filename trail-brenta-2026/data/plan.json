@@ -232,13 +232,13 @@
           },
           "nutrition_plan": [
             {
-              "category": "Colazione ridotta (1h30 prima)",
+              "category": "Colazione (2h30 prima)",
               "items": [
                 "Avena 70 g",
                 "1 banana matura",
                 "Miele 20 g (1 cucchiaio raso)",
-                "1 caffè — dose abituale, non aumentarla oggi",
-                "NO yogurt — versione leggera per digerire in 1h30"
+                "Yogurt greco 0% 125 g",
+                "1 caffè — dose abituale, non aumentarla oggi"
               ]
             },
             {
@@ -264,35 +264,35 @@
           ],
           "schedule": [
             {
-              "time": "07:00",
+              "time": "07:30",
               "what": "Sveglia · 500 ml acqua + 1 bustina Polase Sport"
             },
             {
-              "time": "07:00–07:15",
-              "what": "Colazione ridotta (vedi piano nutrizione)"
+              "time": "07:30–07:45",
+              "what": "Colazione completa (vedi piano nutrizione)"
             },
             {
-              "time": "07:30",
+              "time": "09:00",
               "what": "Partenza da Treviglio (zaino e scarpe già pronti dalla sera prima)"
             },
             {
-              "time": "08:20",
+              "time": "09:50",
               "what": "Arrivo a Roncola Sant'Alberto · parcheggio, scarpe, GPS, antivento in zaino"
             },
             {
-              "time": "08:30",
-              "what": "Start attività"
+              "time": "10:00",
+              "what": "Start attività (2h15 dopo colazione, ok)"
             },
             {
-              "time": "11:30",
-              "what": "Fine attività (3h piene, sforabili a 11:45 senza panico)"
+              "time": "13:00",
+              "what": "Fine attività (3h piene, sforabili a 13:15 senza panico)"
             },
             {
-              "time": "11:40",
+              "time": "13:10",
               "what": "In macchina · cambio veloce, asciugamano sul sedile"
             },
             {
-              "time": "12:00",
+              "time": "13:30",
               "what": "Arrivo Almè ✓"
             }
           ]
