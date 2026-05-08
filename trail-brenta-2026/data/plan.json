@@ -1,7 +1,7 @@
 {
   "_schema_version": "1.1",
   "_description": "Struttura del piano di allenamento: fasi, settimane, template forza/mobility, budget e regole.",
-  "last_updated": "2026-05-06",
+  "last_updated": "2026-05-08",
   "total_weeks": 18,
   "race_date": "2026-09-05",
   "weekly_budget": {
@@ -195,7 +195,7 @@
             {
               "category": "Zaino",
               "items": [
-                "Acqua 1–1,5 L con un pizzico di sali",
+                "Acqua 500-750 ml + 1 bustina Polase Sport (vedi piano nutrizione)",
                 "Barretta + frutta secca (o un gel se ce l'hai)",
                 "Telefono carico",
                 "Orologio GPS carico",
@@ -229,7 +229,39 @@
             "down_5_10": 12.0,
             "down_gt_10": 31.8,
             "vs_race_note": "Stesso DNA della Brenta (cosine 0.96): bimodale ripido-su / ripido-giù. Più denso (8.3 vs 5.8 m D+/100m) e quasi nessun piano (1.3% vs 11.4%). Lab della parte più dura del profilo gara."
-          }
+          },
+          "nutrition_plan": [
+            {
+              "category": "Colazione (2-3h prima)",
+              "items": [
+                "Avena 70 g",
+                "1 banana matura",
+                "Miele 20 g (1 cucchiaio raso)",
+                "Yogurt greco 0% 125 g",
+                "1 caffè — dose abituale, non aumentarla oggi"
+              ]
+            },
+            {
+              "category": "Idratazione pre-run",
+              "items": [
+                "500 ml acqua + 1 bustina Polase Sport al risveglio",
+                "Sorsi piccoli fino alla partenza, non a stomaco pieno"
+              ]
+            },
+            {
+              "category": "15-30 min prima di partire",
+              "items": [
+                "Mezza barretta o 1 dattero solo se senti fame"
+              ]
+            },
+            {
+              "category": "Durante (in zaino)",
+              "items": [
+                "1 bustina Polase Sport in 500-750 ml acqua",
+                "Target sodio: 300-500 mg/h"
+              ]
+            }
+          ]
         }
       ],
       "strength": null,
