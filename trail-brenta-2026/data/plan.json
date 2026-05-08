@@ -195,7 +195,7 @@
             {
               "category": "Zaino",
               "items": [
-                "Acqua 1,5 L: 500 ml con 1 bustina Polase Sport + 1 L liscia (o 750+750 con seconda mezza bustina)",
+                "Acqua 1,5 L: borraccia 1 (500 ml) con 1 bustina Equilibra + 0,5 g sale fino · borracce 2 e 3 (500 ml ciascuna) con 0,5 g sale fino",
                 "Barretta + frutta secca (o un gel se ce l'hai)",
                 "Telefono carico",
                 "Orologio GPS carico",
@@ -244,8 +244,9 @@
             {
               "category": "Idratazione pre-run",
               "items": [
-                "500 ml acqua + 1 bustina Polase Sport al risveglio",
-                "Sorsi piccoli fino alla partenza, non a stomaco pieno"
+                "500 ml acqua + 1 bustina Equilibra + 0,5 g sale fino al risveglio",
+                "Sorsi piccoli fino alla partenza, non a stomaco pieno",
+                "Nota: Equilibra non contiene sodio, il sale fino lo aggiunge (~200 mg Na)"
               ]
             },
             {
@@ -257,16 +258,18 @@
             {
               "category": "Durante (in zaino)",
               "items": [
-                "1,5 L totali: 500 ml + 1 bustina Polase Sport, restanti 1 L acqua liscia",
+                "Borraccia 1 (500 ml): 1 bustina Equilibra + 0,5 g sale fino (gusto + K + Mg + Na)",
+                "Borracce 2 e 3 (500 ml cad.): 0,5 g sale fino in acqua liscia",
                 "Bere a sorsi piccoli ogni 15-20 min, non aspettare la sete",
-                "Target sodio: 300-500 mg/h (1 bustina Polase ne ha ~330 mg)"
+                "Sodio totale ~600 mg in 3h (target 300-500 mg/h con margine)",
+                "Dosaggio pratico: 0,5 g sale = 1 pizzico abbondante (1/8 cucchiaino)"
               ]
             }
           ],
           "schedule": [
             {
               "time": "07:30",
-              "what": "Sveglia · 500 ml acqua + 1 bustina Polase Sport"
+              "what": "Sveglia · 500 ml acqua + 1 bustina Equilibra + 0,5 g sale fino"
             },
             {
               "time": "07:30–07:45",
