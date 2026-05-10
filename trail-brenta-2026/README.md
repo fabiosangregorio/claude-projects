@@ -81,6 +81,8 @@ Chiavi top-level: `total_weeks`, `weekly_budget`, `rules`, `phases`, `strength_t
 
 **`sessions[].activities`** — array opzionale di attività registrate che hanno eseguito quella sessione (consuntivo). Item: `{file, title}` dove `file` è il filename in `data/activities/` senza `.json`. Renderizzato da `week.html` come badge verdi cliccabili sotto il blocco `routes`, link diretto a `activity.html#<file>`. Una sessione può avere più attività (es. hike multi-giorno).
 
+**Niente dati attività-specifici nella sessione.** Gear list ("cosa portare"), piano nutrizione, piano orari e `grade_distribution` pianificata vivono **nel file dell'attività**, non nella sessione della settimana. Vedi "Campi di pianificazione" in `data/activities/`. La sessione resta prescrittiva ad alto livello (tipo, durata, intensità, FC max, when, notes, routes, activities); i dettagli operativi del singolo giorno stanno con l'attività che li esegue.
+
 **`sessions[]` di tipo `check-in` / `cross-training`** — ricorrenze settimanali fisse (cross-training non strutturato, check-in di tracking) **definite per settimana**, vivono nello stesso array delle sessioni di corsa. Non sono sessioni di allenamento prescrittive — sono ancore di baseline. `week.html` le renderizza con lo **stesso layout** delle altre sessioni; il `label` (es. "Pesa", "Padel", "Bici") sostituisce il fallback del tipo nel badge, e il colore del badge resta determinato dal `type`. Definirle per settimana permette di variare in base al contesto (es. vacanza = niente padel, settimana scarico = niente bici). Campi item: `type` (`check-in` | `cross-training`), `label`, `when` (giorno-della-settimana ed eventuale contesto orario, es. `"LUN mattina, a digiuno"` o `"MER"`), `duration_min?`, `intensity?`, `notes?`. Esempi tipici: pesa LUN, padel MER, bici GIO. Non contano per `auto.adherence.done` della review (vedi skill `weekly-review`).
 
 **`strength`** — opzionale. Assente = usa il template (renderer mostra la card "vedi piano principale"). `{ skipped: true, reason: "..." }` = settimana senza forza con motivazione (renderer mostra la card "saltata" con il `reason`). In futuro potrà accettare anche un override in forma di session-object.
@@ -121,6 +123,7 @@ Campi top-level comuni:
 - `totals` — distanza, durate, dislivello (vedi sotto per differenze run/hike)
 - `derived` — metriche calcolate (vertical, race_match, eccetera)
 - `ai_analysis?` — headline, classification, execution, trail_specificity, strengths, concerns, narrative, next_session. **Assente per attività `category: "social"`.**
+- **Pianificazione (opzionali, valgono per uscite "preparate"):** `gear_checklist?`, `grade_distribution?`, `nutrition_plan?`, `schedule?`. Vedi "Campi di pianificazione" sotto.
 
 **Campo `category`:**
 - Omesso o `"training"` → attività di allenamento, contribuisce al piano e alle analisi di progresso.
@@ -130,6 +133,12 @@ Campi top-level comuni:
 **Per `activity_type: "run"`** — `totals` include `duration_sec`, `avg_pace_min_per_km`, `gap_min_per_km`, `avg_hr`, `max_hr_observed`, `avg_cadence_spm`, `ef`, `steps`, ecc. Top-level: `splits`, `hr_zones`, `decoupling`, `walk_breaks`, `walks_summary`, `pace_variability`. Sorgente: parsing Garmin/Strava + analisi AI esterna.
 
 **Per `activity_type: "hike"`** — `totals` include `duration_sec` (= totale, start→end), `duration_moving_sec`, `pause_sec`, `descent_m`, `avg_speed_kmh_moving`. Niente `splits`/`hr_zones`/`decoupling`. Sorgente tipica: GPX da Komoot.
+
+**Campi di pianificazione (top-level, opzionali):** vivono nell'attività perché sono *attività-specifici* (cosa portare/mangiare/fare per **questa** uscita), non nella settimana. Si popolano in fase di pianificazione (anche prima dell'esecuzione, su un file attività skeleton) e restano come record.
+- `gear_checklist[]` — array di `{category, items[]}`. "Cosa portare" per categoria (Indosso, Zaino, Opzionali, ecc.). Renderizzato da `activity.html` come sezione "Cosa portare".
+- `grade_distribution` — distribuzione **pianificata** delle pendenze (calcolata dalle coordinate del percorso scelto, p.es. tour Komoot). Campi: `flat_lt_2`, `rolling_2_5`, `uphill_5_10`, `steep_gt_10`, `down_2_5`, `down_5_10`, `down_gt_10` (percentuali del tracciato, sommano ~100%) + `_source?`, `vs_race_note?`. Da non confondere con `derived.grade_distribution`, che è la distribuzione **misurata** dal GPS post-esecuzione. `activity.html` renderizza la pianificata come "Distribuzione pendenza vs gara" (confronto con `race.json.course_profile_2025.grade_distribution`).
+- `nutrition_plan[]` — array di `{category, items[]}`. Piano nutrizione e idratazione (Colazione, Pre-run, Durante, ecc.). Renderizzato come sezione "Piano nutrizione e idratazione".
+- `schedule[]` — array di `{time, what}`. Sequenza oraria della giornata di gara/uscita. Renderizzato come sezione "Piano orari".
 
 **Manifest `data/activities/index.json`**: elenca i filename. Lo statico hosting non può listare cartelle, quindi **ogni nuova attività va aggiunta qui** nell'array `activities`.
 
