@@ -24,9 +24,11 @@ trail-brenta-2026/
     ├── profile.json        ← Atleta + zone FC calibrate.
     ├── race.json           ← Obiettivo gara (evento, percorso, profilo).
     ├── plan.json           ← Struttura del piano (fasi, milestone, template, regole).
-    ├── weeks.json          ← Settimane del piano (sessioni ordinate cronologicamente, strength, review).
     ├── todo.json           ← Task list di preparazione.
     ├── weighins.json       ← Pesate settimanali (LUN mattina) da scala 1byone.
+    ├── weeks/
+    │   ├── index.json      ← Manifest: elenco dei file settimana. AGGIORNARE a ogni nuova settimana.
+    │   └── week-NN.json    ← Un file per settimana (sessioni ordinate cronologicamente, strength, review).
     └── activities/
         ├── index.json      ← Manifest: elenco dei file attività. AGGIORNARE a ogni nuovo log.
         └── <date>_<uuid>.json  ← Un file per attività (run o hike).
@@ -65,25 +67,27 @@ Chiavi top-level: `event`, `edition`, `date`, `location`, `distance_km`, `elevat
 
 **Sempre aggiornare il campo `last_updated`** quando si modifica.
 
-Chiavi top-level: `total_weeks`, `weekly_budget`, `rules`, `phases`, `strength_template`, `mobility_template`. Le settimane vivono in `weeks.json` (vedi sotto). La data gara vive in `race.json.date` (canonica), non duplicare qui.
+Chiavi top-level: `total_weeks`, `weekly_budget`, `rules`, `phases`, `strength_template`, `mobility_template`. Le settimane vivono in `data/weeks/` (vedi sotto). La data gara vive in `race.json.date` (canonica), non duplicare qui.
 
-### `data/weeks.json`
+### `data/weeks/`
 
-**Settimane del piano** — calendario delle sessioni, strength e retrospettive. Estratto da `plan.json` a partire dalla v1.4 per mantenere `plan.json` snello e indipendente dal log settimanale.
+**Settimane del piano** — un file per settimana, calendario delle sessioni + strength + retrospettiva. Ogni file contiene **una sola** settimana. Estratto da `plan.json` (v1.4) e poi splittato in file singoli (v1.5) per coerenza con `data/activities/` ed evolvibilità.
 
-**Sempre aggiornare il campo `last_updated`** quando si modifica.
+**Manifest `data/weeks/index.json`**: elenca i filename. Lo statico hosting non può listare cartelle, quindi **ogni nuova settimana va aggiunta qui** nell'array `weeks`. Top-level: `_schema_version`, `_description`, `last_updated`, `weeks` (array di filename). I consumatori riordinano per `number` dopo il caricamento, quindi l'ordine nel manifest è irrilevante (di norma cronologico crescente per leggibilità).
 
-Chiavi top-level: `weeks` (array). Ogni elemento è una settimana con `number`, `phase_id`, `start_date`, `end_date`, `label`, `narrative`, `sessions[]`, `strength?`, `review?`.
+**Aggiornare `last_updated` nel manifest** quando si modifica una settimana qualsiasi del piano.
 
-**Ordinamento sessioni:** all'interno di ogni settimana, `sessions[]` è ordinato cronologicamente per data dedotta dal campo `when` (es. `"SAB 2 + DOM 3"` → SAB 2; `"MER 6 o GIO 7"` → MER 6; `"MER"` senza numero → calcolato dal `start_date` della settimana). I consumatori (`week.html`, ecc.) renderizzano nell'ordine dell'array — quindi mantenere l'ordine cronologico in fase di edit.
+**Per-week file `data/weeks/week-NN.json`** (NN = numero settimana, padded a 2 cifre, es. `week-01.json`). Top-level: `number`, `phase_id`, `start_date`, `end_date`, `label`, `narrative`, `sessions[]`, `strength?`, `review?`. Niente `_schema_version` qui — vive nel manifest.
 
-**`weeks[].sessions[].activities`** — array opzionale di attività registrate che hanno eseguito quella sessione (consuntivo). Item: `{file, title}` dove `file` è il filename in `data/activities/` senza `.json`. Renderizzato da `week.html` come badge verdi cliccabili sotto il blocco `routes`, link diretto a `activity.html#<file>`. Una sessione può avere più attività (es. hike multi-giorno).
+**Ordinamento sessioni:** all'interno di ogni file, `sessions[]` è ordinato cronologicamente per data dedotta dal campo `when` (es. `"SAB 2 + DOM 3"` → SAB 2; `"MER 6 o GIO 7"` → MER 6; `"MER"` senza numero → calcolato dal `start_date` della settimana). I consumatori (`week.html`, ecc.) renderizzano nell'ordine dell'array — quindi mantenere l'ordine cronologico in fase di edit.
 
-**`weeks[].sessions[]` di tipo `check-in` / `cross-training`** — ricorrenze settimanali fisse (cross-training non strutturato, check-in di tracking) **definite per settimana**, vivono nello stesso array delle sessioni di corsa. Non sono sessioni di allenamento prescrittive — sono ancore di baseline che `week.html` renderizza inline con uno stile dedicato. Definirle per settimana permette di variare in base al contesto (es. vacanza = niente padel, settimana scarico = niente bici). Campi item: `type` (`check-in` | `cross-training`), `label`, `when` (giorno-della-settimana ed eventuale contesto orario, es. `"LUN mattina, a digiuno"` o `"MER"`), `duration_min?`, `intensity?`, `notes?`. Esempi tipici: pesa LUN, padel MER, bici GIO. Non contano per `auto.adherence.done` della review (vedi skill `weekly-review`).
+**`sessions[].activities`** — array opzionale di attività registrate che hanno eseguito quella sessione (consuntivo). Item: `{file, title}` dove `file` è il filename in `data/activities/` senza `.json`. Renderizzato da `week.html` come badge verdi cliccabili sotto il blocco `routes`, link diretto a `activity.html#<file>`. Una sessione può avere più attività (es. hike multi-giorno).
 
-**`weeks[].strength`** — opzionale. Assente = usa il template (renderer mostra la card "vedi piano principale"). `{ skipped: true, reason: "..." }` = settimana senza forza con motivazione (renderer mostra la card "saltata" con il `reason`). In futuro potrà accettare anche un override in forma di session-object.
+**`sessions[]` di tipo `check-in` / `cross-training`** — ricorrenze settimanali fisse (cross-training non strutturato, check-in di tracking) **definite per settimana**, vivono nello stesso array delle sessioni di corsa. Non sono sessioni di allenamento prescrittive — sono ancore di baseline che `week.html` renderizza inline con uno stile dedicato. Definirle per settimana permette di variare in base al contesto (es. vacanza = niente padel, settimana scarico = niente bici). Campi item: `type` (`check-in` | `cross-training`), `label`, `when` (giorno-della-settimana ed eventuale contesto orario, es. `"LUN mattina, a digiuno"` o `"MER"`), `duration_min?`, `intensity?`, `notes?`. Esempi tipici: pesa LUN, padel MER, bici GIO. Non contano per `auto.adherence.done` della review (vedi skill `weekly-review`).
 
-**`weeks[].review`** — retrospettiva di fine settimana, scritta dalla skill `weekly-review` (vedi `.claude/skills/weekly-review/SKILL.md`). Tre layer: `auto` (calcolato da attività + weighins, zero input), `checkin` (5 risposte multiple-choice raccolte via `mcp__conductor__AskUserQuestion`), `adaptive` (max 2 probe attivati da regole). Campi top: `date`, `verdict` (`on-track` | `ahead` | `behind` | `recalibrate`), `headline` (1 frase), `synthesis` (1-2 frasi deterministiche). Sotto `auto`: `adherence`, `load`, `phase_kpi` (status `measured` | `not_measurable_this_week` | `out_of_target`; `value` presente solo se `measured`/`out_of_target`), `open_concerns` (campi `area`, `weeks_open`, `severity_max` — la presenza nell'array implica `open`, niente campo `status`), `highlights`, `lowlights`, `race_day_break_derived` (la "forzante": NON chiesta all'utente, derivata dai dati con `reason`). I campi `checkin.niggles` e `adaptive` sono omessi quando vuoti. Renderizzato da `week.html` come sezione "Retrospettiva" in fondo alla card della settimana, solo se presente.
+**`strength`** — opzionale. Assente = usa il template (renderer mostra la card "vedi piano principale"). `{ skipped: true, reason: "..." }` = settimana senza forza con motivazione (renderer mostra la card "saltata" con il `reason`). In futuro potrà accettare anche un override in forma di session-object.
+
+**`review`** — retrospettiva di fine settimana, scritta dalla skill `weekly-review` (vedi `.claude/skills/weekly-review/SKILL.md`). Tre layer: `auto` (calcolato da attività + weighins, zero input), `checkin` (5 risposte multiple-choice raccolte via `mcp__conductor__AskUserQuestion`), `adaptive` (max 2 probe attivati da regole). Campi top: `date`, `verdict` (`on-track` | `ahead` | `behind` | `recalibrate`), `headline` (1 frase), `synthesis` (1-2 frasi deterministiche). Sotto `auto`: `adherence`, `load`, `phase_kpi` (status `measured` | `not_measurable_this_week` | `out_of_target`; `value` presente solo se `measured`/`out_of_target`), `open_concerns` (campi `area`, `weeks_open`, `severity_max` — la presenza nell'array implica `open`, niente campo `status`), `highlights`, `lowlights`, `race_day_break_derived` (la "forzante": NON chiesta all'utente, derivata dai dati con `reason`). I campi `checkin.niggles` e `adaptive` sono omessi quando vuoti. Renderizzato da `week.html` come sezione "Retrospettiva" in fondo alla card della settimana, solo se presente.
 
 ### `data/todo.json`
 
@@ -155,7 +159,7 @@ Es. log sensazioni, lista spesa attrezzatura dettagliata.
 
 - ❌ Mai mettere dati nell'HTML. Se vedi un valore hardcoded nella pagina che dovrebbe vivere nei JSON, spostalo.
 - ❌ Mai modificare l'HTML per aggiornare i dati: modifica il JSON.
-- ❌ Mai duplicare dati tra `profile.json`, `race.json`, `plan.json` e `weeks.json`. Profilo = chi sei (anagrafica + zone FC); race = dove vai (gara + percorso); plan = come ti alleni (fasi/template/regole); weeks = il calendario (settimane, sessioni, review).
+- ❌ Mai duplicare dati tra `profile.json`, `race.json`, `plan.json` e `data/weeks/`. Profilo = chi sei (anagrafica + zone FC); race = dove vai (gara + percorso); plan = come ti alleni (fasi/template/regole); weeks = il calendario (settimane, sessioni, review).
 - ❌ Mai aggiungere file/sezioni "appena utili": il principio del progetto è preferire rimuovere/modificare invece di aggiungere. Mantenere i file leggeri.
 
 ### Stile codice
@@ -181,9 +185,9 @@ La pagina si aggiorna automaticamente al prossimo refresh (i JSON vengono fetcha
 
 ## Note per Claude (sessioni future)
 
-- **Prima di modificare:** leggi sempre lo stato corrente di `profile.json`, `race.json`, `plan.json`, `weeks.json`, `todo.json` e `data/activities/index.json`.
+- **Prima di modificare:** leggi sempre lo stato corrente di `profile.json`, `race.json`, `plan.json`, `data/weeks/index.json` (e i `week-NN.json` rilevanti), `todo.json` e `data/activities/index.json`.
 - **Patch chirurgiche:** modifica solo i campi rilevanti, non riscrivere l'intero JSON.
-- **`last_updated`:** aggiornalo nel file modificato (`plan.json`, `weeks.json`, `profile.json` o `todo.json`).
+- **`last_updated`:** aggiornalo nel file modificato (`plan.json`, `data/weeks/index.json`, `profile.json` o `todo.json`).
 - **Validazione:** dopo ogni push, verifica che la pagina renderizzi senza errori (apri la URL live).
 - **Domande chirurgiche:** se Fabio dice "ho fatto un lungo", chiedi solo i dati mancanti (durata, dislivello, sensazioni, passo medio). Non rifare l'intake.
 - **Calibrazione conservativa:** se i numeri vanno meglio del previsto, alza i volumi al massimo del +10%. Mai di più.

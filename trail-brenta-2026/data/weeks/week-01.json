@@ -1,0 +1,278 @@
+{
+  "number": 1,
+  "phase_id": "1-rebuild",
+  "start_date": "2026-05-02",
+  "end_date": "2026-05-10",
+  "label": "Doppio carico montagna + baseline",
+  "narrative": "Settimana di apertura a 9 giorni, costruita attorno al carico montano già a calendario. Il volume è enorme per chi rientra da 13 mesi di stop, ma sotto MAF è tutto Z1-Z2: stimola la base aerobica senza creare stress da intensità. La variabile critica è il recupero — i DOMS dell'hike arriveranno tra martedì e mercoledì, da gestire con mobility e zero corsa. Pattern reale della settimana: MER padel 1h soft (sostituisce la corsa opzionale, non si somma — padel + corsa in fase DOMS è troppo); GIO bici 30 min Z1 (recupero attivo, anzi aiuta); VEN riposo totale; SAB test Monte Linzone. La baseline finale fissa il riferimento misurato (FC, decoupling, sensazioni in salita) su cui taremo le settimane successive.",
+  "sessions": [
+    {
+      "type": "hike",
+      "duration_min": 480,
+      "intensity": "Z1-Z2",
+      "fc_max_bpm": 152,
+      "vertical_m": 1910,
+      "when": "SAB 2 + DOM 3",
+      "notes": "Hike con bivacco su 2 giorni. GIORNO 1 (sab): 13.1 km, +1640 m / -440 m, ~7h15. È il giorno toccante: 1640 m D+ in un colpo è ~30% oltre il tuo max storico recente. GIORNO 2 (dom): 10.1 km, +270 m / -1470 m, ~4h37. Quasi tutto in discesa, attenzione a quadricipiti, ginocchia e vesciche.",
+      "routes": [
+        {
+          "url": "https://www.komoot.com/it-it/tour/2929854136",
+          "name": "Giorno 1 — sab 2"
+        },
+        {
+          "url": "https://www.komoot.com/it-it/tour/2930672013",
+          "name": "Giorno 2 — dom 3"
+        }
+      ],
+      "activities": [
+        {
+          "file": "2026-05-02_3d858ad2-c7e9-42af-abc5-33456a9a8f7c",
+          "title": "Bivacco Pedrinelli — Giorno 1 (salita)"
+        },
+        {
+          "file": "2026-05-03_1c8e48f0-3fd3-44eb-85bb-25e51107fcf3",
+          "title": "Bivacco Pedrinelli — Giorno 2 (discesa)"
+        }
+      ]
+    },
+    {
+      "type": "check-in",
+      "label": "Pesa",
+      "when": "LUN mattina, a digiuno",
+      "notes": "Pesata settimanale per tracciare composizione corporea durante la preparazione. Stesso orario, stesso strumento, stesse condizioni (a digiuno, dopo bagno)."
+    },
+    {
+      "type": "easy",
+      "duration_min": 25,
+      "intensity": "Z1-Z2 bassa",
+      "fc_max_bpm": 140,
+      "when": "MER 6 o GIO 7",
+      "notes": "Solo se le gambe rispondono. Test pratico: sali le scale di casa, se è doloroso o rigido salta la corsa e fai 30 min di camminata. Niente eroismi a 4 mesi dalla gara."
+    },
+    {
+      "type": "cross-training",
+      "label": "Padel",
+      "when": "MER",
+      "duration_min": 60,
+      "intensity": "bassa/non intensa",
+      "notes": "Lezione settimanale fissa. Lateralità + cambi di direzione caricano i quadricipiti. Nei giorni di DOMS sostituisce la corsa opzionale invece di sommarsi. Mai padel + lavoro running di qualità lo stesso giorno."
+    },
+    {
+      "type": "cross-training",
+      "label": "Bici",
+      "when": "GIO",
+      "duration_min": 30,
+      "intensity": "Z1, no impatto",
+      "notes": "Spostamento lavorativo fisso. Conta come recupero attivo: aiuta drenaggio e circolazione, non interferisce con nessuna sessione adiacente."
+    },
+    {
+      "type": "test",
+      "duration_min": 180,
+      "intensity": "Z2/MAF",
+      "fc_max_bpm": 152,
+      "vertical_m": 490,
+      "when": "SAB 9",
+      "notes": "Loop Monte Linzone da Roncola (la 'Cima Albenza' su Komoot è registrata come Monte Linzone). FC sotto 152 sempre, in salita CAMMINI senza vergogna se sale. ATTENZIONE: il tour ha 3 tratti tecnici (sentiero roccioso/esposto): uno lungo da km 1.30 per ~500 m in salita, due brevi da 27 m a km 2.05 e km 3.93. In quei tratti vai a passo lento e metti i piedi con cura — è la prima volta che testi le La Sportiva su sentiero, non è il momento di correre. GPS attivo, non spegnere alle pause. Acqua + snack salato.",
+      "gear_checklist": [
+        {
+          "category": "Indosso",
+          "items": [
+            "Scarpe La Sportiva (le scarpe da testare!)",
+            "Calze trail tecniche, no cotone",
+            "Maglia tecnica + pantaloncini",
+            "Cappellino o buff"
+          ]
+        },
+        {
+          "category": "Zaino",
+          "items": [
+            "Acqua 1,5 L: borraccia 1 (500 ml) con 1 bustina Equilibra + 0,5 g sale fino · borracce 2 e 3 (500 ml ciascuna) con 0,5 g sale fino",
+            "Frutta secca 60-80 g (mandorle/noci) + cioccolato fondente 70%+ 30-40 g, in sacchetto richiudibile",
+            "AirPods Pro 3 cariche 100% (HR via PPG - verifica fit gommino in Settings, può essere diverso da quello audio)",
+            "iPhone 100% in tasca pettorale - Strava o Komoot per GPS + HR da AirPods, schermo spento dopo start",
+            "Power bank 5000+ mAh + cavo Lightning/USB-C (3h GPS drena 30-40% batteria, backup)",
+            "Cerotti Compeed (scarpe nuove = vesciche probabili)",
+            "Crema solare (maggio scotta già in quota)",
+            "Giacca antivento leggera (la cima è ventosa)",
+            "Documento + qualche euro"
+          ]
+        },
+        {
+          "category": "Opzionali ma utili",
+          "items": [
+            "Bastoncini (proteggono ginocchia in discesa)",
+            "Bandana per il sudore"
+          ]
+        }
+      ],
+      "routes": [
+        {
+          "url": "https://www.komoot.com/smarttour/26057234",
+          "name": "Monte Linzone loop da Roncola (6 km, 490 m D+, ~2h38)"
+        }
+      ],
+      "activities": [
+        {
+          "file": "2026-05-09_416b7b46-44e0-492d-90c0-70196f5fa6af",
+          "title": "Baseline Linzone"
+        }
+      ],
+      "grade_distribution": {
+        "_source": "Calcolata dalle coordinate del komoot smarttour 26057234, stesso algoritmo del GPX Brenta (smoothing 7-pt + dead-band 0.5m, finestra ~25m).",
+        "flat_lt_2": 1.3,
+        "rolling_2_5": 4.6,
+        "uphill_5_10": 11.8,
+        "steep_gt_10": 32.4,
+        "down_2_5": 6.2,
+        "down_5_10": 12.0,
+        "down_gt_10": 31.8,
+        "vs_race_note": "Stesso DNA della Brenta (cosine 0.96): bimodale ripido-su / ripido-giù. Più denso (8.3 vs 5.8 m D+/100m) e quasi nessun piano (1.3% vs 11.4%). Lab della parte più dura del profilo gara."
+      },
+      "nutrition_plan": [
+        {
+          "category": "Colazione (2h30 prima)",
+          "items": [
+            "Avena 70 g",
+            "1 banana matura",
+            "Miele 20 g (1 cucchiaio raso)",
+            "Yogurt greco 0% 125 g",
+            "1 caffè — dose abituale, non aumentarla oggi"
+          ]
+        },
+        {
+          "category": "Idratazione pre-run",
+          "items": [
+            "500 ml acqua + 1 bustina Equilibra + 0,5 g sale fino al risveglio",
+            "Sorsi piccoli fino alla partenza, non a stomaco pieno",
+            "Nota: Equilibra non contiene sodio, il sale fino lo aggiunge (~200 mg Na)"
+          ]
+        },
+        {
+          "category": "15-30 min prima di partire",
+          "items": [
+            "1 quadretto cioccolato fondente 70%+ o 5-6 mandorle, solo se hai fame"
+          ]
+        },
+        {
+          "category": "Snack durante l'attività",
+          "items": [
+            "Min 60-75: 25 g frutta secca + 10 g cioccolato fondente",
+            "Min 120-130: stessa cosa se hai fame",
+            "Z2/MAF allena ossidazione grassi: niente gel/zuccheri rapidi, frutta secca e fondente sono ideali",
+            "Mastica bene e bevi subito dopo per facilitare digestione"
+          ]
+        },
+        {
+          "category": "Durante (in zaino)",
+          "items": [
+            "Borraccia 1 (500 ml): 1 bustina Equilibra + 0,5 g sale fino (gusto + K + Mg + Na)",
+            "Borracce 2 e 3 (500 ml cad.): 0,5 g sale fino in acqua liscia",
+            "Bere a sorsi piccoli ogni 15-20 min, non aspettare la sete",
+            "Sodio totale ~600 mg in 3h (target 300-500 mg/h con margine)",
+            "Dosaggio pratico: 0,5 g sale = 1 pizzico abbondante (1/8 cucchiaino)"
+          ]
+        }
+      ],
+      "schedule": [
+        {
+          "time": "07:30",
+          "what": "Sveglia · 500 ml acqua + 1 bustina Equilibra + 0,5 g sale fino"
+        },
+        {
+          "time": "07:30–07:45",
+          "what": "Colazione completa (vedi piano nutrizione)"
+        },
+        {
+          "time": "09:00",
+          "what": "Partenza da Treviglio (zaino e scarpe già pronti dalla sera prima)"
+        },
+        {
+          "time": "09:50",
+          "what": "Arrivo a Roncola Sant'Alberto · parcheggio, scarpe, AirPods + iPhone, antivento in zaino"
+        },
+        {
+          "time": "10:00",
+          "what": "Start attività (2h15 dopo colazione) · avvia tracking HR su iPhone (Apple Workout o Strava con AirPods)"
+        },
+        {
+          "time": "13:00",
+          "what": "Fine attività (3h piene, sforabili a 13:15 senza panico)"
+        },
+        {
+          "time": "13:10",
+          "what": "In macchina · cambio veloce, asciugamano sul sedile"
+        },
+        {
+          "time": "13:30",
+          "what": "Arrivo Almè ✓"
+        }
+      ]
+    }
+  ],
+  "strength": {
+    "skipped": true,
+    "reason": "Saltata. Tre uscite montagna in 8 giorni sono il carico massimo possibile per il rientro. Sostituire con 5-10 min di mobility le sere dei giorni di hike e il giorno dopo."
+  },
+  "review": {
+    "date": "2026-05-10",
+    "verdict": "on-track",
+    "headline": "Carico montano assorbito senza distress, KPI di fase rinviato per terreno verticale.",
+    "synthesis": "Settimana di carico alto con 4 uscite e ~2010 m di D+, recupero neutro a chiusura, sonno 6-7h, vita a regime normale. Il fronte aperto è il motore aerobico: il KPI di fase (decoupling <8% piatto) non è stato misurato questa settimana — va riprogrammato un Z2 piatto da 60-80' entro fine Fase 1. Le scarpe La Sportiva hanno fatto male all'esterno dei pollicioni in discesa, da rivedere prima del prossimo trail (allacciatura o numero).",
+    "auto": {
+      "adherence": {
+        "planned": 3,
+        "done": 2,
+        "long_run": "done",
+        "swapped": [
+          {
+            "planned": "easy MER/GIO opzionale",
+            "replaced_with": "padel MER (cross-training)",
+            "reason": "DOMS post-hike"
+          }
+        ]
+      },
+      "load": {
+        "trimp_training": 272,
+        "ascent_m_total": 2010,
+        "duration_min_total": 656,
+        "maf_below_pct_training": 36.3,
+        "weight_delta_kg": null,
+        "weight_kg_latest": 66.4
+      },
+      "phase_kpi": {
+        "objective": "decoupling Pa:Hr <8% su lungo piatto (60+ min)",
+        "status": "not_measurable_this_week",
+        "note": "Settimana montana: hike + test verticale Linzone. Il decoupling 22% di Linzone è artefatto della camminata iniziale (38' nel primo muro), non comparabile al baseline piatto del 12.6% del 1 maggio. Riprogrammare un Z2 piatto entro fine Fase 1."
+      },
+      "open_concerns": [
+        {
+          "area": "vestibilità scarpa in discesa",
+          "weeks_open": 1,
+          "severity_max": 3
+        },
+        {
+          "area": "tolleranza alla salita corsa",
+          "weeks_open": 1,
+          "severity_max": 3
+        },
+        {
+          "area": "idratazione e nutrizione",
+          "weeks_open": 1,
+          "severity_max": 2
+        }
+      ],
+      "highlights": "662 m di D+ assorbiti su Linzone senza distress, FC media 151 nonostante 88% del tempo in Z4-Z5; discesa fluida e respirazione tranquilla.",
+      "lowlights": "Salita 100% camminata: corretto su pendenze >10%, ma serve costruire tolleranza a corsa lenta sui tratti 5-8%.",
+      "race_day_break_derived": {
+        "value": "motore aerobico",
+        "reason": "Phase 1 KPI ancora non misurato; baseline piatto 1 mag mostrava decoupling 12.6% con 57% del tempo in Z4-Z5; rientro da 13 mesi di stop."
+      }
+    },
+    "checkin": {
+      "recovery": "neutro",
+      "doms": "tipici (3-4 gg)",
+      "sleep_avg": "6-7h",
+      "life_load": "normale"
+    }
+  }
+}
