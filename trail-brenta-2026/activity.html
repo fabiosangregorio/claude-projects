@@ -108,6 +108,31 @@ th{color:var(--tx2);font-size:.65rem;text-transform:uppercase;letter-spacing:.5p
 
 .user-note{background:var(--sf2);border-left:3px solid var(--ac);padding:.7rem .9rem;font-size:.85rem;color:var(--tx);font-style:italic;border-radius:0 6px 6px 0}
 
+.gear{margin-top:.6rem;padding:.7rem .85rem;background:rgba(240,136,62,.05);border:1px solid rgba(240,136,62,.25);border-radius:6px}
+.gear-title{font-family:'Space Mono',monospace;font-size:.65rem;color:var(--wn);text-transform:uppercase;letter-spacing:1px;margin-bottom:.55rem;font-weight:700}
+.gear-cat{margin-bottom:.5rem}
+.gear-cat:last-child{margin-bottom:0}
+.gear-cat-title{font-family:'Space Mono',monospace;font-size:.7rem;color:var(--tx);font-weight:700;margin-bottom:.2rem}
+.gear-items{list-style:none;padding-left:0;margin:0}
+.gear-items li{font-size:.78rem;color:var(--tx2);line-height:1.55;padding:.12rem 0 .12rem 1rem;position:relative}
+.gear-items li::before{content:'·';position:absolute;left:.35rem;color:var(--wn);font-weight:700}
+.nutrition{margin-top:.6rem;padding:.7rem .85rem;background:rgba(63,185,80,.05);border:1px solid rgba(63,185,80,.25);border-radius:6px}
+.nutrition-title{font-family:'Space Mono',monospace;font-size:.65rem;color:var(--ac2);text-transform:uppercase;letter-spacing:1px;margin-bottom:.55rem;font-weight:700}
+.nutrition .gear-items li::before{color:var(--ac2)}
+.schedule{margin-top:.6rem;padding:.7rem .85rem;background:rgba(88,166,255,.05);border:1px solid rgba(88,166,255,.25);border-radius:6px}
+.schedule-title{font-family:'Space Mono',monospace;font-size:.65rem;color:var(--ac);text-transform:uppercase;letter-spacing:1px;margin-bottom:.55rem;font-weight:700}
+.sch-row{display:flex;gap:.7rem;font-size:.78rem;line-height:1.55;padding:.12rem 0}
+.sch-time{font-family:'Space Mono',monospace;color:var(--ac);font-weight:700;flex-shrink:0;min-width:5.5rem}
+.sch-what{color:var(--tx2)}
+.gd{margin-top:.7rem;padding:.7rem .85rem;background:var(--sf2);border:1px solid var(--bd);border-radius:6px}
+.gd-title{font-family:'Space Mono',monospace;font-size:.65rem;color:var(--tx2);text-transform:uppercase;letter-spacing:1px;margin-bottom:.55rem;font-weight:700}
+.gd-row{margin-bottom:.55rem}
+.gd-row:last-of-type{margin-bottom:0}
+.gd-row-lbl{font-family:'Space Mono',monospace;font-size:.62rem;color:var(--tx2);text-transform:uppercase;letter-spacing:.8px;margin-bottom:.25rem;display:flex;justify-content:space-between;align-items:baseline;gap:.5rem}
+.gd-row-lbl strong{color:var(--tx);font-weight:700}
+.gd-row-lbl em{font-style:normal;font-size:.6rem;color:var(--tx2)}
+.gd-note{font-size:.75rem;color:var(--tx2);line-height:1.5;margin-top:.55rem;padding-top:.55rem;border-top:1px solid var(--bd)}
+
 .loader{text-align:center;padding:3rem 0;color:var(--tx2)}
 .spinner{display:inline-block;width:20px;height:20px;border:2px solid var(--bd);border-top-color:var(--ac);border-radius:50%;animation:spin .6s linear infinite;margin-bottom:.6rem}
 @keyframes spin{to{transform:rotate(360deg)}}
@@ -150,11 +175,14 @@ async function load() {
     return;
   }
   try {
-    const act = await fetch(BASE + safe + '.json').then(r => {
-      if (!r.ok) throw new Error('attività: ' + r.status);
-      return r.json();
-    });
-    render(app, act);
+    const [act, race] = await Promise.all([
+      fetch(BASE + safe + '.json').then(r => {
+        if (!r.ok) throw new Error('attività: ' + r.status);
+        return r.json();
+      }),
+      fetch('./data/race.json').then(r => r.ok ? r.json() : null).catch(() => null)
+    ]);
+    render(app, act, race);
     if (act.ai_analysis && act.ai_analysis.generated_at) {
       document.getElementById('generatedAt').textContent =
         'analisi generata ' + act.ai_analysis.generated_at.slice(0, 10);
@@ -164,7 +192,7 @@ async function load() {
   }
 }
 
-function render(app, act) {
+function render(app, act, race) {
   const a = act.ai_analysis || {};
   const t = act.totals || {};
   const isHike = act.activity_type === 'hike';
@@ -185,7 +213,11 @@ function render(app, act) {
     renderDerived(act.derived),
     isHike ? '' : renderDecoupling(act.decoupling),
     isHike ? '' : renderSplits(act.splits, act.remainder),
-    isHike ? '' : renderWalks(act.walk_breaks, act.walks_summary)
+    isHike ? '' : renderWalks(act.walk_breaks, act.walks_summary),
+    renderGearChecklist(act.gear_checklist),
+    renderPlannedGradeDistribution(act.grade_distribution, race),
+    renderNutritionPlan(act.nutrition_plan),
+    renderSchedule(act.schedule)
   ].filter(Boolean).join('');
 }
 
@@ -581,6 +613,121 @@ function formatPace(minPerKm) {
   const m = Math.floor(minPerKm);
   const s = Math.round((minPerKm - m) * 60);
   return `${m}:${String(s).padStart(2,'0')}`;
+}
+
+/* ── Planning-data sections (gear, planned grade dist vs race, nutrition, schedule) ── */
+
+function renderGearChecklist(gear) {
+  if (!gear || !gear.length) return '';
+  return `
+    <section>
+      <h2 class="s-title">Cosa portare</h2>
+      <div class="gear">
+        ${gear.map(g => `
+          <div class="gear-cat">
+            <div class="gear-cat-title">${g.category}</div>
+            <ul class="gear-items">${(g.items || []).map(i => `<li>${i}</li>`).join('')}</ul>
+          </div>
+        `).join('')}
+      </div>
+    </section>
+  `;
+}
+
+function renderNutritionPlan(plan) {
+  if (!plan || !plan.length) return '';
+  return `
+    <section>
+      <h2 class="s-title">Piano nutrizione e idratazione</h2>
+      <div class="nutrition">
+        ${plan.map(g => `
+          <div class="gear-cat">
+            <div class="gear-cat-title">${g.category}</div>
+            <ul class="gear-items">${(g.items || []).map(i => `<li>${i}</li>`).join('')}</ul>
+          </div>
+        `).join('')}
+      </div>
+    </section>
+  `;
+}
+
+function renderSchedule(sched) {
+  if (!sched || !sched.length) return '';
+  return `
+    <section>
+      <h2 class="s-title">Piano orari</h2>
+      <div class="schedule">
+        ${sched.map(r => `
+          <div class="sch-row">
+            <div class="sch-time">${r.time}</div>
+            <div class="sch-what">${r.what}</div>
+          </div>
+        `).join('')}
+      </div>
+    </section>
+  `;
+}
+
+function renderPlannedGradeDistribution(gd, race) {
+  if (!gd) return '';
+  const raceGd = race && race.course_profile_2025 && race.course_profile_2025.grade_distribution;
+  if (!raceGd) return '';
+
+  const segs = [
+    { key: 'down_gt_10', cls: 'gd-down-gt-10', lbl: 'Disc &gt;10%' },
+    { key: 'down_5_10',  cls: 'gd-down-5-10',  lbl: 'Disc 5-10%' },
+    { key: 'down_2_5',   cls: 'gd-down-2-5',   lbl: 'Disc 2-5%' },
+    { key: 'flat_lt_2',  cls: 'gd-flat',       lbl: 'Piano &lt;2%' },
+    { key: 'rolling_2_5',cls: 'gd-rolling',    lbl: 'Mosso 2-5%' },
+    { key: 'uphill_5_10',cls: 'gd-uphill',     lbl: 'Sal 5-10%' },
+    { key: 'steep_gt_10',cls: 'gd-steep',      lbl: 'Ripido &gt;10%' }
+  ];
+
+  const stack = (dist) => `<div class="zstack">${
+    segs.map(s => {
+      const v = dist[s.key];
+      if (v == null || v <= 0) return '';
+      return `<div class="zseg ${s.cls}" style="width:${v.toFixed(2)}%" title="${s.lbl} · ${v}%">${v >= 7 ? Math.round(v) + '%' : ''}</div>`;
+    }).join('')
+  }</div>`;
+
+  const totalSession = segs.reduce((a, s) => a + (gd[s.key] || 0), 0);
+  const cosineSim = (() => {
+    let dot = 0, na = 0, nb = 0;
+    segs.forEach(s => {
+      const a = gd[s.key] || 0, b = raceGd[s.key] || 0;
+      dot += a * b; na += a * a; nb += b * b;
+    });
+    return (na && nb) ? (dot / Math.sqrt(na * nb)) : 0;
+  })();
+  const tvDist = segs.reduce((a, s) => a + Math.abs((gd[s.key] || 0) - (raceGd[s.key] || 0)), 0) / 2;
+
+  const legend = segs.filter(s => (gd[s.key] || 0) > 0 || (raceGd[s.key] || 0) > 0)
+    .map(s => `<div class="zleg-item"><span class="zleg-dot ${s.cls}"></span>${s.lbl}</div>`).join('');
+
+  const raceLbl = race && race.distance_km != null ? `${race.distance_km} km · +${race.elevation_gain_m} m` : '';
+
+  return `
+    <section>
+      <h2 class="s-title">Distribuzione pendenza vs gara</h2>
+      <p class="s-desc">Profilo del percorso pianificato confrontato con il profilo della DBT 21K. Cosine alto = stesso DNA terreno.</p>
+      <div class="gd">
+        <div class="gd-row">
+          <div class="gd-row-lbl"><strong>Sessione</strong><em>${totalSession ? '~' + Math.round(totalSession) + '% del tracciato' : ''}</em></div>
+          ${stack(gd)}
+        </div>
+        <div class="gd-row">
+          <div class="gd-row-lbl"><strong>DBT 21K (gara)</strong><em>${raceLbl}</em></div>
+          ${stack(raceGd)}
+        </div>
+        <div class="zlegend">${legend}</div>
+        <div class="gd-note">
+          <strong style="color:var(--tx)">Match:</strong> cosine ${cosineSim.toFixed(2)} · sovrapposizione ${(100 - tvDist).toFixed(0)}%
+          ${gd.vs_race_note ? `<br>${gd.vs_race_note}` : ''}
+        </div>
+      </div>
+    </section>
+  `;
 }
 
 load();
