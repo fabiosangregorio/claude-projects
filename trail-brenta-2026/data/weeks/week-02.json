@@ -47,12 +47,18 @@
     },
     {
       "type": "long",
-      "duration_min": 80,
+      "duration_min": 105,
       "intensity": "Z2/MAF",
       "fc_max_bpm": 152,
-      "vertical_m": 350,
+      "vertical_m": 405,
       "when": "DOM 17",
-      "notes": "Trail Z2 in collina, 75-90 min, D+ 300-400 m (entro il tetto Fase 1 rilassata di 500 m). Scarpe La Sportiva con heel lock testato prima — se il piede continua a scivolare in avanti dopo 30', si torna alla domanda 'cambio numero'. Camminata libera in salita: in Z2 stretta, mai in Z3. Test idratazione: Camelbak con 1 borraccia Equilibra + sale fino, 1 borraccia acqua + sale fino. Località TBD: opzioni in valutazione (Resegone bassa per ricognizione gara 24/05, Canto Alto, o Albenza). Decisione entro mercoledì."
+      "notes": "Loop trail Castagnola → Monte Sant'Agata → ritorno, partenza/arrivo direttamente dal Laghello (Località Castagnola, Framura). Stats calcolate dal KML (smoothing 7-pt + dead-band 0.5m): 7.56 km, D+ 405 m, quota 341→649 m, loop chiuso esatto. Cima Monte Sant'Agata 644 m s.l.m. a metà tracciato. Densità verticale 54 m/km — meno densa di Linzone (74 m/km), discese distribuite e non concentrate. Stima durata a passo MAF con camminata libera in salita: 100-115 min. Scarpe La Sportiva con heel lock testato prima — se il piede continua a scivolare in avanti dopo i primi 30', valutare cambio numero per il futuro. Camminata libera in salita: FC<152 sempre. Test idratazione: Camelbak con 1 borraccia Equilibra + sale fino + 1 borraccia acqua + sale fino, partenza presto la mattina per caldo. Verificare al check-in con la host del Laghello che il sentiero non abbia tratti chiusi/franati (zona Castagnola segnalata storicamente come franosa).",
+      "routes": [
+        {
+          "url": "https://s3.eu-west-3.amazonaws.com/gpxtrk/trk/2026/05/10/2134_w2xptqfef_Possibile-corsa-a-Framura.kml",
+          "name": "Loop Castagnola — Monte Sant'Agata (7.56 km, 405 m D+)"
+        }
+      ]
     }
   ]
 }
