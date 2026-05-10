@@ -21,7 +21,8 @@ trail-brenta-2026/
 ├── recovery.html           ← Guida pratica al recupero post-attività (statica, no JSON).
 ├── README.md               ← Questo file.
 └── data/
-    ├── profile.json        ← Atleta + obiettivo gara + zone FC calibrate.
+    ├── profile.json        ← Atleta + zone FC calibrate.
+    ├── race.json           ← Obiettivo gara (evento, percorso, profilo).
     ├── plan.json           ← Struttura del piano (fasi, settimane, milestone, template).
     ├── todo.json           ← Task list di preparazione.
     ├── weighins.json       ← Pesate settimanali (LUN mattina) da scala 1byone.
@@ -42,13 +43,20 @@ trail-brenta-2026/
 
 ### `data/profile.json`
 
-Dati dell'atleta e dell'obiettivo gara. Si modifica quando:
+Dati dell'atleta. Si modifica quando:
 - Cambiano i dati anagrafici (peso, infortuni cronici nuovi, ecc.)
 - Si aggiorna lo status di un'attrezzatura (es. "scarpe provate")
-- Si cambia obiettivo gara (raro)
 - Si ricalibrano le zone di FC dopo un test (FCmax, MAF, bande)
 
-Sezioni: `athlete`, `experience`, `availability`, `health`, `calibration_source`, `training_zones`, `equipment`, `race_target`, `nutrition_experience`.
+Sezioni: `athlete`, `experience`, `availability`, `health`, `calibration_source`, `training_zones`, `equipment`, `nutrition_experience`.
+
+### `data/race.json`
+
+**Obiettivo gara** — dati ufficiali dell'evento + profilo percorso. Si modifica quando:
+- Si cambia gara (raro)
+- Viene pubblicato il GPX 2026 ufficiale (sostituire `course_profile_2025` → `course_profile_2026`)
+
+Chiavi top-level: `event`, `edition`, `date`, `location`, `distance_km`, `elevation_gain_m`, `start_time`, `max_time_hours`, `cancello_orario`, `min_age`, `itra_points`, `registration_fee_eur_2025`, `official_url`, `goal`, `route_summary`, `course_profile_2025` (con `gpx_stats_official`, `gpx_stats_computed`, `grade_distribution`).
 
 ### `data/plan.json`
 
@@ -56,13 +64,15 @@ Sezioni: `athlete`, `experience`, `availability`, `health`, `calibration_source`
 
 **Sempre aggiornare il campo `last_updated`** quando si modifica.
 
-Chiavi top-level: `total_weeks`, `race_date`, `weekly_budget`, `rules`, `phases`, `weeks`, `milestones`, `strength_template`, `mobility_template`.
+Chiavi top-level: `total_weeks`, `weekly_budget`, `rules`, `phases`, `weeks`, `strength_template`, `mobility_template`. La data gara vive in `race.json.date` (canonica), non duplicare qui.
 
 **`weeks[].sessions[].activities`** — array opzionale di attività registrate che hanno eseguito quella sessione (consuntivo). Item: `{file, title}` dove `file` è il filename in `data/activities/` senza `.json`. Renderizzato da `week.html` come badge verdi cliccabili sotto il blocco `routes`, link diretto a `activity.html#<file>`. Una sessione può avere più attività (es. hike multi-giorno).
 
-**`weeks[].recurring`** — array di ricorrenze (cross-training non strutturato, check-in di tracking) **definito per settimana**, non globale. Non sono sessioni di allenamento prescrittive — sono ancore di baseline che `week.html` renderizza in fondo alla settimana ("Ricorrenze settimanali fisse"). Definirle per settimana permette di variare in base al contesto (es. vacanza = niente padel, settimana scarico = niente bici). Campi item: `kind` (`check-in` | `cross-training`), `label`, `day` (LUN/MAR/...), `when?`, `duration_min?`, `intensity?`, `notes?`. Esempi tipici: pesa LUN, padel MER, bici GIO.
+**`weeks[].sessions[]` di tipo `check-in` / `cross-training`** — ricorrenze settimanali fisse (cross-training non strutturato, check-in di tracking) **definite per settimana**, vivono nello stesso array delle sessioni di corsa. Non sono sessioni di allenamento prescrittive — sono ancore di baseline che `week.html` renderizza inline con uno stile dedicato. Definirle per settimana permette di variare in base al contesto (es. vacanza = niente padel, settimana scarico = niente bici). Campi item: `type` (`check-in` | `cross-training`), `label`, `when` (giorno-della-settimana ed eventuale contesto orario, es. `"LUN mattina, a digiuno"` o `"MER"`), `duration_min?`, `intensity?`, `notes?`. Esempi tipici: pesa LUN, padel MER, bici GIO. Non contano per `auto.adherence.done` della review (vedi skill `weekly-review`).
 
-**`weeks[].review`** — retrospettiva di fine settimana, scritta dalla skill `weekly-review` (vedi `.claude/skills/weekly-review/SKILL.md`). Tre layer: `auto` (calcolato da attività + weighins, zero input), `checkin` (5 risposte multiple-choice raccolte via `mcp__conductor__AskUserQuestion`), `adaptive` (max 2 probe attivati da regole). Campi top: `date`, `verdict` (`on-track` | `ahead` | `behind` | `recalibrate`), `headline` (1 frase), `synthesis` (1-2 frasi deterministiche). Sotto `auto`: `adherence`, `load`, `phase_kpi` (status `measured` | `not_measurable_this_week` | `out_of_target`), `open_concerns`, `highlights`, `lowlights`, `race_day_break_derived` (la "forzante": NON chiesta all'utente, derivata dai dati con `reason`). Renderizzato da `week.html` come sezione "Retrospettiva" in fondo alla card della settimana, solo se presente.
+**`weeks[].strength`** — opzionale. Assente = usa il template (renderer mostra la card "vedi piano principale"). `{ skipped: true, reason: "..." }` = settimana senza forza con motivazione (renderer mostra la card "saltata" con il `reason`). In futuro potrà accettare anche un override in forma di session-object.
+
+**`weeks[].review`** — retrospettiva di fine settimana, scritta dalla skill `weekly-review` (vedi `.claude/skills/weekly-review/SKILL.md`). Tre layer: `auto` (calcolato da attività + weighins, zero input), `checkin` (5 risposte multiple-choice raccolte via `mcp__conductor__AskUserQuestion`), `adaptive` (max 2 probe attivati da regole). Campi top: `date`, `verdict` (`on-track` | `ahead` | `behind` | `recalibrate`), `headline` (1 frase), `synthesis` (1-2 frasi deterministiche). Sotto `auto`: `adherence`, `load`, `phase_kpi` (status `measured` | `not_measurable_this_week` | `out_of_target`; `value` presente solo se `measured`/`out_of_target`), `open_concerns` (campi `area`, `weeks_open`, `severity_max` — la presenza nell'array implica `open`, niente campo `status`), `highlights`, `lowlights`, `race_day_break_derived` (la "forzante": NON chiesta all'utente, derivata dai dati con `reason`). I campi `checkin.niggles` e `adaptive` sono omessi quando vuoti. Renderizzato da `week.html` come sezione "Retrospettiva" in fondo alla card della settimana, solo se presente.
 
 ### `data/todo.json`
 
@@ -77,12 +87,12 @@ Chiavi: `last_updated`, `tasks` (array con `category`, `task`, `deadline?`, `sta
 Chiavi: `last_updated`, `source` (`device`, `mac`, `cli`), `entries` (array). Campi entry: `date` (YYYY-MM-DD), `weight_kg`, `body_fat_pct?`, `bmi?`, `muscle_kg?`, `body_water_pct?`, `visceral_fat?`, `bmr_kcal?`. Tutti i campi oltre a `date` e `weight_kg` sono opzionali (per supportare scale future più semplici).
 
 Render:
-- **`index.html` → "Profilo atleta"**: il blocco "Peso × Altezza" preferisce l'ultima entry; "BMI" idem; aggiunge una cella "Body Fat" e una sub-line con la data + delta vs baseline (quando `entries.length >= 2`).
+- **`index.html` → "Profilo atleta"**: il blocco "Peso × Altezza" preferisce l'ultima entry (fallback `profile.json.athlete.weight_kg`); "BMI" preferisce l'ultima entry, fallback **calcolato** da `weight_kg / (height_cm/100)²`; aggiunge una cella "Body Fat" e una sub-line con la data + delta vs baseline (quando `entries.length >= 2`).
 - **`index.html` → nav-card "Pesate"**: link a `weighins.html` con counter e ultima pesata in subline.
-- **`week.html` → "Ricorrenze settimanali fisse"**: la card "Pesa LUN" mostra `66.4 kg · 13.1% BF · BMI 19.8` se l'entry cade nel range della settimana, "in attesa" se settimana corrente senza entry, "— saltata" se settimana passata senza entry.
+- **`week.html` → sessione `check-in` "Pesa LUN"**: mostra `66.4 kg · 13.1% BF · BMI 19.8` se l'entry cade nel range della settimana, "in attesa" se settimana corrente senza entry, "— saltata" se settimana passata senza entry.
 - **`weighins.html`**: lista completa delle pesate (desc per data) con summary in alto (ultimo peso, body fat, BMI, Δ vs inizio) e card per entry con `Δ vs precedente` e `Δ vs inizio`. Mappa ogni entry alla settimana del piano via `plan.json`.
 
-`profile.json.athlete.weight_kg/bmi` restano come **baseline iniziale** (al via del piano, non si aggiornano). La home preferisce `weighins.json` quando disponibile, altrimenti fa fallback a `profile.json`. Niente duplicazione: profile = baseline anagrafico, weighins = serie longitudinale.
+`profile.json.athlete.weight_kg` resta come **baseline iniziale** (al via del piano, non si aggiorna). La home preferisce `weighins.json` quando disponibile, altrimenti fa fallback a `profile.json`. Il BMI viene **calcolato** dal peso + altezza (non duplicato in `profile.json`). Niente duplicazione: profile = baseline anagrafico, weighins = serie longitudinale.
 
 ### `data/activities/`
 
@@ -134,7 +144,7 @@ Es. log sensazioni, lista spesa attrezzatura dettagliata.
 
 - ❌ Mai mettere dati nell'HTML. Se vedi un valore hardcoded nella pagina che dovrebbe vivere nei JSON, spostalo.
 - ❌ Mai modificare l'HTML per aggiornare i dati: modifica il JSON.
-- ❌ Mai duplicare dati tra `profile.json` e `plan.json`. Profilo = chi sei (anagrafica + zone FC + obiettivo gara); plan = come ti alleni (fasi/settimane/template).
+- ❌ Mai duplicare dati tra `profile.json`, `race.json` e `plan.json`. Profilo = chi sei (anagrafica + zone FC); race = dove vai (gara + percorso); plan = come ti alleni (fasi/settimane/template).
 - ❌ Mai aggiungere file/sezioni "appena utili": il principio del progetto è preferire rimuovere/modificare invece di aggiungere. Mantenere i file leggeri.
 
 ### Stile codice
@@ -160,7 +170,7 @@ La pagina si aggiorna automaticamente al prossimo refresh (i JSON vengono fetcha
 
 ## Note per Claude (sessioni future)
 
-- **Prima di modificare:** leggi sempre lo stato corrente di `profile.json`, `plan.json`, `todo.json` e `data/activities/index.json`.
+- **Prima di modificare:** leggi sempre lo stato corrente di `profile.json`, `race.json`, `plan.json`, `todo.json` e `data/activities/index.json`.
 - **Patch chirurgiche:** modifica solo i campi rilevanti, non riscrivere l'intero JSON.
 - **`last_updated`:** aggiornalo nel file modificato (`plan.json`, `profile.json` o `todo.json`).
 - **Validazione:** dopo ogni push, verifica che la pagina renderizzi senza errori (apri la URL live).
