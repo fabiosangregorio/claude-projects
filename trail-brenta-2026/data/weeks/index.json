@@ -1,6 +1,6 @@
 {
   "_schema_version": "1.0",
-  "_description": "Manifest delle settimane del piano di allenamento. Aggiungere il filename (relativo a data/weeks/) di ogni nuova settimana. I consumatori ordinano per `number` dopo il caricamento.",
+  "_description": "Manifest delle settimane del piano. Ogni settimana è un file separato in questa cartella (week-NN.json). Aggiungere il filename qui quando si pianifica una nuova settimana. Ordine: cronologico (week-01 prima).",
   "last_updated": "2026-05-10",
   "weeks": [
     "week-01.json"
