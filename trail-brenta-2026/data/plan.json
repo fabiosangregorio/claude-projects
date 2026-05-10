@@ -1,16 +1,16 @@
 {
-  "_schema_version": "1.4",
-  "_description": "Struttura del piano di allenamento: fasi, template forza/mobility, budget e regole. Le settimane vivono in weeks/ (un file per settimana, manifest in weeks/index.json) a partire da v1.5.",
+  "_schema_version": "1.5",
+  "_description": "Struttura del piano di allenamento: fasi, template forza/mobility, budget e regole. Le settimane vivono in weeks/ (un file per settimana, manifest in weeks/index.json) a partire da v1.5. Le date di passaggio fase sono indicative — la transizione reale dipende dal KPI raggiunto e dalla tolleranza osservata, non dal calendario.",
   "last_updated": "2026-05-10",
   "total_weeks": 18,
   "weekly_budget": {
     "running_sessions": 3,
     "strength_sessions": 1,
     "mobility_post_run_min": "5-10",
-    "philosophy": "Architettura a budget settimanale, non a giorni fissi. Distribuisci le sessioni nei giorni che hai, rispettando le regole."
+    "philosophy": "Architettura a budget settimanale, non a giorni fissi. 3 corse + 1 forza è il target medio del mesociclo: settimane vincolate possono fermarsi a 2 corse, settimane libere possono arrivare a 4. Distribuisci le sessioni nei giorni che hai, rispettando le regole."
   },
   "rules": [
-    "Il lungo non si salta. Se devi tagliare la settimana, taglia prima le corse brevi.",
+    "Il lungo non si salta. Se devi tagliare la settimana, taglia prima le corse brevi. La forza è il secondo investimento dopo il lungo: si sposta nella settimana, non si elimina.",
     "Mai due lavori duri di fila. Tra qualità e qualità, almeno 1 giorno di riposo o Z2 facile.",
     "FC batte pace. Se al passo target la FC sale di più di 5 bpm sopra il limite di zona, rallenta o inserisci tratti di camminata.",
     "Indolenzimento muscolare diffuso = ok continuare. Dolore acuto, articolare o asimmetrico = stop e valutazione medica.",
@@ -29,7 +29,7 @@
       "start_date": "2026-05-02",
       "end_date": "2026-06-07",
       "focus": "Ricostruire il motore aerobico distrutto dai 13 mesi di stop. Tutto sotto MAF (152 bpm).",
-      "key_objective": "Portare il decoupling Pa:Hr da 12.6% a sotto 8% su un lungo di 60+ min.",
+      "key_objective": "Portare il decoupling Pa:Hr da 12.6% a sotto 8% su un lungo piatto di 60+ min. Da misurare almeno una volta entro fine fase, non ogni settimana.",
       "long_run_min": [
         60,
         90
@@ -38,7 +38,7 @@
         0,
         200
       ],
-      "intensity": "100% Z1-Z2, nessuna intensità",
+      "intensity": "100% Z1-Z2 (no Z3+). 1 trail/settimana fino a 90 min con D+ ≤500 m è permesso, camminata libera in salita — niente intensità anche su sentiero.",
       "test_at_end": "Ripeti un 10-12 km piatto (stesso percorso del 1 maggio, se possibile). Misura il decoupling. Target: sotto l'8%."
     },
     {

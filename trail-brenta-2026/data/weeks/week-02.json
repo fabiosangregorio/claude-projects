@@ -1,0 +1,64 @@
+{
+  "_schema_version": "1.0",
+  "number": 2,
+  "phase_id": "1-rebuild",
+  "start_date": "2026-05-11",
+  "end_date": "2026-05-17",
+  "label": "Consolidamento + 1° trail Fase 1 rilassata",
+  "narrative": "Settimana di consolidamento dopo il carico alto della 1 (TRIMP 272, 2010 m D+, 4 uscite). Inaugura la Fase 1 rilassata: 1 trail/settimana ≤90' e ≤500 m D+ è ora permesso, camminata libera in salita — niente intensità anche su sentiero. Tre corse (2 easy piatte Mizuno + 1 trail lungo La Sportiva) + forza MAR (template, dopo l'easy) + padel MER 90' + bici commute GIO. SAB off come buffer pulito prima del lungo di domenica. Obiettivi operativi: (1) test definitivo scarpe La Sportiva con heel lock prima di decidere Resegone (iscrizione scade 23/05); (2) prima sessione di forza dopo lo skip giustificato della 1; (3) capire la tenuta dei quadricipiti su un trail più 'normale' rispetto al verticale di Linzone. Il KPI di Fase 1 (decoupling Z2 piatto 60+ min) resta aperto, lo programmiamo nelle settimane 3-5.",
+  "sessions": [
+    {
+      "type": "check-in",
+      "label": "Pesa",
+      "when": "LUN mattina, a digiuno",
+      "notes": "Pesata settimanale. Stesso orario, stesso strumento, stesse condizioni (a digiuno, dopo bagno). Onebyone-cli per il log."
+    },
+    {
+      "type": "easy",
+      "duration_min": 35,
+      "intensity": "Z1-Z2 bassa",
+      "fc_max_bpm": 140,
+      "when": "MAR 12",
+      "notes": "Treviglio piatto, scarpe Mizuno Ultima 17. FC<140 stretta — è un easy vero, non un fartlek mascherato. Stesso giorno: Forza A dal template (25 min), in finestra separata (mattina/sera) o subito dopo l'easy. Il template autorizza 'giornata con corsa breve facile' come timing per la forza."
+    },
+    {
+      "type": "cross-training",
+      "label": "Padel",
+      "when": "MER mattina",
+      "duration_min": 90,
+      "intensity": "bassa/non intensa",
+      "notes": "Lezione settimanale fissa, 90 min. Lateralità + cambi di direzione caricano i quadricipiti. Niente corsa di qualità lo stesso giorno."
+    },
+    {
+      "type": "cross-training",
+      "label": "Bici",
+      "when": "GIO",
+      "duration_min": 30,
+      "intensity": "Z1, no impatto",
+      "notes": "Spostamento lavorativo fisso. Conta come recupero attivo: aiuta drenaggio e circolazione, non interferisce con sessioni adiacenti."
+    },
+    {
+      "type": "easy",
+      "duration_min": 30,
+      "intensity": "Z1-Z2 bassa",
+      "fc_max_bpm": 140,
+      "when": "VEN 15",
+      "notes": "Treviglio piatto, Mizuno. FC<140 stretta: se ti senti bene, NON aumentare il passo — questo è recupero attivo + mantenimento, non un secondo allenamento. SAB off come buffer pulito prima del lungo."
+    },
+    {
+      "type": "long",
+      "duration_min": 105,
+      "intensity": "Z2/MAF",
+      "fc_max_bpm": 152,
+      "vertical_m": 430,
+      "when": "DOM 17",
+      "notes": "Loop trail Castagnola → Monte Grumo → ritorno, partenza/arrivo direttamente dal Laghello (Località Castagnola, Framura). Stats Komoot: 7.63 km, D+ 430 m, loop chiuso, fondo 84% naturale + 14% asfalto (il tratto strada è probabilmente il raccordo Laghello-imbocco sentiero). Verifica locale dal KML con stesso algoritmo dei GPX Brenta (smoothing 7-pt + dead-band 0.5m): 7.56 km / 405 m D+ / quota 341→649 m. Densità verticale 56 m/km — meno densa di Linzone (74 m/km), discese distribuite. Stima durata a passo MAF con camminata libera in salita: 100-115 min (Komoot stima 1h10 al loro passo 9:14/km, ma a MAF è più lento). Scarpe La Sportiva con heel lock testato prima — se il piede continua a scivolare in avanti dopo i primi 30', valutare cambio numero per il futuro. Camminata libera in salita: FC<152 sempre. Test idratazione: Camelbak con 1 borraccia Equilibra + sale fino + 1 borraccia acqua + sale fino, partenza presto la mattina per il caldo. Verificare al check-in con la host del Laghello che il sentiero non abbia tratti chiusi/franati (zona Castagnola storicamente segnalata come franosa).",
+      "routes": [
+        {
+          "url": "https://www.komoot.com/it-IT/tour/2947521754",
+          "name": "Loop Castagnola — Monte Grumo (7.63 km, 430 m D+)"
+        }
+      ]
+    }
+  ]
+}

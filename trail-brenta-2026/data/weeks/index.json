@@ -3,6 +3,7 @@
   "_description": "Manifest delle settimane del piano. Ogni settimana è un file separato in questa cartella (week-NN.json). Aggiungere il filename qui quando si pianifica una nuova settimana. Ordine: cronologico (week-01 prima).",
   "last_updated": "2026-05-10",
   "weeks": [
-    "week-01.json"
+    "week-01.json",
+    "week-02.json"
   ]
 }
