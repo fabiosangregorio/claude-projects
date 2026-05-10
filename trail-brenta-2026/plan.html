@@ -104,11 +104,13 @@ const BASE = './data/';
 async function loadAll() {
   const app = document.getElementById('app');
   try {
-    const [profile, race, plan] = await Promise.all([
+    const [profile, race, plan, weeksDoc] = await Promise.all([
       fetch(BASE + 'profile.json').then(r => { if (!r.ok) throw new Error('profile.json: ' + r.status); return r.json(); }),
       fetch(BASE + 'race.json').then(r => { if (!r.ok) throw new Error('race.json: ' + r.status); return r.json(); }),
-      fetch(BASE + 'plan.json').then(r => { if (!r.ok) throw new Error('plan.json: ' + r.status); return r.json(); })
+      fetch(BASE + 'plan.json').then(r => { if (!r.ok) throw new Error('plan.json: ' + r.status); return r.json(); }),
+      fetch(BASE + 'weeks.json').then(r => { if (!r.ok) throw new Error('weeks.json: ' + r.status); return r.json(); })
     ]);
+    plan.weeks = weeksDoc.weeks || [];
     render(app, profile, race, plan);
     document.getElementById('lastUpdated').textContent = 'piano aggiornato ' + plan.last_updated;
   } catch (err) {
