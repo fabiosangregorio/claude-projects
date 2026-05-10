@@ -74,38 +74,6 @@
       "vertical_m": 490,
       "when": "SAB 9",
       "notes": "Loop Monte Linzone da Roncola (la 'Cima Albenza' su Komoot è registrata come Monte Linzone). FC sotto 152 sempre, in salita CAMMINI senza vergogna se sale. ATTENZIONE: il tour ha 3 tratti tecnici (sentiero roccioso/esposto): uno lungo da km 1.30 per ~500 m in salita, due brevi da 27 m a km 2.05 e km 3.93. In quei tratti vai a passo lento e metti i piedi con cura — è la prima volta che testi le La Sportiva su sentiero, non è il momento di correre. GPS attivo, non spegnere alle pause. Acqua + snack salato.",
-      "gear_checklist": [
-        {
-          "category": "Indosso",
-          "items": [
-            "Scarpe La Sportiva (le scarpe da testare!)",
-            "Calze trail tecniche, no cotone",
-            "Maglia tecnica + pantaloncini",
-            "Cappellino o buff"
-          ]
-        },
-        {
-          "category": "Zaino",
-          "items": [
-            "Acqua 1,5 L: borraccia 1 (500 ml) con 1 bustina Equilibra + 0,5 g sale fino · borracce 2 e 3 (500 ml ciascuna) con 0,5 g sale fino",
-            "Frutta secca 60-80 g (mandorle/noci) + cioccolato fondente 70%+ 30-40 g, in sacchetto richiudibile",
-            "AirPods Pro 3 cariche 100% (HR via PPG - verifica fit gommino in Settings, può essere diverso da quello audio)",
-            "iPhone 100% in tasca pettorale - Strava o Komoot per GPS + HR da AirPods, schermo spento dopo start",
-            "Power bank 5000+ mAh + cavo Lightning/USB-C (3h GPS drena 30-40% batteria, backup)",
-            "Cerotti Compeed (scarpe nuove = vesciche probabili)",
-            "Crema solare (maggio scotta già in quota)",
-            "Giacca antivento leggera (la cima è ventosa)",
-            "Documento + qualche euro"
-          ]
-        },
-        {
-          "category": "Opzionali ma utili",
-          "items": [
-            "Bastoncini (proteggono ginocchia in discesa)",
-            "Bandana per il sudore"
-          ]
-        }
-      ],
       "routes": [
         {
           "url": "https://www.komoot.com/smarttour/26057234",
@@ -116,96 +84,6 @@
         {
           "file": "2026-05-09_416b7b46-44e0-492d-90c0-70196f5fa6af",
           "title": "Baseline Linzone"
-        }
-      ],
-      "grade_distribution": {
-        "_source": "Calcolata dalle coordinate del komoot smarttour 26057234, stesso algoritmo del GPX Brenta (smoothing 7-pt + dead-band 0.5m, finestra ~25m).",
-        "flat_lt_2": 1.3,
-        "rolling_2_5": 4.6,
-        "uphill_5_10": 11.8,
-        "steep_gt_10": 32.4,
-        "down_2_5": 6.2,
-        "down_5_10": 12.0,
-        "down_gt_10": 31.8,
-        "vs_race_note": "Stesso DNA della Brenta (cosine 0.96): bimodale ripido-su / ripido-giù. Più denso (8.3 vs 5.8 m D+/100m) e quasi nessun piano (1.3% vs 11.4%). Lab della parte più dura del profilo gara."
-      },
-      "nutrition_plan": [
-        {
-          "category": "Colazione (2h30 prima)",
-          "items": [
-            "Avena 70 g",
-            "1 banana matura",
-            "Miele 20 g (1 cucchiaio raso)",
-            "Yogurt greco 0% 125 g",
-            "1 caffè — dose abituale, non aumentarla oggi"
-          ]
-        },
-        {
-          "category": "Idratazione pre-run",
-          "items": [
-            "500 ml acqua + 1 bustina Equilibra + 0,5 g sale fino al risveglio",
-            "Sorsi piccoli fino alla partenza, non a stomaco pieno",
-            "Nota: Equilibra non contiene sodio, il sale fino lo aggiunge (~200 mg Na)"
-          ]
-        },
-        {
-          "category": "15-30 min prima di partire",
-          "items": [
-            "1 quadretto cioccolato fondente 70%+ o 5-6 mandorle, solo se hai fame"
-          ]
-        },
-        {
-          "category": "Snack durante l'attività",
-          "items": [
-            "Min 60-75: 25 g frutta secca + 10 g cioccolato fondente",
-            "Min 120-130: stessa cosa se hai fame",
-            "Z2/MAF allena ossidazione grassi: niente gel/zuccheri rapidi, frutta secca e fondente sono ideali",
-            "Mastica bene e bevi subito dopo per facilitare digestione"
-          ]
-        },
-        {
-          "category": "Durante (in zaino)",
-          "items": [
-            "Borraccia 1 (500 ml): 1 bustina Equilibra + 0,5 g sale fino (gusto + K + Mg + Na)",
-            "Borracce 2 e 3 (500 ml cad.): 0,5 g sale fino in acqua liscia",
-            "Bere a sorsi piccoli ogni 15-20 min, non aspettare la sete",
-            "Sodio totale ~600 mg in 3h (target 300-500 mg/h con margine)",
-            "Dosaggio pratico: 0,5 g sale = 1 pizzico abbondante (1/8 cucchiaino)"
-          ]
-        }
-      ],
-      "schedule": [
-        {
-          "time": "07:30",
-          "what": "Sveglia · 500 ml acqua + 1 bustina Equilibra + 0,5 g sale fino"
-        },
-        {
-          "time": "07:30–07:45",
-          "what": "Colazione completa (vedi piano nutrizione)"
-        },
-        {
-          "time": "09:00",
-          "what": "Partenza da Treviglio (zaino e scarpe già pronti dalla sera prima)"
-        },
-        {
-          "time": "09:50",
-          "what": "Arrivo a Roncola Sant'Alberto · parcheggio, scarpe, AirPods + iPhone, antivento in zaino"
-        },
-        {
-          "time": "10:00",
-          "what": "Start attività (2h15 dopo colazione) · avvia tracking HR su iPhone (Apple Workout o Strava con AirPods)"
-        },
-        {
-          "time": "13:00",
-          "what": "Fine attività (3h piene, sforabili a 13:15 senza panico)"
-        },
-        {
-          "time": "13:10",
-          "what": "In macchina · cambio veloce, asciugamano sul sedile"
-        },
-        {
-          "time": "13:30",
-          "what": "Arrivo Almè ✓"
         }
       ]
     }
