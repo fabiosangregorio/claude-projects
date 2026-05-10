@@ -1,6 +1,6 @@
 {
   "_schema_version": "1.4",
-  "_description": "Struttura del piano di allenamento: fasi, template forza/mobility, budget e regole. Le settimane vivono in data/weeks/ (un file per settimana + index.json) a partire da v1.5.",
+  "_description": "Struttura del piano di allenamento: fasi, template forza/mobility, budget e regole. Le settimane vivono in weeks/ (un file per settimana, manifest in weeks/index.json) a partire da v1.5.",
   "last_updated": "2026-05-10",
   "total_weeks": 18,
   "weekly_budget": {
