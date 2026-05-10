@@ -207,12 +207,15 @@ let WEIGHINS = null;
 async function loadAll() {
   const app = document.getElementById('app');
   try {
-    [PLAN, PROFILE, RACE, WEIGHINS] = await Promise.all([
+    let WEEKS_DOC;
+    [PLAN, PROFILE, RACE, WEEKS_DOC, WEIGHINS] = await Promise.all([
       fetch(BASE + 'plan.json').then(r => { if (!r.ok) throw new Error('plan.json: ' + r.status); return r.json(); }),
       fetch(BASE + 'profile.json').then(r => { if (!r.ok) throw new Error('profile.json: ' + r.status); return r.json(); }),
       fetch(BASE + 'race.json').then(r => { if (!r.ok) throw new Error('race.json: ' + r.status); return r.json(); }),
+      fetch(BASE + 'weeks.json').then(r => { if (!r.ok) throw new Error('weeks.json: ' + r.status); return r.json(); }),
       fetch(BASE + 'weighins.json').then(r => r.ok ? r.json() : null).catch(() => null)
     ]);
+    PLAN.weeks = WEEKS_DOC.weeks || [];
     renderRoute();
   } catch (err) {
     app.innerHTML = `<div class="error">Errore caricamento dati: ${err.message}</div>`;
