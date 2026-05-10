@@ -1,7 +1,15 @@
 {
   "_description": "Task list per la preparazione (burocrazia, equipment, test).",
-  "last_updated": "2026-05-01",
+  "last_updated": "2026-05-09",
   "tasks": [
+    {
+      "category": "decisione",
+      "task": "Decidere iscrizione Trail Anello del Resegone (gara prep)",
+      "deadline": "2026-05-23",
+      "status": "pending",
+      "priority": "alta",
+      "note": "Trail Anello del Resegone — 6^ ed. · Domenica 24/05/2026 · Brumano (BG) 911m · partenza 09:00 · 15.8 km · D+ 1100 m · cutoff 6h · max 150 pettorali. Iscrizione su orobiesport.it (deadline 23/05 ore 12:00 o esaurimento posti); €28 fino al 23/05, €33 il giorno stesso. Materiale obbligatorio: scarpe trail, k-way (se meteo), bicchiere ≥15cl, riserva acqua/cibo. Liberatoria firmata al ritiro (visita medica non esplicitamente richiesta). Tracciato tecnico: radici, rocce fisse, single-track, discesa tecnica. Decisione DOPO il prossimo lungo. Criteri GO: (1) dolore pollicioni risolto (heel lock o cambio numero scarpa), (2) gestiti ≥2h30 in piedi senza disastri sul prossimo lungo, (3) nessun fastidio residuo post-Linzone. Stima al passo attuale: ~3h15-3h30 (cutoff 6h ampio). Vale ~80% del D+ della DBT 21K — ottimo lungo specifico se la decisione è GO. Info: https://www.skydelresegone.it/trail-anello-del-resegone/ · Regolamento: https://www.skydelresegone.it/trail-anello-del-resegone/regolamento-6-edizione-trail-anello-del-resegone/ · Iscrizione: https://www.orobiesport.it/"
+    },
     {
       "category": "burocrazia",
       "task": "Visita medica agonistica",
