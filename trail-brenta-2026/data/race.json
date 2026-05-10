@@ -1,0 +1,53 @@
+{
+  "_schema_version": "1.0",
+  "_description": "Obiettivo gara: dati ufficiali dell'evento + profilo percorso. Modificare solo se cambia gara o quando viene pubblicato il GPX 2026 ufficiale.",
+  "event": "XTERRA Dolomiti di Brenta Trail – SHORT 21K",
+  "edition": 2026,
+  "date": "2026-09-05",
+  "location": "Molveno (TN)",
+  "distance_km": 21,
+  "elevation_gain_m": 1250,
+  "start_time": "10:00",
+  "max_time_hours": 5,
+  "cancello_orario": {
+    "checkpoint": "Rifugio Croz dell'Altissimo",
+    "limit": "3h00' / ore 13:00"
+  },
+  "min_age": 18,
+  "itra_points": 1,
+  "registration_fee_eur_2025": 40,
+  "official_url": "https://www.dolomitidibrentatrail.it/en/routes/xterra21k/",
+  "goal": "finire entro i cancelli",
+  "route_summary": "Lago di Molveno → via Marocchi → Malga Andalo (km 6, +522m) → sent. 332 → variante DBT K21 → Rif. Selvata (ristoro) → Rif. Croz dell'Altissimo (CANCELLO) → Sentiero delle Grotte → Rif. Montanara → Pradel → Molveno",
+  "course_profile_2025": {
+    "_source": "Trace de Trail #272999, caricato il 09/10/2024 dall'organizzatore (Molveno Holiday). Edizione 2025, percorso del 6 settembre 2025. Il percorso 2026 verrà pubblicato entro il 31 luglio 2026 e potrebbe variare leggermente.",
+    "_disclaimer": "Riferimento da edizione precedente. Sostituire con il GPX 2026 ufficiale appena pubblicato.",
+    "gpx_stats_official": {
+      "distance_km": 20.83,
+      "elevation_gain_m": 1212,
+      "elevation_loss_m": 1213,
+      "elev_min_m": 823,
+      "elev_max_m": 1662,
+      "longest_climb_m": 800,
+      "longest_descent_m": 710
+    },
+    "gpx_stats_computed": {
+      "_note": "Calcolati dal GPX scaricato con stesso algoritmo usato per gli hike (smoothing elevation 7-pt + dead-band 0.5m). Differenza vs TdT in D+ deriva da filtri altimetrici più aggressivi del loro tool.",
+      "distance_km": 20.52,
+      "ascent_m": 1384,
+      "descent_m": 1382,
+      "elev_min_m": 817,
+      "elev_max_m": 1680
+    },
+    "grade_distribution": {
+      "_note": "Distribuzione del tempo per pendenza, calcolata distance-weighted su finestre scorrevoli ~25m. Stesso bin schema delle altre attività.",
+      "flat_lt_2": 11.4,
+      "rolling_2_5": 7.0,
+      "uphill_5_10": 10.0,
+      "steep_gt_10": 24.2,
+      "down_2_5": 9.3,
+      "down_5_10": 11.7,
+      "down_gt_10": 26.4
+    }
+  }
+}

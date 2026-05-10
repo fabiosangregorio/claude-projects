@@ -104,28 +104,29 @@ const BASE = './data/';
 async function loadAll() {
   const app = document.getElementById('app');
   try {
-    const [profile, plan] = await Promise.all([
+    const [profile, race, plan] = await Promise.all([
       fetch(BASE + 'profile.json').then(r => { if (!r.ok) throw new Error('profile.json: ' + r.status); return r.json(); }),
+      fetch(BASE + 'race.json').then(r => { if (!r.ok) throw new Error('race.json: ' + r.status); return r.json(); }),
       fetch(BASE + 'plan.json').then(r => { if (!r.ok) throw new Error('plan.json: ' + r.status); return r.json(); })
     ]);
-    render(app, profile, plan);
+    render(app, profile, race, plan);
     document.getElementById('lastUpdated').textContent = 'piano aggiornato ' + plan.last_updated;
   } catch (err) {
     app.innerHTML = `<div class="error">Errore caricamento dati: ${err.message}</div>`;
   }
 }
 
-function render(app, profile, plan) {
+function render(app, profile, race, plan) {
   app.innerHTML = [
-    renderHero(profile),
+    renderHero(race),
     renderWeekLink(plan),
     renderPhases(plan),
     renderRefSection(plan, profile)
   ].join('');
 }
 
-function renderHero(profile) {
-  const r = profile.race_target;
+function renderHero(race) {
+  const r = race;
   return `
     <div class="hero">
       <div class="kicker">Piano di allenamento</div>

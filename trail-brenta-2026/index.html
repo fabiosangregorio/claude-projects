@@ -208,37 +208,38 @@ const BASE = './data/';
 async function loadAll() {
   const app = document.getElementById('app');
   try {
-    const [profile, plan, todo, activitiesManifest, weighins] = await Promise.all([
+    const [profile, race, plan, todo, activitiesManifest, weighins] = await Promise.all([
       fetch(BASE + 'profile.json').then(r => { if (!r.ok) throw new Error('profile.json: ' + r.status); return r.json(); }),
+      fetch(BASE + 'race.json').then(r => { if (!r.ok) throw new Error('race.json: ' + r.status); return r.json(); }),
       fetch(BASE + 'plan.json').then(r => { if (!r.ok) throw new Error('plan.json: ' + r.status); return r.json(); }),
       fetch(BASE + 'todo.json').then(r => { if (!r.ok) throw new Error('todo.json: ' + r.status); return r.json(); }),
       fetch(BASE + 'activities/index.json').then(r => r.ok ? r.json() : { activities: [] }).catch(() => ({ activities: [] })),
       fetch(BASE + 'weighins.json').then(r => r.ok ? r.json() : null).catch(() => null)
     ]);
-    render(app, profile, plan, todo, activitiesManifest, weighins);
+    render(app, profile, race, plan, todo, activitiesManifest, weighins);
     document.getElementById('lastUpdated').textContent = 'piano aggiornato ' + plan.last_updated;
   } catch (err) {
     app.innerHTML = `<div class="error">Errore caricamento dati: ${err.message}</div>`;
   }
 }
 
-function render(app, profile, plan, todo, activitiesManifest, weighins) {
+function render(app, profile, race, plan, todo, activitiesManifest, weighins) {
   app.innerHTML = [
-    renderHero(profile, plan),
+    renderHero(race, plan),
     renderPlanLink(plan),
     renderActivitiesLink(activitiesManifest),
     renderWeighinsLink(weighins),
     renderRecoveryLink(),
     renderTasks(todo),
-    renderRaceInfo(profile),
+    renderRaceInfo(race),
     renderProfile(profile, weighins)
   ].join('');
 }
 
 /* ── Sections ──────────────────────────────────────────────── */
 
-function renderHero(profile, plan) {
-  const r = profile.race_target;
+function renderHero(race, plan) {
+  const r = race;
   const cd = countdown(r.date);
   return `
     <div class="hero">
@@ -353,8 +354,8 @@ function renderTasks(todo) {
   `;
 }
 
-function renderRaceInfo(profile) {
-  const r = profile.race_target;
+function renderRaceInfo(race) {
+  const r = race;
   const cp = r.course_profile_2025;
   return `
     <section>
@@ -413,7 +414,8 @@ function renderProfile(profile, weighins) {
   const latest = sorted[sorted.length - 1];
   const baseline = sorted[0];
   const weightVal = latest ? latest.weight_kg : a.weight_kg;
-  const bmiVal = latest && latest.bmi != null ? latest.bmi : a.bmi;
+  const computedBmi = a.height_cm ? Math.round((weightVal / Math.pow(a.height_cm / 100, 2)) * 10) / 10 : null;
+  const bmiVal = latest && latest.bmi != null ? latest.bmi : computedBmi;
   const weightSub = latest
     ? `<div class="pf-sub">${formatItalianDate(latest.date, true)}${
         sorted.length >= 2 && baseline.weight_kg != null

@@ -12,7 +12,8 @@ End-of-week retrospective. Three layers in order: **auto block (no input) → 6 
 - `trail-brenta-2026/data/plan.json` — the review is written into `weeks[N].review`. Update `last_updated`.
 - `trail-brenta-2026/data/activities/index.json` + `data/activities/*.json` — source for the auto block.
 - `trail-brenta-2026/data/weighins.json` — for weekly weight delta in load.
-- `trail-brenta-2026/data/profile.json` — for FC zones / race target context.
+- `trail-brenta-2026/data/profile.json` — for FC zones context.
+- `trail-brenta-2026/data/race.json` — for race target context.
 - `trail-brenta-2026/week.html` — render layer. Section `Retrospettiva` at the bottom of the page renders `review` if present. Add it the first time the skill runs.
 
 ## Workflow
@@ -29,10 +30,10 @@ Read every activity whose `start` falls in the week's `[start_date, end_date]` r
 
 ```
 auto.adherence:
-  planned: count of sessions[] in plan.json weeks[N]
+  planned: count of sessions[] in plan.json weeks[N], EXCLUDING items with type ∈ {check-in, cross-training}
   done: count of activities matched by date+type
   long_run: "done" | "missed" | "n/a-this-week"
-  swapped: array of {planned, replaced_with, reason?} — infer from gaps + recurring
+  swapped: array of {planned, replaced_with, reason?} — infer from gaps + cross-training/check-in sessions
 
 auto.load:
   trimp: sum of derived.trimp across week (training only)
@@ -44,7 +45,7 @@ auto.load:
 auto.phase_kpi:
   objective: copy from phases[current].key_objective
   status: "measured" | "not_measurable_this_week" | "out_of_target"
-  value: numeric if measured, else null
+  value: numeric if measured/out_of_target; OMIT the field entirely when not measurable
   note: 1 sentence explaining why not measurable, or interpreting the value
 
 auto.open_concerns: aggregate ai_analysis.concerns[] across activities of the week.
@@ -67,7 +68,7 @@ Run these checks against the auto block + last 3 weeks' reviews:
 | Trigger | Fires when |
 |---|---|
 | `carryover_concern` | Same `concerns[].area` (case-insensitive substring match) appears in ≥2 of last 3 activity groups. |
-| `swap_unexplained` | A planned session is missing AND no swap was inferred from recurring (e.g. easy run absent, no padel/bici on that day either). |
+| `swap_unexplained` | A planned session is missing AND no swap was inferred from a cross-training/check-in session (e.g. easy run absent, no padel/bici on that day either). |
 | `phase_kpi_off` | KPI status is `out_of_target` or measured value deviates >25% from phase target. |
 | `equipment_concern` | Any activity in the week has a concern with `area` matching `/scarp|zaino|airpods|pack|gps|HR/i`. |
 
@@ -154,8 +155,8 @@ Write to `trail-brenta-2026/data/plan.json` under `weeks[N].review`:
   "auto": {
     "adherence": { "planned": 3, "done": 2, "long_run": "done", "swapped": [...] },
     "load": { "trimp_training": 272, "ascent_m_total": 2010, "duration_min_total": 656, "maf_below_pct_training": 36, "weight_delta_kg": null, "weight_kg_latest": 66.4 },
-    "phase_kpi": { "objective": "...", "status": "not_measurable_this_week", "value": null, "note": "..." },
-    "open_concerns": [{ "area": "vestibilità scarpa in discesa", "weeks_open": 1, "severity_max": 3, "status": "open" }],
+    "phase_kpi": { "objective": "...", "status": "not_measurable_this_week", "note": "..." },
+    "open_concerns": [{ "area": "vestibilità scarpa in discesa", "weeks_open": 1, "severity_max": 3 }],
     "highlights": "...",
     "lowlights": "...",
     "race_day_break_derived": { "value": "motore aerobico", "reason": "Phase 1 KPI not measured; baseline piatto 1 mag a 12.6% decoupling; rientro 13 mesi." }
@@ -174,6 +175,8 @@ Write to `trail-brenta-2026/data/plan.json` under `weeks[N].review`:
 ```
 
 Update `plan.json.last_updated` to today's date. Don't reformat unrelated keys.
+
+**Omit-when-empty rule**: do NOT serialize empty containers / null leaves. Specifically: omit `checkin.niggles` when the user picked only `nessuno`; omit the entire `adaptive` key when no adaptive probes fired; omit `phase_kpi.value` when status ≠ `measured`/`out_of_target`; omit `open_concerns[*].status` (presence in the array implies open). The renderer in `week.html` treats missing keys identically to empty/null values.
 
 ### 8. Verify the page renders
 
@@ -211,7 +214,7 @@ Don't auto-commit. Show the diff summary and ask: "Committo la review della sett
 
 - **Phase boundary weeks**: when a week straddles two phases (rare), the KPI rule uses the phase of `week.end_date`.
 - **First week of plan**: no carryover possible, `weeks_open` = 1 for any concern. Trigger `carryover_concern` won't fire (good).
-- **Recurring (padel/bici)**: don't count in `adherence.done`. They live in `weeks[N].recurring`, not in `sessions[]`.
+- **Cross-training & check-in (padel/bici/pesa)**: don't count in `adherence.done` or `adherence.planned`. They live in `weeks[N].sessions[]` with `type` ∈ {`check-in`, `cross-training`} — filter them out when counting running sessions.
 - **Multi-day sessions** (e.g. hike sab+dom in week 1): one logical session in `sessions[]`, two activity files. Match by the `when` field — count as 1 done if ≥1 file logged.
 - **Social activities** (`category: "social"`): excluded from adherence done count, decoupling/MAF aggregates, KPI status — but their `ascent_m` and `duration_sec` count in raw `auto.load`.
 

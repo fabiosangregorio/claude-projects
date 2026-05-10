@@ -123,12 +123,7 @@ section{margin:2rem 0}
 @keyframes spin{to{transform:rotate(360deg)}}
 .error{padding:1.5rem;color:var(--rd);font-size:.85rem;background:rgba(248,81,73,.05);border:1px solid var(--rd);border-radius:10px;text-align:center}
 
-.recurring{margin-top:1rem;padding-top:.95rem;border-top:1px dashed var(--bd)}
-.recurring-title{font-family:'Space Mono',monospace;font-size:.65rem;color:var(--tx2);text-transform:uppercase;letter-spacing:1px;margin-bottom:.6rem;font-weight:700}
-.recurring-list{display:flex;flex-direction:column;gap:.5rem}
-.recurring-item{display:flex;align-items:flex-start;gap:.55rem;padding:.5rem .65rem;background:var(--sf2);border:1px solid var(--bd);border-radius:6px}
-.recurring-day{font-family:'Space Mono',monospace;font-size:.6rem;font-weight:700;background:var(--bg);border:1px solid var(--bd);border-radius:4px;padding:.2rem .4rem;color:var(--tx);letter-spacing:.8px;flex-shrink:0;margin-top:.1rem}
-.recurring-body{flex:1;min-width:0}
+.recurring-item{padding:.5rem .65rem;margin-top:.85rem;background:var(--sf2);border:1px solid var(--bd);border-radius:6px}
 .recurring-head{display:flex;align-items:center;gap:.45rem;flex-wrap:wrap;margin-bottom:.18rem}
 .recurring-label{font-family:'Space Mono',monospace;font-size:.78rem;font-weight:700;color:var(--tx)}
 .recurring-kind{font-family:'Space Mono',monospace;font-size:.55rem;text-transform:uppercase;letter-spacing:.6px;font-weight:700;padding:.1rem .35rem;border-radius:3px;border:1px solid var(--bd);background:rgba(139,148,158,.1);color:var(--tx2)}
@@ -206,14 +201,16 @@ footer a{color:var(--ac);text-decoration:none}
 const BASE = './data/';
 let PLAN = null;
 let PROFILE = null;
+let RACE = null;
 let WEIGHINS = null;
 
 async function loadAll() {
   const app = document.getElementById('app');
   try {
-    [PLAN, PROFILE, WEIGHINS] = await Promise.all([
+    [PLAN, PROFILE, RACE, WEIGHINS] = await Promise.all([
       fetch(BASE + 'plan.json').then(r => { if (!r.ok) throw new Error('plan.json: ' + r.status); return r.json(); }),
       fetch(BASE + 'profile.json').then(r => { if (!r.ok) throw new Error('profile.json: ' + r.status); return r.json(); }),
+      fetch(BASE + 'race.json').then(r => { if (!r.ok) throw new Error('race.json: ' + r.status); return r.json(); }),
       fetch(BASE + 'weighins.json').then(r => r.ok ? r.json() : null).catch(() => null)
     ]);
     renderRoute();
@@ -240,23 +237,23 @@ function renderRoute() {
 
   document.title = `DBT 21K — Settimana ${week.number}`;
 
-  const sessHtml = (week.sessions || []).map(renderSession).join('');
-  const strengthHtml = week.strength
+  const sessHtml = (week.sessions || []).map(s => renderSession(s, week)).join('');
+  const strengthHtml = (week.strength && week.strength.skipped)
     ? `<div class="sess">
+         <div class="sess-head">
+           <span class="sess-type sess-type-strength" data-tooltip="${TYPE_DESCRIPTIONS.strength}" tabindex="0" aria-label="forza: ${TYPE_DESCRIPTIONS.strength}">forza</span>
+           <span class="sess-meta">· saltata</span>
+         </div>
+         <div class="sess-notes" style="color:var(--wn)">⚠ ${week.strength.reason}</div>
+       </div>`
+    : `<div class="sess">
          <div class="sess-head">
            <span class="sess-type sess-type-strength" data-tooltip="${TYPE_DESCRIPTIONS.strength}" tabindex="0" aria-label="forza: ${TYPE_DESCRIPTIONS.strength}">forza</span>
            <span class="sess-dur">~25 min</span>
            <span class="sess-meta">full-body · vedi piano principale</span>
          </div>
          <div class="sess-notes">Template completo nella sezione "Forza & mobility" della <a href="./plan.html" style="color:var(--ac)">pagina piano</a>. 1 sessione. Mai prima del lungo.</div>
-       </div>`
-    : (week.strength_note ? `<div class="sess">
-         <div class="sess-head">
-           <span class="sess-type sess-type-strength" data-tooltip="${TYPE_DESCRIPTIONS.strength}" tabindex="0" aria-label="forza: ${TYPE_DESCRIPTIONS.strength}">forza</span>
-           <span class="sess-meta">· saltata</span>
-         </div>
-         <div class="sess-notes" style="color:var(--wn)">⚠ ${week.strength_note}</div>
-       </div>` : '');
+       </div>`;
 
   const prev = weeks.find(w => w.number === week.number - 1);
   const next = weeks.find(w => w.number === week.number + 1);
@@ -296,7 +293,6 @@ function renderRoute() {
         ${week.narrative ? `<div class="week-narr">${week.narrative}</div>` : ''}
         ${sessHtml}
         ${strengthHtml}
-        ${renderRecurring(week.recurring, week, WEIGHINS)}
       </div>
       ${pagerHtml}
     </section>
@@ -314,32 +310,21 @@ const TYPE_DESCRIPTIONS = {
   strength: 'Sessione di forza full-body. Vedi template completo nella pagina piano.'
 };
 
-function renderRecurring(items, week, weighins) {
-  if (!items || !items.length) return '';
-  const itemsHtml = items.map(it => {
-    const meta = [];
-    if (it.duration_min) meta.push(`${it.duration_min} min`);
-    if (it.intensity) meta.push(it.intensity);
-    if (it.when) meta.push(it.when);
-    const valueLine = recurringValueLine(it, week, weighins);
-    return `
-      <div class="recurring-item">
-        <span class="recurring-day">${it.day}</span>
-        <div class="recurring-body">
-          <div class="recurring-head">
-            <span class="recurring-label">${it.label}</span>
-            <span class="recurring-kind ${it.kind}">${it.kind}</span>
-            ${meta.length ? `<span class="recurring-meta">· ${meta.join(' · ')}</span>` : ''}
-          </div>
-          ${valueLine}
-          ${it.notes ? `<div class="recurring-notes">${it.notes}</div>` : ''}
-        </div>
-      </div>`;
-  }).join('');
+function renderRecurringSession(s, week) {
+  const meta = [];
+  if (s.duration_min) meta.push(`${s.duration_min} min`);
+  if (s.intensity) meta.push(s.intensity);
+  const valueLine = recurringValueLine(s, week, WEIGHINS);
   return `
-    <div class="recurring">
-      <div class="recurring-title">Ricorrenze settimanali fisse</div>
-      <div class="recurring-list">${itemsHtml}</div>
+    <div class="recurring-item">
+      <div class="recurring-head">
+        <span class="recurring-label">${s.label}</span>
+        <span class="recurring-kind ${s.type}">${s.type}</span>
+        ${meta.length ? `<span class="recurring-meta">· ${meta.join(' · ')}</span>` : ''}
+        ${s.when ? `<span class="sess-when">${s.when}</span>` : ''}
+      </div>
+      ${valueLine}
+      ${s.notes ? `<div class="recurring-notes">${s.notes}</div>` : ''}
     </div>`;
 }
 
@@ -425,7 +410,7 @@ function renderReview(r) {
 }
 
 function recurringValueLine(item, week, weighins) {
-  if (item.kind !== 'check-in' || item.label !== 'Pesa' || !week) return '';
+  if (item.type !== 'check-in' || item.label !== 'Pesa' || !week) return '';
   const entries = (weighins && weighins.entries) || [];
   const hit = entries.find(e => e.date >= week.start_date && e.date <= week.end_date);
   if (hit) {
@@ -445,7 +430,10 @@ function todayISO() {
   return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
 }
 
-function renderSession(s) {
+function renderSession(s, week) {
+  if (s.type === 'check-in' || s.type === 'cross-training') {
+    return renderRecurringSession(s, week);
+  }
   const typeLabel = TYPE_LABELS[s.type] || s.type;
   const typeDesc = TYPE_DESCRIPTIONS[s.type] || '';
   const meta = [];
@@ -530,8 +518,7 @@ function renderSession(s) {
 
 function renderGradeDistribution(gd) {
   if (!gd) return '';
-  const race = PROFILE && PROFILE.race_target && PROFILE.race_target.course_profile_2025
-    && PROFILE.race_target.course_profile_2025.grade_distribution;
+  const race = RACE && RACE.course_profile_2025 && RACE.course_profile_2025.grade_distribution;
   if (!race) return '';
 
   const segs = [
