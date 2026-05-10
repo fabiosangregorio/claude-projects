@@ -61,53 +61,6 @@ section{margin:2rem 0}
 .sess-act:hover{border-color:var(--ac2);background:rgba(63,185,80,.12)}
 .sess-act-icon{font-size:.85rem}
 
-.gear{margin-top:.6rem;padding:.7rem .85rem;background:rgba(240,136,62,.05);border:1px solid rgba(240,136,62,.25);border-radius:6px}
-.gear-title{font-family:'Space Mono',monospace;font-size:.65rem;color:var(--wn);text-transform:uppercase;letter-spacing:1px;margin-bottom:.55rem;font-weight:700}
-.gear-cat{margin-bottom:.5rem}
-.gear-cat:last-child{margin-bottom:0}
-.gear-cat-title{font-family:'Space Mono',monospace;font-size:.7rem;color:var(--tx);font-weight:700;margin-bottom:.2rem}
-.gear-items{list-style:none;padding-left:0;margin:0}
-.gear-items li{font-size:.78rem;color:var(--tx2);line-height:1.55;padding:.12rem 0 .12rem 1rem;position:relative}
-.gear-items li::before{content:'·';position:absolute;left:.35rem;color:var(--wn);font-weight:700}
-
-.nutrition{margin-top:.6rem;padding:.7rem .85rem;background:rgba(63,185,80,.05);border:1px solid rgba(63,185,80,.25);border-radius:6px}
-.nutrition-title{font-family:'Space Mono',monospace;font-size:.65rem;color:var(--ac2);text-transform:uppercase;letter-spacing:1px;margin-bottom:.55rem;font-weight:700}
-.nutrition .gear-items li::before{color:var(--ac2)}
-
-.schedule{margin-top:.6rem;padding:.7rem .85rem;background:rgba(88,166,255,.05);border:1px solid rgba(88,166,255,.25);border-radius:6px}
-.schedule-title{font-family:'Space Mono',monospace;font-size:.65rem;color:var(--ac);text-transform:uppercase;letter-spacing:1px;margin-bottom:.55rem;font-weight:700}
-.sch-row{display:flex;gap:.7rem;font-size:.78rem;line-height:1.55;padding:.12rem 0}
-.sch-time{font-family:'Space Mono',monospace;color:var(--ac);font-weight:700;flex-shrink:0;min-width:5.5rem}
-.sch-what{color:var(--tx2)}
-
-.gd{margin-top:.7rem;padding:.7rem .85rem;background:var(--sf2);border:1px solid var(--bd);border-radius:6px}
-.gd-title{font-family:'Space Mono',monospace;font-size:.65rem;color:var(--tx2);text-transform:uppercase;letter-spacing:1px;margin-bottom:.55rem;font-weight:700}
-.gd-row{margin-bottom:.55rem}
-.gd-row:last-of-type{margin-bottom:0}
-.gd-row-lbl{font-family:'Space Mono',monospace;font-size:.62rem;color:var(--tx2);text-transform:uppercase;letter-spacing:.8px;margin-bottom:.25rem;display:flex;justify-content:space-between;align-items:baseline;gap:.5rem}
-.gd-row-lbl strong{color:var(--tx);font-weight:700}
-.gd-row-lbl em{font-style:normal;font-size:.6rem;color:var(--tx2)}
-.zstack{display:flex;width:100%;height:18px;border-radius:4px;overflow:hidden;background:var(--bg);border:1px solid var(--bd)}
-.zseg{height:100%;display:flex;align-items:center;justify-content:center;font-family:'Space Mono',monospace;font-size:.58rem;color:#0e1117;font-weight:700;min-width:0;overflow:hidden;white-space:nowrap}
-.zseg.gd-down-gt-10{background:#0a3069;color:#fff}
-.zseg.gd-down-5-10{background:#1f6feb;color:#fff}
-.zseg.gd-down-2-5{background:#79c0ff}
-.zseg.gd-flat{background:#6e7681;color:#fff}
-.zseg.gd-rolling{background:#d29922}
-.zseg.gd-uphill{background:#f0883e}
-.zseg.gd-steep{background:#f85149;color:#fff}
-.zlegend{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.55rem;font-family:'Space Mono',monospace;font-size:.65rem;color:var(--tx2)}
-.zleg-item{display:flex;align-items:center;gap:.3rem}
-.zleg-dot{width:9px;height:9px;border-radius:2px;flex-shrink:0}
-.zleg-dot.gd-down-gt-10{background:#0a3069}
-.zleg-dot.gd-down-5-10{background:#1f6feb}
-.zleg-dot.gd-down-2-5{background:#79c0ff}
-.zleg-dot.gd-flat{background:#6e7681}
-.zleg-dot.gd-rolling{background:#d29922}
-.zleg-dot.gd-uphill{background:#f0883e}
-.zleg-dot.gd-steep{background:#f85149}
-.gd-note{font-size:.75rem;color:var(--tx2);line-height:1.5;margin-top:.55rem;padding-top:.55rem;border-top:1px solid var(--bd)}
-
 .nav-card{display:flex;align-items:center;justify-content:space-between;background:var(--sf);border:1px solid var(--bd);border-radius:10px;padding:.9rem 1.1rem;text-decoration:none;color:inherit;transition:border-color .2s;margin-bottom:.7rem}
 .nav-card:hover{border-color:var(--ac)}
 .nav-card-title{font-family:'Space Mono',monospace;font-size:.9rem;color:var(--tx);font-weight:700}
@@ -210,17 +163,15 @@ async function loadWeeks() {
 
 let PLAN = null;
 let PROFILE = null;
-let RACE = null;
 let WEIGHINS = null;
 
 async function loadAll() {
   const app = document.getElementById('app');
   try {
     let weeks;
-    [PLAN, PROFILE, RACE, weeks, WEIGHINS] = await Promise.all([
+    [PLAN, PROFILE, weeks, WEIGHINS] = await Promise.all([
       fetch(BASE + 'plan.json').then(r => { if (!r.ok) throw new Error('plan.json: ' + r.status); return r.json(); }),
       fetch(BASE + 'profile.json').then(r => { if (!r.ok) throw new Error('profile.json: ' + r.status); return r.json(); }),
-      fetch(BASE + 'race.json').then(r => { if (!r.ok) throw new Error('race.json: ' + r.status); return r.json(); }),
       loadWeeks(),
       fetch(BASE + 'weighins.json').then(r => r.ok ? r.json() : null).catch(() => null)
     ]);
@@ -434,41 +385,6 @@ function renderSession(s, week) {
   else if (s.vertical_m_max) meta.push(`+${s.vertical_m_max} m max`);
   const valueLineHtml = recurringValueLine(s, week, WEIGHINS);
 
-  const gearHtml = (s.gear_checklist && s.gear_checklist.length) ? `
-    <div class="gear">
-      <div class="gear-title">Cosa portare</div>
-      ${s.gear_checklist.map(g => `
-        <div class="gear-cat">
-          <div class="gear-cat-title">${g.category}</div>
-          <ul class="gear-items">${g.items.map(i => `<li>${i}</li>`).join('')}</ul>
-        </div>
-      `).join('')}
-    </div>` : '';
-
-  const nutritionHtml = (s.nutrition_plan && s.nutrition_plan.length) ? `
-    <div class="nutrition">
-      <div class="nutrition-title">Piano nutrizione e idratazione</div>
-      ${s.nutrition_plan.map(g => `
-        <div class="gear-cat">
-          <div class="gear-cat-title">${g.category}</div>
-          <ul class="gear-items">${g.items.map(i => `<li>${i}</li>`).join('')}</ul>
-        </div>
-      `).join('')}
-    </div>` : '';
-
-  const scheduleHtml = (s.schedule && s.schedule.length) ? `
-    <div class="schedule">
-      <div class="schedule-title">Piano orari</div>
-      ${s.schedule.map(r => `
-        <div class="sch-row">
-          <div class="sch-time">${r.time}</div>
-          <div class="sch-what">${r.what}</div>
-        </div>
-      `).join('')}
-    </div>` : '';
-
-  const gdHtml = renderGradeDistribution(s.grade_distribution);
-
   const routesHtml = (s.routes && s.routes.length) ? `
     <div class="sess-routes">
       ${s.routes.map(r => `
@@ -501,67 +417,6 @@ function renderSession(s, week) {
       ${s.notes ? `<div class="sess-notes">${s.notes}</div>` : ''}
       ${routesHtml}
       ${actsHtml}
-      ${gdHtml}
-      ${gearHtml}
-      ${nutritionHtml}
-      ${scheduleHtml}
-    </div>
-  `;
-}
-
-function renderGradeDistribution(gd) {
-  if (!gd) return '';
-  const race = RACE && RACE.course_profile_2025 && RACE.course_profile_2025.grade_distribution;
-  if (!race) return '';
-
-  const segs = [
-    { key: 'down_gt_10', cls: 'gd-down-gt-10', lbl: 'Disc &gt;10%' },
-    { key: 'down_5_10',  cls: 'gd-down-5-10',  lbl: 'Disc 5-10%' },
-    { key: 'down_2_5',   cls: 'gd-down-2-5',   lbl: 'Disc 2-5%' },
-    { key: 'flat_lt_2',  cls: 'gd-flat',       lbl: 'Piano &lt;2%' },
-    { key: 'rolling_2_5',cls: 'gd-rolling',    lbl: 'Mosso 2-5%' },
-    { key: 'uphill_5_10',cls: 'gd-uphill',     lbl: 'Sal 5-10%' },
-    { key: 'steep_gt_10',cls: 'gd-steep',      lbl: 'Ripido &gt;10%' }
-  ];
-
-  const stack = (dist) => `<div class="zstack">${
-    segs.map(s => {
-      const v = dist[s.key];
-      if (v == null || v <= 0) return '';
-      return `<div class="zseg ${s.cls}" style="width:${v.toFixed(2)}%" title="${s.lbl} · ${v}%">${v >= 7 ? Math.round(v) + '%' : ''}</div>`;
-    }).join('')
-  }</div>`;
-
-  const totalSession = segs.reduce((a, s) => a + (gd[s.key] || 0), 0);
-  const cosineSim = (() => {
-    let dot = 0, na = 0, nb = 0;
-    segs.forEach(s => {
-      const a = gd[s.key] || 0, b = race[s.key] || 0;
-      dot += a * b; na += a * a; nb += b * b;
-    });
-    return (na && nb) ? (dot / Math.sqrt(na * nb)) : 0;
-  })();
-  const tvDist = segs.reduce((a, s) => a + Math.abs((gd[s.key] || 0) - (race[s.key] || 0)), 0) / 2;
-
-  const legend = segs.filter(s => (gd[s.key] || 0) > 0 || (race[s.key] || 0) > 0)
-    .map(s => `<div class="zleg-item"><span class="zleg-dot ${s.cls}"></span>${s.lbl}</div>`).join('');
-
-  return `
-    <div class="gd">
-      <div class="gd-title">Distribuzione pendenza vs gara</div>
-      <div class="gd-row">
-        <div class="gd-row-lbl"><strong>Sessione</strong><em>${totalSession ? '~' + Math.round(totalSession) + '% del tracciato' : ''}</em></div>
-        ${stack(gd)}
-      </div>
-      <div class="gd-row">
-        <div class="gd-row-lbl"><strong>DBT 21K (gara)</strong><em>21 km · +1212 m</em></div>
-        ${stack(race)}
-      </div>
-      <div class="zlegend">${legend}</div>
-      <div class="gd-note">
-        <strong style="color:var(--tx)">Match:</strong> cosine ${cosineSim.toFixed(2)} · sovrapposizione ${(100 - tvDist).toFixed(0)}%
-        ${gd.vs_race_note ? `<br>${gd.vs_race_note}` : ''}
-      </div>
     </div>
   `;
 }
