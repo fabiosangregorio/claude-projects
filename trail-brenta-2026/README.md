@@ -56,9 +56,13 @@ Sezioni: `athlete`, `experience`, `availability`, `health`, `calibration_source`
 
 **Sempre aggiornare il campo `last_updated`** quando si modifica.
 
-Chiavi top-level: `total_weeks`, `race_date`, `weekly_budget`, `weekly_recurring`, `rules`, `phases`, `weeks`, `milestones`, `strength_template`, `mobility_template`.
+Chiavi top-level: `total_weeks`, `race_date`, `weekly_budget`, `rules`, `phases`, `weeks`, `milestones`, `strength_template`, `mobility_template`.
 
-**`weekly_recurring`** — array di ricorrenze fisse che valgono per ogni settimana del piano (cross-training non strutturato, check-in di tracking). Non sono sessioni di allenamento prescrittive — sono ancore di baseline che `week.html` renderizza in fondo a ogni settimana ("Ricorrenze settimanali fisse"). Campi item: `kind` (`check-in` | `cross-training`), `label`, `day` (LUN/MAR/...), `when?`, `duration_min?`, `intensity?`, `notes?`. Esempi attuali: pesa lunedì, padel mercoledì, bici giovedì.
+**`weeks[].sessions[].activities`** — array opzionale di attività registrate che hanno eseguito quella sessione (consuntivo). Item: `{file, title}` dove `file` è il filename in `data/activities/` senza `.json`. Renderizzato da `week.html` come badge verdi cliccabili sotto il blocco `routes`, link diretto a `activity.html#<file>`. Una sessione può avere più attività (es. hike multi-giorno).
+
+**`weeks[].recurring`** — array di ricorrenze (cross-training non strutturato, check-in di tracking) **definito per settimana**, non globale. Non sono sessioni di allenamento prescrittive — sono ancore di baseline che `week.html` renderizza in fondo alla settimana ("Ricorrenze settimanali fisse"). Definirle per settimana permette di variare in base al contesto (es. vacanza = niente padel, settimana scarico = niente bici). Campi item: `kind` (`check-in` | `cross-training`), `label`, `day` (LUN/MAR/...), `when?`, `duration_min?`, `intensity?`, `notes?`. Esempi tipici: pesa LUN, padel MER, bici GIO.
+
+**`weeks[].review`** — retrospettiva di fine settimana, scritta dalla skill `weekly-review` (vedi `.claude/skills/weekly-review/SKILL.md`). Tre layer: `auto` (calcolato da attività + weighins, zero input), `checkin` (5 risposte multiple-choice raccolte via `mcp__conductor__AskUserQuestion`), `adaptive` (max 2 probe attivati da regole). Campi top: `date`, `verdict` (`on-track` | `ahead` | `behind` | `recalibrate`), `headline` (1 frase), `synthesis` (1-2 frasi deterministiche). Sotto `auto`: `adherence`, `load`, `phase_kpi` (status `measured` | `not_measurable_this_week` | `out_of_target`), `open_concerns`, `highlights`, `lowlights`, `race_day_break_derived` (la "forzante": NON chiesta all'utente, derivata dai dati con `reason`). Renderizzato da `week.html` come sezione "Retrospettiva" in fondo alla card della settimana, solo se presente.
 
 ### `data/todo.json`
 

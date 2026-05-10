@@ -22,6 +22,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--tx);line-
 section{margin:2rem 0}
 .s-title{font-family:'Space Mono',monospace;font-size:.75rem;color:var(--tx2);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:1rem;display:flex;align-items:center;gap:.5rem}
 .s-title::before{content:'';display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--ac2);box-shadow:0 0 0 0 rgba(63,185,80,.5);animation:pulse 2s infinite}
+.s-title.s-title-review::before{background:var(--pd);box-shadow:none;animation:none}
 @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(63,185,80,.5)}70%{box-shadow:0 0 0 6px rgba(63,185,80,0)}100%{box-shadow:0 0 0 0 rgba(63,185,80,0)}}
 
 .card{background:var(--sf);border:1px solid var(--bd);border-radius:10px;padding:1rem 1.1rem;margin-bottom:.7rem}
@@ -53,6 +54,10 @@ section{margin:2rem 0}
 .sess-route{display:inline-flex;align-items:center;gap:.4rem;padding:.45rem .7rem;background:var(--sf2);border:1px solid var(--bd);border-radius:6px;text-decoration:none;color:var(--ac);font-family:'Space Mono',monospace;font-size:.75rem;font-weight:700;transition:border-color .2s,background .2s}
 .sess-route:hover{border-color:var(--ac);background:rgba(88,166,255,.08)}
 .sess-route-icon{font-size:.85rem}
+.sess-acts{display:flex;flex-direction:column;gap:.4rem;margin-top:.55rem;align-items:flex-start}
+.sess-act{display:inline-flex;align-items:center;gap:.4rem;padding:.45rem .7rem;background:rgba(63,185,80,.06);border:1px solid rgba(63,185,80,.35);border-radius:6px;text-decoration:none;color:var(--ac2);font-family:'Space Mono',monospace;font-size:.75rem;font-weight:700;transition:border-color .2s,background .2s}
+.sess-act:hover{border-color:var(--ac2);background:rgba(63,185,80,.12)}
+.sess-act-icon{font-size:.85rem}
 
 .gear{margin-top:.6rem;padding:.7rem .85rem;background:rgba(240,136,62,.05);border:1px solid rgba(240,136,62,.25);border-radius:6px}
 .gear-title{font-family:'Space Mono',monospace;font-size:.65rem;color:var(--wn);text-transform:uppercase;letter-spacing:1px;margin-bottom:.55rem;font-weight:700}
@@ -133,6 +138,50 @@ section{margin:2rem 0}
 .recurring-notes{font-size:.75rem;color:var(--tx2);line-height:1.45;margin-top:.2rem}
 .recurring-value{font-family:'Space Mono',monospace;font-size:.75rem;color:var(--ac);margin-top:.25rem;font-weight:500}
 .recurring-value.muted{color:var(--tx2);font-weight:400}
+
+.review-head{display:flex;justify-content:space-between;align-items:flex-start;gap:.7rem;flex-wrap:wrap;margin-bottom:.7rem}
+.review-title{font-family:'Space Mono',monospace;font-size:.65rem;color:var(--tx2);text-transform:uppercase;letter-spacing:1px;font-weight:700}
+.review-verdict{font-family:'Space Mono',monospace;font-size:.6rem;font-weight:700;text-transform:uppercase;letter-spacing:.8px;padding:.22rem .55rem;border-radius:4px;border:1px solid}
+.review-verdict.on-track{color:var(--ac2);border-color:var(--ac2);background:rgba(63,185,80,.1)}
+.review-verdict.ahead{color:var(--ac);border-color:var(--ac);background:rgba(88,166,255,.1)}
+.review-verdict.behind{color:var(--wn);border-color:var(--wn);background:rgba(240,136,62,.1)}
+.review-verdict.recalibrate{color:var(--rd);border-color:var(--rd);background:rgba(248,81,73,.1)}
+.review-headline{font-family:'Space Mono',monospace;font-size:.95rem;font-weight:700;color:var(--tx);line-height:1.4;margin-bottom:.85rem}
+.review-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:.4rem;margin-bottom:.85rem}
+.review-stat{padding:.55rem .5rem;background:var(--sf2);border:1px solid var(--bd);border-radius:6px;text-align:center}
+.review-stat-val{font-family:'Space Mono',monospace;font-size:.95rem;font-weight:700;color:var(--tx);line-height:1.1}
+.review-stat-lbl{font-family:'Space Mono',monospace;font-size:.55rem;color:var(--tx2);text-transform:uppercase;letter-spacing:.6px;margin-top:.2rem}
+.review-kpi{padding:.7rem .85rem;background:var(--sf2);border:1px solid var(--bd);border-radius:6px;margin-bottom:.85rem}
+.review-kpi-head{display:flex;align-items:center;justify-content:space-between;gap:.5rem;flex-wrap:wrap;margin-bottom:.35rem}
+.review-kpi-lbl{font-family:'Space Mono',monospace;font-size:.62rem;color:var(--tx2);text-transform:uppercase;letter-spacing:.8px;font-weight:700}
+.review-kpi-pill{font-family:'Space Mono',monospace;font-size:.55rem;font-weight:700;text-transform:uppercase;letter-spacing:.6px;padding:.18rem .45rem;border-radius:3px;border:1px solid}
+.review-kpi-pill.measured{color:var(--ac2);border-color:var(--ac2);background:rgba(63,185,80,.1)}
+.review-kpi-pill.not_measurable_this_week{color:var(--tx2);border-color:var(--tx2);background:rgba(139,148,158,.1)}
+.review-kpi-pill.out_of_target{color:var(--wn);border-color:var(--wn);background:rgba(240,136,62,.1)}
+.review-kpi-obj{font-family:'Space Mono',monospace;font-size:.78rem;font-weight:700;color:var(--tx);margin-bottom:.25rem}
+.review-kpi-note{font-size:.75rem;color:var(--tx2);line-height:1.5}
+.review-chips{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:.85rem}
+.review-chip{display:inline-flex;align-items:center;gap:.35rem;padding:.28rem .55rem;background:var(--sf2);border:1px solid var(--bd);border-radius:14px;font-size:.7rem;color:var(--tx2);font-family:'DM Sans',sans-serif}
+.review-chip strong{font-family:'Space Mono',monospace;font-size:.6rem;color:var(--tx);text-transform:uppercase;letter-spacing:.6px;font-weight:700}
+.review-chip.warn{border-color:var(--wn);background:rgba(240,136,62,.08);color:var(--wn)}
+.review-chip.warn strong{color:var(--wn)}
+.review-break{padding:.7rem .85rem;background:rgba(210,168,255,.05);border-left:2px solid var(--pd);border-radius:4px;margin-bottom:.85rem}
+.review-break-lbl{font-family:'Space Mono',monospace;font-size:.6rem;color:var(--pd);text-transform:uppercase;letter-spacing:.8px;font-weight:700;margin-bottom:.3rem}
+.review-break-val{font-family:'Space Mono',monospace;font-size:.85rem;font-weight:700;color:var(--tx);margin-bottom:.25rem}
+.review-break-why{font-size:.72rem;color:var(--tx2);line-height:1.45;font-style:italic}
+.review-synth{font-size:.85rem;color:var(--tx);line-height:1.55;padding:.7rem .85rem;background:var(--sf2);border-left:2px solid var(--ac);border-radius:4px;margin-bottom:.7rem}
+.review-details{margin-top:.5rem;font-size:.78rem;color:var(--tx2)}
+.review-details summary{cursor:pointer;font-family:'Space Mono',monospace;font-size:.65rem;text-transform:uppercase;letter-spacing:.8px;color:var(--tx2);padding:.35rem 0;list-style:none}
+.review-details summary::-webkit-details-marker{display:none}
+.review-details summary::before{content:'▸ ';color:var(--ac)}
+.review-details[open] summary::before{content:'▾ '}
+.review-details-body{padding:.5rem .8rem;background:var(--sf2);border-radius:6px;line-height:1.5}
+.review-details-body p{margin-bottom:.5rem}
+.review-details-body p:last-child{margin-bottom:0}
+.review-details-body strong{color:var(--tx);font-family:'Space Mono',monospace;font-size:.7rem;text-transform:uppercase;letter-spacing:.6px}
+@media(max-width:480px){
+  .review-stats{grid-template-columns:repeat(2,1fr)}
+}
 
 footer{margin-top:3rem;padding-top:1.5rem;border-top:1px solid var(--bd);text-align:center;color:var(--tx2);font-size:.72rem}
 footer a{color:var(--ac);text-decoration:none}
@@ -233,6 +282,7 @@ function renderRoute() {
   `;
 
   app.innerHTML = `
+    ${renderReview(week.review)}
     <section${isCurrent ? ' class="live"' : ''}>
       <h2 class="s-title">${isCurrent ? 'Settimana corrente' : 'Piano settimana'}</h2>
       <div class="card${isCurrent ? ' live' : ''}">
@@ -246,7 +296,7 @@ function renderRoute() {
         ${week.narrative ? `<div class="week-narr">${week.narrative}</div>` : ''}
         ${sessHtml}
         ${strengthHtml}
-        ${renderRecurring(PLAN.weekly_recurring, week, WEIGHINS)}
+        ${renderRecurring(week.recurring, week, WEIGHINS)}
       </div>
       ${pagerHtml}
     </section>
@@ -291,6 +341,87 @@ function renderRecurring(items, week, weighins) {
       <div class="recurring-title">Ricorrenze settimanali fisse</div>
       <div class="recurring-list">${itemsHtml}</div>
     </div>`;
+}
+
+function renderReview(r) {
+  if (!r) return '';
+  const a = r.auto || {};
+  const c = r.checkin || {};
+  const adh = a.adherence || {};
+  const load = a.load || {};
+  const kpi = a.phase_kpi || {};
+  const brk = a.race_day_break_derived || null;
+  const concerns = a.open_concerns || [];
+
+  const verdictCls = r.verdict || 'on-track';
+  const statsHtml = `
+    <div class="review-stats">
+      <div class="review-stat"><div class="review-stat-val">${load.trimp_training ?? '—'}</div><div class="review-stat-lbl">TRIMP</div></div>
+      <div class="review-stat"><div class="review-stat-val">${load.ascent_m_total != null ? load.ascent_m_total + ' m' : '—'}</div><div class="review-stat-lbl">D+</div></div>
+      <div class="review-stat"><div class="review-stat-val">${load.duration_min_total != null ? Math.round(load.duration_min_total/60*10)/10 + 'h' : '—'}</div><div class="review-stat-lbl">durata</div></div>
+      <div class="review-stat"><div class="review-stat-val">${load.maf_below_pct_training != null ? Math.round(load.maf_below_pct_training) + '%' : '—'}</div><div class="review-stat-lbl">MAF&lt;</div></div>
+    </div>`;
+
+  const kpiHtml = kpi.objective ? `
+    <div class="review-kpi">
+      <div class="review-kpi-head">
+        <div class="review-kpi-lbl">KPI di fase</div>
+        <span class="review-kpi-pill ${kpi.status || ''}">${(kpi.status || '').replace(/_/g,' ')}</span>
+      </div>
+      <div class="review-kpi-obj">${kpi.objective}${kpi.value != null ? ' — <span style="color:var(--ac)">' + kpi.value + '</span>' : ''}</div>
+      ${kpi.note ? `<div class="review-kpi-note">${kpi.note}</div>` : ''}
+    </div>` : '';
+
+  const chips = [];
+  const adhLine = `${adh.done ?? 0}/${adh.planned ?? 0} sessioni${adh.long_run === 'done' ? ' · lungo ✓' : adh.long_run === 'missed' ? ' · lungo ✗' : ''}`;
+  chips.push(`<span class="review-chip"><strong>aderenza</strong> ${adhLine}</span>`);
+  if (c.recovery) chips.push(`<span class="review-chip"><strong>recupero</strong> ${c.recovery}</span>`);
+  if (c.doms) chips.push(`<span class="review-chip"><strong>DOMS</strong> ${c.doms}</span>`);
+  if (c.sleep_avg) chips.push(`<span class="review-chip"><strong>sonno</strong> ${c.sleep_avg}</span>`);
+  if (c.life_load) chips.push(`<span class="review-chip"><strong>vita</strong> ${c.life_load}</span>`);
+  if (c.niggles && c.niggles.length) chips.push(`<span class="review-chip warn"><strong>niggle</strong> ${c.niggles.join(', ')}</span>`);
+  concerns.forEach(co => {
+    const wk = co.weeks_open && co.weeks_open > 1 ? ` · ${co.weeks_open}ª sett.` : '';
+    chips.push(`<span class="review-chip warn"><strong>concern</strong> ${co.area}${wk}</span>`);
+  });
+  const chipsHtml = `<div class="review-chips">${chips.join('')}</div>`;
+
+  const breakHtml = brk ? `
+    <div class="review-break">
+      <div class="review-break-lbl">Se la gara fosse domani, si romperebbe per primo</div>
+      <div class="review-break-val">${brk.value}</div>
+      ${brk.reason ? `<div class="review-break-why">${brk.reason}</div>` : ''}
+    </div>` : '';
+
+  const synthHtml = r.synthesis ? `<div class="review-synth">${r.synthesis}</div>` : '';
+
+  const detailsHtml = (a.highlights || a.lowlights || (r.adaptive && r.adaptive.length)) ? `
+    <details class="review-details">
+      <summary>Dettagli</summary>
+      <div class="review-details-body">
+        ${a.highlights ? `<p><strong>Highlight</strong> · ${a.highlights}</p>` : ''}
+        ${a.lowlights ? `<p><strong>Da migliorare</strong> · ${a.lowlights}</p>` : ''}
+        ${(r.adaptive && r.adaptive.length) ? r.adaptive.map(p => `<p><strong>${p.q}</strong> · ${p.a}</p>`).join('') : ''}
+      </div>
+    </details>` : '';
+
+  return `
+    <section>
+      <h2 class="s-title s-title-review">Retrospettiva · ${r.date || ''}</h2>
+      <div class="card">
+        <div class="review-head">
+          <div class="review-title">Settimana chiusa</div>
+          <span class="review-verdict ${verdictCls}">${verdictCls.replace(/-/g,' ')}</span>
+        </div>
+        ${r.headline ? `<div class="review-headline">${r.headline}</div>` : ''}
+        ${statsHtml}
+        ${kpiHtml}
+        ${chipsHtml}
+        ${breakHtml}
+        ${synthHtml}
+        ${detailsHtml}
+      </div>
+    </section>`;
 }
 
 function recurringValueLine(item, week, weighins) {
@@ -368,6 +499,16 @@ function renderSession(s) {
       `).join('')}
     </div>` : '';
 
+  const actsHtml = (s.activities && s.activities.length) ? `
+    <div class="sess-acts">
+      ${s.activities.map(a => `
+        <a class="sess-act" href="./activity.html#${encodeURIComponent(a.file)}">
+          <span class="sess-act-icon">●</span>
+          <span class="sess-act-text">${a.title || a.file}</span>
+        </a>
+      `).join('')}
+    </div>` : '';
+
   return `
     <div class="sess">
       <div class="sess-head">
@@ -378,6 +519,7 @@ function renderSession(s) {
       </div>
       ${s.notes ? `<div class="sess-notes">${s.notes}</div>` : ''}
       ${routesHtml}
+      ${actsHtml}
       ${gdHtml}
       ${gearHtml}
       ${nutritionHtml}

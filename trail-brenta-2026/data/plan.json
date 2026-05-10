@@ -1,7 +1,7 @@
 {
   "_schema_version": "1.1",
   "_description": "Struttura del piano di allenamento: fasi, settimane, template forza/mobility, budget e regole.",
-  "last_updated": "2026-05-08",
+  "last_updated": "2026-05-10",
   "total_weeks": 18,
   "race_date": "2026-09-05",
   "weekly_budget": {
@@ -10,31 +10,6 @@
     "mobility_post_run_min": "5-10",
     "philosophy": "Architettura a budget settimanale, non a giorni fissi. Distribuisci le sessioni nei giorni che hai, rispettando le regole."
   },
-  "weekly_recurring": [
-    {
-      "kind": "check-in",
-      "label": "Pesa",
-      "day": "LUN",
-      "when": "mattina, a digiuno",
-      "notes": "Pesata settimanale per tracciare composizione corporea durante la preparazione. Stesso orario, stesso strumento, stesse condizioni (a digiuno, dopo bagno)."
-    },
-    {
-      "kind": "cross-training",
-      "label": "Padel",
-      "day": "MER",
-      "duration_min": 60,
-      "intensity": "bassa/non intensa",
-      "notes": "Lezione settimanale fissa. Lateralità + cambi di direzione caricano i quadricipiti. Nei giorni di DOMS sostituisce la corsa opzionale invece di sommarsi. Mai padel + lavoro running di qualità lo stesso giorno."
-    },
-    {
-      "kind": "cross-training",
-      "label": "Bici",
-      "day": "GIO",
-      "duration_min": 30,
-      "intensity": "Z1, no impatto",
-      "notes": "Spostamento lavorativo fisso. Conta come recupero attivo: aiuta drenaggio e circolazione, non interferisce con nessuna sessione adiacente."
-    }
-  ],
   "rules": [
     "Il lungo non si salta. Se devi tagliare la settimana, taglia prima le corse brevi.",
     "Mai due lavori duri di fila. Tra qualità e qualità, almeno 1 giorno di riposo o Z2 facile.",
@@ -164,6 +139,16 @@
               "url": "https://www.komoot.com/it-it/tour/2930672013",
               "name": "Giorno 2 — dom 3"
             }
+          ],
+          "activities": [
+            {
+              "file": "2026-05-02_3d858ad2-c7e9-42af-abc5-33456a9a8f7c",
+              "title": "Bivacco Pedrinelli — Giorno 1 (salita)"
+            },
+            {
+              "file": "2026-05-03_1c8e48f0-3fd3-44eb-85bb-25e51107fcf3",
+              "title": "Bivacco Pedrinelli — Giorno 2 (discesa)"
+            }
           ]
         },
         {
@@ -218,6 +203,12 @@
             {
               "url": "https://www.komoot.com/smarttour/26057234",
               "name": "Monte Linzone loop da Roncola (6 km, 490 m D+, ~2h38)"
+            }
+          ],
+          "activities": [
+            {
+              "file": "2026-05-09_416b7b46-44e0-492d-90c0-70196f5fa6af",
+              "title": "Baseline Linzone"
             }
           ],
           "grade_distribution": {
@@ -313,7 +304,81 @@
         }
       ],
       "strength": null,
-      "strength_note": "Saltata. Tre uscite montagna in 8 giorni sono il carico massimo possibile per il rientro. Sostituire con 5-10 min di mobility le sere dei giorni di hike e il giorno dopo."
+      "strength_note": "Saltata. Tre uscite montagna in 8 giorni sono il carico massimo possibile per il rientro. Sostituire con 5-10 min di mobility le sere dei giorni di hike e il giorno dopo.",
+      "recurring": [
+        {
+          "kind": "check-in",
+          "label": "Pesa",
+          "day": "LUN",
+          "when": "mattina, a digiuno",
+          "notes": "Pesata settimanale per tracciare composizione corporea durante la preparazione. Stesso orario, stesso strumento, stesse condizioni (a digiuno, dopo bagno)."
+        },
+        {
+          "kind": "cross-training",
+          "label": "Padel",
+          "day": "MER",
+          "duration_min": 60,
+          "intensity": "bassa/non intensa",
+          "notes": "Lezione settimanale fissa. Lateralità + cambi di direzione caricano i quadricipiti. Nei giorni di DOMS sostituisce la corsa opzionale invece di sommarsi. Mai padel + lavoro running di qualità lo stesso giorno."
+        },
+        {
+          "kind": "cross-training",
+          "label": "Bici",
+          "day": "GIO",
+          "duration_min": 30,
+          "intensity": "Z1, no impatto",
+          "notes": "Spostamento lavorativo fisso. Conta come recupero attivo: aiuta drenaggio e circolazione, non interferisce con nessuna sessione adiacente."
+        }
+      ],
+      "review": {
+        "date": "2026-05-10",
+        "verdict": "on-track",
+        "headline": "Carico montano assorbito senza distress, KPI di fase rinviato per terreno verticale.",
+        "synthesis": "Settimana di carico alto con 4 uscite e ~2010 m di D+, recupero neutro a chiusura, sonno 6-7h, vita a regime normale. Il fronte aperto è il motore aerobico: il KPI di fase (decoupling <8% piatto) non è stato misurato questa settimana — va riprogrammato un Z2 piatto da 60-80' entro fine Fase 1. Le scarpe La Sportiva hanno fatto male all'esterno dei pollicioni in discesa, da rivedere prima del prossimo trail (allacciatura o numero).",
+        "auto": {
+          "adherence": {
+            "planned": 3,
+            "done": 2,
+            "long_run": "done",
+            "swapped": [
+              { "planned": "easy MER/GIO opzionale", "replaced_with": "padel MER (recurring)", "reason": "DOMS post-hike" }
+            ]
+          },
+          "load": {
+            "trimp_training": 272,
+            "ascent_m_total": 2010,
+            "duration_min_total": 656,
+            "maf_below_pct_training": 36.3,
+            "weight_delta_kg": null,
+            "weight_kg_latest": 66.4
+          },
+          "phase_kpi": {
+            "objective": "decoupling Pa:Hr <8% su lungo piatto (60+ min)",
+            "status": "not_measurable_this_week",
+            "value": null,
+            "note": "Settimana montana: hike + test verticale Linzone. Il decoupling 22% di Linzone è artefatto della camminata iniziale (38' nel primo muro), non comparabile al baseline piatto del 12.6% del 1 maggio. Riprogrammare un Z2 piatto entro fine Fase 1."
+          },
+          "open_concerns": [
+            { "area": "vestibilità scarpa in discesa", "weeks_open": 1, "severity_max": 3, "status": "open" },
+            { "area": "tolleranza alla salita corsa", "weeks_open": 1, "severity_max": 3, "status": "open" },
+            { "area": "idratazione e nutrizione", "weeks_open": 1, "severity_max": 2, "status": "open" }
+          ],
+          "highlights": "662 m di D+ assorbiti su Linzone senza distress, FC media 151 nonostante 88% del tempo in Z4-Z5; discesa fluida e respirazione tranquilla.",
+          "lowlights": "Salita 100% camminata: corretto su pendenze >10%, ma serve costruire tolleranza a corsa lenta sui tratti 5-8%.",
+          "race_day_break_derived": {
+            "value": "motore aerobico",
+            "reason": "Phase 1 KPI ancora non misurato; baseline piatto 1 mag mostrava decoupling 12.6% con 57% del tempo in Z4-Z5; rientro da 13 mesi di stop."
+          }
+        },
+        "checkin": {
+          "recovery": "neutro",
+          "doms": "tipici (3-4 gg)",
+          "sleep_avg": "6-7h",
+          "niggles": [],
+          "life_load": "normale"
+        },
+        "adaptive": []
+      }
     }
   ],
   "strength_template": {
