@@ -45,6 +45,8 @@ section{margin:2rem 0}
 .sess-type-test{background:rgba(210,168,255,.15);color:var(--pd);border:1px solid var(--pd)}
 .sess-type-hike{background:rgba(139,148,158,.12);color:var(--tx2);border:1px solid var(--tx2)}
 .sess-type-strength{background:rgba(248,81,73,.15);color:var(--rd);border:1px solid var(--rd)}
+.sess-type-check-in{background:rgba(210,168,255,.15);color:var(--pd);border:1px solid var(--pd)}
+.sess-type-cross-training{background:rgba(63,185,80,.15);color:var(--ac2);border:1px solid var(--ac2)}
 .sess-dur{font-family:'Space Mono',monospace;font-size:.85rem;font-weight:700;color:var(--tx)}
 .sess-meta{font-family:'Space Mono',monospace;font-size:.7rem;color:var(--tx2)}
 .sess-when{font-family:'Space Mono',monospace;font-size:.6rem;font-weight:700;color:var(--tx);background:var(--sf2);border:1px solid var(--bd);border-radius:4px;padding:.18rem .45rem;text-transform:uppercase;letter-spacing:.8px;white-space:nowrap;margin-left:auto}
@@ -123,16 +125,8 @@ section{margin:2rem 0}
 @keyframes spin{to{transform:rotate(360deg)}}
 .error{padding:1.5rem;color:var(--rd);font-size:.85rem;background:rgba(248,81,73,.05);border:1px solid var(--rd);border-radius:10px;text-align:center}
 
-.recurring-item{padding:.5rem .65rem;margin-top:.85rem;background:var(--sf2);border:1px solid var(--bd);border-radius:6px}
-.recurring-head{display:flex;align-items:center;gap:.45rem;flex-wrap:wrap;margin-bottom:.18rem}
-.recurring-label{font-family:'Space Mono',monospace;font-size:.78rem;font-weight:700;color:var(--tx)}
-.recurring-kind{font-family:'Space Mono',monospace;font-size:.55rem;text-transform:uppercase;letter-spacing:.6px;font-weight:700;padding:.1rem .35rem;border-radius:3px;border:1px solid var(--bd);background:rgba(139,148,158,.1);color:var(--tx2)}
-.recurring-kind.check-in{background:rgba(210,168,255,.1);color:var(--pd);border-color:var(--pd)}
-.recurring-kind.cross-training{background:rgba(63,185,80,.1);color:var(--ac2);border-color:var(--ac2)}
-.recurring-meta{font-family:'Space Mono',monospace;font-size:.65rem;color:var(--tx2)}
-.recurring-notes{font-size:.75rem;color:var(--tx2);line-height:1.45;margin-top:.2rem}
-.recurring-value{font-family:'Space Mono',monospace;font-size:.75rem;color:var(--ac);margin-top:.25rem;font-weight:500}
-.recurring-value.muted{color:var(--tx2);font-weight:400}
+.sess-value{font-family:'Space Mono',monospace;font-size:.78rem;color:var(--ac);margin-top:.15rem;font-weight:500}
+.sess-value.muted{color:var(--tx2);font-weight:400}
 
 .review-head{display:flex;justify-content:space-between;align-items:flex-start;gap:.7rem;flex-wrap:wrap;margin-bottom:.7rem}
 .review-title{font-family:'Space Mono',monospace;font-size:.65rem;color:var(--tx2);text-transform:uppercase;letter-spacing:1px;font-weight:700}
@@ -319,7 +313,7 @@ function renderRoute() {
   window.scrollTo(0, 0);
 }
 
-const TYPE_LABELS = { easy:'facile', long:'lungo', test:'test', hike:'hike', strength:'forza' };
+const TYPE_LABELS = { easy:'facile', long:'lungo', test:'test', hike:'hike', strength:'forza', 'check-in':'check-in', 'cross-training':'cross-training' };
 const TYPE_DESCRIPTIONS = {
   easy: 'Corsa breve a bassa intensità (Z1-Z2 bassa), ritmo conversazionale. Stimolo aerobico minimo, recupero attivo.',
   long: 'Corsa lunga aerobica in Z1-Z2. Costruisce capacità aerobica — di solito il workout chiave della settimana.',
@@ -327,24 +321,6 @@ const TYPE_DESCRIPTIONS = {
   hike: 'Cammino in montagna in Z1-Z2. Costruisce volume e gambe da salita senza stress da intensità di corsa.',
   strength: 'Sessione di forza full-body. Vedi template completo nella pagina piano.'
 };
-
-function renderRecurringSession(s, week) {
-  const meta = [];
-  if (s.duration_min) meta.push(`${s.duration_min} min`);
-  if (s.intensity) meta.push(s.intensity);
-  const valueLine = recurringValueLine(s, week, WEIGHINS);
-  return `
-    <div class="recurring-item">
-      <div class="recurring-head">
-        <span class="recurring-label">${s.label}</span>
-        <span class="recurring-kind ${s.type}">${s.type}</span>
-        ${meta.length ? `<span class="recurring-meta">· ${meta.join(' · ')}</span>` : ''}
-        ${s.when ? `<span class="sess-when">${s.when}</span>` : ''}
-      </div>
-      ${valueLine}
-      ${s.notes ? `<div class="recurring-notes">${s.notes}</div>` : ''}
-    </div>`;
-}
 
 function renderReview(r) {
   if (!r) return '';
@@ -435,11 +411,11 @@ function recurringValueLine(item, week, weighins) {
     const parts = [`${hit.weight_kg} kg`];
     if (hit.body_fat_pct != null) parts.push(`${hit.body_fat_pct}% BF`);
     if (hit.bmi != null) parts.push(`BMI ${hit.bmi}`);
-    return `<div class="recurring-value">${parts.join(' · ')}</div>`;
+    return `<div class="sess-value">${parts.join(' · ')}</div>`;
   }
   const today = todayISO();
-  if (today > week.end_date) return `<div class="recurring-value muted">— saltata</div>`;
-  if (today >= week.start_date) return `<div class="recurring-value muted">in attesa</div>`;
+  if (today > week.end_date) return `<div class="sess-value muted">— saltata</div>`;
+  if (today >= week.start_date) return `<div class="sess-value muted">in attesa</div>`;
   return '';
 }
 
@@ -449,16 +425,14 @@ function todayISO() {
 }
 
 function renderSession(s, week) {
-  if (s.type === 'check-in' || s.type === 'cross-training') {
-    return renderRecurringSession(s, week);
-  }
-  const typeLabel = TYPE_LABELS[s.type] || s.type;
+  const typeLabel = s.label || TYPE_LABELS[s.type] || s.type;
   const typeDesc = TYPE_DESCRIPTIONS[s.type] || '';
   const meta = [];
   if (s.intensity) meta.push(s.intensity);
   if (s.fc_max_bpm) meta.push(`FC max ${s.fc_max_bpm}`);
   if (s.vertical_m) meta.push(`+${s.vertical_m} m`);
   else if (s.vertical_m_max) meta.push(`+${s.vertical_m_max} m max`);
+  const valueLineHtml = recurringValueLine(s, week, WEIGHINS);
 
   const gearHtml = (s.gear_checklist && s.gear_checklist.length) ? `
     <div class="gear">
@@ -519,10 +493,11 @@ function renderSession(s, week) {
     <div class="sess">
       <div class="sess-head">
         <span class="sess-type sess-type-${s.type}"${typeDesc ? ` data-tooltip="${typeDesc}" tabindex="0" aria-label="${typeLabel}: ${typeDesc}"` : ''}>${typeLabel}</span>
-        <span class="sess-dur">${s.duration_min} min</span>
-        <span class="sess-meta">· ${meta.join(' · ')}</span>
+        ${s.duration_min ? `<span class="sess-dur">${s.duration_min} min</span>` : ''}
+        ${meta.length ? `<span class="sess-meta">${s.duration_min ? '· ' : ''}${meta.join(' · ')}</span>` : ''}
         ${s.when ? `<span class="sess-when">${s.when}</span>` : ''}
       </div>
+      ${valueLineHtml}
       ${s.notes ? `<div class="sess-notes">${s.notes}</div>` : ''}
       ${routesHtml}
       ${actsHtml}
