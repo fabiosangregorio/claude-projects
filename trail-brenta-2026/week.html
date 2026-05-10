@@ -199,6 +199,21 @@ footer a{color:var(--ac);text-decoration:none}
 
 <script>
 const BASE = './data/';
+
+async function loadWeeks() {
+  const m = await fetch(BASE + 'weeks/index.json').then(r => {
+    if (!r.ok) throw new Error('weeks/index.json: ' + r.status);
+    return r.json();
+  });
+  const files = m.weeks || [];
+  return Promise.all(files.map(f =>
+    fetch(BASE + 'weeks/' + f).then(r => {
+      if (!r.ok) throw new Error('weeks/' + f + ': ' + r.status);
+      return r.json();
+    })
+  ));
+}
+
 let PLAN = null;
 let PROFILE = null;
 let RACE = null;
@@ -207,22 +222,15 @@ let WEIGHINS = null;
 async function loadAll() {
   const app = document.getElementById('app');
   try {
-    let WEEKS_DOC;
-    [PLAN, PROFILE, RACE, WEEKS_DOC, WEIGHINS] = await Promise.all([
+    let weeks;
+    [PLAN, PROFILE, RACE, weeks, WEIGHINS] = await Promise.all([
       fetch(BASE + 'plan.json').then(r => { if (!r.ok) throw new Error('plan.json: ' + r.status); return r.json(); }),
       fetch(BASE + 'profile.json').then(r => { if (!r.ok) throw new Error('profile.json: ' + r.status); return r.json(); }),
       fetch(BASE + 'race.json').then(r => { if (!r.ok) throw new Error('race.json: ' + r.status); return r.json(); }),
-      (async () => {
-        const m = await fetch(BASE + 'weeks/index.json').then(r => { if (!r.ok) throw new Error('weeks/index.json: ' + r.status); return r.json(); });
-        const items = await Promise.all((m.weeks || []).map(f =>
-          fetch(BASE + 'weeks/' + f).then(r => { if (!r.ok) throw new Error('weeks/' + f + ': ' + r.status); return r.json(); })
-        ));
-        items.sort((a, b) => (a.number || 0) - (b.number || 0));
-        return { weeks: items, last_updated: m.last_updated };
-      })(),
+      loadWeeks(),
       fetch(BASE + 'weighins.json').then(r => r.ok ? r.json() : null).catch(() => null)
     ]);
-    PLAN.weeks = WEEKS_DOC.weeks || [];
+    PLAN.weeks = weeks;
     renderRoute();
   } catch (err) {
     app.innerHTML = `<div class="error">Errore caricamento dati: ${err.message}</div>`;
