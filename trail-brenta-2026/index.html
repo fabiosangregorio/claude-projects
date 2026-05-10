@@ -208,14 +208,16 @@ const BASE = './data/';
 async function loadAll() {
   const app = document.getElementById('app');
   try {
-    const [profile, race, plan, todo, activitiesManifest, weighins] = await Promise.all([
+    const [profile, race, plan, weeksDoc, todo, activitiesManifest, weighins] = await Promise.all([
       fetch(BASE + 'profile.json').then(r => { if (!r.ok) throw new Error('profile.json: ' + r.status); return r.json(); }),
       fetch(BASE + 'race.json').then(r => { if (!r.ok) throw new Error('race.json: ' + r.status); return r.json(); }),
       fetch(BASE + 'plan.json').then(r => { if (!r.ok) throw new Error('plan.json: ' + r.status); return r.json(); }),
+      fetch(BASE + 'weeks.json').then(r => { if (!r.ok) throw new Error('weeks.json: ' + r.status); return r.json(); }),
       fetch(BASE + 'todo.json').then(r => { if (!r.ok) throw new Error('todo.json: ' + r.status); return r.json(); }),
       fetch(BASE + 'activities/index.json').then(r => r.ok ? r.json() : { activities: [] }).catch(() => ({ activities: [] })),
       fetch(BASE + 'weighins.json').then(r => r.ok ? r.json() : null).catch(() => null)
     ]);
+    plan.weeks = weeksDoc.weeks || [];
     render(app, profile, race, plan, todo, activitiesManifest, weighins);
     document.getElementById('lastUpdated').textContent = 'piano aggiornato ' + plan.last_updated;
   } catch (err) {
