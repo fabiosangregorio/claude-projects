@@ -23,7 +23,8 @@ trail-brenta-2026/
 └── data/
     ├── profile.json        ← Atleta + zone FC calibrate.
     ├── race.json           ← Obiettivo gara (evento, percorso, profilo).
-    ├── plan.json           ← Struttura del piano (fasi, settimane, milestone, template).
+    ├── plan.json           ← Struttura del piano (fasi, milestone, template, regole).
+    ├── weeks.json          ← Settimane del piano (sessioni ordinate cronologicamente, strength, review).
     ├── todo.json           ← Task list di preparazione.
     ├── weighins.json       ← Pesate settimanali (LUN mattina) da scala 1byone.
     └── activities/
@@ -60,11 +61,21 @@ Chiavi top-level: `event`, `edition`, `date`, `location`, `distance_km`, `elevat
 
 ### `data/plan.json`
 
-**Struttura del piano** — il blueprint prescrittivo. Si aggiorna quando si ridisegna il piano (fasi, settimane, milestone, template forza/mobility).
+**Struttura del piano** — il blueprint prescrittivo (fasi, regole, budget settimanale, template forza/mobility). Si aggiorna quando si ridisegna l'architettura del piano.
 
 **Sempre aggiornare il campo `last_updated`** quando si modifica.
 
-Chiavi top-level: `total_weeks`, `weekly_budget`, `rules`, `phases`, `weeks`, `strength_template`, `mobility_template`. La data gara vive in `race.json.date` (canonica), non duplicare qui.
+Chiavi top-level: `total_weeks`, `weekly_budget`, `rules`, `phases`, `strength_template`, `mobility_template`. Le settimane vivono in `weeks.json` (vedi sotto). La data gara vive in `race.json.date` (canonica), non duplicare qui.
+
+### `data/weeks.json`
+
+**Settimane del piano** — calendario delle sessioni, strength e retrospettive. Estratto da `plan.json` a partire dalla v1.4 per mantenere `plan.json` snello e indipendente dal log settimanale.
+
+**Sempre aggiornare il campo `last_updated`** quando si modifica.
+
+Chiavi top-level: `weeks` (array). Ogni elemento è una settimana con `number`, `phase_id`, `start_date`, `end_date`, `label`, `narrative`, `sessions[]`, `strength?`, `review?`.
+
+**Ordinamento sessioni:** all'interno di ogni settimana, `sessions[]` è ordinato cronologicamente per data dedotta dal campo `when` (es. `"SAB 2 + DOM 3"` → SAB 2; `"MER 6 o GIO 7"` → MER 6; `"MER"` senza numero → calcolato dal `start_date` della settimana). I consumatori (`week.html`, ecc.) renderizzano nell'ordine dell'array — quindi mantenere l'ordine cronologico in fase di edit.
 
 **`weeks[].sessions[].activities`** — array opzionale di attività registrate che hanno eseguito quella sessione (consuntivo). Item: `{file, title}` dove `file` è il filename in `data/activities/` senza `.json`. Renderizzato da `week.html` come badge verdi cliccabili sotto il blocco `routes`, link diretto a `activity.html#<file>`. Una sessione può avere più attività (es. hike multi-giorno).
 
@@ -144,7 +155,7 @@ Es. log sensazioni, lista spesa attrezzatura dettagliata.
 
 - ❌ Mai mettere dati nell'HTML. Se vedi un valore hardcoded nella pagina che dovrebbe vivere nei JSON, spostalo.
 - ❌ Mai modificare l'HTML per aggiornare i dati: modifica il JSON.
-- ❌ Mai duplicare dati tra `profile.json`, `race.json` e `plan.json`. Profilo = chi sei (anagrafica + zone FC); race = dove vai (gara + percorso); plan = come ti alleni (fasi/settimane/template).
+- ❌ Mai duplicare dati tra `profile.json`, `race.json`, `plan.json` e `weeks.json`. Profilo = chi sei (anagrafica + zone FC); race = dove vai (gara + percorso); plan = come ti alleni (fasi/template/regole); weeks = il calendario (settimane, sessioni, review).
 - ❌ Mai aggiungere file/sezioni "appena utili": il principio del progetto è preferire rimuovere/modificare invece di aggiungere. Mantenere i file leggeri.
 
 ### Stile codice
@@ -170,9 +181,9 @@ La pagina si aggiorna automaticamente al prossimo refresh (i JSON vengono fetcha
 
 ## Note per Claude (sessioni future)
 
-- **Prima di modificare:** leggi sempre lo stato corrente di `profile.json`, `race.json`, `plan.json`, `todo.json` e `data/activities/index.json`.
+- **Prima di modificare:** leggi sempre lo stato corrente di `profile.json`, `race.json`, `plan.json`, `weeks.json`, `todo.json` e `data/activities/index.json`.
 - **Patch chirurgiche:** modifica solo i campi rilevanti, non riscrivere l'intero JSON.
-- **`last_updated`:** aggiornalo nel file modificato (`plan.json`, `profile.json` o `todo.json`).
+- **`last_updated`:** aggiornalo nel file modificato (`plan.json`, `weeks.json`, `profile.json` o `todo.json`).
 - **Validazione:** dopo ogni push, verifica che la pagina renderizzi senza errori (apri la URL live).
 - **Domande chirurgiche:** se Fabio dice "ho fatto un lungo", chiedi solo i dati mancanti (durata, dislivello, sensazioni, passo medio). Non rifare l'intake.
 - **Calibrazione conservativa:** se i numeri vanno meglio del previsto, alza i volumi al massimo del +10%. Mai di più.
