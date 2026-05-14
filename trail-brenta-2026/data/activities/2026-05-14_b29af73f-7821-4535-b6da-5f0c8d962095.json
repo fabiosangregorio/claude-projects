@@ -1,0 +1,178 @@
+{
+  "schema_version": 1,
+  "id": "b29af73f-7821-4535-b6da-5f0c8d962095",
+  "start": "2026-05-14T09:01:02.238Z",
+  "ai_analysis": {
+    "model": "claude-opus-4-7",
+    "generated_at": "2026-05-14T15:30:00Z",
+    "prompt_version": 1,
+    "classification": {
+      "workout_type": "easy",
+      "primary_benefit": "base",
+      "training_effect_aerobic": 2.4,
+      "training_effect_anaerobic": 1.0
+    },
+    "execution": {
+      "intent_inferred": "corsa facile MAF a frequenza cardiaca (FC) bassa",
+      "execution_quality": 4,
+      "primary_failure_mode": "none",
+      "failure_confidence": 0.6
+    },
+    "trail_specificity": {
+      "score": 1,
+      "vertical_load_pct_of_race": 0,
+      "notes": "Pianura padana, 21 m dislivello positivo (D+) su 4.7 km. Zero specificità rispetto alla XTERRA Brenta 21K."
+    },
+    "headline": "Corsetta facile 4.7K in piano corsa interamente sotto MAF (152): esecuzione disciplinata da Fase 1, ma deriva cardiaca al 10% indica che la base aerobica è ancora sottile.",
+    "strengths": [
+      "Disciplina MAF perfetta: 100% del tempo con frequenza cardiaca (FC) sotto il tetto di 152 bpm — esattamente l'intent della Fase 1.",
+      "Primo chilometro molto pulito (6:38/km a 133 bpm, efficienza meccanico-cardiaca EF 1.185): è la base da cui ricostruire.",
+      "Carico aerobico onesto (TRIMP 102) per un mid-week breve, utile come mattoncino di volume."
+    ],
+    "concerns": [
+      { "area": "deriva cardiaca (decoupling Pa:Hr)", "severity": 3, "note": "10.1% contro un target <5%: il passo scende da 6:38 a 7:46/km mentre la FC sale da 133 a 146 bpm." },
+      { "area": "efficienza aerobica a parità di FC", "severity": 2, "note": "A 142 bpm medi (Z2 basso) si tiene solo 7:27/km — c'è ampio margine di guadagno aerobico." },
+      { "area": "freschezza residua", "severity": 2, "note": "Possibile fatica del Linzone (8.9 km, 662 m dislivello positivo) di 5 giorni fa: spiegherebbe la deriva precoce." }
+    ],
+    "narrative": "Uscita corta del giovedì mattina: 4.7 km su asfalto pianeggiante (Treviglio), 35 minuti. L'intent è una facile in zona MAF e l'esecuzione conferma il piano: la frequenza cardiaca (FC) è rimasta sempre sotto il tetto di 152 bpm, con massima osservata 151. Nessuna pausa camminata: hai corso tutto il tempo, anche quando il passo è sceso è rimasto da corsa lenta (sotto 8:30/km).\n\nIl segnale interessante è la dinamica passo–FC: per tenere la FC sotto MAF il passo è sceso da 6:38/km iniziale a 7:46/km al quarto chilometro, con una deriva cardiaca (decoupling Pa:Hr) del 10% — il doppio del target <5%. Significa che la base aerobica è ancora sottile e l'efficienza cala già dopo 15–20 minuti continuativi. Pattern coerente con un atleta a inizio piano, plausibilmente accentuato dalla fatica residua del Linzone di 5 giorni fa."
+  },
+  "totals": {
+    "distance_km": 4.69,
+    "duration_sec": 2094,
+    "avg_pace_min_per_km": 7.436,
+    "gap_min_per_km": 7.208,
+    "ef": 0.974,
+    "avg_hr": 142,
+    "max_hr_observed": 151,
+    "hrmax_est_used": 156,
+    "ascent_m": 21,
+    "elev_min_m": 124,
+    "elev_max_m": 135,
+    "steps": 4500,
+    "avg_cadence_spm": 129,
+    "avg_stride_cm": 104
+  },
+  "derived": {
+    "trimp": 102,
+    "polarization_3z": {
+      "lit_pct": 4.9,
+      "mit_pct": 7,
+      "hit_pct": 88.1
+    },
+    "maf": {
+      "ceiling_bpm": 152,
+      "time_below_pct": 100
+    },
+    "vertical": {
+      "vam_m_per_h": 36,
+      "ascent_m_per_h": 36,
+      "descent_m_per_h": 31
+    },
+    "grade_distribution": {
+      "flat_lt_2": 78.4,
+      "rolling_2_5": 9.1,
+      "uphill_5_10": 1,
+      "steep_gt_10": 0.4,
+      "down_2_5": 10.2,
+      "down_5_10": 1,
+      "down_gt_10": 0
+    },
+    "climb_efficiency": {
+      "ef_uphill": 1.369,
+      "uphill_time_sec": 28
+    },
+    "race_match": null
+  },
+  "decoupling": {
+    "first_half": {
+      "gap_min_per_km": 7.885,
+      "hr": 139
+    },
+    "second_half": {
+      "gap_min_per_km": 8.404,
+      "hr": 145
+    },
+    "pct": 10.12
+  },
+  "pace_variability": {
+    "cv_overall_pct": 20.76,
+    "cv_running_only_pct": null
+  },
+  "split_balance": {
+    "first_half_sec": 827,
+    "second_half_sec": 921,
+    "diff_pct": 11.35
+  },
+  "hr_zones": [
+    {
+      "zone": 1,
+      "time_sec": 20
+    },
+    {
+      "zone": 2,
+      "time_sec": 5
+    },
+    {
+      "zone": 3,
+      "time_sec": 62
+    },
+    {
+      "zone": 4,
+      "time_sec": 273
+    },
+    {
+      "zone": 5,
+      "time_sec": 1736
+    }
+  ],
+  "walks_summary": {
+    "count": 0,
+    "total_walk_sec": 0,
+    "walk_pct": 0
+  },
+  "walk_breaks": [],
+  "splits": [
+    {
+      "km": 1,
+      "duration_sec": 398,
+      "pace_min_per_km": 6.633,
+      "gap_min_per_km": 6.366,
+      "avg_hr": 133,
+      "pct_hrmax": 85,
+      "ef": 1.185
+    },
+    {
+      "km": 2,
+      "duration_sec": 429.1,
+      "pace_min_per_km": 7.151,
+      "gap_min_per_km": 7.063,
+      "avg_hr": 143,
+      "pct_hrmax": 91.8,
+      "ef": 0.989
+    },
+    {
+      "km": 3,
+      "duration_sec": 454.4,
+      "pace_min_per_km": 7.573,
+      "gap_min_per_km": 7.729,
+      "avg_hr": 146,
+      "pct_hrmax": 93.4,
+      "ef": 0.888
+    },
+    {
+      "km": 4,
+      "duration_sec": 466.5,
+      "pace_min_per_km": 7.775,
+      "gap_min_per_km": 7.88,
+      "avg_hr": 145,
+      "pct_hrmax": 92.8,
+      "ef": 0.877
+    }
+  ],
+  "remainder": {
+    "km": 0.69,
+    "duration_sec": 345.8,
+    "pace_min_per_km": 8.319,
+    "gap_min_per_km": 8.396
+  }
+}
