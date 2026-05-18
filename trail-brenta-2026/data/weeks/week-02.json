@@ -19,7 +19,13 @@
       "intensity": "Z1-Z2 bassa",
       "fc_max_bpm": 140,
       "when": "MAR 12",
-      "notes": "Treviglio piatto, scarpe Mizuno Ultima 17. FC<140 stretta — è un easy vero, non un fartlek mascherato. Stesso giorno: Forza A dal template (25 min), in finestra separata (mattina/sera) o subito dopo l'easy. Il template autorizza 'giornata con corsa breve facile' come timing per la forza."
+      "notes": "Treviglio piatto, scarpe Mizuno Ultima 17. FC<140 stretta — è un easy vero, non un fartlek mascherato. Stesso giorno: Forza A dal template (25 min), in finestra separata (mattina/sera) o subito dopo l'easy. Il template autorizza 'giornata con corsa breve facile' come timing per la forza.",
+      "activities": [
+        {
+          "file": "2026-05-14_b29af73f-7821-4535-b6da-5f0c8d962095",
+          "title": "Easy Treviglio GIO 14 (shift di +2 gg)"
+        }
+      ]
     },
     {
       "type": "cross-training",
@@ -56,9 +62,105 @@
       "routes": [
         {
           "url": "https://www.komoot.com/it-IT/tour/2947521754",
-          "name": "Loop Castagnola — Monte Grumo (7.63 km, 430 m D+)"
+          "name": "Loop Castagnola — Monte Grumo (7.63 km, 430 m D+) — pianificato"
+        },
+        {
+          "url": "https://www.komoot.com/tour/2963295725",
+          "name": "Trail run al Laghello (12.5 km, 610 m D+) — eseguito"
+        }
+      ],
+      "activities": [
+        {
+          "file": "2026-05-18_5d243887-9f08-4d15-8aa7-94732fc5a029",
+          "title": "Trail run al Laghello — eseguito LUN 18 (vacanza)"
         }
       ]
     }
-  ]
+  ],
+  "review": {
+    "date": "2026-05-17",
+    "verdict": "recalibrate",
+    "headline": "Lungo trail oversize portato a casa, ma il motore aerobico resta il fronte aperto: secondo segnale consecutivo.",
+    "synthesis": "Settimana di carico medio con 2 uscite e 710 m di D+, lungo che sfora il budget Fase 1 rilassata (130'/689 m vs 90'/500 m). Motore aerobico in cima per la seconda settimana — in settimana 3 va inserito un Z2 piatto 60-80' per misurare il KPI; in parallelo valutare l'asimmetria gamba sinistra emersa al checkin.",
+    "auto": {
+      "adherence": {
+        "planned": 3,
+        "done": 2,
+        "long_run": "done",
+        "swapped": [
+          {
+            "planned": "easy MAR 12",
+            "replaced_with": "easy GIO 14",
+            "reason": "shift di 2 giorni"
+          },
+          {
+            "planned": "easy VEN 15",
+            "replaced_with": "saltata",
+            "reason": "vita/lavoro (vacanza)"
+          },
+          {
+            "planned": "long DOM 17 Castagnola 7.6 km/430 m",
+            "replaced_with": "long LUN 18 Trail al Laghello 12.8 km/689 m",
+            "reason": "shift per vacanza, route più lunga e verticale"
+          }
+        ]
+      },
+      "load": {
+        "trimp_training": 376,
+        "ascent_m_total": 710,
+        "duration_min_total": 165,
+        "maf_below_pct_training": 61,
+        "weight_delta_kg": 0.7,
+        "weight_kg_latest": 67.1
+      },
+      "phase_kpi": {
+        "objective": "decoupling Pa:Hr <8% su lungo piatto (60+ min)",
+        "status": "not_measurable_this_week",
+        "note": "Easy GIO troppo corta (35'), lungo LUN troppo verticale (689 m D+). Il decoupling 13.5% del lungo è gonfiato da durata + terreno, non comparabile al baseline piatto 12.6% del 1/5. Programmare Z2 piatto 60-80' in settimana 3."
+      },
+      "open_concerns": [
+        {
+          "area": "deriva cardiaca (decoupling Pa:Hr)",
+          "weeks_open": 1,
+          "severity_max": 4
+        },
+        {
+          "area": "vestibilità scarpa in discesa (alluci)",
+          "weeks_open": 2,
+          "severity_max": 3
+        },
+        {
+          "area": "asimmetria carico gamba sinistra",
+          "weeks_open": 1,
+          "severity_max": 3
+        },
+        {
+          "area": "idratazione/nutrizione su long",
+          "weeks_open": 2,
+          "severity_max": 2
+        }
+      ],
+      "highlights": "Lungo 130' / 689 m D+ chiuso intero, EF uphill 1.45 (buona efficienza in salita >10%) e seconda metà 6.6% più rapida in tempo.",
+      "lowlights": "Decoupling 13.5% (target <5%) e 50.6% sotto MAF sul long — motore aerobico ancora corto sulla durata, pausa da 10' al km 8 segnala il punto di crisi.",
+      "race_day_break_derived": {
+        "value": "motore aerobico",
+        "reason": "Decoupling 13.5% su lungo 130' verticali; baseline piatto 1 mag a 12.6%; disciplina MAF 50.6% sul long; pattern carryover dal Linzone, secondo segnale consecutivo."
+      }
+    },
+    "checkin": {
+      "sleep_avg": "6-7h",
+      "niggles": [
+        "dita piedi (alluci La Sportiva, carryover)",
+        "asimmetria carico gamba sinistra (cronica)"
+      ],
+      "life_load": "pesante"
+    },
+    "adaptive": [
+      {
+        "trigger": "swap_unexplained",
+        "q": "Easy VEN 15 saltata. Motivo:",
+        "a": "vita/lavoro (incl. vacanza/viaggio)"
+      }
+    ]
+  }
 }
