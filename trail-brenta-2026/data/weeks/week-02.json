@@ -81,7 +81,7 @@
     "date": "2026-05-17",
     "verdict": "recalibrate",
     "headline": "Lungo trail oversize portato a casa, ma il motore aerobico resta il fronte aperto: secondo segnale consecutivo.",
-    "synthesis": "Settimana di carico medio con 2 uscite e 710 m di D+, lungo che sfora il budget Fase 1 rilassata (130'/689 m vs 90'/500 m). Motore aerobico in cima per la seconda settimana — in settimana 3 va inserito un Z2 piatto 60-80' per misurare il KPI; in parallelo valutare l'asimmetria gamba sinistra emersa al checkin.",
+    "synthesis": "Settimana compressa dal carico lavoro: 2 corse su 3 + lungo done, ma padel, bici e easy VEN tutti saltati. Motore aerobico in cima per la seconda settimana di fila — in settimana 3 inserire un Z2 piatto 60-80' per misurare il KPI; in parallelo valutare l'asimmetria gamba sinistra emersa al checkin.",
     "auto": {
       "adherence": {
         "planned": 3,
@@ -92,6 +92,16 @@
             "planned": "easy MAR 12",
             "replaced_with": "easy GIO 14",
             "reason": "shift di 2 giorni"
+          },
+          {
+            "planned": "padel MER 90'",
+            "replaced_with": "saltato",
+            "reason": "vita/lavoro"
+          },
+          {
+            "planned": "bici GIO commute 30'",
+            "replaced_with": "saltato",
+            "reason": "vita/lavoro"
           },
           {
             "planned": "easy VEN 15",
