@@ -23,6 +23,7 @@ section{margin:2rem 0}
 .s-title{font-family:'Space Mono',monospace;font-size:.75rem;color:var(--tx2);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:1rem;display:flex;align-items:center;gap:.5rem}
 .s-title::before{content:'';display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--ac2);box-shadow:0 0 0 0 rgba(63,185,80,.5);animation:pulse 2s infinite}
 .s-title.s-title-review::before{background:var(--pd);box-shadow:none;animation:none}
+.s-title.s-title-log::before{background:var(--ac);box-shadow:none;animation:none}
 @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(63,185,80,.5)}70%{box-shadow:0 0 0 6px rgba(63,185,80,0)}100%{box-shadow:0 0 0 0 rgba(63,185,80,0)}}
 
 .card{background:var(--sf);border:1px solid var(--bd);border-radius:10px;padding:1rem 1.1rem;margin-bottom:.7rem}
@@ -60,6 +61,14 @@ section{margin:2rem 0}
 .sess-act{display:inline-flex;align-items:center;gap:.4rem;padding:.45rem .7rem;background:rgba(63,185,80,.06);border:1px solid rgba(63,185,80,.35);border-radius:6px;text-decoration:none;color:var(--ac2);font-family:'Space Mono',monospace;font-size:.75rem;font-weight:700;transition:border-color .2s,background .2s}
 .sess-act:hover{border-color:var(--ac2);background:rgba(63,185,80,.12)}
 .sess-act-icon{font-size:.85rem}
+
+.log-entry{padding:.75rem 0;border-bottom:1px solid var(--bd)}
+.log-entry:first-of-type{padding-top:0}
+.log-entry:last-of-type{border-bottom:none;padding-bottom:0}
+.log-entry-head{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap}
+.log-ref{font-family:'Space Mono',monospace;font-size:.6rem;color:var(--tx2);text-transform:uppercase;letter-spacing:.6px;padding:.18rem .45rem;border:1px solid var(--bd);border-radius:4px;background:var(--sf2)}
+.log-ref.unplanned{color:var(--wn);border-color:var(--wn);background:rgba(240,136,62,.08)}
+.log-note{font-size:.78rem;color:var(--tx2);line-height:1.5;margin-top:.4rem;font-style:italic;padding:.2rem .6rem;border-left:2px solid var(--bd)}
 
 .nav-card{display:flex;align-items:center;justify-content:space-between;background:var(--sf);border:1px solid var(--bd);border-radius:10px;padding:.9rem 1.1rem;text-decoration:none;color:inherit;transition:border-color .2s;margin-bottom:.7rem}
 .nav-card:hover{border-color:var(--ac)}
@@ -200,7 +209,8 @@ function renderRoute() {
 
   document.title = `DBT 21K — Settimana ${week.number}`;
 
-  const sessHtml = (week.sessions || []).map(s => renderSession(s, week)).join('');
+  const sessHtml = (week.plan || []).map(s => renderSession(s, week)).join('');
+  const logSectionHtml = renderLogSection(week);
   const strengthHtml = (week.strength && week.strength.skipped)
     ? `<div class="sess">
          <div class="sess-head">
@@ -243,6 +253,7 @@ function renderRoute() {
 
   app.innerHTML = `
     ${renderReview(week.review)}
+    ${logSectionHtml}
     <section${isCurrent ? ' class="live"' : ''}>
       <h2 class="s-title">${isCurrent ? 'Settimana corrente' : 'Piano settimana'}</h2>
       <div class="card${isCurrent ? ' live' : ''}">
@@ -257,8 +268,8 @@ function renderRoute() {
         ${sessHtml}
         ${strengthHtml}
       </div>
-      ${pagerHtml}
     </section>
+    ${pagerHtml}
   `;
 
   window.scrollTo(0, 0);
@@ -395,16 +406,6 @@ function renderSession(s, week) {
       `).join('')}
     </div>` : '';
 
-  const actsHtml = (s.activities && s.activities.length) ? `
-    <div class="sess-acts">
-      ${s.activities.map(a => `
-        <a class="sess-act" href="./activity.html#${encodeURIComponent(a.file)}">
-          <span class="sess-act-icon">●</span>
-          <span class="sess-act-text">${a.title || a.file}</span>
-        </a>
-      `).join('')}
-    </div>` : '';
-
   return `
     <div class="sess">
       <div class="sess-head">
@@ -416,8 +417,72 @@ function renderSession(s, week) {
       ${valueLineHtml}
       ${s.notes ? `<div class="sess-notes">${s.notes}</div>` : ''}
       ${routesHtml}
-      ${actsHtml}
     </div>
+  `;
+}
+
+function planRefLabel(planItem) {
+  if (!planItem) return null;
+  const typeLabel = planItem.label || TYPE_LABELS[planItem.type] || planItem.type;
+  return planItem.when ? `${typeLabel} · ${planItem.when}` : typeLabel;
+}
+
+function renderLogEntry(e, planIndex) {
+  const title = e.title || e.activity || 'fatto';
+  const planItem = e.plan_ref ? planIndex.get(e.plan_ref) : null;
+  let refLabel, refCls = '';
+  if (planItem) {
+    refLabel = planRefLabel(planItem);
+  } else if (e.plan_ref) {
+    refLabel = e.plan_ref;
+    refCls = ' unplanned';
+  } else {
+    refLabel = 'non pianificato';
+    refCls = ' unplanned';
+  }
+
+  const icon = e.activity ? '●' : '✓';
+  const inner = `<span class="sess-act-icon">${icon}</span><span class="sess-act-text">${title}</span>`;
+  const pill = e.activity
+    ? `<a class="sess-act" href="./activity.html#${encodeURIComponent(e.activity)}">${inner}</a>`
+    : `<span class="sess-act">${inner}</span>`;
+
+  const routesHtml = (e.routes && e.routes.length) ? `
+    <div class="sess-routes" style="margin-top:.4rem">
+      ${e.routes.map(r => `
+        <a class="sess-route" href="${r.url}" target="_blank" rel="noopener">
+          <span class="sess-route-icon">↗</span>
+          <span class="sess-route-text">${r.name || 'Apri percorso'}</span>
+        </a>
+      `).join('')}
+    </div>` : '';
+
+  const noteHtml = e.note ? `<div class="log-note">${e.note}</div>` : '';
+
+  return `
+    <div class="log-entry">
+      <div class="log-entry-head">
+        ${pill}
+        <span class="log-ref${refCls}">→ ${refLabel}</span>
+      </div>
+      ${routesHtml}
+      ${noteHtml}
+    </div>
+  `;
+}
+
+function renderLogSection(week) {
+  const log = week.log || [];
+  if (!log.length) return '';
+  const planIndex = new Map();
+  (week.plan || []).forEach(p => planIndex.set(p.id, p));
+  return `
+    <section>
+      <h2 class="s-title s-title-log">Eseguito</h2>
+      <div class="card">
+        ${log.map(e => renderLogEntry(e, planIndex)).join('')}
+      </div>
+    </section>
   `;
 }
 

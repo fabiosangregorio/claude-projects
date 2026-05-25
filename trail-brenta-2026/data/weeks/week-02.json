@@ -1,33 +1,30 @@
 {
-  "_schema_version": "1.0",
+  "_schema_version": "2.0",
   "number": 2,
   "phase_id": "1-rebuild",
   "start_date": "2026-05-11",
   "end_date": "2026-05-17",
   "label": "Consolidamento + 1° trail Fase 1 rilassata",
   "narrative": "Settimana di consolidamento dopo il carico alto della 1 (TRIMP 272, 2010 m D+, 4 uscite). Inaugura la Fase 1 rilassata: 1 trail/settimana ≤90' e ≤500 m D+ è ora permesso, camminata libera in salita — niente intensità anche su sentiero. Tre corse (2 easy piatte Mizuno + 1 trail lungo La Sportiva) + forza MAR (template, dopo l'easy) + padel MER 90' + bici commute GIO. SAB off come buffer pulito prima del lungo di domenica. Obiettivi operativi: (1) test definitivo scarpe La Sportiva con heel lock prima di decidere Resegone (iscrizione scade 23/05); (2) prima sessione di forza dopo lo skip giustificato della 1; (3) capire la tenuta dei quadricipiti su un trail più 'normale' rispetto al verticale di Linzone. Il KPI di Fase 1 (decoupling Z2 piatto 60+ min) resta aperto, lo programmiamo nelle settimane 3-5.",
-  "sessions": [
+  "plan": [
     {
+      "id": "checkin",
       "type": "check-in",
       "label": "Pesa",
       "when": "LUN mattina, a digiuno",
       "notes": "Pesata settimanale. Stesso orario, stesso strumento, stesse condizioni (a digiuno, dopo bagno). Onebyone-cli per il log."
     },
     {
+      "id": "easy-mar",
       "type": "easy",
       "duration_min": 35,
       "intensity": "Z1-Z2 bassa",
       "fc_max_bpm": 140,
       "when": "MAR 12",
-      "notes": "Treviglio piatto, scarpe Mizuno Ultima 17. FC<140 stretta — è un easy vero, non un fartlek mascherato. Stesso giorno: Forza A dal template (25 min), in finestra separata (mattina/sera) o subito dopo l'easy. Il template autorizza 'giornata con corsa breve facile' come timing per la forza.",
-      "activities": [
-        {
-          "file": "2026-05-14_b29af73f-7821-4535-b6da-5f0c8d962095",
-          "title": "Easy Treviglio GIO 14 (shift di +2 gg)"
-        }
-      ]
+      "notes": "Treviglio piatto, scarpe Mizuno Ultima 17. FC<140 stretta — è un easy vero, non un fartlek mascherato. Stesso giorno: Forza A dal template (25 min), in finestra separata (mattina/sera) o subito dopo l'easy. Il template autorizza 'giornata con corsa breve facile' come timing per la forza."
     },
     {
+      "id": "padel",
       "type": "cross-training",
       "label": "Padel",
       "when": "MER mattina",
@@ -36,6 +33,7 @@
       "notes": "Lezione settimanale fissa, 90 min. Lateralità + cambi di direzione caricano i quadricipiti. Niente corsa di qualità lo stesso giorno."
     },
     {
+      "id": "bici",
       "type": "cross-training",
       "label": "Bici",
       "when": "GIO",
@@ -44,6 +42,7 @@
       "notes": "Spostamento lavorativo fisso. Conta come recupero attivo: aiuta drenaggio e circolazione, non interferisce con sessioni adiacenti."
     },
     {
+      "id": "easy-ven",
       "type": "easy",
       "duration_min": 30,
       "intensity": "Z1-Z2 bassa",
@@ -52,6 +51,7 @@
       "notes": "Treviglio piatto, Mizuno. FC<140 stretta: se ti senti bene, NON aumentare il passo — questo è recupero attivo + mantenimento, non un secondo allenamento. SAB off come buffer pulito prima del lungo."
     },
     {
+      "id": "long",
       "type": "long",
       "duration_min": 105,
       "intensity": "Z2/MAF",
@@ -63,16 +63,24 @@
         {
           "url": "https://www.komoot.com/it-IT/tour/2947521754",
           "name": "Loop Castagnola — Monte Grumo (7.63 km, 430 m D+) — pianificato"
-        },
+        }
+      ]
+    }
+  ],
+  "log": [
+    {
+      "plan_ref": "easy-mar",
+      "activity": "2026-05-14_b29af73f-7821-4535-b6da-5f0c8d962095",
+      "title": "Easy Treviglio GIO 14 (shift di +2 gg)"
+    },
+    {
+      "plan_ref": "long",
+      "activity": "2026-05-18_5d243887-9f08-4d15-8aa7-94732fc5a029",
+      "title": "Trail run al Laghello — eseguito LUN 18 (vacanza)",
+      "routes": [
         {
           "url": "https://www.komoot.com/tour/2963295725",
           "name": "Trail run al Laghello (12.5 km, 610 m D+) — eseguito"
-        }
-      ],
-      "activities": [
-        {
-          "file": "2026-05-18_5d243887-9f08-4d15-8aa7-94732fc5a029",
-          "title": "Trail run al Laghello — eseguito LUN 18 (vacanza)"
         }
       ]
     }
