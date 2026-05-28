@@ -51,12 +51,22 @@ section{margin:2rem 0}
 .phase.current .phase-kpi{background:rgba(63,185,80,.08);border-color:rgba(63,185,80,.35)}
 .phase.current .phase-kpi-lbl{color:var(--ac2)}
 
-.zone-row{display:grid;grid-template-columns:auto auto 1fr;gap:.7rem;align-items:center;padding:.5rem 0;border-bottom:1px solid var(--bd);font-size:.78rem}
-.zone-row:last-child{border-bottom:none}
-.zone-id{font-family:'Space Mono',monospace;font-weight:700;font-size:.85rem;min-width:1.5rem}
-.zone-bpm{font-family:'Space Mono',monospace;color:var(--tx2);min-width:5.5rem}
-.zone-lbl{color:var(--tx)}
-.zone-use{display:block;font-size:.7rem;color:var(--tx2);margin-top:.15rem}
+.phase-weeks{margin-top:.7rem;display:flex;flex-direction:column;gap:.3rem}
+.phase-weeks-lbl{font-family:'Space Mono',monospace;font-size:.6rem;color:var(--tx2);text-transform:uppercase;letter-spacing:1px;margin-bottom:.1rem}
+.phase-week{display:grid;grid-template-columns:auto 1fr auto;gap:.6rem;align-items:center;padding:.45rem .65rem;background:var(--sf2);border:1px solid var(--bd);border-radius:6px;text-decoration:none;color:inherit;transition:border-color .2s}
+.phase-week:hover{border-color:var(--ac)}
+.phase-week.current{border-color:var(--ac2);background:rgba(63,185,80,.06)}
+.phase-week.empty{opacity:.55;cursor:default}
+.phase-week.empty:hover{border-color:var(--bd)}
+.phase-week-num{font-family:'Space Mono',monospace;font-size:.7rem;font-weight:700;color:var(--tx2);min-width:2.4rem}
+.phase-week.current .phase-week-num{color:var(--ac2)}
+.phase-week-info{min-width:0}
+.phase-week-label{display:block;font-size:.8rem;color:var(--tx);line-height:1.3;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.phase-week.empty .phase-week-label{color:var(--tx2);font-style:italic}
+.phase-week-dates{display:block;font-family:'Space Mono',monospace;font-size:.65rem;color:var(--tx2);margin-top:.1rem}
+.phase-week-arrow{color:var(--ac);font-family:'Space Mono',monospace;font-size:.85rem}
+.phase-week.current .phase-week-arrow{color:var(--ac2)}
+.phase-week.empty .phase-week-arrow{display:none}
 
 .ex{padding:.55rem 0;border-bottom:1px solid var(--bd)}
 .ex:last-child{border-bottom:none}
@@ -135,7 +145,6 @@ async function loadAll() {
 function render(app, profile, race, plan) {
   app.innerHTML = [
     renderHero(race),
-    renderWeekLink(plan),
     renderPhases(plan),
     renderRefSection(plan, profile)
   ].join('');
@@ -152,42 +161,46 @@ function renderHero(race) {
   `;
 }
 
-function renderWeekLink(plan) {
-  if (!plan || !plan.weeks || !plan.weeks.length) return '';
-
-  const today = todayISO();
-  const weeks = plan.weeks;
-  let week = weeks.find(w => today >= w.start_date && today <= w.end_date);
-  let label = 'Settimana corrente';
-
-  if (!week) {
-    const next = weeks.find(w => w.start_date > today);
-    if (next) { week = next; label = 'Prossima settimana'; }
-    else { week = weeks[weeks.length - 1]; label = 'Ultima settimana'; }
-  }
-
-  const phase = plan.phases.find(p => p.id === week.phase_id);
-  const sub = `${phase ? phase.name + ' · ' : ''}sett ${week.number}/${plan.total_weeks}${week.label ? ' · ' + week.label : ''}`;
-
-  return `
-    <a class="nav-card" href="./week.html#${week.number}">
-      <div>
-        <div class="nav-card-title">${label}</div>
-        <div class="nav-card-sub">${sub}</div>
-      </div>
-      <div class="nav-card-arrow">→</div>
-    </a>
-  `;
-}
-
 function renderPhases(plan) {
   if (!plan || !plan.phases) return '';
   const today = todayISO();
+  const weeksByNumber = new Map((plan.weeks || []).map(w => [w.number, w]));
 
   const html = plan.phases.map(p => {
     let cls = '';
     if (today > p.end_date) cls = 'past';
     else if (today >= p.start_date && today <= p.end_date) cls = 'current';
+
+    const [wFrom, wTo] = p.weeks_range;
+    const weekRows = [];
+    for (let n = wFrom; n <= wTo; n++) {
+      const w = weeksByNumber.get(n);
+      if (w) {
+        let wcls = '';
+        if (today >= w.start_date && today <= w.end_date) wcls = 'current';
+        const dates = `${formatItalianDate(w.start_date, true)} → ${formatItalianDate(w.end_date, true)}`;
+        weekRows.push(`
+          <a class="phase-week ${wcls}" href="./week.html#${w.number}">
+            <span class="phase-week-num">W${w.number}</span>
+            <span class="phase-week-info">
+              <span class="phase-week-label">${w.label || 'Settimana ' + w.number}</span>
+              <span class="phase-week-dates">${dates}</span>
+            </span>
+            <span class="phase-week-arrow">→</span>
+          </a>
+        `);
+      } else {
+        weekRows.push(`
+          <div class="phase-week empty">
+            <span class="phase-week-num">W${n}</span>
+            <span class="phase-week-info">
+              <span class="phase-week-label">non ancora pianificata</span>
+            </span>
+            <span class="phase-week-arrow">→</span>
+          </div>
+        `);
+      }
+    }
 
     return `
       <div class="phase ${cls}">
@@ -199,6 +212,10 @@ function renderPhases(plan) {
           <div class="phase-kpi">
             <div class="phase-kpi-lbl">Obiettivo fine fase</div>
             <div class="phase-kpi-text">${p.key_objective}</div>
+          </div>
+          <div class="phase-weeks">
+            <div class="phase-weeks-lbl">Settimane</div>
+            ${weekRows.join('')}
           </div>
         </div>
       </div>
@@ -214,32 +231,15 @@ function renderPhases(plan) {
 }
 
 function renderRefSection(plan, profile) {
-  const z = profile.training_zones;
   const s = plan.strength_template;
-  const m = plan.mobility_template;
   const rules = plan.rules || [];
   const budget = plan.weekly_budget;
-
-  const zonesHtml = (z && z.zones) ? z.zones.map(zone => `
-    <div class="zone-row">
-      <div class="zone-id" style="color:${zone.color}">${zone.id.toUpperCase()}</div>
-      <div class="zone-bpm">${zone.min_bpm}–${zone.max_bpm} bpm</div>
-      <div><span class="zone-lbl">${zone.label}</span><span class="zone-use">${zone.use}</span></div>
-    </div>
-  `).join('') : '';
 
   const exHtml = (s && s.exercises) ? s.exercises.map(e => `
     <div class="ex">
       <div class="ex-name">${e.name}</div>
       <div class="ex-meta">${e.sets} × ${e.reps}</div>
       <div class="ex-focus">${e.focus}</div>
-    </div>
-  `).join('') : '';
-
-  const mobHtml = (m && m.exercises) ? m.exercises.map(e => `
-    <div class="ex">
-      <div class="ex-name">${e.name}</div>
-      <div class="ex-meta">${e.duration}</div>
     </div>
   `).join('') : '';
 
@@ -261,17 +261,6 @@ function renderRefSection(plan, profile) {
 
       <details>
         <summary>
-          <span>Zone di frequenza cardiaca<span class="summary-sub">FCmax ${z.fcmax_bpm} · MAF ${z.maf_ceiling_bpm} · 5 zone</span></span>
-        </summary>
-        <div>
-          <div style="font-size:.75rem;color:var(--tx2);margin-bottom:.7rem;line-height:1.5"><em>${z.fcmax_source}</em></div>
-          ${zonesHtml}
-          <div style="margin-top:.8rem;font-size:.78rem;color:var(--ac2);font-family:'Space Mono',monospace">★ MAF ${z.maf_ceiling_bpm} bpm: ${z.maf_note}</div>
-        </div>
-      </details>
-
-      <details>
-        <summary>
           <span>Forza<span class="summary-sub">${s.frequency} · ${s.duration_min} min · ${s.exercises.length} esercizi</span></span>
         </summary>
         <div>
@@ -280,16 +269,6 @@ function renderRefSection(plan, profile) {
           <div style="font-size:.78rem;color:var(--tx2);margin-bottom:.9rem"><strong>Kit:</strong> ${s.kit}</div>
           ${exHtml}
           <div style="margin-top:.8rem;font-size:.78rem;color:var(--ac2);font-family:'Space Mono',monospace">★ Progressione: ${s.progression}</div>
-        </div>
-      </details>
-
-      <details>
-        <summary>
-          <span>Mobility post-corsa<span class="summary-sub">${m.exercises.length} esercizi · ~5 min</span></span>
-        </summary>
-        <div>
-          <div style="font-size:.78rem;color:var(--tx2);margin-bottom:.7rem">${m.when}</div>
-          ${mobHtml}
         </div>
       </details>
     </section>

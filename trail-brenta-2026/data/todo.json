@@ -1,15 +1,15 @@
 {
   "_description": "Task list per la preparazione (burocrazia, equipment, test).",
-  "last_updated": "2026-05-25T18:00:00",
+  "last_updated": "2026-05-28T12:00:00",
   "tasks": [
     {
       "category": "burocrazia",
       "task": "Visita medica agonistica",
       "deadline": "2026-05-31",
-      "status": "scheduled",
+      "status": "done",
+      "completed_date": "2026-05-27",
       "priority": "urgente",
-      "scheduled_date": "2026-05-27",
-      "note": "Appuntamento mercoledì 27 maggio. Richiede ECG sotto sforzo."
+      "note": "Fatta. Certificato agonistico ottenuto — sblocca conferma iscrizione DBT 21K."
     },
     {
       "category": "burocrazia",
@@ -24,8 +24,17 @@
       "category": "attrezzatura",
       "task": "Provare scarpe La Sportiva su sentiero",
       "deadline": "2026-05-15",
+      "status": "done",
+      "completed_date": "2026-05-28",
+      "note": "Test fatto su sentiero. Da decidere se tenerle o cambiarle."
+    },
+    {
+      "category": "attrezzatura",
+      "task": "Decidere se tenere La Sportiva o cambiarle",
+      "deadline": "2026-06-15",
       "status": "pending",
-      "note": "Test in baseline sabato 9 maggio — Albenza."
+      "priority": "alta",
+      "note": "Valutare comfort, grip, stabilità su tecnico, eventuale dolore/sfregamento dopo i test su sentiero. Se cambiare, lasciare tempo per rodare un nuovo modello prima del lungo block (luglio)."
     },
     {
       "category": "attrezzatura",

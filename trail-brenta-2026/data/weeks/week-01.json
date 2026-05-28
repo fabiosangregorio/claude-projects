@@ -80,6 +80,10 @@
   ],
   "log": [
     {
+      "plan_ref": "checkin",
+      "title": "Pesa 02/05 — 66.4 kg, 13.1% BF, BMI 19.8 (baseline)"
+    },
+    {
       "plan_ref": "hike",
       "activity": "2026-05-02_3d858ad2-c7e9-42af-abc5-33456a9a8f7c",
       "title": "Bivacco Pedrinelli — Giorno 1 (salita)"

@@ -1,0 +1,77 @@
+{
+  "_schema_version": "2.0",
+  "number": 4,
+  "phase_id": "1-rebuild",
+  "start_date": "2026-05-25",
+  "end_date": "2026-05-31",
+  "label": "Verso il trail Resegone + rientro corse",
+  "narrative": "Prima settimana piena dopo la recovery della 3. LUN pesa (68.6 kg, trend in salita +2.2 kg dalla baseline, da monitorare). MAR corsa non strutturata (dettaglio da analizzare in futuro). MER visita medica agonistica fatta — certificato ottenuto, sblocca conferma iscrizione DBT 21K — + padel sera. GIO bici commute. VEN off come buffer pulito prima del trail (pattern week-02). SAB trail Resegone come long della settimana (TBD km/D+). DOM forza dal template (giorno dopo il lungo, timing canonico). Settimana vincolata a 2 corse (MAR + SAB long): il budget del piano lo permette ('settimane vincolate possono fermarsi a 2 corse'), e i primi 4 giorni avevano già solo 1 corsa. Il KPI Fase 1 (decoupling Pa:Hr <8% su Z2 piatto 60+ min) NON è in questa settimana: il long è verticale, Z2 piatto puro va programmato in week-05 dove può stare da solo. Open concern carryover: motore aerobico ancora non misurato in modo pulito (due settimane consecutive senza Z2 piatto).",
+  "plan": [
+    {
+      "id": "checkin",
+      "type": "check-in",
+      "label": "Pesa",
+      "when": "LUN 25 mattina, a digiuno",
+      "notes": "Pesata settimanale standard."
+    },
+    {
+      "id": "corsa-mar",
+      "type": "easy",
+      "label": "Corsa MAR 26",
+      "when": "MAR 26",
+      "notes": "Corsa non strutturata. Dettagli, durata, FC e analisi rimandati a futura iterazione."
+    },
+    {
+      "id": "padel",
+      "type": "cross-training",
+      "label": "Padel",
+      "when": "MER 27 sera",
+      "duration_min": 90,
+      "intensity": "bassa/non intensa",
+      "notes": "Lezione settimanale fissa. Stesso giorno della visita medica agonistica (fatta in mattinata/pomeriggio)."
+    },
+    {
+      "id": "bici",
+      "type": "cross-training",
+      "label": "Bici",
+      "when": "GIO 28",
+      "duration_min": 30,
+      "intensity": "Z1, no impatto",
+      "notes": "Spostamento lavorativo fisso. Conta come recupero attivo."
+    },
+    {
+      "id": "long",
+      "type": "long",
+      "intensity": "Z2/MAF in salita-cammina, discesa controllata",
+      "fc_max_bpm": 152,
+      "when": "SAB 30",
+      "notes": "Trail Resegone. Distanza e dislivello ancora TBD — definire la route Komoot prima del SAB e aggiungerla qui. La Sportiva con heel lock testato (carryover open concern dalle settimane precedenti). Camminata libera in salita: FC<152 sempre, niente intensità anche su sentiero (Fase 1 rilassata: 1 trail/sett ≤90' e ≤500 m D+ è permesso). Se la route supera quei limiti, ridurre o spezzare. Camelbak + sale fino come format Laghello. Verificare condizioni sentiero il giorno prima."
+    },
+    {
+      "id": "forza",
+      "type": "strength",
+      "label": "Forza",
+      "when": "DOM 31",
+      "duration_min": 25,
+      "notes": "Template completo (goblet squat, split squat bulgaro, step-up, calf raise eccentrici, plank, glute bridge mono). Giorno dopo il lungo = timing canonico del template. Prima sessione di forza del piano (saltata in week-1, in week-2 era programmata ma non vedo log entry, week-3 senza piano). Conservativa su carichi e reps — è la prima volta dopo il rientro."
+    }
+  ],
+  "log": [
+    {
+      "plan_ref": "checkin",
+      "title": "Pesa LUN 25 — 68.6 kg, 14.1% BF, BMI 20.5 (+2.2 kg vs baseline, +1.1 vs MER 20)"
+    },
+    {
+      "plan_ref": "corsa-mar",
+      "title": "Corsa MAR 26 — done (non strutturata, da analizzare)"
+    },
+    {
+      "plan_ref": "padel",
+      "title": "Padel MER 27 sera — done"
+    },
+    {
+      "plan_ref": "bici",
+      "title": "Bici GIO 28 commute — done"
+    }
+  ]
+}

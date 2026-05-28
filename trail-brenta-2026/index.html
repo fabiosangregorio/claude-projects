@@ -77,6 +77,17 @@ section.live .s-title::before{background:var(--ac2);box-shadow:0 0 0 0 rgba(63,1
 .nav-card-sub{font-family:'Space Mono',monospace;font-size:.7rem;color:var(--tx2);margin-top:.15rem}
 .nav-card-arrow{color:var(--ac);font-family:'Space Mono',monospace;font-size:1rem}
 
+/* Group card (more entries inside one card) */
+.group-card{background:var(--sf);border:1px solid var(--bd);border-radius:10px;padding:.3rem 1.1rem;margin-bottom:.7rem}
+.group-card-head{font-family:'Space Mono',monospace;font-size:.65rem;color:var(--tx2);text-transform:uppercase;letter-spacing:1.5px;padding:.7rem 0 .5rem;border-bottom:1px solid var(--bd)}
+.group-link{display:flex;align-items:center;justify-content:space-between;padding:.75rem 0;border-bottom:1px solid var(--bd);text-decoration:none;color:inherit;transition:color .2s}
+.group-link:last-child{border-bottom:none}
+.group-link:hover .group-link-title{color:var(--ac)}
+.group-link:hover .group-link-arrow{transform:translateX(2px)}
+.group-link-title{font-family:'Space Mono',monospace;font-size:.85rem;color:var(--tx);font-weight:700;transition:color .2s}
+.group-link-sub{font-family:'Space Mono',monospace;font-size:.7rem;color:var(--tx2);margin-top:.15rem}
+.group-link-arrow{color:var(--ac);font-family:'Space Mono',monospace;font-size:1rem;transition:transform .2s}
+
 /* Profile compact */
 .profile-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:.5rem}
 .pf{background:var(--sf);border:1px solid var(--bd);border-radius:8px;padding:.6rem .7rem}
@@ -245,7 +256,7 @@ function render(app, profile, race, plan, todo, activitiesManifest, weighins) {
     renderPlanLink(plan),
     renderActivitiesLink(activitiesManifest),
     renderWeighinsLink(weighins),
-    renderRecoveryLink(),
+    renderGuidesCard(),
     renderTasks(todo),
     renderRaceInfo(race),
     renderProfile(profile, weighins)
@@ -291,15 +302,32 @@ function renderPlanLink(plan) {
   `;
 }
 
-function renderRecoveryLink() {
+function renderGuidesCard() {
   return `
-    <a class="nav-card" href="./recovery.html">
-      <div>
-        <div class="nav-card-title">Recovery</div>
-        <div class="nav-card-sub">guida pratica · cosa fare dopo l'attività</div>
-      </div>
-      <div class="nav-card-arrow">→</div>
-    </a>
+    <div class="group-card">
+      <div class="group-card-head">Guide</div>
+      <a class="group-link" href="./guides/recovery.html">
+        <div>
+          <div class="group-link-title">Recovery</div>
+          <div class="group-link-sub">cosa fare dopo l'attività</div>
+        </div>
+        <div class="group-link-arrow">→</div>
+      </a>
+      <a class="group-link" href="./guides/zones.html">
+        <div>
+          <div class="group-link-title">Zone di frequenza cardiaca</div>
+          <div class="group-link-sub">FCmax · MAF · 5 zone</div>
+        </div>
+        <div class="group-link-arrow">→</div>
+      </a>
+      <a class="group-link" href="./guides/mobility.html">
+        <div>
+          <div class="group-link-title">Mobility post-corsa</div>
+          <div class="group-link-sub">5 esercizi · ~5 min</div>
+        </div>
+        <div class="group-link-arrow">→</div>
+      </a>
+    </div>
   `;
 }
 
