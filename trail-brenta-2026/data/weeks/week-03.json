@@ -1,0 +1,34 @@
+{
+  "_schema_version": "2.0",
+  "number": 3,
+  "phase_id": "1-rebuild",
+  "start_date": "2026-05-18",
+  "end_date": "2026-05-24",
+  "label": "Settimana non pianificata — solo eseguito",
+  "narrative": "Settimana senza piano formale: non è stata pianificata in anticipo. LUN 18 era il lungo shiftato della week-02 (Laghello 12.8 km / 689 m D+), il resto della settimana è stato de facto scarico. Nessuna corsa, nessuna forza: solo cross-training fisso (padel MER + bici GIO commute) e una via ferrata domenica come uscita montana non strutturata. Pesa shiftata a MER 20 per il rientro da vacanza. Conseguenza: il KPI Fase 1 (decoupling Pa:Hr <8% su Z2 piatto 60+ min) resta aperto e va programmato in week-04. Open concern: 0 corse in settimana 3 della Fase 1 = due settimane consecutive senza un Z2 piatto pulito su cui misurare il motore aerobico.",
+  "plan": [],
+  "log": [
+    {
+      "title": "Pesa MER 20 — 67.5 kg, 13.5% BF, BMI 20.2 (+0.4 vs LUN 11)"
+    },
+    {
+      "title": "Padel MER 20 — 90 min, lezione settimanale fissa"
+    },
+    {
+      "title": "Bici GIO 21 — commute lavorativo, ~30 min Z1"
+    },
+    {
+      "title": "Via ferrata DOM 24 — uscita montana non strutturata. Durata e dislivello da importare da GPX Komoot se si vuole tracciare load esatto.",
+      "routes": [
+        {
+          "url": "https://www.komoot.com/it-it/tour/2980889555",
+          "name": "Via ferrata DOM 24 — Komoot"
+        }
+      ]
+    }
+  ],
+  "strength": {
+    "skipped": true,
+    "reason": "Settimana senza piano formale, niente corsa né forza. Riprende in week-04."
+  }
+}

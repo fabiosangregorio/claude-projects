@@ -18,7 +18,10 @@ trail-brenta-2026/
 ├── activities.html         ← Lista di tutte le attività (run + hike).
 ├── activity.html           ← Dettaglio singola attività (#<filename-senza-.json>).
 ├── weighins.html           ← Lista di tutte le pesate settimanali (con summary + delta).
-├── recovery.html           ← Guida pratica al recupero post-attività (statica, no JSON).
+├── guides/                 ← Guide pratiche linkate dalla home (sezione "Guide").
+│   ├── recovery.html       ← Cosa fare dopo l'attività (statica, no JSON).
+│   ├── zones.html          ← Zone di frequenza cardiaca (legge profile.json).
+│   └── mobility.html       ← Mobility post-corsa (legge plan.json#mobility_template).
 ├── README.md               ← Questo file.
 └── data/
     ├── profile.json        ← Atleta + zone FC calibrate.

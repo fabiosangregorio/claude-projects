@@ -69,6 +69,10 @@
   ],
   "log": [
     {
+      "plan_ref": "checkin",
+      "title": "Pesa LUN 11 — 67.1 kg, 13.1% BF, BMI 20.0 (+0.7 vs baseline)"
+    },
+    {
       "plan_ref": "easy-mar",
       "activity": "2026-05-14_b29af73f-7821-4535-b6da-5f0c8d962095",
       "title": "Easy Treviglio GIO 14 (shift di +2 gg)"
