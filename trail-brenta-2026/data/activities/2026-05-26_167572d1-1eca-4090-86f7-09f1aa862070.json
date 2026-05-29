@@ -1,0 +1,215 @@
+{
+  "schema_version": 1,
+  "id": "167572d1-1eca-4090-86f7-09f1aa862070",
+  "start": "2026-05-26T06:20:09.212Z",
+  "ai_analysis": {
+    "model": "claude-opus-4-7",
+    "generated_at": "2026-05-28T12:30:00Z",
+    "prompt_version": 1,
+    "classification": {
+      "workout_type": "ibrida corsa + forza (calisthenics)",
+      "primary_benefit": "forza generale + richiamo soglia",
+      "training_effect_aerobic": 2.5,
+      "training_effect_anaerobic": 3.0
+    },
+    "execution": {
+      "intent_inferred": "brick session: 3 km di riscaldamento → blocco di calistenia (trazioni, piegamenti, tricipiti) in parco → 2 km di chiusura tirati",
+      "execution_quality": 4,
+      "primary_failure_mode": "nessuno",
+      "failure_confidence": 0.85
+    },
+    "trail_specificity": {
+      "score": 2,
+      "vertical_load_pct_of_race": null,
+      "notes": "Per dislivello positivo (D+) e volume zero specificità gara; ma la forza del tronco/superiore è utile in discesa tecnica e per i bastoncini."
+    },
+    "headline": "Brick run + calisthenics: 3 km moderati → ~11' di lavoro di forza al parco → 2 km finali al 93% FCmax. Sessione voluta e ben eseguita.",
+    "strengths": [
+      "Rilancio finale forte: km 5–6 a 6:20/km con FC ~164 bpm dopo il blocco di forza, ottimo segnale di freschezza neuromuscolare.",
+      "Combinazione corsa + forza superiore (trazioni, piegamenti, tricipiti): copre un buco frequente nei piani solo-corsa.",
+      "Polarizzazione 49% in zona alta intensità (HIT): la frequenza cardiaca è rimasta alta anche durante la calistenia, quindi lo stimolo cardiovascolare non si è azzerato."
+    ],
+    "concerns": [
+      {
+        "area": "specificità gara",
+        "severity": 4,
+        "note": "Volume basso e zero D+: per la XTERRA Brenta SHORT 21K servono uscite con dislivello e durata, qui assenti."
+      },
+      {
+        "area": "interpretazione dati",
+        "severity": 2,
+        "note": "Indicatori come deriva cardiaca (20%) e variabilità del passo non sono leggibili: la pausa di forza li falsa, vanno ignorati per questa sessione."
+      },
+      {
+        "area": "carico complessivo",
+        "severity": 2,
+        "note": "TRIMP 113 sottostima il vero costo: la calistenia non entra nel calcolo. Considerare la fatica reale più alta del dato cardiaco."
+      }
+    ],
+    "narrative": "Sessione ibrida ben strutturata: 3 km di avvicinamento progressivi (6:05 → 6:13 → 7:09 al km), blocco di calistenia in parco (trazioni, piegamenti, tricipiti, ~11 minuti) e chiusura tirata sui 2 km finali a 6:20/km al 93% FCmax. La frequenza cardiaca durante il blocco di forza è rimasta elevata, segno che il lavoro a corpo libero ha mantenuto carico cardiovascolare anche fuori dalla corsa.\n\nIl rilancio finale solido dopo lo sforzo isometrico/concentrico è il dato più interessante: nessun cedimento di passo né drift cardiaco anomalo nel secondo blocco di corsa, indica buona freschezza neuromuscolare nelle gambe nonostante il lavoro superiore. Da leggere come sessione di forza generale con bookend di corsa, non come allenamento aerobico continuo: gli indicatori di durabilità (deriva cardiaca, variabilità) qui non sono leggibili e vanno ignorati."
+  },
+  "totals": {
+    "distance_km": 6.01,
+    "duration_sec": 2998,
+    "avg_pace_min_per_km": 8.318,
+    "gap_min_per_km": 7.169,
+    "ef": 0.951,
+    "avg_hr": 147,
+    "max_hr_observed": 170,
+    "hrmax_est_used": 175,
+    "ascent_m": 23,
+    "elev_min_m": 127,
+    "elev_max_m": 138,
+    "steps": 5460,
+    "avg_cadence_spm": 109.3,
+    "avg_stride_cm": 110
+  },
+  "derived": {
+    "trimp": 113,
+    "polarization_3z": {
+      "lit_pct": 33.5,
+      "mit_pct": 17.3,
+      "hit_pct": 49.3
+    },
+    "maf": {
+      "ceiling_bpm": 152,
+      "time_below_pct": 43.2
+    },
+    "vertical": {
+      "vam_m_per_h": 27,
+      "ascent_m_per_h": 27,
+      "descent_m_per_h": 27
+    },
+    "grade_distribution": {
+      "flat_lt_2": 77.5,
+      "rolling_2_5": 8.5,
+      "uphill_5_10": 1.2,
+      "steep_gt_10": 0,
+      "down_2_5": 12,
+      "down_5_10": 0.9,
+      "down_gt_10": 0
+    },
+    "climb_efficiency": {
+      "ef_uphill": 1.251,
+      "uphill_time_sec": 28
+    },
+    "race_match": null
+  },
+  "decoupling": {
+    "first_half": {
+      "gap_min_per_km": 6.97,
+      "hr": 142
+    },
+    "second_half": {
+      "gap_min_per_km": 8.249,
+      "hr": 151
+    },
+    "pct": 20.42
+  },
+  "pace_variability": {
+    "cv_overall_pct": 31.78,
+    "cv_running_only_pct": 30.86
+  },
+  "split_balance": {
+    "first_half_sec": 1169,
+    "second_half_sec": 1824,
+    "diff_pct": 56
+  },
+  "hr_zones": [
+    {
+      "zone": 1,
+      "time_sec": 12
+    },
+    {
+      "zone": 2,
+      "time_sec": 503
+    },
+    {
+      "zone": 3,
+      "time_sec": 448
+    },
+    {
+      "zone": 4,
+      "time_sec": 760
+    },
+    {
+      "zone": 5,
+      "time_sec": 1273
+    }
+  ],
+  "walks_summary": {
+    "count": 1,
+    "total_walk_sec": 659,
+    "walk_pct": 27.61
+  },
+  "walk_breaks": [
+    {
+      "started_sec": 1223,
+      "duration_sec": 659,
+      "avg_cadence_spm": 7.4,
+      "at_km": 3.13
+    }
+  ],
+  "splits": [
+    {
+      "km": 1,
+      "duration_sec": 365.5,
+      "pace_min_per_km": 6.092,
+      "gap_min_per_km": 5.937,
+      "avg_hr": 142,
+      "pct_hrmax": 81.4,
+      "ef": 1.183
+    },
+    {
+      "km": 2,
+      "duration_sec": 373.7,
+      "pace_min_per_km": 6.229,
+      "gap_min_per_km": 6.273,
+      "avg_hr": 156,
+      "pct_hrmax": 88.9,
+      "ef": 1.025
+    },
+    {
+      "km": 3,
+      "duration_sec": 429.9,
+      "pace_min_per_km": 7.165,
+      "gap_min_per_km": 7.116,
+      "avg_hr": 149,
+      "pct_hrmax": 85.2,
+      "ef": 0.943
+    },
+    {
+      "km": 4,
+      "duration_sec": 1062.9,
+      "pace_min_per_km": 17.714,
+      "gap_min_per_km": 17.737,
+      "avg_hr": 132,
+      "pct_hrmax": 75.1,
+      "ef": 0.429
+    },
+    {
+      "km": 5,
+      "duration_sec": 382.1,
+      "pace_min_per_km": 6.368,
+      "gap_min_per_km": 6.376,
+      "avg_hr": 164,
+      "pct_hrmax": 93.8,
+      "ef": 0.955
+    },
+    {
+      "km": 6,
+      "duration_sec": 378.9,
+      "pace_min_per_km": 6.315,
+      "gap_min_per_km": 6.436,
+      "avg_hr": 164,
+      "pct_hrmax": 93.6,
+      "ef": 0.948
+    }
+  ],
+  "remainder": {
+    "km": 0.01,
+    "duration_sec": 4.7,
+    "pace_min_per_km": 12.47,
+    "gap_min_per_km": 12.47
+  }
+}
