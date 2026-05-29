@@ -144,7 +144,7 @@ footer a{color:var(--ac);text-decoration:none}
 </head>
 <body>
 <div class="c">
-  <a class="back" href="./"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>Piano</a>
+  <a class="back" href="./plan.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>Piano</a>
 
   <div id="app"><div class="loader"><div class="spinner"></div><br>Caricamento dati...</div></div>
 
@@ -198,7 +198,7 @@ function renderRoute() {
   const week = weeks.find(w => w.number === n);
 
   if (!week) {
-    app.innerHTML = `<div class="error">Settimana non trovata. <a href="./" style="color:var(--ac)">Torna al piano</a></div>`;
+    app.innerHTML = `<div class="error">Settimana non trovata. <a href="./plan.html" style="color:var(--ac)">Torna al piano</a></div>`;
     document.title = 'DBT 21K — Piano settimana';
     return;
   }
