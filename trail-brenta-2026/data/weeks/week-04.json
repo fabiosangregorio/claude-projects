@@ -73,5 +73,78 @@
       "plan_ref": "bici",
       "title": "Bici GIO 28 commute — done"
     }
-  ]
+  ],
+  "review": {
+    "date": "2026-05-31",
+    "verdict": "recalibrate",
+    "headline": "Trail Resegone completato con buona tenuta, ma l'intensita e il motore aerobico restano fuori controllo.",
+    "synthesis": "Settimana di carico medio con 2 uscite e 514 m di D+, lungo fatto ma quasi tutto sopra MAF. Priorita alla prossima settimana: Z2 piatto pulito e monitoraggio del peso al petto, oggi sparito e con ECG sotto sforzo riferito ok.",
+    "auto": {
+      "adherence": {
+        "planned": 3,
+        "done": 2,
+        "long_run": "done",
+        "swapped": [
+          {
+            "planned": "forza DOM 31",
+            "replaced_with": "non loggata"
+          }
+        ]
+      },
+      "load": {
+        "trimp_training": 341,
+        "ascent_m_total": 514,
+        "duration_min_total": 131,
+        "maf_below_pct_training": 21.8,
+        "weight_delta_kg": 1.1,
+        "weight_kg_latest": 68.6
+      },
+      "phase_kpi": {
+        "objective": "Portare il decoupling Pa:Hr da 12.6% a sotto 8% su un lungo piatto di 60+ min.",
+        "status": "not_measurable_this_week",
+        "note": "La corsa MAR era ibrida e sotto 60', il Resegone era verticale: nessuna delle due sessioni misura il KPI piatto di Fase 1."
+      },
+      "open_concerns": [
+        {
+          "area": "motore aerobico",
+          "weeks_open": 3,
+          "severity_max": 4
+        },
+        {
+          "area": "controllo intensita",
+          "weeks_open": 1,
+          "severity_max": 3
+        },
+        {
+          "area": "peso al petto sotto sforzo",
+          "weeks_open": 1,
+          "severity_max": 3
+        }
+      ],
+      "highlights": "Deriva cardiaca negativa (-6%): seconda meta piu efficiente, durabilita solida sugli 81 minuti.",
+      "lowlights": "FC media 161 e solo 8.6% sotto MAF sul Resegone: il lungo e diventato un lavoro a soglia, non aerobico.",
+      "race_day_break_derived": {
+        "value": "motore aerobico",
+        "reason": "KPI piatto ancora non misurato; Resegone con FC media 161 e solo 8.6% sotto MAF; stesso fronte gia emerso nelle review precedenti."
+      }
+    },
+    "checkin": {
+      "recovery": "neutro — riposato ma serve un giorno facile",
+      "doms": "leggeri, spariti in 1-2 gg",
+      "sleep_avg": "6-7h",
+      "niggles": [
+        "callo post-trail"
+      ],
+      "life_load": "leggero — settimana tranquilla",
+      "symptoms": [
+        {
+          "area": "peso/pesantezza al petto sotto sforzo",
+          "status": "sparito del tutto",
+          "associated_symptoms": "nessun capogiro, nausea o altro sintomo associato riferito",
+          "context": "ECG sotto sforzo per certificato agonistico riferito perfetto",
+          "follow_up": "richiedere stato alla prossima review"
+        }
+      ]
+    }
+  }
 }
