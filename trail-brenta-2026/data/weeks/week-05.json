@@ -1,0 +1,81 @@
+{
+  "_schema_version": "2.0",
+  "number": 5,
+  "phase_id": "1-rebuild",
+  "start_date": "2026-06-01",
+  "end_date": "2026-06-07",
+  "label": "Test Z2 piatto + chiusura Fase 1",
+  "narrative": "Ultima settimana della Fase 1: prima si misura il motore aerobico, poi si decide se aprire la Fase 2. Dopo baseline 1/5 a 12.6% di decoupling, easy 35' al 10.1%, Laghello troppo verticale e Resegone con FC media 161 / solo 8.6% sotto MAF, manca ancora la misura pulita del KPI: 60+ minuti piatti sotto 152 bpm. Il piano riduce dislivello e intensita: test piatto come lungo della settimana, un easy molto facile, un trail corto solo tecnico e controllato. Peso rientrato a 66.8 kg dopo il picco 68.6: nessun allarme, continua il monitoraggio standard.",
+  "plan": [
+    {
+      "id": "checkin",
+      "type": "check-in",
+      "label": "Pesa",
+      "when": "LUN 1 mattina, a digiuno",
+      "notes": "Pesata settimanale standard. Il dato di oggi rientra verso baseline: leggerlo come oscillazione, non come trend nuovo."
+    },
+    {
+      "id": "long-z2-test",
+      "type": "long",
+      "label": "Test Z2 piatto",
+      "duration_min": 70,
+      "intensity": "Z2/MAF pulita",
+      "fc_max_bpm": 152,
+      "when": "MAR 2",
+      "notes": "Sessione chiave e lungo della settimana. Percorso piatto a Treviglio, idealmente lo stesso o molto simile al baseline del 1 maggio; D+ sotto 100 m. Obiettivo: 60-70' continui, niente progressione finale, niente segmenti tirati. Primi 10' facilissimi, poi tieni FC 140-150; se supera 152 per oltre 30-45 secondi, cammina 60-90 secondi e riparti. Questa e la misura che decide la transizione: target <8% decoupling; se resta >8-10%, prolunghiamo la ricostruzione aerobica."
+    },
+    {
+      "id": "padel",
+      "type": "cross-training",
+      "label": "Padel",
+      "when": "MER 3",
+      "duration_min": 60,
+      "intensity": "bassa/non intensa",
+      "notes": "Solo lezione tecnica, niente partita tirata. Se il test Z2 lascia DOMS o stanchezza insolita, salta o accorcia: questa settimana la priorita e il dato aerobico, non il carico laterale."
+    },
+    {
+      "id": "bici",
+      "type": "cross-training",
+      "label": "Bici",
+      "when": "GIO 4",
+      "duration_min": 30,
+      "intensity": "Z1, no impatto",
+      "notes": "Commute lavorativo facile. Deve restare recupero attivo, non allenamento."
+    },
+    {
+      "id": "forza",
+      "type": "strength",
+      "label": "Forza",
+      "when": "GIO 4 o VEN 5",
+      "duration_min": 25,
+      "notes": "Template completo ma conservativo: lascia 2-3 ripetizioni in riserva su squat, split squat e step-up. Niente cedimento muscolare: serve riattivare la routine forza, non creare DOMS prima del weekend."
+    },
+    {
+      "id": "easy-recovery",
+      "type": "easy",
+      "label": "Easy recovery",
+      "duration_min": 30,
+      "intensity": "Z1-Z2 bassa",
+      "fc_max_bpm": 140,
+      "when": "VEN 5",
+      "notes": "Treviglio piatto, Mizuno. Deve sembrare quasi troppo facile: ritmo conversazionale pieno, FC sotto 140. Se sonno <6h, gambe pesanti o fastidio al petto che ritorna, sostituisci con 30' camminata e mobility."
+    },
+    {
+      "id": "trail-technique",
+      "type": "easy",
+      "label": "Trail corto controllato",
+      "duration_min": 60,
+      "intensity": "Z1-Z2, cammina appena sale",
+      "fc_max_bpm": 152,
+      "vertical_m_max": 250,
+      "when": "SAB 6 o DOM 7",
+      "notes": "Richiamo tecnico leggero, non un secondo lungo. Route collinare facile, 45-65' e massimo 250 m D+. Target reale 140-145 bpm; 152 e solo il tetto assoluto. In salita cammina prima che la FC scappi; in discesa lavora su passi corti, controllo e allacciatura La Sportiva. Se il test Z2 esce molto faticoso o il callo/alluce si riapre, taglia questa sessione e fai solo camminata in piano."
+    }
+  ],
+  "log": [
+    {
+      "plan_ref": "checkin",
+      "title": "Pesa LUN 1 — 66.8 kg, 13.0% BF, BMI 19.9 (-1.8 kg vs LUN 25, +0.4 vs baseline)"
+    }
+  ]
+}
