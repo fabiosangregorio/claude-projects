@@ -63,7 +63,8 @@
     },
     {
       "plan_ref": "corsa-mar",
-      "title": "Corsa MAR 26 — done (non strutturata, da analizzare)"
+      "activity": "2026-05-26_167572d1-1eca-4090-86f7-09f1aa862070",
+      "title": "Corsa MAR 26 — brick run + calisthenics, 6.01 km, ~50', FC media 147"
     },
     {
       "plan_ref": "padel",
@@ -72,6 +73,11 @@
     {
       "plan_ref": "bici",
       "title": "Bici GIO 28 commute — done"
+    },
+    {
+      "plan_ref": "long",
+      "activity": "2026-05-30_50ea5102-1614-416b-ae3d-2768669d5138",
+      "title": "Trail Resegone SAB 30 — 8.72 km, 491 m D+, ~81', FC media 161, 8.6% sotto MAF, decoupling -6%"
     }
   ],
   "review": {
