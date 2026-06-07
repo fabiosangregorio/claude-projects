@@ -1,0 +1,298 @@
+{
+  "schema_version": 1,
+  "id": "b65ccc40-63db-4450-b523-55ca01d31ad3",
+  "start": "2026-06-03T06:06:45.770Z",
+  "komoot_url": "https://www.komoot.com/it-it/tour/3008472088",
+  "ai_analysis": {
+    "model": "claude-opus-4-8",
+    "generated_at": "2026-06-07T15:30:00Z",
+    "prompt_version": 1,
+    "classification": {
+      "workout_type": "facile / fondo (base)",
+      "primary_benefit": "fondo aerobico",
+      "training_effect_aerobic": 3.0,
+      "training_effect_anaerobic": 1.0
+    },
+    "execution": {
+      "intent_inferred": "fondo facile in pianura; depurato dalle 3 soste (bere, bagno, spesa) sono 12.42 km in 83:36 a 6:44/km, ben tenuto",
+      "execution_quality": 5,
+      "primary_failure_mode": "nessuno",
+      "failure_confidence": 0.9
+    },
+    "trail_specificity": {
+      "score": 1,
+      "vertical_load_pct_of_race": null,
+      "notes": "Pianura pura: 43 m di dislivello positivo (D+) su 12.9 km, 79% del tempo sotto il 2% di pendenza. Zero specificità verticale per la DBT 21K."
+    },
+    "headline": "Depurato dalle 3 soste (9:50) E dal recupero FC post-sosta (120s), è un fondo facile eseguito molto bene: passo reale 6:44/km (non 7:14), FC media 151 e deriva cardiaca (decoupling Pa:Hr) +1.0% — quasi piatta. Il +14% del file era l'artefatto della camminata-spesa.",
+    "strengths": [
+      "Durabilità aerobica solida: tolto anche il recupero FC dopo le soste, la deriva cardiaca (decoupling Pa:Hr) è +1.0% — di fatto piatta; la frequenza cardiaca (FC) sale solo da 149 a 153 nella seconda metà tenendo la velocità.",
+      "Passo reale 6:44/km su 12.42 km di corsa effettiva: ben più brillante del 7:14 che il tempo trascorso (con soste) suggerisce.",
+      "Intensità da fondo: 0% in Z4/Z5 sul profilo FCmax reale (181), nessuna partenza a strappo, primo km in riscaldamento."
+    ],
+    "concerns": [
+      {
+        "area": "intensità",
+        "severity": 2,
+        "note": "Il 57% del tempo di corsa è appena sopra MAF, in soglia aerobica (Z3, 152-165). Per un fondo di Fase 1 l'ideale sarebbe stare tutto sotto 152: sbavatura lieve, non grave."
+      },
+      {
+        "area": "qualità del dato",
+        "severity": 1,
+        "note": "I numeri 'ufficiali' del file (passo 7:14, decoupling +14.4%, split-balance +15.6%, split km 12) includono le 3 soste come tempo attivo. Vanno letti dalla sezione data_quality, non dai totali grezzi."
+      }
+    ],
+    "narrative": "Riletta con le finestre di sosta reali fornite da te (bere 33:20-35:20, bagno 40:54-42:30, spesa 78:17-84:31, in tutto 9:50 e ~520 m camminati), la corsa cambia faccia rispetto ai totali grezzi. Il passo vero in movimento è 6:44/km su 12.42 km, non 7:14: erano i quasi 10 minuti in piedi a gonfiare la media.\n\nIl punto chiave è la deriva cardiaca. Sui dati grezzi il file segna +14.4%, ma quel numero include la camminata-spesa nella seconda metà. Tolte le soste, il passo è 6:38 nella prima metà e 6:50 nella seconda, con la frequenza cardiaca (FC) che sale appena da 148 a 152: deriva Pa:Hr +0.3%, di fatto nulla. Tradotto: per essere un principiante, hai tenuto un fondo lungo senza sfaldarti. Ottimo segnale.\n\nResta solo la solita nota di intensità: il 57% del tempo di corsa è poco sopra la soglia MAF (152), in Z3. Niente di grave su un fondo facile, ma il margine per stare più aerobici c'è. Zero specificità trail (pianura)."
+  },
+  "data_quality": {
+    "watch_paused": false,
+    "elapsed_eq_active": true,
+    "stop_windows_source": "fornite manualmente dall'atleta (minuti di tempo trascorso)",
+    "non_training_stops": [
+      { "type": "bere", "start_min": 33.333, "end_min": 35.34, "duration_sec": 120, "km_from": 5.09, "km_to": 5.25, "walked_m": 161 },
+      { "type": "bagno", "start_min": 40.908, "end_min": 42.492, "duration_sec": 95, "km_from": 6.06, "km_to": 6.15, "walked_m": 86 },
+      { "type": "spesa", "start_min": 78.278, "end_min": 84.52, "duration_sec": 375, "km_from": 11.30, "km_to": 11.57, "walked_m": 271 }
+    ],
+    "total_stop_sec": 590,
+    "stop_distance_m": 519,
+    "running_time_sec": 5016,
+    "running_distance_km": 12.42,
+    "running_avg_pace_min_per_km": 6.73,
+    "running_avg_hr": 150,
+    "running_hr_zones_pct_real_hrmax181": { "z1": 1.8, "z2_maf": 41.0, "z3": 57.3, "z4": 0.0, "z5": 0.0, "below_maf": 42.7 },
+    "decoupling_clean_pahr_pct": 0.3,
+    "decoupling_clean_ef_pct": 5.6,
+    "recovery_corrected": {
+      "_note": "Lettura RACCOMANDATA. Esclude anche il transitorio di recupero FC dopo ogni ripartenza (120s), non solo la finestra di sosta. Dopo una sosta la FC e' depressa di 10-30 bpm e risale al regime in ~80s (bere/bagno) / ~110s (spesa): quei secondi hanno passo normale ma FC finta-bassa, e falsano decoupling e zone.",
+      "recovery_blanking_sec": 120,
+      "running_distance_km": 11.53,
+      "running_time_sec": 4658,
+      "running_avg_pace_min_per_km": 6.73,
+      "running_avg_hr": 151,
+      "running_hr_zones_pct_real_hrmax181": { "z1": 1.5, "z2_maf": 37.8, "z3": 60.7, "z4": 0.0, "z5": 0.0, "below_maf": 39.3 },
+      "decoupling_pahr_pct": 1.0,
+      "decoupling_ef_pct": 6.4,
+      "convergence_check": "con blanking 180s i valori non si muovono (Pa:Hr +1.2%, EF +6.8%): 120s e' sufficiente."
+    },
+    "metrics_contaminated_by_stops": ["totals.avg_pace_min_per_km (7:14 vs 6:44 reale)", "decoupling.pct (14.44 vs +1.0 reale)", "split_balance", "splits[12]", "zone FC (post-sosta FC-in-ritardo gonfia il tempo sotto MAF: 43% apparente vs 39% reale)"],
+    "note": "Soste = commissioni (bere, bagno, spesa), NON walk-break da fatica. L'orologio non e' mai stato messo in pausa, percio' i 9:50 di sosta sono dentro il tempo attivo. Due artefatti da togliere: (1) le finestre di sosta; (2) il recupero FC nei ~120s dopo ogni ripartenza. La lettura completa e' in 'recovery_corrected': decoupling Pa:Hr +1.0% (quasi piatto, buona durabilita'), e solo 39.3% sotto MAF (il 43% apparente era gonfiato dalla FC-in-ritardo). Senza togliere il recupero il decoupling risultava artificialmente piatto a +0.3%. Vedi grafico interattivo 2026-06-03_pace-hr-decoupling.html (fasce arancioni = soste, viola = recupero FC)."
+  },
+  "totals": {
+    "distance_km": 12.93,
+    "duration_sec": 5610,
+    "avg_pace_min_per_km": 7.23,
+    "gap_min_per_km": 7.109,
+    "ef": 0.951,
+    "avg_hr": 148,
+    "max_hr_observed": 161,
+    "hrmax_est_used": 166,
+    "ascent_m": 43,
+    "elev_min_m": 126,
+    "elev_max_m": 147,
+    "steps": 12345,
+    "avg_cadence_spm": 132,
+    "avg_stride_cm": 105
+  },
+  "derived": {
+    "trimp": 254,
+    "polarization_3z": {
+      "lit_pct": 11.7,
+      "mit_pct": 13.4,
+      "hit_pct": 74.9
+    },
+    "maf": {
+      "ceiling_bpm": 152,
+      "time_below_pct": 47.7
+    },
+    "vertical": {
+      "vam_m_per_h": 28,
+      "ascent_m_per_h": 28,
+      "descent_m_per_h": 29
+    },
+    "grade_distribution": {
+      "flat_lt_2": 78.8,
+      "rolling_2_5": 8.8,
+      "uphill_5_10": 1.3,
+      "steep_gt_10": 0.1,
+      "down_2_5": 9,
+      "down_5_10": 1.9,
+      "down_gt_10": 0.1
+    },
+    "climb_efficiency": {
+      "ef_uphill": 1.335,
+      "uphill_time_sec": 74
+    },
+    "race_match": null
+  },
+  "decoupling": {
+    "first_half": {
+      "gap_min_per_km": 7.014,
+      "hr": 147
+    },
+    "second_half": {
+      "gap_min_per_km": 8.133,
+      "hr": 148
+    },
+    "pct": 14.44
+  },
+  "pace_variability": {
+    "cv_overall_pct": 23.53,
+    "cv_running_only_pct": 22.84
+  },
+  "split_balance": {
+    "first_half_sec": 2428,
+    "second_half_sec": 2807,
+    "diff_pct": 15.59
+  },
+  "hr_zones": [
+    {
+      "zone": 1,
+      "time_sec": 35
+    },
+    {
+      "zone": 2,
+      "time_sec": 229
+    },
+    {
+      "zone": 3,
+      "time_sec": 291
+    },
+    {
+      "zone": 4,
+      "time_sec": 1392
+    },
+    {
+      "zone": 5,
+      "time_sec": 3657
+    }
+  ],
+  "walks_summary": {
+    "count": 1,
+    "total_walk_sec": 279,
+    "walk_pct": 4.97
+  },
+  "walk_breaks": [
+    {
+      "started_sec": 4734,
+      "duration_sec": 279,
+      "avg_cadence_spm": 21.7,
+      "at_km": 11.45
+    }
+  ],
+  "splits": [
+    {
+      "km": 1,
+      "duration_sec": 400.5,
+      "pace_min_per_km": 6.676,
+      "gap_min_per_km": 6.622,
+      "avg_hr": 132,
+      "pct_hrmax": 79.8,
+      "ef": 1.14
+    },
+    {
+      "km": 2,
+      "duration_sec": 371.6,
+      "pace_min_per_km": 6.194,
+      "gap_min_per_km": 6.247,
+      "avg_hr": 150,
+      "pct_hrmax": 90.1,
+      "ef": 1.07
+    },
+    {
+      "km": 3,
+      "duration_sec": 374,
+      "pace_min_per_km": 6.233,
+      "gap_min_per_km": 6.075,
+      "avg_hr": 155,
+      "pct_hrmax": 93.1,
+      "ef": 1.065
+    },
+    {
+      "km": 4,
+      "duration_sec": 394.7,
+      "pace_min_per_km": 6.578,
+      "gap_min_per_km": 6.461,
+      "avg_hr": 153,
+      "pct_hrmax": 92.4,
+      "ef": 1.009
+    },
+    {
+      "km": 5,
+      "duration_sec": 420.5,
+      "pace_min_per_km": 7.008,
+      "gap_min_per_km": 6.906,
+      "avg_hr": 152,
+      "pct_hrmax": 91.7,
+      "ef": 0.951
+    },
+    {
+      "km": 6,
+      "duration_sec": 467.1,
+      "pace_min_per_km": 7.785,
+      "gap_min_per_km": 7.66,
+      "avg_hr": 145,
+      "pct_hrmax": 87.3,
+      "ef": 0.901
+    },
+    {
+      "km": 7,
+      "duration_sec": 495.1,
+      "pace_min_per_km": 8.251,
+      "gap_min_per_km": 8.371,
+      "avg_hr": 145,
+      "pct_hrmax": 87.6,
+      "ef": 0.821
+    },
+    {
+      "km": 8,
+      "duration_sec": 407.9,
+      "pace_min_per_km": 6.799,
+      "gap_min_per_km": 6.825,
+      "avg_hr": 153,
+      "pct_hrmax": 92.2,
+      "ef": 0.958
+    },
+    {
+      "km": 9,
+      "duration_sec": 404.8,
+      "pace_min_per_km": 6.746,
+      "gap_min_per_km": 6.923,
+      "avg_hr": 150,
+      "pct_hrmax": 90.2,
+      "ef": 0.965
+    },
+    {
+      "km": 10,
+      "duration_sec": 422.4,
+      "pace_min_per_km": 7.041,
+      "gap_min_per_km": 7.043,
+      "avg_hr": 152,
+      "pct_hrmax": 91.6,
+      "ef": 0.934
+    },
+    {
+      "km": 11,
+      "duration_sec": 419,
+      "pace_min_per_km": 6.984,
+      "gap_min_per_km": 7.174,
+      "avg_hr": 153,
+      "pct_hrmax": 92.4,
+      "ef": 0.909
+    },
+    {
+      "km": 12,
+      "duration_sec": 657.7,
+      "pace_min_per_km": 10.962,
+      "gap_min_per_km": 11.065,
+      "avg_hr": 134,
+      "pct_hrmax": 80.5,
+      "ef": 0.677
+    }
+  ],
+  "remainder": {
+    "km": 0.93,
+    "duration_sec": 374.4,
+    "pace_min_per_km": 6.692,
+    "gap_min_per_km": 6.806
+  }
+}

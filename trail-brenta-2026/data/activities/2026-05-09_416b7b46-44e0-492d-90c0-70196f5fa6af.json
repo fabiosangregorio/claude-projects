@@ -130,50 +130,50 @@
     }
   ],
   "ai_analysis": {
-    "model": "claude-opus-4-7",
-    "generated_at": "2026-05-09T18:00:00Z",
+    "model": "claude-opus-4-8",
+    "generated_at": "2026-06-07T15:22:51Z",
     "prompt_version": 1,
     "classification": {
       "workout_type": "salita",
       "primary_benefit": "base",
-      "training_effect_aerobic": 3.8,
-      "training_effect_anaerobic": 2.5
+      "training_effect_aerobic": 3.5,
+      "training_effect_anaerobic": 2
     },
     "execution": {
       "intent_inferred": "baseline trail verticale su Linzone — primo test sul terreno di gara",
       "execution_quality": 4,
-      "primary_failure_mode": "none",
+      "primary_failure_mode": "nessuno",
       "failure_confidence": 0.6
     },
     "trail_specificity": {
       "score": 4,
-      "vertical_load_pct_of_race": 53,
-      "notes": "662 m di dislivello positivo (D+) in singola salita, 46% del tempo su pendenza >10%, discesa tecnica: stimolo specifico per la DBT 21K."
+      "vertical_load_pct_of_race": 43.3,
+      "notes": "541 m di dislivello positivo (D+) in singola salita ripida con discesa tecnica: il 43% del carico verticale della gara."
     },
-    "headline": "Primo trail vero su Linzone: 662 m di dislivello positivo (D+) in 8.9 km, salita camminata in controllo, discesa fluida e senza fiatone — segnale trail positivo.",
+    "headline": "Trail verticale al Linzone: 541 m di dislivello positivo (D+) in 8.9 km, salita tutta camminata in controllo e discesa fluida senza fiatone — solido stimolo specifico.",
     "strengths": [
-      "662 m di D+ assorbiti senza distress, frequenza cardiaca (FC) tenuta a 151 di media nonostante 88% del tempo in Z4-Z5.",
-      "Discesa con respirazione tranquilla — feedback soggettivo coerente con FC che cala al km 7 (139 bpm) prima di rialzarsi.",
-      "Salita gestita bene a piedi: cadenza 90 spm sul muro iniziale, niente strappi inutili per correre l'incorribile."
+      "Discesa fluida e senza fiatone (km 7-8 a ~9:30/km su terreno tecnico): la tenuta respiratoria in discesa è già a posto.",
+      "Salita gestita a piedi con criterio: cadenza 90 sul muro iniziale, nessuno strappo per correre l'incorribile.",
+      "Intensità reale moderata: con la frequenza cardiaca massima (FCmax) corretta il tempo in Z5 scende al 15%, non era uno sforzo estremo."
     ],
     "concerns": [
       {
         "area": "vestibilità scarpa in discesa",
         "severity": 3,
-        "note": "Dolore esterno ai pollicioni in discesa e post-corsa: piede scivola in avanti, da rivedere allacciatura o numero prima del prossimo trail."
+        "note": "Dolore esterno ai pollicioni in discesa e dopo: piede che scivola avanti, da rivedere allacciatura o taglia prima del prossimo trail."
       },
       {
-        "area": "tolleranza alla salita corsa",
-        "severity": 3,
-        "note": "Salita 100% camminata. Corretto su pendenze >10%, ma serve costruire tolleranza a corsa lenta sui tratti 5-8%."
-      },
-      {
-        "area": "idratazione e nutrizione",
+        "area": "tolleranza alla corsa in salita",
         "severity": 2,
-        "note": "750 ml su 1.5 L in ~1h52m: ok oggi, ma sali e gel vanno testati nei prossimi lunghi prima della gara."
+        "note": "Salita 100% camminata: corretto oltre il 10%, ma manca ancora la corsa lenta sui tratti al 5-8%."
+      },
+      {
+        "area": "test sali e nutrizione",
+        "severity": 2,
+        "note": "750 ml su 1.5 L in ~1h52: ok oggi, ma sali e gellino restano da provare nei lunghi prima della gara."
       }
     ],
-    "narrative": "Stacco netto rispetto al baseline su asfalto del 1 maggio: lì il messaggio era 'base aerobica da rifare', qui è 'sul terreno di gara testa e gambe rispondono'. Linzone con 662 m di dislivello positivo (D+) in singola salita pesa il 53% del carico verticale della Dolomiti di Brenta Trail (DBT) 21K, e l'hai assorbito.\n\nLa salita è stata camminata al 100% (53% del tempo totale): corretto su pendenze >10%. Frequenza cardiaca (FC) media a 151 bpm con il 43% in Z5 — alto, ma senza crolli e con buona efficacia in salita (EF uphill 1.31).\n\nLa discesa è il dato che pesa di più: km 7-8 a 9:30/km su pendenza tecnica negativa, FC che ridiscende, niente fiatone soggettivo. La tenuta polmonare in discesa è già lì.\n\nIl decoupling al 22% è artefatto della lunga camminata iniziale (38 min nel primo muro), non base aerobica persa."
+    "narrative": "Ri-analisi della baseline Linzone con due correzioni rispetto alla versione precedente. Primo: il dislivello vero, rimisurato sul modello del terreno komoot, è 541 m e non i 662 m grezzi del GPS, quindi il carico verticale vale il 43% della Dolomiti di Brenta Trail (DBT) 21K, non il 53%. Secondo, più importante: ricalcolando sulla frequenza cardiaca massima (FCmax) reale, l'intensità non era estrema — il tempo in Z5 cala dal 43% al 15% e di fatto è stato un lungo prevalentemente di soglia (Z4), camminando in salita.\n\nLa salita (~58 min, tutta a piedi) è corretta sulle pendenze oltre il 10%. La discesa resta il segnale migliore: passo sciolto, frequenza cardiaca che rientra, nessun fiatone soggettivo — in discesa la tenuta c'è già.\n\nLa deriva cardiaca (decoupling) al 22% è artefatto del lungo tratto camminato iniziale, non base aerobica persa. Da sistemare la scarpa in discesa e il piano sali/gel."
   },
   "totals": {
     "distance_km": 8.92,
@@ -183,8 +183,13 @@
     "ef": 0.637,
     "avg_hr": 151,
     "max_hr_observed": 170,
-    "hrmax_est_used": 175,
-    "ascent_m": 662,
+    "hrmax_est_used": 181,
+    "hrmax_source": "profile",
+    "elevation_source": "komoot_dem",
+    "ascent_m": 541,
+    "descent_m": 529,
+    "nrc_ascent_m": 662,
+    "nrc_descent_m": 669,
     "elev_min_m": 887,
     "elev_max_m": 1423,
     "steps": 12015,
@@ -192,20 +197,20 @@
     "avg_stride_cm": 74
   },
   "derived": {
-    "trimp": 272,
+    "trimp": 239,
     "polarization_3z": {
-      "lit_pct": 14.2,
-      "mit_pct": 42.8,
-      "hit_pct": 43
+      "lit_pct": 21.1,
+      "mit_pct": 63.5,
+      "hit_pct": 15.4
     },
     "maf": {
       "ceiling_bpm": 152,
       "time_below_pct": 36.3
     },
     "vertical": {
-      "vam_m_per_h": 355,
-      "ascent_m_per_h": 355,
-      "descent_m_per_h": 358
+      "vam_m_per_h": 290,
+      "ascent_m_per_h": 290,
+      "descent_m_per_h": 283
     },
     "grade_distribution": {
       "flat_lt_2": 5.8,
@@ -221,7 +226,7 @@
       "uphill_time_sec": 3457
     },
     "race_match": {
-      "vertical_match_pct": 53,
+      "vertical_match_pct": 43.3,
       "duration_match_pct": 37.3
     }
   },
@@ -238,7 +243,7 @@
   },
   "pace_variability": {
     "cv_overall_pct": 36.9,
-    "cv_running_only_pct": 34.17
+    "cv_running_only_pct": 34.8
   },
   "split_balance": {
     "first_half_sec": 3643,
@@ -248,29 +253,29 @@
   "hr_zones": [
     {
       "zone": 1,
-      "time_sec": 8
+      "time_sec": 51
     },
     {
       "zone": 2,
-      "time_sec": 406
+      "time_sec": 462
     },
     {
       "zone": 3,
-      "time_sec": 419
+      "time_sec": 689
     },
     {
       "zone": 4,
-      "time_sec": 3661
+      "time_sec": 4694
     },
     {
       "zone": 5,
-      "time_sec": 2222
+      "time_sec": 820
     }
   ],
   "walks_summary": {
-    "count": 7,
-    "total_walk_sec": 3565,
-    "walk_pct": 53.03
+    "count": 4,
+    "total_walk_sec": 3082,
+    "walk_pct": 45.85
   },
   "walk_breaks": [
     {
@@ -280,39 +285,21 @@
       "at_km": 1.21
     },
     {
-      "started_sec": 2384,
-      "duration_sec": 119,
-      "avg_cadence_spm": 106.9,
-      "at_km": 2.49
-    },
-    {
       "started_sec": 2549,
       "duration_sec": 458,
       "avg_cadence_spm": 72,
       "at_km": 2.88
     },
     {
-      "started_sec": 3185,
-      "duration_sec": 116,
-      "avg_cadence_spm": 59.7,
-      "at_km": 3.5
-    },
-    {
-      "started_sec": 3570,
-      "duration_sec": 108,
-      "avg_cadence_spm": 96,
-      "at_km": 3.98
-    },
-    {
-      "started_sec": 3886,
-      "duration_sec": 187,
-      "avg_cadence_spm": 65.1,
+      "started_sec": 3894,
+      "duration_sec": 179,
+      "avg_cadence_spm": 63,
       "at_km": 4.44
     },
     {
-      "started_sec": 4968,
-      "duration_sec": 274,
-      "avg_cadence_spm": 27,
+      "started_sec": 5100,
+      "duration_sec": 142,
+      "avg_cadence_spm": 10.9,
       "at_km": 6.01
     }
   ],
@@ -323,7 +310,7 @@
       "pace_min_per_km": 15.73,
       "gap_min_per_km": 7.048,
       "avg_hr": 151,
-      "pct_hrmax": 86.4,
+      "pct_hrmax": 83.5,
       "ef": 0.938
     },
     {
@@ -332,7 +319,7 @@
       "pace_min_per_km": 19.282,
       "gap_min_per_km": 7.034,
       "avg_hr": 160,
-      "pct_hrmax": 91.6,
+      "pct_hrmax": 88.5,
       "ef": 0.887
     },
     {
@@ -341,7 +328,7 @@
       "pace_min_per_km": 14.742,
       "gap_min_per_km": 8.786,
       "avg_hr": 153,
-      "pct_hrmax": 87.3,
+      "pct_hrmax": 84.4,
       "ef": 0.745
     },
     {
@@ -350,7 +337,7 @@
       "pace_min_per_km": 10.97,
       "gap_min_per_km": 11.709,
       "avg_hr": 153,
-      "pct_hrmax": 87.2,
+      "pct_hrmax": 84.3,
       "ef": 0.56
     },
     {
@@ -359,7 +346,7 @@
       "pace_min_per_km": 12.176,
       "gap_min_per_km": 12.089,
       "avg_hr": 139,
-      "pct_hrmax": 79.3,
+      "pct_hrmax": 76.7,
       "ef": 0.596
     },
     {
@@ -368,7 +355,7 @@
       "pace_min_per_km": 11.99,
       "gap_min_per_km": 11.361,
       "avg_hr": 149,
-      "pct_hrmax": 85.4,
+      "pct_hrmax": 82.6,
       "ef": 0.589
     },
     {
@@ -377,7 +364,7 @@
       "pace_min_per_km": 9.342,
       "gap_min_per_km": 16.455,
       "avg_hr": 139,
-      "pct_hrmax": 79.6,
+      "pct_hrmax": 76.9,
       "ef": 0.436
     },
     {
@@ -386,7 +373,7 @@
       "pace_min_per_km": 9.642,
       "gap_min_per_km": 18.191,
       "avg_hr": 151,
-      "pct_hrmax": 86.5,
+      "pct_hrmax": 83.6,
       "ef": 0.363
     }
   ],

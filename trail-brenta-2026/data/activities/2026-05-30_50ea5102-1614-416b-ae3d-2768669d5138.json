@@ -2,9 +2,12 @@
   "schema_version": 1,
   "id": "50ea5102-1614-416b-ae3d-2768669d5138",
   "start": "2026-05-30T15:08:06.441Z",
+  "name": "Trail run dal rifugio Resegone",
+  "user_note": null,
+  "komoot_url": "https://www.komoot.com/it-it/tour/2999366690",
   "ai_analysis": {
     "model": "claude-opus-4-8",
-    "generated_at": "2026-06-01T08:00:00Z",
+    "generated_at": "2026-06-07T15:22:51Z",
     "prompt_version": 1,
     "classification": {
       "workout_type": "lungo trail",
@@ -20,20 +23,20 @@
     },
     "trail_specificity": {
       "score": 4,
-      "vertical_load_pct_of_race": null,
-      "notes": "491 m D+ in 8.7 km su terreno ripido (~39% del dislivello gara): vera specificità trail, ma sotto Linzone (662 m) e Laghello (689 m)."
+      "vertical_load_pct_of_race": 34.4,
+      "notes": "430 m di dislivello positivo (D+) in 8.7 km su terreno ripido (34% del dislivello gara): vera specificità trail, ma sotto Linzone e Laghello."
     },
-    "headline": "Trail al Resegone più corto e meno verticale di Linzone e Laghello, ma corso molto più forte: FC media 161 e solo 8.6% sotto MAF — di fatto un lungo a soglia, non aerobico.",
+    "headline": "Trail al Resegone più corto e meno verticale di Linzone e Laghello, ma corso troppo forte: frequenza cardiaca media 161 e solo 8.6% sotto la soglia aerobica Maffetone (MAF) — un lungo a soglia, non aerobico.",
     "strengths": [
       "Deriva cardiaca (decoupling Pa:Hr) negativa (-6%): seconda metà più efficiente, durabilità solida sugli 81 minuti.",
-      "Vincoli di Fase 1 rispettati: 491 m di dislivello (D+) e 81' sotto i tetti; cammina-in-salita applicata (8 pause, 23%).",
-      "Buona resa in salita: efficienza 1.22 e velocità ascensionale media (VAM) 364 m/h su pendenze reali."
+      "Vincoli di Fase 1 rispettati: 430 m di dislivello positivo (D+) e 81' sotto i tetti; cammina-in-salita applicata (8 pause, 23%).",
+      "Buona resa in salita: efficienza in salita 1.22 e velocità ascensionale media (VAM) 319 m/h su pendenze reali."
     ],
     "concerns": [
       {
         "area": "motore aerobico",
         "severity": 4,
-        "note": "Solo l'8.6% del tempo sotto la soglia MAF e il 63% in alta intensità (HIT): l'intento aerobico è saltato, conferma il motore aerobico ancora poco sviluppato."
+        "note": "Solo l'8.6% del tempo sotto la soglia aerobica Maffetone (MAF) e il 53% in alta intensità (HIT): l'intento aerobico è saltato, motore aerobico ancora poco sviluppato."
       },
       {
         "area": "controllo intensità",
@@ -46,7 +49,7 @@
         "note": "Discesa ripida presente (19.5% oltre il -10%): nessun riscontro qui sul fastidio pollicioni / allacciatura La Sportiva, da verificare a voce."
       }
     ],
-    "narrative": "Trail vero — terreno ripido, salita continua, una discesa tecnica nella seconda metà — ma più corto e meno verticale dei due trail precedenti (Linzone e Laghello, entrambi oltre 650 m D+). La strategia cammina-in-salita c'è stata e i vincoli di Fase 1 (dislivello e durata) sono rispettati.\n\nIl punto critico è l'intensità. Sui due trail più lunghi avevi tenuto la frequenza cardiaca (FC) intorno al tetto MAF; qui, su un percorso più facile, è schizzata in alto (media 161, solo l'8.6% del tempo sotto MAF): di fatto un lungo a soglia, non aerobico. Pesa la stessa preoccupazione aperta dalle settimane precedenti — manca una misura pulita del fondo aerobico.\n\nIl segnale positivo è la tenuta: nessuna deriva cardiaca, anzi seconda metà leggermente più efficiente. Sugli 81 minuti la durabilità ha retto nonostante lo sforzo."
+    "narrative": "Ri-analisi con il dislivello rimisurato sul modello del terreno komoot: 430 m di dislivello positivo (D+), non i 491 m grezzi del GPS, quindi il carico verticale vale il 34% della Dolomiti di Brenta Trail 21K — sotto Linzone e Laghello (entrambi oltre 540 m). Resta trail vero: terreno ripido, salita continua, una discesa tecnica nella seconda metà. La strategia cammina-in-salita c'è stata e i vincoli di Fase 1 (dislivello e durata) sono rispettati.\n\nIl punto critico è l'intensità. Sui due trail più lunghi avevi tenuto la frequenza cardiaca (FC) intorno al tetto MAF; qui, su un percorso più facile, è schizzata in alto (media 161, solo l'8.6% del tempo sotto MAF): di fatto un lungo a soglia, non aerobico. Pesa la stessa preoccupazione delle settimane precedenti — manca una misura pulita del fondo aerobico.\n\nIl segnale positivo è la tenuta: nessuna deriva cardiaca, anzi seconda metà leggermente più efficiente. Sugli 81 minuti la durabilità ha retto nonostante lo sforzo."
   },
   "totals": {
     "distance_km": 8.72,
@@ -56,8 +59,13 @@
     "ef": 0.728,
     "avg_hr": 161,
     "max_hr_observed": 174,
-    "hrmax_est_used": 179,
-    "ascent_m": 491,
+    "hrmax_est_used": 181,
+    "hrmax_source": "profile",
+    "elevation_source": "komoot_dem",
+    "ascent_m": 430,
+    "descent_m": 468,
+    "nrc_ascent_m": 491,
+    "nrc_descent_m": 486,
     "elev_min_m": 1086,
     "elev_max_m": 1415,
     "steps": 10652,
@@ -65,20 +73,20 @@
     "avg_stride_cm": 82
   },
   "derived": {
-    "trimp": 228,
+    "trimp": 218,
     "polarization_3z": {
-      "lit_pct": 2.3,
-      "mit_pct": 35,
-      "hit_pct": 62.7
+      "lit_pct": 3.2,
+      "mit_pct": 44.3,
+      "hit_pct": 52.6
     },
     "maf": {
       "ceiling_bpm": 152,
       "time_below_pct": 8.6
     },
     "vertical": {
-      "vam_m_per_h": 364,
-      "ascent_m_per_h": 364,
-      "descent_m_per_h": 360
+      "vam_m_per_h": 319,
+      "ascent_m_per_h": 319,
+      "descent_m_per_h": 347
     },
     "grade_distribution": {
       "flat_lt_2": 7.3,
@@ -93,7 +101,10 @@
       "ef_uphill": 1.215,
       "uphill_time_sec": 2607
     },
-    "race_match": null
+    "race_match": {
+      "vertical_match_pct": 34.4,
+      "duration_match_pct": 27
+    }
   },
   "decoupling": {
     "first_half": {
@@ -126,15 +137,15 @@
     },
     {
       "zone": 3,
-      "time_sec": 76
+      "time_sec": 95
     },
     {
       "zone": 4,
-      "time_sec": 2213
+      "time_sec": 2479
     },
     {
       "zone": 5,
-      "time_sec": 2553
+      "time_sec": 2268
     }
   ],
   "walks_summary": {
@@ -199,7 +210,7 @@
       "pace_min_per_km": 9.902,
       "gap_min_per_km": 6.262,
       "avg_hr": 162,
-      "pct_hrmax": 90.5,
+      "pct_hrmax": 89.5,
       "ef": 0.986
     },
     {
@@ -208,7 +219,7 @@
       "pace_min_per_km": 9.091,
       "gap_min_per_km": 7.58,
       "avg_hr": 157,
-      "pct_hrmax": 87.9,
+      "pct_hrmax": 87,
       "ef": 0.838
     },
     {
@@ -217,7 +228,7 @@
       "pace_min_per_km": 8.188,
       "gap_min_per_km": 13.564,
       "avg_hr": 160,
-      "pct_hrmax": 89.5,
+      "pct_hrmax": 88.5,
       "ef": 0.46
     },
     {
@@ -226,7 +237,7 @@
       "pace_min_per_km": 9.417,
       "gap_min_per_km": 19.013,
       "avg_hr": 163,
-      "pct_hrmax": 90.8,
+      "pct_hrmax": 89.8,
       "ef": 0.324
     },
     {
@@ -235,7 +246,7 @@
       "pace_min_per_km": 10,
       "gap_min_per_km": 6.598,
       "avg_hr": 163,
-      "pct_hrmax": 91,
+      "pct_hrmax": 90,
       "ef": 0.93
     },
     {
@@ -244,7 +255,7 @@
       "pace_min_per_km": 12.917,
       "gap_min_per_km": 6.701,
       "avg_hr": 162,
-      "pct_hrmax": 90.4,
+      "pct_hrmax": 89.4,
       "ef": 0.922
     },
     {
@@ -253,7 +264,7 @@
       "pace_min_per_km": 8.175,
       "gap_min_per_km": 8.909,
       "avg_hr": 162,
-      "pct_hrmax": 90.6,
+      "pct_hrmax": 89.6,
       "ef": 0.692
     },
     {
@@ -262,7 +273,7 @@
       "pace_min_per_km": 6.019,
       "gap_min_per_km": 9.361,
       "avg_hr": 158,
-      "pct_hrmax": 88.3,
+      "pct_hrmax": 87.3,
       "ef": 0.676
     }
   ],

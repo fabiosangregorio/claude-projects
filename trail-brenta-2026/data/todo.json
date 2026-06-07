@@ -1,6 +1,6 @@
 {
   "_description": "Task list per la preparazione (burocrazia, equipment, test).",
-  "last_updated": "2026-05-28T12:00:00",
+  "last_updated": "2026-06-07T12:00:00",
   "tasks": [
     {
       "category": "burocrazia",
@@ -32,9 +32,10 @@
       "category": "attrezzatura",
       "task": "Decidere se tenere La Sportiva o cambiarle",
       "deadline": "2026-06-15",
-      "status": "pending",
+      "status": "done",
+      "completed_date": "2026-06-07",
       "priority": "alta",
-      "note": "Valutare comfort, grip, stabilità su tecnico, eventuale dolore/sfregamento dopo i test su sentiero. Se cambiare, lasciare tempo per rodare un nuovo modello prima del lungo block (luglio)."
+      "note": "DECISO: le tengo. Dopo essermi fatto i calli non ho più dolore (era il dolore esterno pollicioni / sfregamento dei primi test). Restano le scarpe da gara — niente nuovo modello da rodare."
     },
     {
       "category": "attrezzatura",
