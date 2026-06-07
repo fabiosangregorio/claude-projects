@@ -1,0 +1,66 @@
+{
+  "_schema_version": "2.0",
+  "number": 6,
+  "phase_id": "2-base-mountain",
+  "start_date": "2026-06-08",
+  "end_date": "2026-06-14",
+  "label": "Base montagna: rampa d'ingresso D+ (~300 m)",
+  "narrative": "Prima settimana di Fase 2 (base montagna) dopo la chiusura della Fase 1 con verdetto proceed: KPI aerobico promosso (decoupling Pa:Hr +1.0% sul test piatto di 84') e scarpe confermate. La fase introduce il dislivello in modo progressivo (200-700 m sull'arco delle 5 settimane) con obiettivo finale sostenere 1h30 con 600 m D+ in Z2; la 06 sta volutamente in basso, rampa d'ingresso a ~300 m. Settimana stra-impegnata sul lavoro: solo lunedi e martedi sera per le corse, domenica mattina per il trail, giovedi bici. Due fili rossi dal review della 05: la disciplina di intensita (cammina in salita appena la FC supera 152, l'unico concern ancora aperto, severita 4) e la forza, saltata 2 settimane di fila, da riancorare subito - slot tentato il mercoledi sera, ora libero. Niente piu padel.",
+  "plan": [
+    {
+      "id": "checkin",
+      "type": "check-in",
+      "label": "Pesa",
+      "when": "LUN 8 mattina, a digiuno",
+      "notes": "Prima di partire: registra solo il dato, non cambiare allenamento per il numero. Stesse condizioni delle altre settimane (a digiuno, prima di bere). Lettura attesa: oscillazione fisiologica intorno a 66.x kg, nessun allarme."
+    },
+    {
+      "id": "easy-1",
+      "type": "easy",
+      "label": "Easy Z2 piatto",
+      "duration_min": 45,
+      "intensity": "Z2/MAF",
+      "fc_max_bpm": 152,
+      "when": "LUN 8 sera",
+      "notes": "Prima di partire: corsa facile di fondo, non un test. Percorso: Treviglio piatto, Mizuno. Target: 40-45', FC 140-150, tetto assoluto 152, respirazione conversazionale piena. Primi 10' molto facili. Se la FC supera 152 per oltre 30-45 secondi, rallenta o cammina 60 secondi e riparti. Vietato il progressivo finale."
+    },
+    {
+      "id": "easy-2",
+      "type": "easy",
+      "label": "Easy recupero",
+      "duration_min": 30,
+      "intensity": "Z1-Z2 bassa",
+      "fc_max_bpm": 140,
+      "when": "MAR 9 sera",
+      "notes": "Prima di partire: solo recupero attivo, deve sembrare quasi troppo facile. Treviglio piatto, Mizuno. Target: 30', FC sotto 140, ritmo conversazionale pieno. Sostituisci con 30' camminata + mobility se sonno <6h, gambe pesanti o stanchezza accumulata dalla settimana."
+    },
+    {
+      "id": "forza",
+      "type": "strength",
+      "label": "Forza",
+      "duration_min": 25,
+      "when": "MER 10 sera",
+      "notes": "Priorita della settimana: riancorare la forza dopo 2 settimane saltate di fila. Slot tentato il mercoledi sera (ora libero, niente piu padel) ma non garantito; se salta e il 3o salto consecutivo, l'aderenza forza diventa un concern aperto. Template completo, conservativa: 2-3 ripetizioni in riserva su goblet squat, split squat e step-up, movimenti lenti e puliti. Manubri 20 kg a casa. Stop se compare dolore acuto, articolare o asimmetrico. Mai prima del lungo - qui il trail e domenica, quindi mercoledi e perfetto."
+    },
+    {
+      "id": "bici",
+      "type": "cross-training",
+      "label": "Bici",
+      "when": "GIO 11",
+      "duration_min": 30,
+      "intensity": "Z1, no impatto",
+      "notes": "Commute, recupero attivo. Z1, pedalata agile, nessuna salita o tratto tirato. Conta come cross-training di baseline, non come seduta di qualita."
+    },
+    {
+      "id": "trail-d-plus",
+      "type": "long",
+      "label": "Trail D+ controllato",
+      "duration_min": 80,
+      "intensity": "Z2, cammina in salita appena FC > 152",
+      "fc_max_bpm": 152,
+      "vertical_m_max": 320,
+      "when": "DOM 14 mattina",
+      "notes": "Prima di partire: primo vero lungo di Fase 2 con dislivello, rampa d'ingresso morbida e conta come lungo della settimana. Zona: Monte Canto / Pontida / Carvico (~25-30' da Treviglio, l'elevazione vera piu vicina). Target: 75-85', ~300 m D+ (tetto 320), FC reale 140-148, tetto assoluto 152. DISCIPLINA: cammina in salita ogni volta che la FC tocca 152, senza eccezioni - e il punto aperto da 2 settimane e in Fase 2 il terreno spinge di piu. In discesa: passi corti, controllo, niente cronometro, verifica allacciatura La Sportiva e callo/alluce. Taglia a camminata in piano se la FC scappa nei primi 15' o se le gambe sono ancora cariche. Scarpe La Sportiva; porta acqua (lo zaino idro arrivera, per ora borraccia in mano o marsupio)."
+    }
+  ]
+}
