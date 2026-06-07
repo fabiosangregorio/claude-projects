@@ -76,6 +76,93 @@
     {
       "plan_ref": "checkin",
       "title": "Pesa LUN 1 — 66.8 kg, 13.0% BF, BMI 19.9 (-1.8 kg vs LUN 25, +0.4 vs baseline)"
+    },
+    {
+      "plan_ref": "long-z2-test",
+      "activity": "2026-06-03_b65ccc40-63db-4450-b523-55ca01d31ad3",
+      "title": "Test Z2 piatto MER 3 (slittato dal MAR 2) — 12.9 km, 43 m D+, ~84' di corsa, FC media ~150, decoupling Pa:Hr pulito +1.0% (al netto di 3 soste-commissioni). KPI Fase 1 raggiunto."
+    },
+    {
+      "plan_ref": "padel",
+      "title": "Padel MER 3 — done"
+    },
+    {
+      "plan_ref": "bici",
+      "title": "Bici GIO 4 commute — done"
+    },
+    {
+      "plan_ref": "trail-technique",
+      "activity": "2026-06-06_318d9130-652c-44d7-8d56-08e02a0e34fd",
+      "title": "Trail collinare SAB 6 — 9.96 km, 375 m D+ (oltre cap Fase 1 di 250), ~97', FC media 145, 63.7% sotto MAF, decoupling 8.82%, su gambe stanche/poco sonno."
     }
-  ]
+  ],
+  "review": {
+    "date": "2026-06-07",
+    "verdict": "proceed",
+    "headline": "Fase 1 chiusa: motore aerobico promosso e scarpe decise, via libera alla Fase 2 (base montagna) da lunedi 8.",
+    "synthesis": "Il KPI di Fase 1 e raggiunto (decoupling Pa:Hr +1.0% pulito sul test piatto di 84', ben sotto l'8%), il recupero dalla giornata storta di sabato e rientrato e la scelta scarpe e chiusa (La Sportiva confermate, dolore da rodaggio risolto). I due cancelli per la Fase 2 sono superati: si apre la base montagna con D+ progressivo 200-700 m e obiettivo sostenere 1h30 con 600 m D+ in Z2. Un solo monito da portarsi dietro: la disciplina di intensita, cioe camminare in salita ogni volta che la FC supera 152, perche in Fase 2 il terreno spingera di piu. Secondo buco di aderenza: la forza, saltata per la seconda settimana di fila, va riancorata subito in Fase 2.",
+    "auto": {
+      "adherence": {
+        "planned": 3,
+        "done": 2,
+        "long_run": "done",
+        "swapped": [
+          {
+            "planned": "test Z2 MAR 2",
+            "replaced_with": "fatto MER 3 (slittato di 1 giorno)"
+          },
+          {
+            "planned": "easy-recovery VEN 5",
+            "replaced_with": "non fatta"
+          },
+          {
+            "planned": "forza",
+            "replaced_with": "saltata (2a settimana di fila)"
+          }
+        ]
+      },
+      "load": {
+        "trimp_training": 432,
+        "ascent_m_total": 418,
+        "duration_min_total": 181,
+        "maf_below_pct_training": 53,
+        "weight_delta_kg": -1.8,
+        "weight_kg_latest": 66.8
+      },
+      "phase_kpi": {
+        "objective": "Portare il decoupling Pa:Hr da 12.6% a sotto 8% su un lungo piatto di 60+ min.",
+        "status": "met",
+        "note": "Test Z2 piatto MER 3 (slittato dal MAR 2): 12.9 km, 43 m D+, ~84' di corsa, decoupling Pa:Hr pulito +1.0% (recovery-corrected, al netto di 3 soste-commissioni da 9:50 totali). Soglia <8% superata nettamente. Caveat: intensita non sub-MAF pura (FC media ~150, solo ~39% sotto MAF, 57% appena sopra il tetto 152): la durabilita e promossa, la disciplina del tetto resta da affinare in Fase 2."
+      },
+      "open_concerns": [
+        {
+          "area": "controllo intensita",
+          "weeks_open": 2,
+          "severity_max": 4
+        }
+      ],
+      "highlights": "KPI Fase 1 raggiunto: decoupling Pa:Hr +1.0% pulito sul test piatto di 84', motore aerobico promosso dopo 3 settimane da bottleneck. Decisione scarpe chiusa (La Sportiva confermate, niente nuovo modello da rodare). Tempo sotto MAF piu che raddoppiato (53% vs 21.8% della 04). Peso rientrato a 66.8 kg.",
+      "lowlights": "Disciplina di intensita ancora aperta: test Z2 con FC media ~150 (57% sopra MAF), e trail di sabato su gambe stanche finito in Z3/Z4 (decoupling 8.82%) e a 375 m D+, oltre il cap Fase 1 di 250 m. Easy recovery di venerdi saltata e forza saltata per la seconda settimana.",
+      "race_day_break_derived": {
+        "value": "controllo intensita / disciplina aerobica in salita",
+        "reason": "KPI aerobico ora promosso (decoupling +1.0%); il limite residuo e tenere la FC sotto 152 quando terreno e fatica spingono, esattamente cio che la Fase 2 con D+ crescente mettera alla prova."
+      }
+    },
+    "checkin": {
+      "recovery": "buono, la giornata storta di sabato (gambe pesanti, poco sonno) e rientrata il giorno dopo",
+      "doms": "non riferiti",
+      "sleep_avg": "una notte scarsa pre-sabato; resto della settimana non riferito",
+      "niggles": [
+        "callo/alluce La Sportiva, fastidio lieve ma gestibile; scarpa confermata in gara"
+      ],
+      "life_load": "non riferito",
+      "symptoms": [
+        {
+          "area": "peso/pesantezza al petto sotto sforzo",
+          "status": "mai piu comparso",
+          "follow_up": "tenere sotto osservazione, richiesto esplicitamente dall'atleta"
+        }
+      ]
+    }
+  }
 }
