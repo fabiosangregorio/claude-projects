@@ -2,51 +2,54 @@
   "schema_version": 1,
   "id": "5d243887-9f08-4d15-8aa7-94732fc5a029",
   "start": "2026-05-18T06:33:26.499Z",
+  "name": "lunedì corsa mattutina",
+  "user_note": null,
+  "komoot_url": "https://www.komoot.com/it-it/tour/2963295725",
   "ai_analysis": {
-    "model": "claude-opus-4-7",
-    "generated_at": "2026-05-18T10:18:00Z",
+    "model": "claude-opus-4-8",
+    "generated_at": "2026-06-07T00:00:00Z",
     "prompt_version": 1,
     "classification": {
       "workout_type": "lungo in salita (trail)",
       "primary_benefit": "base aerobica + specificità muscolare in salita",
-      "training_effect_aerobic": 3.6,
-      "training_effect_anaerobic": 1.4
+      "training_effect_aerobic": 3.5,
+      "training_effect_anaerobic": 1.3
     },
     "execution": {
       "intent_inferred": "uscita lunga su trail con forte dislivello positivo (D+), gestita a sensazione",
       "execution_quality": 3,
-      "primary_failure_mode": "pacing",
-      "failure_confidence": 0.6
+      "primary_failure_mode": "terreno",
+      "failure_confidence": 0.55
     },
     "trail_specificity": {
       "score": 4,
-      "vertical_load_pct_of_race": 55.1,
-      "notes": "689 m D+ in 12.8 km, oltre metà del tempo su pendenze >10%: simile, in miniatura, alla gara."
+      "vertical_load_pct_of_race": 48.5,
+      "notes": "606 m D+ (DEM komoot) in 12.8 km, 35% del tempo su pendenze >10%: gara in miniatura, quasi metà del carico verticale della Brenta."
     },
-    "headline": "Sessione trail molto specifica per dislivello e pendenze, ma deriva cardiaca al 13.5% e una pausa da 10 minuti a km 8 indicano una base aerobica ancora corta sulla durata.",
+    "headline": "Trail molto specifico per dislivello e pendenze (~48% del carico verticale di gara), ma deriva cardiaca al 13.5% e una sosta da ~10 min al km 8 dicono che durata e terreno hanno superato la base aerobica attuale.",
     "strengths": [
-      "Stimolo verticale notevole: 689 m D+, 35% del tempo su salite >10%, velocità di ascesa media (VAM) 318 m/h.",
-      "Efficienza in salita (efficiency factor in uphill EF 1.45) buona per terreno così ripido.",
-      "Seconda metà 6.6% più rapida in tempo: chiusura progressiva sulla durata complessiva."
+      "Stimolo verticale notevole: 606 m di dislivello positivo (D+) corretto, 35% del tempo su salite >10%, velocità di ascesa media (VAM) 279 m/h.",
+      "Efficienza in salita (efficiency factor in salita, EF 1.46) buona per terreno così ripido.",
+      "Seconda metà 6.6% più rapida in tempo: tiene la struttura del lungo nonostante la crisi centrale."
     ],
     "concerns": [
       {
         "area": "deriva cardiaca (decoupling Pa:Hr)",
         "severity": 4,
-        "note": "13.5% tra prima e seconda metà: ben oltre la soglia di buona resistenza aerobica (<5%). Stesso pattern, peggiore, del Linzone."
+        "note": "13.5% tra prima e seconda metà: a frequenza cardiaca (FC) costante (150/149) il passo cala. Oltre la soglia di buona tenuta aerobica (<5%), peggio del Linzone."
       },
       {
-        "area": "disciplina aerobica (MAF)",
+        "area": "disciplina aerobica (soglia aerobica Maffetone, MAF)",
         "severity": 3,
-        "note": "Solo 50.6% del tempo sotto il tetto MAF di 152 bpm: quasi metà uscita oltre soglia per terreno e durata."
+        "note": "Solo 50.6% del tempo sotto il tetto MAF di 152 bpm; quasi metà uscita in Z4. Terreno e durata oltre la capacità aerobica di oggi."
       },
       {
         "area": "pause e cammino",
         "severity": 3,
-        "note": "13 walk break per 36 min (28% del tempo), inclusa una sosta da quasi 10 min a km 8: probabile momento di crisi."
+        "note": "13 walk break per 36 min (28% del tempo), inclusa una sosta da ~10 min al km 8: punto di crisi della giornata."
       }
     ],
-    "narrative": "Lungo del lunedì mattina con profilo da trail vero: 689 m di dislivello positivo (D+) in 12.8 km e oltre la metà del tempo su pendenze sopra il 10%. Stimolo specifico alto per la XTERRA Brenta — circa il 55% del carico verticale di gara, con buona efficienza in salita.\n\nIl tema è la tenuta aerobica nella durata. La deriva cardiaca Pa:Hr al 13.5% (target <5%) racconta che a frequenza cardiaca costante (149/149 bpm) nella seconda metà andavi più lento — segnale di affaticamento, calore o idratazione. Stesso pattern del Linzone, ma più marcato. Solo il 50.6% del tempo sotto il tetto MAF di 152 bpm conferma che durata e terreno hanno superato l'attuale capacità aerobica.\n\nLa pausa di quasi 10 min al km 8 ha mascherato la crisi. Distribuzione di intensità (polarizzazione) 31.7/48.6/19.7: troppo grigia per un lungo, lontano dal modello 80/20."
+    "narrative": "Lungo del lunedì mattina con profilo da trail vero: 606 m di dislivello positivo (D+) — il dato komoot corretto sul modello del terreno, contro i 689 m gonfiati del GPS Nike — in 12.8 km, oltre un terzo del tempo su pendenze sopra il 10%. Stimolo specifico alto per la XTERRA Brenta, quasi metà del carico verticale di gara, con buona efficienza in salita.\n\nIl limite resta la tenuta aerobica sulla durata. La deriva cardiaca Pa:Hr al 13.5% (obiettivo <5%) dice che a FC praticamente identica nella seconda metà andavi più piano: affaticamento accumulato da terreno e durata, non un avvio troppo forte. Solo il 50.6% del tempo sotto il tetto MAF di 152 bpm e una quota dominante in Z4 confermano che l'uscita ha lavorato sopra il regime aerobico.\n\nLa pausa di ~10 min al km 8 ha mascherato la crisi. Distribuzione di intensità (polarizzazione) 39/48/13: molto centrata sulla zona media, lontana dal modello 80/20 di un lungo aerobico."
   },
   "totals": {
     "distance_km": 12.79,
@@ -56,8 +59,13 @@
     "ef": 0.727,
     "avg_hr": 149,
     "max_hr_observed": 174,
-    "hrmax_est_used": 179,
-    "ascent_m": 689,
+    "hrmax_est_used": 181,
+    "hrmax_source": "profile",
+    "elevation_source": "komoot_dem",
+    "ascent_m": 606,
+    "descent_m": 612,
+    "nrc_ascent_m": 689,
+    "nrc_descent_m": 692,
     "elev_min_m": 340,
     "elev_max_m": 680,
     "steps": 15221,
@@ -65,20 +73,20 @@
     "avg_stride_cm": 84
   },
   "derived": {
-    "trimp": 274,
+    "trimp": 263,
     "polarization_3z": {
-      "lit_pct": 31.7,
-      "mit_pct": 48.6,
-      "hit_pct": 19.7
+      "lit_pct": 39,
+      "mit_pct": 48.4,
+      "hit_pct": 12.6
     },
     "maf": {
       "ceiling_bpm": 152,
       "time_below_pct": 50.6
     },
     "vertical": {
-      "vam_m_per_h": 318,
-      "ascent_m_per_h": 318,
-      "descent_m_per_h": 319
+      "vam_m_per_h": 279,
+      "ascent_m_per_h": 279,
+      "descent_m_per_h": 282
     },
     "grade_distribution": {
       "flat_lt_2": 9.9,
@@ -93,7 +101,10 @@
       "ef_uphill": 1.455,
       "uphill_time_sec": 3662
     },
-    "race_match": null
+    "race_match": {
+      "vertical_match_pct": 48.5,
+      "duration_match_pct": 43.4
+    }
   },
   "decoupling": {
     "first_half": {
@@ -122,19 +133,19 @@
     },
     {
       "zone": 2,
-      "time_sec": 406
+      "time_sec": 453
     },
     {
       "zone": 3,
-      "time_sec": 1822
+      "time_sec": 2026
     },
     {
       "zone": 4,
-      "time_sec": 4600
+      "time_sec": 4543
     },
     {
       "zone": 5,
-      "time_sec": 981
+      "time_sec": 786
     }
   ],
   "walks_summary": {
@@ -229,7 +240,7 @@
       "pace_min_per_km": 9.494,
       "gap_min_per_km": 6.191,
       "avg_hr": 144,
-      "pct_hrmax": 80.7,
+      "pct_hrmax": 79.8,
       "ef": 1.118
     },
     {
@@ -238,7 +249,7 @@
       "pace_min_per_km": 10.831,
       "gap_min_per_km": 6.367,
       "avg_hr": 150,
-      "pct_hrmax": 84.1,
+      "pct_hrmax": 83.1,
       "ef": 1.044
     },
     {
@@ -247,7 +258,7 @@
       "pace_min_per_km": 10.389,
       "gap_min_per_km": 6.851,
       "avg_hr": 151,
-      "pct_hrmax": 84.3,
+      "pct_hrmax": 83.4,
       "ef": 0.967
     },
     {
@@ -256,7 +267,7 @@
       "pace_min_per_km": 9.949,
       "gap_min_per_km": 8.344,
       "avg_hr": 155,
-      "pct_hrmax": 86.8,
+      "pct_hrmax": 85.8,
       "ef": 0.771
     },
     {
@@ -265,7 +276,7 @@
       "pace_min_per_km": 16.045,
       "gap_min_per_km": 21.665,
       "avg_hr": 145,
-      "pct_hrmax": 81,
+      "pct_hrmax": 80.1,
       "ef": 0.318
     },
     {
@@ -274,7 +285,7 @@
       "pace_min_per_km": 8.388,
       "gap_min_per_km": 10.795,
       "avg_hr": 155,
-      "pct_hrmax": 86.6,
+      "pct_hrmax": 85.6,
       "ef": 0.598
     },
     {
@@ -283,7 +294,7 @@
       "pace_min_per_km": 7.213,
       "gap_min_per_km": 13.624,
       "avg_hr": 159,
-      "pct_hrmax": 88.7,
+      "pct_hrmax": 87.7,
       "ef": 0.462
     },
     {
@@ -292,7 +303,7 @@
       "pace_min_per_km": 13.337,
       "gap_min_per_km": 11.863,
       "avg_hr": 145,
-      "pct_hrmax": 81.1,
+      "pct_hrmax": 80.2,
       "ef": 0.58
     },
     {
@@ -301,7 +312,7 @@
       "pace_min_per_km": 15.249,
       "gap_min_per_km": 8.807,
       "avg_hr": 142,
-      "pct_hrmax": 79.6,
+      "pct_hrmax": 78.7,
       "ef": 0.797
     },
     {
@@ -310,7 +321,7 @@
       "pace_min_per_km": 10.676,
       "gap_min_per_km": 7.148,
       "avg_hr": 146,
-      "pct_hrmax": 81.8,
+      "pct_hrmax": 80.9,
       "ef": 0.955
     },
     {
@@ -319,7 +330,7 @@
       "pace_min_per_km": 6.857,
       "gap_min_per_km": 12.2,
       "avg_hr": 153,
-      "pct_hrmax": 85.4,
+      "pct_hrmax": 84.5,
       "ef": 0.536
     },
     {
@@ -328,7 +339,7 @@
       "pace_min_per_km": 7.478,
       "gap_min_per_km": 11.72,
       "avg_hr": 149,
-      "pct_hrmax": 83,
+      "pct_hrmax": 82.1,
       "ef": 0.574
     }
   ],
