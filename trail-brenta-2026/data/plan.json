@@ -15,7 +15,8 @@
     "FC batte pace. Se al passo target la FC sale di più di 5 bpm sopra il limite di zona, rallenta o inserisci tratti di camminata.",
     "Indolenzimento muscolare diffuso = ok continuare. Dolore acuto, articolare o asimmetrico = stop e valutazione medica.",
     "Sonno sotto 6h o malanno in corso = sostituisci la sessione del giorno con riposo o corsa molto facile (max 25 min Z1).",
-    "Calibrazione conservativa: se i numeri vanno meglio del previsto, il volume sale al massimo del +10% settimana su settimana."
+    "Calibrazione conservativa: se i numeri vanno meglio del previsto, il volume sale al massimo del +10% settimana su settimana.",
+    "Ogni corsa o trail include un coaching_tip {title, detail}: una singola abilita nuova di tecnica/running su cui concentrarsi quella sessione, oltre ai riferimenti FC/zona. Progressivi e non ripetuti tra le sessioni - costruiscono un repertorio. Scopo: imparare qualcosa di utile a ogni uscita."
   ],
   "phases": [
     {

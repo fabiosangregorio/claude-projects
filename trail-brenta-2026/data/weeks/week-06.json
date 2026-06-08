@@ -22,7 +22,11 @@
       "intensity": "Z2/MAF",
       "fc_max_bpm": 152,
       "when": "LUN 8 sera",
-      "notes": "Prima di partire: corsa facile di fondo, non un test. Percorso: Treviglio piatto, Mizuno. Target: 40-45', FC 140-150, tetto assoluto 152, respirazione conversazionale piena. Primi 10' molto facili. Se la FC supera 152 per oltre 30-45 secondi, rallenta o cammina 60 secondi e riparti. Vietato il progressivo finale."
+      "notes": "Prima di partire: corsa facile di fondo, non un test. Percorso: Treviglio piatto, Mizuno. Target: 40-45', FC 140-150, tetto assoluto 152, respirazione conversazionale piena. Primi 10' molto facili. Se la FC supera 152 per oltre 30-45 secondi, rallenta o cammina 60 secondi e riparti. Vietato il progressivo finale.",
+      "coaching_tip": {
+        "title": "Cadenza",
+        "detail": "Quasi tutti i principianti fanno passi troppo lunghi e lenti, atterrando col piede molto avanti al corpo: e una frenata a ogni passo e tutto l'impatto va sul ginocchio. Fix contro-intuitivo: passi piu corti e frequenti, ~170-180 al minuto. In sessione: ogni tanto conta i passi di un piede per 15 secondi (x4 = la tua cadenza) e cerca passi leggeri, come su gusci d'uovo. Non cambi ritmo ne FC, solo la frequenza."
+      }
     },
     {
       "id": "easy-2",
@@ -32,7 +36,11 @@
       "intensity": "Z1-Z2 bassa",
       "fc_max_bpm": 140,
       "when": "MAR 9 sera",
-      "notes": "Prima di partire: solo recupero attivo, deve sembrare quasi troppo facile. Treviglio piatto, Mizuno. Target: 30', FC sotto 140, ritmo conversazionale pieno. Sostituisci con 30' camminata + mobility se sonno <6h, gambe pesanti o stanchezza accumulata dalla settimana."
+      "notes": "Prima di partire: solo recupero attivo, deve sembrare quasi troppo facile. Treviglio piatto, Mizuno. Target: 30', FC sotto 140, ritmo conversazionale pieno. Sostituisci con 30' camminata + mobility se sonno <6h, gambe pesanti o stanchezza accumulata dalla settimana.",
+      "coaching_tip": {
+        "title": "Postura e rilassamento",
+        "detail": "La tensione e energia sprecata; una buona postura e velocita gratis. Corri alto (immagina un filo che ti tira su dalla testa), leggera inclinazione dalle caviglie non dalla vita, spalle basse e lontane dalle orecchie, mani molli (come tenere una patatina senza romperla), mascella rilassata, sguardo 10-15 m avanti non ai piedi. In sessione: ogni 5' un check testa-piedi e rilascia cio che e teso."
+      }
     },
     {
       "id": "forza",
@@ -60,7 +68,11 @@
       "fc_max_bpm": 152,
       "vertical_m_max": 320,
       "when": "DOM 14 mattina",
-      "notes": "Prima di partire: primo vero lungo di Fase 2 con dislivello, rampa d'ingresso morbida e conta come lungo della settimana. Zona: Monte Canto / Pontida / Carvico (~25-30' da Treviglio, l'elevazione vera piu vicina). Target: 75-85', ~300 m D+ (tetto 320), FC reale 140-148, tetto assoluto 152. DISCIPLINA: cammina in salita ogni volta che la FC tocca 152, senza eccezioni - e il punto aperto da 2 settimane e in Fase 2 il terreno spinge di piu. In discesa: passi corti, controllo, niente cronometro, verifica allacciatura La Sportiva e callo/alluce. Taglia a camminata in piano se la FC scappa nei primi 15' o se le gambe sono ancora cariche. Scarpe La Sportiva; porta acqua (lo zaino idro arrivera, per ora borraccia in mano o marsupio)."
+      "notes": "Prima di partire: primo vero lungo di Fase 2 con dislivello, rampa d'ingresso morbida e conta come lungo della settimana. Zona: Monte Canto / Pontida / Carvico (~25-30' da Treviglio, l'elevazione vera piu vicina). Target: 75-85', ~300 m D+ (tetto 320), FC reale 140-148, tetto assoluto 152. DISCIPLINA: cammina in salita ogni volta che la FC tocca 152, senza eccezioni - e il punto aperto da 2 settimane e in Fase 2 il terreno spinge di piu. In discesa: passi corti, controllo, niente cronometro, verifica allacciatura La Sportiva e callo/alluce. Taglia a camminata in piano se la FC scappa nei primi 15' o se le gambe sono ancora cariche. Scarpe La Sportiva; porta acqua (lo zaino idro arrivera, per ora borraccia in mano o marsupio).",
+      "coaching_tip": {
+        "title": "Power-hiking in salita",
+        "detail": "Rivelazione che cambia il trail: anche i bravi trail runner CAMMINANO le salite ripide - spesso e piu veloce e molto piu economico che corricchiarle, e non e barare. Quando la pendenza morde: passi corti, mani che premono sulle cosce a ogni passo (spingi e scarichi la schiena), busto un filo avanti, sguardo su per il sentiero. In sessione: e anche lo strumento che tiene la FC sotto 152 - appena sale, passa a questo invece di forzare la corsa."
+      }
     }
   ]
 }

@@ -52,6 +52,10 @@ section{margin:2rem 0}
 .sess-meta{font-family:'Space Mono',monospace;font-size:.7rem;color:var(--tx2)}
 .sess-when{font-family:'Space Mono',monospace;font-size:.6rem;font-weight:700;color:var(--tx);background:var(--sf2);border:1px solid var(--bd);border-radius:4px;padding:.18rem .45rem;text-transform:uppercase;letter-spacing:.8px;white-space:nowrap;margin-left:auto}
 .sess-notes{font-size:.82rem;color:var(--tx2);line-height:1.5;margin-top:.3rem}
+.sess-tip{margin-top:.5rem;padding:.55rem .7rem .6rem;background:rgba(63,185,80,.07);border:1px solid rgba(63,185,80,.3);border-left:3px solid var(--ac2);border-radius:6px}
+.sess-tip-label{font-family:'Space Mono',monospace;font-size:.56rem;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--ac2);display:flex;align-items:center;gap:.35rem;margin-bottom:.3rem}
+.sess-tip-title{font-weight:700;color:var(--tx);font-size:.85rem;margin-bottom:.18rem}
+.sess-tip-detail{font-size:.8rem;color:var(--tx2);line-height:1.5}
 
 .sess-routes{display:flex;flex-direction:column;gap:.4rem;margin-top:.55rem;align-items:flex-start}
 .sess-route{display:inline-flex;align-items:center;gap:.4rem;padding:.45rem .7rem;background:var(--sf2);border:1px solid var(--bd);border-radius:6px;text-decoration:none;color:var(--ac);font-family:'Space Mono',monospace;font-size:.75rem;font-weight:700;transition:border-color .2s,background .2s}
@@ -416,6 +420,12 @@ function renderSession(s, week) {
       </div>
       ${valueLineHtml}
       ${s.notes ? `<div class="sess-notes">${s.notes}</div>` : ''}
+      ${s.coaching_tip ? `
+      <div class="sess-tip">
+        <div class="sess-tip-label">💡 Focus della sessione · impara qualcosa di nuovo</div>
+        ${s.coaching_tip.title ? `<div class="sess-tip-title">${s.coaching_tip.title}</div>` : ''}
+        ${s.coaching_tip.detail ? `<div class="sess-tip-detail">${s.coaching_tip.detail}</div>` : ''}
+      </div>` : ''}
       ${routesHtml}
     </div>
   `;
