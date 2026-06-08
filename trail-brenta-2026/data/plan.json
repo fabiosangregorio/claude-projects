@@ -1,7 +1,7 @@
 {
   "_schema_version": "1.5",
   "_description": "Struttura del piano di allenamento: fasi, template forza/mobility, budget e regole. Le settimane vivono in weeks/ (un file per settimana, manifest in weeks/index.json) a partire da v1.5. Le date di passaggio fase sono indicative — la transizione reale dipende dal KPI raggiunto e dalla tolleranza osservata, non dal calendario.",
-  "last_updated": "2026-06-01",
+  "last_updated": "2026-06-07",
   "total_weeks": 18,
   "weekly_budget": {
     "running_sessions": 3,
@@ -62,7 +62,8 @@
         700
       ],
       "intensity": "Quasi tutto Z2. Le salite naturali possono spingere brevemente in Z3 ma in salita CAMMINI quando la FC supera la soglia.",
-      "calibration_note": "Le sessioni dettagliate verranno definite alla fine della Fase 1, sulla base del test."
+      "calibration_note": "Le sessioni dettagliate verranno definite alla fine della Fase 1, sulla base del test.",
+      "coaching_note": "Da settimana 06: inizia a testare la nutrizione di gara (gel/idratazione) sui lunghi, anche se brevi - la tolleranza gastrica si costruisce ora, non si scopre in Fase 3."
     },
     {
       "id": "3-build",
@@ -86,7 +87,8 @@
       ],
       "intensity": "80/20 polarizzato: 80% Z2, 20% qualità (tempo run brevi 20-30 min in Z3, una volta a settimana).",
       "vacation_strategy": "Se le vacanze cadono qui e sono in zona montana → blocco massimamente produttivo (lunghi sui sentieri reali). Se sono in città/mare → mantenimento Z2 + scale come surrogato del D+, lungo settimanale non negoziabile.",
-      "calibration_note": "Definito dopo Fase 2."
+      "calibration_note": "Definito dopo Fase 2.",
+      "coaching_note": "Specificita sul profilo reale: percorso >50% ripido (24% salita >10%, 26% discesa >10%, solo 11% piatto) per 1250 m D+. Il picco a 800-1000 m resta valido, ma includi almeno una prova-gara verso ~1100-1250 m (corsa/cammino, ok come hike) e dai priorita alla discesa tecnica: il limite di questo tracciato sono i quadricipiti, non il fiato."
     },
     {
       "id": "4-peak-taper",

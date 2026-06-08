@@ -1,6 +1,6 @@
 {
   "_description": "Task list per la preparazione (burocrazia, equipment, test).",
-  "last_updated": "2026-06-07T12:00:00",
+  "last_updated": "2026-06-07T21:10:00",
   "tasks": [
     {
       "category": "burocrazia",
@@ -60,6 +60,14 @@
       "task": "Telo termico + fischietto",
       "deadline": "2026-08-15",
       "status": "pending"
+    },
+    {
+      "category": "logistica",
+      "task": "Definire date e strategia vacanze estive",
+      "deadline": "2026-07-12",
+      "status": "pending",
+      "priority": "media",
+      "note": "Le vacanze cadono in Fase 2/3. Confermare le date e applicare la vacation_strategy di Fase 3: montagna = blocco D+ massimamente produttivo; citta/mare = mantenimento Z2 + scale, lungo settimanale non negoziabile."
     }
   ]
 }
