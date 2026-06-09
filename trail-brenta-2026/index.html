@@ -76,6 +76,8 @@ section.live .s-title::before{background:var(--ac2);box-shadow:0 0 0 0 rgba(63,1
 .nav-card-title{font-family:'Space Mono',monospace;font-size:.9rem;color:var(--tx);font-weight:700}
 .nav-card-sub{font-family:'Space Mono',monospace;font-size:.7rem;color:var(--tx2);margin-top:.15rem}
 .nav-card-arrow{color:var(--ac);font-family:'Space Mono',monospace;font-size:1rem}
+.nav-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.6rem;margin-bottom:.7rem}
+.nav-grid .nav-card{margin-bottom:0;padding:.85rem .9rem}
 
 /* Group card (more entries inside one card) */
 .group-card{background:var(--sf);border:1px solid var(--bd);border-radius:10px;padding:.3rem 1.1rem;margin-bottom:.7rem}
@@ -253,14 +255,11 @@ async function loadAll() {
 function render(app, profile, race, plan, todo, activitiesManifest, weighins) {
   app.innerHTML = [
     renderHero(race, plan),
-    renderPlanLink(plan),
-    renderActivitiesLink(activitiesManifest),
-    renderStatsLink(),
-    renderWeighinsLink(weighins),
+    renderNavGrid(plan, activitiesManifest, weighins),
     renderGuidesCard(),
-    renderTasks(todo),
     renderRaceInfo(race),
-    renderProfile(profile, weighins)
+    renderProfile(profile, weighins),
+    renderTasks(todo)
   ].join('');
 }
 
@@ -279,6 +278,10 @@ function renderHero(race, plan) {
       </div>
     </div>
   `;
+}
+
+function renderNavGrid(plan, activitiesManifest, weighins) {
+  return `<div class="nav-grid">${renderPlanLink(plan)}${renderActivitiesLink(activitiesManifest)}${renderStatsLink()}${renderWeighinsLink(weighins)}</div>`;
 }
 
 function renderPlanLink(plan) {
@@ -305,30 +308,32 @@ function renderPlanLink(plan) {
 
 function renderGuidesCard() {
   return `
-    <div class="group-card">
-      <div class="group-card-head">Guide</div>
-      <a class="group-link" href="./guides/recovery.html">
-        <div>
-          <div class="group-link-title">Recovery</div>
-          <div class="group-link-sub">cosa fare dopo l'attività</div>
-        </div>
-        <div class="group-link-arrow">→</div>
-      </a>
-      <a class="group-link" href="./guides/zones.html">
-        <div>
-          <div class="group-link-title">Zone di frequenza cardiaca</div>
-          <div class="group-link-sub">FCmax · MAF · 5 zone</div>
-        </div>
-        <div class="group-link-arrow">→</div>
-      </a>
-      <a class="group-link" href="./guides/mobility.html">
-        <div>
-          <div class="group-link-title">Mobility post-corsa</div>
-          <div class="group-link-sub">5 esercizi · ~5 min</div>
-        </div>
-        <div class="group-link-arrow">→</div>
-      </a>
-    </div>
+    <details>
+      <summary><span>Guide<span class="summary-sub">recovery · zone FC · mobility</span></span></summary>
+      <div>
+        <a class="group-link" href="./guides/recovery.html">
+          <div>
+            <div class="group-link-title">Recovery</div>
+            <div class="group-link-sub">cosa fare dopo l'attività</div>
+          </div>
+          <div class="group-link-arrow">→</div>
+        </a>
+        <a class="group-link" href="./guides/zones.html">
+          <div>
+            <div class="group-link-title">Zone di frequenza cardiaca</div>
+            <div class="group-link-sub">FCmax · MAF · 5 zone</div>
+          </div>
+          <div class="group-link-arrow">→</div>
+        </a>
+        <a class="group-link" href="./guides/mobility.html">
+          <div>
+            <div class="group-link-title">Mobility post-corsa</div>
+            <div class="group-link-sub">5 esercizi · ~5 min</div>
+          </div>
+          <div class="group-link-arrow">→</div>
+        </a>
+      </div>
+    </details>
   `;
 }
 
@@ -352,7 +357,7 @@ function renderStatsLink() {
     <a class="nav-card" href="./statistics.html">
       <div>
         <div class="nav-card-title">Statistiche</div>
-        <div class="nav-card-sub">trend carico · intensità · prontezza gara</div>
+        <div class="nav-card-sub">carico · intensità · gara</div>
       </div>
       <div class="nav-card-arrow">→</div>
     </a>
