@@ -359,6 +359,14 @@ function renderAdherence(reviewed) {
   const rows = reviewed.map(w => {
     const a = w.review.auto.adherence;
     const done = a.done || 0, planned = a.planned || 0;
+    if (planned === 0 || a.long_run === 'n/a') {
+      return `
+      <div class="adh">
+        <span class="adh-wk">S${w.number}</span>
+        <span style="font-family:'Space Mono',monospace;font-size:.7rem;color:var(--tx2)">settimana non pianificata</span>
+        <span class="adh-frac" style="color:var(--tx2)">n/a</span>
+      </div>`;
+    }
     const dots = [];
     for (let i = 0; i < planned; i++) dots.push(`<span class="adh-dot ${i < done ? 'done' : 'miss'}"></span>`);
     const longOk = a.long_run === 'done';
@@ -369,13 +377,14 @@ function renderAdherence(reviewed) {
         <span class="adh-frac">${done}/${planned}</span>
       </div>`;
   }).join('');
-  const longProtected = reviewed.every(w => w.review.auto.adherence.long_run === 'done');
+  const longWeeks = reviewed.filter(w => w.review.auto.adherence.long_run !== 'n/a' && (w.review.auto.adherence.planned || 0) > 0);
+  const longProtected = longWeeks.length > 0 && longWeeks.every(w => w.review.auto.adherence.long_run === 'done');
   return `
     <section${strengthStreak >= 2 ? ' class="warn"' : ''}>
       <h2 class="s-title">Aderenza</h2>
       <p class="s-note">Corse fatte vs pianificate per settimana. Il lungo è la sessione non negoziabile; la forza è il secondo investimento.</p>
       <div class="card">${rows}</div>
-      ${longProtected ? `<div class="card good"><span style="font-family:'Space Mono',monospace;font-size:.8rem;color:var(--ac2);font-weight:700">✓ Lungo protetto</span> <span class="cap" style="margin-top:.2rem">Mai saltato finora in ${reviewed.length} settimane valutate.</span></div>` : ''}
+      ${longProtected ? `<div class="card good"><span style="font-family:'Space Mono',monospace;font-size:.8rem;color:var(--ac2);font-weight:700">✓ Lungo protetto</span> <span class="cap" style="margin-top:.2rem">Mai saltato nelle ${longWeeks.length} settimane in cui era previsto.</span></div>` : ''}
       ${strengthStreak >= 2 ? `<div class="card warn"><span style="font-family:'Space Mono',monospace;font-size:.8rem;color:var(--wn);font-weight:700">⚠ Forza saltata ${strengthStreak} settimane di fila</span><div class="cap" style="margin-top:.2rem">Soglia di allerta a 2 salti consecutivi: da riancorare, non da trascinare.</div></div>` : ''}
     </section>`;
 }
