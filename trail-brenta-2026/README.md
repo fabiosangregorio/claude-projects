@@ -20,6 +20,7 @@ trail-brenta-2026/
 ├── weighins.html           ← Lista di tutte le pesate settimanali (con summary + delta).
 ├── guides/                 ← Guide pratiche linkate dalla home (sezione "Guide").
 │   ├── recovery.html       ← Cosa fare dopo l'attività (statica, no JSON).
+│   ├── recovery-run.html   ← Cos'è un recovery run / corsa facile (statica, no JSON).
 │   ├── zones.html          ← Zone di frequenza cardiaca (legge profile.json).
 │   └── mobility.html       ← Mobility post-corsa (legge plan.json#mobility_template).
 ├── README.md               ← Questo file.

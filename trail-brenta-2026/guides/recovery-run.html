@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DBT 21K — Recovery run</title>
+<meta name="theme-color" content="#0e1117">
+<script>document.documentElement.setAttribute('data-theme',localStorage.getItem('theme')||'dark')</script>
+<link rel="stylesheet" href="/claude-projects/theme.css">
+<script src="/claude-projects/theme.js" defer></script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0e1117;--sf:#161b22;--sf2:#1c2230;--bd:#2a3040;--tx:#e6edf3;--tx2:#8b949e;--ac:#58a6ff;--ac2:#3fb950;--wn:#f0883e;--rd:#f85149;--pd:#d2a8ff}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--tx);line-height:1.6;min-height:100vh;-webkit-font-smoothing:antialiased}
+.c{max-width:760px;margin:0 auto;padding:1.5rem 1rem 3rem}
+
+.back{display:inline-flex;align-items:center;gap:.35rem;font-family:'Space Mono',monospace;font-size:.75rem;color:var(--tx2);text-decoration:none;padding:.35rem .6rem;border-radius:6px;border:1px solid var(--bd);background:var(--sf);transition:border-color .2s,color .2s;margin-bottom:1.5rem}
+.back:hover{border-color:var(--ac);color:var(--ac)}
+.back svg{width:14px;height:14px}
+
+.hero{margin-bottom:2rem}
+.kicker{font-family:'Space Mono',monospace;font-size:.7rem;color:var(--ac2);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:.5rem}
+.hero h1{font-family:'Space Mono',monospace;font-size:clamp(1.4rem,4.5vw,2rem);font-weight:700;letter-spacing:-.5px;line-height:1.25;margin-bottom:.5rem;color:var(--tx)}
+.hero-sub{color:var(--tx2);font-size:.85rem;margin-bottom:1rem}
+.scope{background:rgba(88,166,255,.06);border:1px solid rgba(88,166,255,.28);border-radius:8px;padding:.7rem .85rem;font-size:.8rem;color:var(--tx);line-height:1.55}
+.scope strong{color:var(--ac);font-family:'Space Mono',monospace;font-size:.65rem;text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:.25rem}
+
+section{margin:2rem 0}
+.s-title{font-family:'Space Mono',monospace;font-size:.75rem;color:var(--tx2);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:1rem;display:flex;align-items:center;gap:.5rem}
+.s-title::before{content:'';display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--ac)}
+
+.intro{background:var(--sf);border:1px solid var(--bd);border-radius:10px;padding:1rem 1.1rem;font-size:.88rem;color:var(--tx);line-height:1.6}
+.intro p{margin-bottom:.7rem}
+.intro p:last-child{margin-bottom:0}
+.intro strong{color:var(--ac2)}
+
+.howto{background:var(--sf);border:1px solid var(--bd);border-radius:10px;padding:1rem 1.1rem;font-size:.85rem;color:var(--tx);line-height:1.55}
+.howto ul{margin:0 0 0 1rem;padding:0;list-style:none}
+.howto li{margin-bottom:.7rem;padding-left:1.2rem;position:relative}
+.howto li:last-child{margin-bottom:0}
+.howto li::before{content:'▸';position:absolute;left:0;color:var(--ac2);font-weight:700}
+.howto li strong{color:var(--tx)}
+
+.cmp{width:100%;border-collapse:collapse;font-size:.8rem;background:var(--sf);border:1px solid var(--bd);border-radius:10px;overflow:hidden}
+.cmp th{font-family:'Space Mono',monospace;font-size:.68rem;text-transform:uppercase;letter-spacing:.5px;text-align:left;padding:.7rem .7rem;color:var(--tx2);border-bottom:1px solid var(--bd);background:var(--sf2)}
+.cmp th.recov{color:var(--ac2)}
+.cmp th.easy{color:var(--ac)}
+.cmp td{padding:.6rem .7rem;border-bottom:1px solid var(--bd);vertical-align:top;color:var(--tx);line-height:1.45}
+.cmp tr:last-child td{border-bottom:none}
+.cmp td:first-child{font-family:'Space Mono',monospace;font-size:.7rem;color:var(--tx2);text-transform:uppercase;letter-spacing:.5px;width:24%}
+
+.callout{margin-top:1rem;padding:.85rem 1.1rem;background:rgba(240,136,62,.06);border:1px solid rgba(240,136,62,.3);border-radius:8px;font-size:.83rem;color:var(--tx);line-height:1.55}
+.callout strong{color:var(--wn);font-family:'Space Mono',monospace;font-size:.68rem;text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:.3rem}
+
+footer{margin-top:3rem;padding-top:1.5rem;border-top:1px solid var(--bd);text-align:center;color:var(--tx2);font-size:.72rem}
+footer a{color:var(--ac);text-decoration:none}
+.disclaimer{margin-top:1.5rem;padding:.85rem 1.1rem;background:rgba(240,136,62,.06);border:1px solid rgba(240,136,62,.3);border-radius:8px;font-size:.75rem;color:var(--tx2);line-height:1.55}
+.disclaimer strong{color:var(--wn);font-family:'Space Mono',monospace;font-size:.65rem;text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:.25rem}
+</style>
+</head>
+<body>
+<div class="c">
+  <a class="back" href="../"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>Home</a>
+
+  <div class="hero">
+    <div class="kicker">Teoria — guida pratica</div>
+    <h1>Cos'è un recovery run</h1>
+    <p class="hero-sub">La corsa più facile della settimana: a cosa serve e perché va corsa lenta.</p>
+    <div class="scope">
+      <strong>Quando si usa</strong>
+      Nel piano è la sessione corta del martedì (~30 min, FC &lt; 140). In generale: il giorno dopo una sessione dura — un lungo, le salite, l'intensità. Lo scopo non è migliorare, è far recuperare il corpo.
+    </div>
+  </div>
+
+  <section>
+    <h2 class="s-title">Il principio</h2>
+    <div class="intro">
+      <p>Quando fai una sessione dura (un lungo, le salite, le ripetute) crei fatica e micro-stress nei muscoli. Non diventi più forte <em>durante</em> la sessione: diventi più forte <strong>dopo</strong>, quando il corpo ripara e si adatta. È quell'adattamento che ti rende più allenato — ma richiede tempo.</p>
+      <p>Tornare a spingere troppo presto interrompe la riparazione. Il recovery run ti tiene in movimento <strong>senza aggiungere stress nuovo</strong>: il movimento leggero porta sangue ai muscoli stanchi, aiuta a smaltire le scorie e portare nutrienti. Spesso ti senti più sciolto dopo che a stare fermo tutto il giorno.</p>
+      <p>In una frase: le sessioni dure sono dove <strong>guadagni</strong> la forma, i giorni facili sono dove la <strong>assorbi</strong>. Il recovery run serve a proteggere i giorni facili dal diventare, per sbaglio, giorni duri.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="s-title">Come si corre</h2>
+    <div class="howto">
+      <ul>
+        <li><strong>Deve sembrare davvero facile.</strong> È la regola che conta più di tutte le altre.</li>
+        <li><strong>Conversazione completa.</strong> Passo abbastanza lento da poter parlare a frasi intere, respiro rilassato.</li>
+        <li><strong>FC sotto 140 bpm</strong> — ben sotto il tuo tetto di 152. Tienila al fondo della fascia facile.</li>
+        <li><strong>Il passo non conta.</strong> Se ti sembra "troppo lento", è normale: resistere alla tentazione di accelerare è proprio l'abilità da allenare.</li>
+        <li><strong>Breve.</strong> ~30 minuti bastano. Non serve fare di più.</li>
+      </ul>
+      <div class="callout">
+        <strong>L'errore tipico</strong>
+        Correre troppo forte perché "sembra troppo piano". Un recovery run corso veloce smette di essere recupero e diventa solo altra fatica — annullando il suo scopo. Se la FC sale sopra 140, rallenta o cammina. Meglio troppo piano che troppo forte.
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="s-title">Recovery run vs corsa facile</h2>
+    <p class="hero-sub" style="margin-top:-.5rem;margin-bottom:1rem">Nel piano compaiono entrambe e sembrano simili, ma hanno scopi diversi.</p>
+    <table class="cmp">
+      <tr>
+        <th></th>
+        <th class="recov">Recovery run</th>
+        <th class="easy">Corsa facile (Z2)</th>
+      </tr>
+      <tr>
+        <td>Quando</td>
+        <td>il giorno dopo il duro</td>
+        <td>giorni di base</td>
+      </tr>
+      <tr>
+        <td>FC</td>
+        <td>&lt; 140 bpm</td>
+        <td>≤ 152 bpm (MAF)</td>
+      </tr>
+      <tr>
+        <td>Scopo</td>
+        <td>smaltire la fatica</td>
+        <td>costruire base aerobica</td>
+      </tr>
+      <tr>
+        <td>Sforzo</td>
+        <td>il più facile possibile</td>
+        <td>comodo, ma allenante</td>
+      </tr>
+    </table>
+  </section>
+
+  <div class="disclaimer">
+    <strong>Nota</strong>
+    Le soglie di FC qui (&lt; 140 recovery, ≤ 152 facile) sono le tue, calibrate nel piano. Le trovi sempre aggiornate nella <a href="./zones.html" style="color:var(--ac)">guida alle zone di FC</a>.
+  </div>
+
+  <footer>
+    <a href="https://github.com/fabiosangregorio/claude-projects/tree/main/trail-brenta-2026" target="_blank" rel="noopener">trail-brenta-2026</a>
+  </footer>
+</div>
+</body>
+</html>
