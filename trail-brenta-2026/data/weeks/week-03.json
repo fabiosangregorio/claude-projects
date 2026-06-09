@@ -18,13 +18,14 @@
       "title": "Bici GIO 21 — commute lavorativo, ~30 min Z1"
     },
     {
-      "title": "Via ferrata DOM 24 — uscita social non strutturata. Nessun carico tracciato (GPX non importato, per scelta).",
+      "title": "Via ferrata DOM 24 — uscita social non strutturata (Corni di Canzo): 2.58 km, 356 m D+, 3h33', importata da GPX. Carico grezzo, nessuna analisi.",
       "routes": [
         {
           "url": "https://www.komoot.com/it-it/tour/2980889555",
           "name": "Via ferrata DOM 24 — Komoot"
         }
-      ]
+      ],
+      "activity": "2026-05-24_0eeb9065-1457-415b-8d41-61266b87c20d"
     }
   ],
   "strength": {
@@ -35,7 +36,7 @@
     "date": "2026-06-09",
     "verdict": "recalibrate",
     "headline": "Vacanza non strutturata: zero corse, recupero ok. Il motore aerobico resta il collo di bottiglia, semplicemente non toccato.",
-    "synthesis": "Settimana non pianificata di vacanza (18-24 maggio): nessuna corsa strutturata, solo padel (lezione fissa), bici di trasferta e una via ferrata sociale non importata. Non c'e nulla da valutare sull'esecuzione perche non c'era un piano. Sul fronte recupero la settimana e sana: corpo riferito normale, nessun acciacco. Il punto critico e un altro: in piena Fase 1, con il motore aerobico come unico vero collo di bottiglia, una settimana a stimolo zero lascia il problema fermo dov'era (weeks_open 2). Non un errore, ma un buco nella ricostruzione che ha poi richiesto di re-ancorare il volume nella settimana 4. Verdetto recalibrate per coerenza con la traiettoria, non per esecuzione mancata. (Review ricostruita a posteriori il 9 giugno.)",
+    "synthesis": "Settimana non pianificata di vacanza (18-24 maggio): nessuna corsa strutturata, solo padel (lezione fissa), bici di trasferta e una via ferrata sociale (importata come carico grezzo). Non c'e nulla da valutare sull'esecuzione perche non c'era un piano. Sul fronte recupero la settimana e sana: corpo riferito normale, nessun acciacco. Il punto critico e un altro: in piena Fase 1, con il motore aerobico come unico vero collo di bottiglia, una settimana a stimolo zero lascia il problema fermo dov'era (weeks_open 2). Non un errore, ma un buco nella ricostruzione che ha poi richiesto di re-ancorare il volume nella settimana 4. Verdetto recalibrate per coerenza con la traiettoria, non per esecuzione mancata. (Review ricostruita a posteriori il 9 giugno.)",
     "auto": {
       "adherence": {
         "planned": 0,
@@ -45,8 +46,8 @@
       },
       "load": {
         "trimp_training": 0,
-        "ascent_m_total": 0,
-        "duration_min_total": 0,
+        "ascent_m_total": 356,
+        "duration_min_total": 213,
         "maf_below_pct_training": null,
         "weight_delta_kg": 0.4,
         "weight_kg_latest": 67.5
@@ -64,7 +65,7 @@
         }
       ],
       "highlights": "Vacanza gestita come scarico: corpo riposato (normale, nessun acciacco). Padel e bici hanno tenuto un minimo di movimento senza stress.",
-      "lowlights": "Zero stimolo aerobico in piena ricostruzione Fase 1: il motore aerobico, gia collo di bottiglia, resta fermo (weeks_open 2). Peso in lieve salita (67.5 kg, +0.4 vs 11/5). Via ferrata non importata: carico montano reale non tracciato.",
+      "lowlights": "Zero stimolo aerobico in piena ricostruzione Fase 1: il motore aerobico, gia collo di bottiglia, resta fermo (weeks_open 2). Peso in lieve salita (67.5 kg, +0.4 vs 11/5). Via ferrata sociale importata da GPX (2.58 km, 356 m D+, 3h33'): entra come carico grezzo, non come stimolo allenante.",
       "race_day_break_derived": {
         "value": "motore aerobico",
         "reason": "In Fase 1 la durabilita aerobica e il limite dominante; una settimana senza corse non lo peggiora ma nemmeno lo muove, e il tempo di ricostruzione e limitato."

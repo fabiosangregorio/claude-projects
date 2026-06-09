@@ -1,0 +1,37 @@
+{
+ "schema_version": 2,
+ "activity_type": "hike",
+ "category": "social",
+ "id": "0eeb9065-1457-415b-8d41-61266b87c20d",
+ "start": "2026-05-24T06:57:21+00:00",
+ "end": "2026-05-24T10:30:09+00:00",
+ "title": "Via ferrata del Venticinquennale ai Corni di Canzo",
+ "source": "komoot",
+ "source_url": "https://www.komoot.com/tour/2980889555",
+ "user_notes": "Via ferrata con amici, uscita social non strutturata, senza cardiofrequenzimetro. Molto tempo da fermo (tratti tecnici, assicurazione, code). Conta come carico settimanale grezzo, non come allenamento specifico per la DBT 21K.",
+ "totals": {
+  "distance_km": 2.58,
+  "duration_sec": 12768,
+  "duration_moving_sec": 2755,
+  "pause_sec": 10013,
+  "ascent_m": 356,
+  "descent_m": 82,
+  "elev_min_m": 1017,
+  "elev_max_m": 1352,
+  "avg_speed_kmh_moving": 3.37
+ },
+ "derived": {
+  "vertical": {
+   "vam_m_per_h_moving": 466
+  },
+  "grade_distribution": {
+   "flat_lt_2": 14.7,
+   "rolling_2_5": 5.8,
+   "uphill_5_10": 3.9,
+   "steep_gt_10": 60.1,
+   "down_2_5": 0.0,
+   "down_5_10": 1.9,
+   "down_gt_10": 13.6
+  }
+ }
+}
