@@ -255,6 +255,7 @@ function render(app, profile, race, plan, todo, activitiesManifest, weighins) {
     renderHero(race, plan),
     renderPlanLink(plan),
     renderActivitiesLink(activitiesManifest),
+    renderStatsLink(),
     renderWeighinsLink(weighins),
     renderGuidesCard(),
     renderTasks(todo),
@@ -340,6 +341,18 @@ function renderActivitiesLink(manifest) {
       <div>
         <div class="nav-card-title">Attività</div>
         <div class="nav-card-sub">${sub}</div>
+      </div>
+      <div class="nav-card-arrow">→</div>
+    </a>
+  `;
+}
+
+function renderStatsLink() {
+  return `
+    <a class="nav-card" href="./statistics.html">
+      <div>
+        <div class="nav-card-title">Statistiche</div>
+        <div class="nav-card-sub">trend carico · intensità · prontezza gara</div>
       </div>
       <div class="nav-card-arrow">→</div>
     </a>

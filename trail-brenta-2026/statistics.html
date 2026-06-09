@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DBT 21K — Statistiche</title>
+<meta name="theme-color" content="#0e1117">
+<script>document.documentElement.setAttribute('data-theme',localStorage.getItem('theme')||'dark')</script>
+<link rel="stylesheet" href="/claude-projects/theme.css">
+<script src="/claude-projects/theme.js" defer></script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0e1117;--sf:#161b22;--sf2:#1c2230;--bd:#2a3040;--tx:#e6edf3;--tx2:#8b949e;--ac:#58a6ff;--ac2:#3fb950;--wn:#f0883e;--rd:#f85149;--pd:#d2a8ff}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--tx);line-height:1.6;min-height:100vh;-webkit-font-smoothing:antialiased}
+.c{max-width:760px;margin:0 auto;padding:1.5rem 1rem 3rem}
+
+.back{display:inline-flex;align-items:center;gap:.35rem;font-family:'Space Mono',monospace;font-size:.75rem;color:var(--tx2);text-decoration:none;padding:.35rem .6rem;border-radius:6px;border:1px solid var(--bd);background:var(--sf);transition:border-color .2s,color .2s;margin-bottom:1.5rem}
+.back:hover{border-color:var(--ac);color:var(--ac)}
+.back svg{width:14px;height:14px}
+
+.hero{margin-bottom:2rem}
+.kicker{font-family:'Space Mono',monospace;font-size:.7rem;color:var(--ac2);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:.5rem}
+.hero h1{font-family:'Space Mono',monospace;font-size:clamp(1.6rem,5vw,2.4rem);font-weight:700;letter-spacing:-1px;line-height:1.15;margin-bottom:.5rem;background:linear-gradient(135deg,var(--ac2),var(--ac));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-sub{color:var(--tx2);font-size:.9rem}
+
+section{margin:2rem 0}
+.s-title{font-family:'Space Mono',monospace;font-size:.75rem;color:var(--tx2);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:1rem;display:flex;align-items:center;gap:.5rem}
+.s-title::before{content:'';display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--ac)}
+section.warn .s-title::before{background:var(--wn)}
+section.good .s-title::before{background:var(--ac2)}
+.s-note{font-size:.78rem;color:var(--tx2);line-height:1.5;margin:-.5rem 0 1rem}
+
+.card{background:var(--sf);border:1px solid var(--bd);border-radius:10px;padding:1rem 1.1rem;margin-bottom:.7rem}
+.card.good{border-color:var(--ac2);background:linear-gradient(180deg,rgba(63,185,80,.06),var(--sf))}
+.card.warn{border-color:var(--wn);background:linear-gradient(180deg,rgba(240,136,62,.05),var(--sf))}
+
+.chart-title{font-family:'Space Mono',monospace;font-size:.72rem;color:var(--tx2);text-transform:uppercase;letter-spacing:1px;margin-bottom:.7rem}
+.chart-title .unit{color:var(--tx2);text-transform:none;letter-spacing:0}
+svg.chart{display:block;width:100%;height:auto}
+.cap{font-size:.74rem;color:var(--tx2);line-height:1.5;margin-top:.6rem}
+
+/* KPI / gap cells */
+.gap{margin-bottom:.9rem}
+.gap:last-child{margin-bottom:0}
+.gap-head{display:flex;justify-content:space-between;align-items:baseline;gap:.6rem;margin-bottom:.35rem}
+.gap-lbl{font-size:.85rem;color:var(--tx);font-weight:500}
+.gap-val{font-family:'Space Mono',monospace;font-size:.85rem;font-weight:700;color:var(--tx)}
+.gap-val small{color:var(--tx2);font-weight:400}
+.gap-bar{height:9px;border-radius:5px;background:var(--sf2);border:1px solid var(--bd);overflow:hidden}
+.gap-fill{height:100%;border-radius:4px;background:linear-gradient(90deg,var(--ac),var(--ac2))}
+.gap-pct{font-family:'Space Mono',monospace;font-size:.66rem;color:var(--ac);margin-top:.2rem}
+
+/* stacked grade bars */
+.zstack{display:flex;width:100%;height:22px;border-radius:4px;overflow:hidden;background:var(--sf2);border:1px solid var(--bd)}
+.zseg{height:100%;display:flex;align-items:center;justify-content:center;font-family:'Space Mono',monospace;font-size:.62rem;color:#0e1117;font-weight:700;min-width:0;overflow:hidden;white-space:nowrap}
+.zlabel{font-family:'Space Mono',monospace;font-size:.66rem;color:var(--tx2);margin:.7rem 0 .25rem}
+.zlegend{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:.7rem;font-family:'Space Mono',monospace;font-size:.7rem;color:var(--tx2)}
+.zleg-item{display:flex;align-items:center;gap:.35rem}
+.zleg-dot{width:10px;height:10px;border-radius:2px;flex-shrink:0}
+.zseg.gd-down-gt-10,.zleg-dot.gd-down-gt-10{background:#0a3069;color:#fff}
+.zseg.gd-down-5-10,.zleg-dot.gd-down-5-10{background:#1f6feb;color:#fff}
+.zseg.gd-down-2-5,.zleg-dot.gd-down-2-5{background:#79c0ff}
+.zseg.gd-flat,.zleg-dot.gd-flat{background:#6e7681;color:#fff}
+.zseg.gd-rolling,.zleg-dot.gd-rolling{background:#d29922}
+.zseg.gd-uphill,.zleg-dot.gd-uphill{background:#f0883e}
+.zseg.gd-steep,.zleg-dot.gd-steep{background:#f85149;color:#fff}
+
+/* adherence rows */
+.adh{display:grid;grid-template-columns:2.4rem 1fr auto;gap:.6rem;align-items:center;padding:.5rem 0;border-bottom:1px solid var(--bd);font-size:.8rem}
+.adh:last-child{border-bottom:none}
+.adh-wk{font-family:'Space Mono',monospace;font-weight:700;color:var(--tx2)}
+.adh-track{display:flex;gap:.25rem}
+.adh-dot{width:14px;height:14px;border-radius:3px;border:1px solid var(--bd);background:var(--bg)}
+.adh-dot.done{background:var(--ac2);border-color:var(--ac2)}
+.adh-dot.miss{background:var(--sf2);border-color:var(--bd)}
+.adh-frac{font-family:'Space Mono',monospace;font-size:.78rem;color:var(--tx);font-weight:700}
+
+/* concerns */
+.concern{display:flex;align-items:flex-start;gap:.6rem;padding:.55rem 0;border-bottom:1px solid var(--bd)}
+.concern:last-child{border-bottom:none}
+.sev{font-family:'Space Mono',monospace;font-size:.6rem;font-weight:700;padding:.18rem .45rem;border-radius:4px;border:1px solid;flex-shrink:0;margin-top:.1rem}
+.sev-5,.sev-4{background:rgba(248,81,73,.12);color:var(--rd);border-color:var(--rd)}
+.sev-3{background:rgba(240,136,62,.12);color:var(--wn);border-color:var(--wn)}
+.sev-2,.sev-1{background:rgba(88,166,255,.1);color:var(--ac);border-color:var(--ac)}
+.concern-body{flex:1;min-width:0}
+.concern-area{font-size:.85rem;color:var(--tx);font-weight:500}
+.concern-meta{font-family:'Space Mono',monospace;font-size:.68rem;color:var(--tx2);margin-top:.1rem}
+
+/* verdict list */
+.verdict{display:grid;grid-template-columns:auto 1fr;gap:.7rem;padding:.7rem 0;border-bottom:1px solid var(--bd);align-items:start}
+.verdict:last-child{border-bottom:none}
+.v-wk{font-family:'Space Mono',monospace;font-size:.7rem;color:var(--tx2);min-width:2.6rem;padding-top:.15rem}
+.v-badge{font-family:'Space Mono',monospace;font-size:.58rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;padding:.18rem .45rem;border-radius:4px;border:1px solid;display:inline-block;margin-bottom:.25rem}
+.v-proceed{background:rgba(63,185,80,.12);color:var(--ac2);border-color:var(--ac2)}
+.v-on-track{background:rgba(88,166,255,.1);color:var(--ac);border-color:var(--ac)}
+.v-recalibrate{background:rgba(240,136,62,.12);color:var(--wn);border-color:var(--wn)}
+.v-head{font-size:.82rem;color:var(--tx2);line-height:1.5}
+
+.kpi-row{display:flex;align-items:center;gap:.6rem;margin-bottom:.5rem}
+.kpi-status{font-family:'Space Mono',monospace;font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.6px;padding:.2rem .5rem;border-radius:4px;border:1px solid}
+.kpi-met{background:rgba(63,185,80,.12);color:var(--ac2);border-color:var(--ac2)}
+.kpi-pending{background:rgba(139,148,158,.1);color:var(--tx2);border-color:var(--bd)}
+.kpi-obj{font-size:.85rem;color:var(--tx);line-height:1.5;margin-bottom:.5rem}
+.kpi-note{font-size:.78rem;color:var(--tx2);line-height:1.55;padding:.6rem .75rem;background:var(--sf2);border-left:2px solid var(--ac2);border-radius:4px}
+
+.loader{text-align:center;padding:3rem 0;color:var(--tx2)}
+.spinner{display:inline-block;width:20px;height:20px;border:2px solid var(--bd);border-top-color:var(--ac);border-radius:50%;animation:spin .6s linear infinite;margin-bottom:.6rem}
+@keyframes spin{to{transform:rotate(360deg)}}
+.error{padding:1.5rem;color:var(--rd);font-size:.85rem;background:rgba(248,81,73,.05);border:1px solid var(--rd);border-radius:10px;text-align:center}
+
+footer{margin-top:3rem;padding-top:1.5rem;border-top:1px solid var(--bd);text-align:center;color:var(--tx2);font-size:.72rem}
+footer a{color:var(--ac);text-decoration:none}
+</style>
+</head>
+<body>
+<div class="c">
+  <a class="back" href="./"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>Piano</a>
+
+  <div class="hero">
+    <div class="kicker">Metriche di preparazione</div>
+    <h1>Statistiche</h1>
+    <p class="hero-sub" id="subline">Trend di carico, intensità e prontezza gara.</p>
+  </div>
+
+  <div id="app"><div class="loader"><div class="spinner"></div><br>Calcolo statistiche...</div></div>
+
+  <footer>
+    <a href="https://github.com/fabiosangregorio/claude-projects/tree/main/trail-brenta-2026" target="_blank" rel="noopener">trail-brenta-2026</a>
+    · <span id="lastUpdated">—</span>
+  </footer>
+</div>
+
+<script>
+const BASE = './data/';
+
+/* ── Loaders (stessi pattern delle altre pagine) ─────────────── */
+async function loadWeeks() {
+  const m = await fetch(BASE + 'weeks/index.json').then(r => { if (!r.ok) throw new Error('weeks/index.json: ' + r.status); return r.json(); });
+  const files = m.weeks || [];
+  return Promise.all(files.map(f => fetch(BASE + 'weeks/' + f).then(r => { if (!r.ok) throw new Error(f + ': ' + r.status); return r.json(); })));
+}
+async function loadActivities() {
+  const m = await fetch(BASE + 'activities/index.json').then(r => r.ok ? r.json() : { activities: [] }).catch(() => ({ activities: [] }));
+  const files = (m.activities || m.runs || []);
+  return Promise.all(files.map(f => fetch(BASE + 'activities/' + f).then(r => r.ok ? r.json() : null).catch(() => null))).then(a => a.filter(Boolean));
+}
+
+async function loadAll() {
+  const app = document.getElementById('app');
+  try {
+    const [race, plan, weeks, weighins, activities] = await Promise.all([
+      fetch(BASE + 'race.json').then(r => { if (!r.ok) throw new Error('race.json: ' + r.status); return r.json(); }),
+      fetch(BASE + 'plan.json').then(r => { if (!r.ok) throw new Error('plan.json: ' + r.status); return r.json(); }),
+      loadWeeks(),
+      fetch(BASE + 'weighins.json').then(r => r.ok ? r.json() : null).catch(() => null),
+      loadActivities()
+    ]);
+    render(app, race, plan, weeks, weighins, activities);
+    document.getElementById('lastUpdated').textContent = 'piano aggiornato ' + plan.last_updated;
+  } catch (err) {
+    app.innerHTML = `<div class="error">Errore caricamento dati: ${err.message}</div>`;
+  }
+}
+
+function render(app, race, plan, weeks, weighins, activities) {
+  // Solo settimane con review.auto (le altre sono in corso / non valutate)
+  const reviewed = weeks.filter(w => w.review && w.review.auto).sort((a, b) => a.number - b.number);
+  const nonSocial = activities.filter(a => a.category !== 'social');
+  document.getElementById('subline').textContent =
+    `${reviewed.length} settiman${reviewed.length === 1 ? 'a' : 'e'} valutat${reviewed.length === 1 ? 'a' : 'e'} · ${activities.length} uscite registrate.`;
+
+  app.innerHTML = [
+    renderRaceReadiness(race, nonSocial),
+    renderGradeMatch(race, nonSocial),
+    renderLoad(reviewed, plan),
+    renderIntensity(reviewed),
+    renderAerobicKpi(reviewed, plan),
+    renderAdherence(reviewed),
+    renderWeight(weighins),
+    renderVerdicts(reviewed)
+  ].join('');
+}
+
+/* ── 1. Prontezza gara ───────────────────────────────────────── */
+function renderRaceReadiness(race, acts) {
+  const targetD = race.elevation_gain_m || 1250;
+  const targetMin = (race.max_time_hours || 5) * 60;
+  let bestD = 0, bestDur = 0;
+  acts.forEach(a => {
+    const t = a.totals || {};
+    if (t.ascent_m != null) bestD = Math.max(bestD, t.ascent_m);
+    if (t.duration_sec != null) bestDur = Math.max(bestDur, t.duration_sec / 60);
+  });
+  const dPct = Math.round(bestD / targetD * 100);
+  const durPct = Math.round(bestDur / targetMin * 100);
+  const cancello = race.cancello_orario || {};
+  return `
+    <section>
+      <h2 class="s-title">Prontezza gara</h2>
+      <p class="s-note">Distanza tra la tua miglior singola uscita e ciò che chiede la gara (${targetD} m D+, ${race.max_time_hours}h di tempo massimo). Esclude le uscite social.</p>
+      <div class="card">
+        ${gapRow('Dislivello — miglior uscita', `${Math.round(bestD)} m`, `/ ${targetD} m`, dPct)}
+        ${gapRow('Tempo sui piedi — più lungo', fmtMin(bestDur), `/ ${fmtMin(targetMin)}`, durPct)}
+        <div class="cap">Cancello intermedio: <strong style="color:var(--rd)">${cancello.checkpoint || '—'}</strong> entro ${cancello.limit || '—'}. È il vero vincolo: serve ritmo, non solo arrivare in fondo.</div>
+      </div>
+    </section>`;
+}
+function gapRow(lbl, val, sub, pct) {
+  const w = Math.max(0, Math.min(100, pct));
+  return `
+    <div class="gap">
+      <div class="gap-head"><span class="gap-lbl">${lbl}</span><span class="gap-val">${val} <small>${sub}</small></span></div>
+      <div class="gap-bar"><div class="gap-fill" style="width:${w}%"></div></div>
+      <div class="gap-pct">${pct}% del target</div>
+    </div>`;
+}
+
+/* ── 2. Match profilo terreno ────────────────────────────────── */
+const GD_SEGS = [
+  { key: 'down_gt_10', cls: 'gd-down-gt-10', lbl: 'Discesa >10%' },
+  { key: 'down_5_10',  cls: 'gd-down-5-10',  lbl: 'Discesa 5-10%' },
+  { key: 'down_2_5',   cls: 'gd-down-2-5',   lbl: 'Discesa 2-5%' },
+  { key: 'flat_lt_2',  cls: 'gd-flat',       lbl: 'Piano <2%' },
+  { key: 'rolling_2_5',cls: 'gd-rolling',    lbl: 'Mosso 2-5%' },
+  { key: 'uphill_5_10',cls: 'gd-uphill',     lbl: 'Salita 5-10%' },
+  { key: 'steep_gt_10',cls: 'gd-steep',      lbl: 'Ripido >10%' }
+];
+function renderGradeMatch(race, acts) {
+  const cp = race.course_profile_2025 || {};
+  const raceGd = cp.grade_distribution;
+  if (!raceGd) return '';
+  // distribuzione allenamento, pesata per distanza, escluse le social
+  const agg = {}; let totKm = 0;
+  GD_SEGS.forEach(s => agg[s.key] = 0);
+  acts.forEach(a => {
+    const gd = (a.derived && a.derived.grade_distribution) || null;
+    const km = (a.totals && a.totals.distance_km) || 0;
+    if (!gd || !km) return;
+    totKm += km;
+    GD_SEGS.forEach(s => { if (gd[s.key] != null) agg[s.key] += gd[s.key] * km; });
+  });
+  const trainGd = {};
+  GD_SEGS.forEach(s => trainGd[s.key] = totKm ? +(agg[s.key] / totKm).toFixed(2) : 0);
+  const raceSteep = (raceGd.steep_gt_10 || 0) + (raceGd.down_gt_10 || 0);
+  const trainSteep = (trainGd.steep_gt_10 || 0) + (trainGd.down_gt_10 || 0);
+  return `
+    <section class="warn">
+      <h2 class="s-title">Match profilo terreno</h2>
+      <p class="s-note">Su quali pendenze ti sei allenato (pesato per km, escluse le social) contro ciò che la gara richiede. Da sinistra le discese, a destra le salite.</p>
+      <div class="card">
+        ${stackBar('Il tuo allenamento', trainGd)}
+        ${stackBar('Gara (rif. ed. 2025)', raceGd)}
+        <div class="zlegend">${GD_SEGS.map(s => `<span class="zleg-item"><span class="zleg-dot ${s.cls}"></span>${s.lbl}</span>`).join('')}</div>
+        <div class="cap">Terreno ripido (>10% su e giù): <strong>${trainSteep.toFixed(0)}%</strong> in allenamento contro <strong style="color:var(--wn)">${raceSteep.toFixed(0)}%</strong> in gara. La discesa tecnica (>10% in giù) è la richiesta più sotto-allenata: ${trainGd.down_gt_10.toFixed(1)}% contro ${raceGd.down_gt_10}% della gara.</div>
+      </div>
+    </section>`;
+}
+function stackBar(label, gd) {
+  const segs = GD_SEGS.map(s => ({ ...s, val: gd[s.key] || 0 })).filter(s => s.val > 0);
+  return `
+    <div class="zlabel">${label}</div>
+    <div class="zstack">${segs.map(s => `<div class="zseg ${s.cls}" style="width:${s.val.toFixed(2)}%" title="${s.lbl} · ${s.val}%">${s.val >= 8 ? s.val.toFixed(0) : ''}</div>`).join('')}</div>`;
+}
+
+/* ── 3. Carico settimanale ───────────────────────────────────── */
+function renderLoad(reviewed, plan) {
+  if (!reviewed.length) return '';
+  const wk = reviewed.map(w => 'S' + w.number);
+  const trimp = reviewed.map(w => num(w.review.auto.load, 'trimp_training'));
+  const dplus = reviewed.map(w => num(w.review.auto.load, 'ascent_m_total'));
+  const dur = reviewed.map(w => num(w.review.auto.load, 'duration_min_total'));
+  return `
+    <section>
+      <h2 class="s-title">Carico settimanale</h2>
+      <p class="s-note">Aggregati dalle review di fine settimana (escludono le social). Regola di calibrazione: il volume sale al massimo del +10% settimana su settimana.</p>
+      <div class="card">
+        <div class="chart-title">Carico TRIMP <span class="unit">/ settimana</span></div>
+        ${barChart(wk, trimp, '#58a6ff')}
+        <div class="cap">Salto massimo prudente da una settimana all'altra: ~+10%. Picchi più alti vanno spiegati (es. lungo o trail in più), non ripetuti a caso.</div>
+      </div>
+      <div class="card">
+        <div class="chart-title">Dislivello <span class="unit">m D+ / settimana</span></div>
+        ${barChart(wk, dplus, '#3fb950')}
+      </div>
+      <div class="card">
+        <div class="chart-title">Durata <span class="unit">min / settimana</span></div>
+        ${barChart(wk, dur, '#d2a8ff')}
+      </div>
+    </section>`;
+}
+
+/* ── 4. Disciplina di intensità ──────────────────────────────── */
+function renderIntensity(reviewed) {
+  if (!reviewed.length) return '';
+  const wk = reviewed.map(w => 'S' + w.number);
+  const maf = reviewed.map(w => num(w.review.auto.load, 'maf_below_pct_training'));
+  // concern aperti dalla settimana valutata più recente
+  const last = reviewed[reviewed.length - 1];
+  const open = (last.review.auto.open_concerns || []).slice().sort((a, b) => (b.severity_max || 0) - (a.severity_max || 0));
+  const concernsHtml = open.length ? open.map(c => `
+      <div class="concern">
+        <span class="sev sev-${c.severity_max || 1}">sev ${c.severity_max || '?'}</span>
+        <div class="concern-body">
+          <div class="concern-area">${c.area}</div>
+          <div class="concern-meta">aperto da ${c.weeks_open || 1} settiman${(c.weeks_open || 1) === 1 ? 'a' : 'e'}</div>
+        </div>
+      </div>`).join('') : '<div class="cap">Nessun concern aperto nell\'ultima review. 🎉</div>';
+  return `
+    <section class="warn">
+      <h2 class="s-title">Disciplina di intensità</h2>
+      <p class="s-note">Tempo trascorso sotto il tetto MAF (152 bpm) per settimana. Più alto = più tempo in aerobico pulito. Il filo rosso ricorrente del piano è la FC che sfora in salita.</p>
+      <div class="card">
+        <div class="chart-title">Tempo sotto MAF <span class="unit">% / settimana</span></div>
+        ${lineChart(wk, maf, '#f0883e', '%')}
+      </div>
+      <div class="card">
+        <div class="chart-title" style="margin-bottom:.5rem">Concern aperti — ultima review (S${last.number})</div>
+        ${concernsHtml}
+      </div>
+    </section>`;
+}
+
+/* ── 5. Motore aerobico (KPI) ────────────────────────────────── */
+function renderAerobicKpi(reviewed, plan) {
+  // ultima review con un phase_kpi misurato
+  let kpi = null, wkNum = null;
+  for (let i = reviewed.length - 1; i >= 0; i--) {
+    const k = reviewed[i].review.auto.phase_kpi;
+    if (k && k.status && k.status !== 'not_measurable_this_week') { kpi = k; wkNum = reviewed[i].number; break; }
+  }
+  if (!kpi) return '';
+  const met = kpi.status === 'met';
+  return `
+    <section class="${met ? 'good' : ''}">
+      <h2 class="s-title">Motore aerobico — KPI</h2>
+      <p class="s-note">L'indicatore chiave usa il decoupling Pa:Hr <em>recovery-corrected</em> della review, non il valore grezzo della singola attività (che non tiene conto di soste e condizioni).</p>
+      <div class="card ${met ? 'good' : ''}">
+        <div class="kpi-row">
+          <span class="kpi-status ${met ? 'kpi-met' : 'kpi-pending'}">${met ? 'raggiunto' : kpi.status}</span>
+          <span style="font-family:'Space Mono',monospace;font-size:.72rem;color:var(--tx2)">misurato S${wkNum}</span>
+        </div>
+        <div class="kpi-obj">${kpi.objective || ''}</div>
+        ${kpi.note ? `<div class="kpi-note">${kpi.note}</div>` : ''}
+      </div>
+    </section>`;
+}
+
+/* ── 6. Aderenza ─────────────────────────────────────────────── */
+function renderAdherence(reviewed) {
+  if (!reviewed.length) return '';
+  // streak salti forza
+  let strengthStreak = 0;
+  for (let i = reviewed.length - 1; i >= 0; i--) {
+    const sw = reviewed[i].review.auto.adherence.swapped || [];
+    const skippedStrength = sw.some(s => /forza/i.test((s.planned || '') + ' ' + (s.replaced_with || '')) && /salt|non\s+(fatt|logg|svolt|esegu)|skip|mancat/i.test((s.replaced_with || '') + ' ' + (s.planned || '')));
+    if (skippedStrength) strengthStreak++; else break;
+  }
+  const rows = reviewed.map(w => {
+    const a = w.review.auto.adherence;
+    const done = a.done || 0, planned = a.planned || 0;
+    const dots = [];
+    for (let i = 0; i < planned; i++) dots.push(`<span class="adh-dot ${i < done ? 'done' : 'miss'}"></span>`);
+    const longOk = a.long_run === 'done';
+    return `
+      <div class="adh">
+        <span class="adh-wk">S${w.number}</span>
+        <span class="adh-track">${dots.join('')} <span style="font-family:'Space Mono',monospace;font-size:.66rem;color:${longOk ? 'var(--ac2)' : 'var(--rd)'};margin-left:.4rem">lungo ${longOk ? '✓' : '✗'}</span></span>
+        <span class="adh-frac">${done}/${planned}</span>
+      </div>`;
+  }).join('');
+  const longProtected = reviewed.every(w => w.review.auto.adherence.long_run === 'done');
+  return `
+    <section${strengthStreak >= 2 ? ' class="warn"' : ''}>
+      <h2 class="s-title">Aderenza</h2>
+      <p class="s-note">Corse fatte vs pianificate per settimana. Il lungo è la sessione non negoziabile; la forza è il secondo investimento.</p>
+      <div class="card">${rows}</div>
+      ${longProtected ? `<div class="card good"><span style="font-family:'Space Mono',monospace;font-size:.8rem;color:var(--ac2);font-weight:700">✓ Lungo protetto</span> <span class="cap" style="margin-top:.2rem">Mai saltato finora in ${reviewed.length} settimane valutate.</span></div>` : ''}
+      ${strengthStreak >= 2 ? `<div class="card warn"><span style="font-family:'Space Mono',monospace;font-size:.8rem;color:var(--wn);font-weight:700">⚠ Forza saltata ${strengthStreak} settimane di fila</span><div class="cap" style="margin-top:.2rem">Soglia di allerta a 2 salti consecutivi: da riancorare, non da trascinare.</div></div>` : ''}
+    </section>`;
+}
+
+/* ── 7. Peso ─────────────────────────────────────────────────── */
+function renderWeight(weighins) {
+  const entries = ((weighins && weighins.entries) || []).slice().sort((a, b) => a.date.localeCompare(b.date));
+  if (entries.length < 2) return '';
+  const labels = entries.map(e => fmtDay(e.date));
+  const vals = entries.map(e => e.weight_kg);
+  const delta = +(vals[vals.length - 1] - vals[0]).toFixed(1);
+  return `
+    <section>
+      <h2 class="s-title">Peso</h2>
+      <p class="s-note">Pesate settimanali (lun mattina, a digiuno). Δ dall'inizio piano: ${signed(delta)} kg.</p>
+      <div class="card">
+        <div class="chart-title">Peso corporeo <span class="unit">kg</span></div>
+        ${lineChart(labels, vals, '#58a6ff', '')}
+      </div>
+    </section>`;
+}
+
+/* ── 8. Verdetti ─────────────────────────────────────────────── */
+function renderVerdicts(reviewed) {
+  if (!reviewed.length) return '';
+  const rows = reviewed.slice().reverse().map(w => {
+    const v = w.review.verdict || 'on-track';
+    const cls = 'v-' + v.replace(/[^a-z-]/gi, '');
+    return `
+      <div class="verdict">
+        <span class="v-wk">S${w.number}</span>
+        <div>
+          <span class="v-badge ${cls}">${v}</span>
+          <div class="v-head">${w.review.headline || ''}</div>
+        </div>
+      </div>`;
+  }).join('');
+  return `
+    <section>
+      <h2 class="s-title">Storico verdetti</h2>
+      <div class="card">${rows}</div>
+    </section>`;
+}
+
+/* ── Mini-grafici SVG (nessuna dipendenza) ───────────────────── */
+function barChart(labels, values, color) {
+  const W = 320, H = 150, padL = 30, padB = 22, padT = 8, padR = 6;
+  const vals = values.map(v => v == null ? 0 : v);
+  const max = Math.max(1, ...vals);
+  const niceMax = niceCeil(max);
+  const plotW = W - padL - padR, plotH = H - padT - padB;
+  const n = vals.length;
+  const bw = plotW / n * 0.62, gap = plotW / n;
+  const ticks = [0, niceMax / 2, niceMax];
+  const grid = ticks.map(t => {
+    const y = padT + plotH - (t / niceMax) * plotH;
+    return `<line x1="${padL}" y1="${y.toFixed(1)}" x2="${W - padR}" y2="${y.toFixed(1)}" stroke="#2a3040" stroke-width="1"/><text x="${padL - 4}" y="${(y + 3).toFixed(1)}" text-anchor="end" font-size="8" fill="#8b949e" font-family="Space Mono,monospace">${fmtNum(t)}</text>`;
+  }).join('');
+  const bars = vals.map((v, i) => {
+    const x = padL + i * gap + (gap - bw) / 2;
+    const h = (v / niceMax) * plotH;
+    const y = padT + plotH - h;
+    return `<rect x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="${bw.toFixed(1)}" height="${Math.max(0, h).toFixed(1)}" rx="2" fill="${color}"/>` +
+      `<text x="${(x + bw / 2).toFixed(1)}" y="${(y - 3).toFixed(1)}" text-anchor="middle" font-size="8" fill="#e6edf3" font-family="Space Mono,monospace">${fmtNum(v)}</text>` +
+      `<text x="${(x + bw / 2).toFixed(1)}" y="${H - 7}" text-anchor="middle" font-size="9" fill="#8b949e" font-family="Space Mono,monospace">${labels[i]}</text>`;
+  }).join('');
+  return `<svg class="chart" viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMid meet" role="img">${grid}${bars}</svg>`;
+}
+
+function lineChart(labels, values, color, suffix) {
+  const W = 320, H = 150, padL = 32, padB = 22, padT = 10, padR = 8;
+  const present = values.map((v, i) => ({ v, i })).filter(p => p.v != null);
+  const vals = present.map(p => p.v);
+  const min = Math.min(...vals), max = Math.max(...vals);
+  let lo = Math.floor(min - (max - min) * 0.15 - 0.5);
+  let hi = Math.ceil(max + (max - min) * 0.15 + 0.5);
+  if (lo === hi) { lo -= 1; hi += 1; }
+  const plotW = W - padL - padR, plotH = H - padT - padB;
+  const n = values.length;
+  const x = i => padL + (n === 1 ? plotW / 2 : (i / (n - 1)) * plotW);
+  const y = v => padT + plotH - ((v - lo) / (hi - lo)) * plotH;
+  const ticks = [lo, (lo + hi) / 2, hi];
+  const grid = ticks.map(t => {
+    const yy = y(t);
+    return `<line x1="${padL}" y1="${yy.toFixed(1)}" x2="${W - padR}" y2="${yy.toFixed(1)}" stroke="#2a3040" stroke-width="1"/><text x="${padL - 4}" y="${(yy + 3).toFixed(1)}" text-anchor="end" font-size="8" fill="#8b949e" font-family="Space Mono,monospace">${fmtNum(t)}${suffix}</text>`;
+  }).join('');
+  const pts = present.map(p => `${x(p.i).toFixed(1)},${y(p.v).toFixed(1)}`).join(' ');
+  const line = present.length > 1 ? `<polyline points="${pts}" fill="none" stroke="${color}" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>` : '';
+  const dots = present.map(p =>
+    `<circle cx="${x(p.i).toFixed(1)}" cy="${y(p.v).toFixed(1)}" r="3" fill="${color}"/>` +
+    `<text x="${x(p.i).toFixed(1)}" y="${(y(p.v) - 7).toFixed(1)}" text-anchor="middle" font-size="8" fill="#e6edf3" font-family="Space Mono,monospace">${fmtNum(p.v)}</text>`).join('');
+  const xlabels = labels.map((l, i) => `<text x="${x(i).toFixed(1)}" y="${H - 7}" text-anchor="middle" font-size="9" fill="#8b949e" font-family="Space Mono,monospace">${l}</text>`).join('');
+  return `<svg class="chart" viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMid meet" role="img">${grid}${line}${dots}${xlabels}</svg>`;
+}
+
+/* ── Helpers ─────────────────────────────────────────────────── */
+function num(o, k) { return o && o[k] != null ? o[k] : null; }
+function niceCeil(v) {
+  const mag = Math.pow(10, Math.floor(Math.log10(v)));
+  const f = v / mag;
+  const nf = f <= 1 ? 1 : f <= 2 ? 2 : f <= 5 ? 5 : 10;
+  return nf * mag;
+}
+function fmtNum(v) { if (v == null) return '–'; return Math.abs(v) >= 100 ? Math.round(v).toString() : (Math.round(v * 10) / 10).toString().replace(/\.0$/, ''); }
+function fmtMin(min) { const h = Math.floor(min / 60), m = Math.round(min % 60); return h > 0 ? `${h}h${String(m).padStart(2, '0')}` : `${m}'`; }
+function signed(n) { const v = Math.round(n * 10) / 10; return v > 0 ? `+${v}` : `${v}`; }
+function fmtDay(iso) { const months = ['gen','feb','mar','apr','mag','giu','lug','ago','set','ott','nov','dic']; const d = new Date(iso); return `${d.getDate()} ${months[d.getMonth()]}`; }
+
+loadAll();
+</script>
+</body>
+</html>
