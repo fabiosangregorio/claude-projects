@@ -143,7 +143,7 @@ async function loadWeeks() {
 async function loadActivities() {
   const m = await fetch(BASE + 'activities/index.json').then(r => r.ok ? r.json() : { activities: [] }).catch(() => ({ activities: [] }));
   const files = (m.activities || m.runs || []);
-  return Promise.all(files.map(f => fetch(BASE + 'activities/' + f).then(r => r.ok ? r.json() : null).catch(() => null))).then(a => a.filter(Boolean));
+  return Promise.all(files.map(f => fetch(BASE + 'activities/' + f).then(r => r.ok ? r.json() : null).then(j => j ? { ...j, _stem: f.replace(/\.json$/, '') } : null).catch(() => null))).then(a => a.filter(Boolean));
 }
 
 async function loadAll() {
@@ -173,7 +173,7 @@ function render(app, race, plan, weeks, weighins, activities) {
   app.innerHTML = [
     renderRaceReadiness(race, nonSocial),
     renderGradeMatch(race, nonSocial),
-    renderLoad(reviewed, plan),
+    renderLoad(reviewed, plan, activities),
     renderIntensity(reviewed),
     renderAerobicKpi(reviewed, plan),
     renderAdherence(reviewed),
@@ -264,28 +264,52 @@ function stackBar(label, gd) {
 }
 
 /* ── 3. Carico settimanale ───────────────────────────────────── */
-function renderLoad(reviewed, plan) {
+function renderLoad(reviewed, plan, activities) {
   if (!reviewed.length) return '';
+  const byStem = {};
+  (activities || []).forEach(a => { if (a._stem) byStem[a._stem] = a; });
+  function socialOf(w) {
+    let d = 0, dur = 0;
+    (w.log || []).forEach(e => {
+      const a = e.activity && byStem[e.activity];
+      if (a && a.category === 'social') {
+        d += (a.totals && a.totals.ascent_m) || 0;
+        dur += (a.totals && a.totals.duration_sec) ? a.totals.duration_sec / 60 : 0;
+      }
+    });
+    return { d: Math.round(d), dur: Math.round(dur) };
+  }
   const wk = reviewed.map(w => 'S' + w.number);
   const trimp = reviewed.map(w => num(w.review.auto.load, 'trimp_training'));
-  const dplus = reviewed.map(w => num(w.review.auto.load, 'ascent_m_total'));
-  const dur = reviewed.map(w => num(w.review.auto.load, 'duration_min_total'));
+  const dplusSeg = reviewed.map(w => {
+    const tot = num(w.review.auto.load, 'ascent_m_total') || 0;
+    const s = Math.min(tot, socialOf(w).d);
+    return [Math.max(0, tot - s), s];
+  });
+  const durSeg = reviewed.map(w => {
+    const tot = num(w.review.auto.load, 'duration_min_total') || 0;
+    const s = Math.min(tot, socialOf(w).dur);
+    return [Math.max(0, tot - s), s];
+  });
+  const COL_SOCIAL = '#6e7681';
   return `
     <section>
       <h2 class="s-title">Carico settimanale</h2>
-      <p class="s-note">Aggregati dalle review di fine settimana (escludono le social). Regola di calibrazione: il volume sale al massimo del +10% settimana su settimana.</p>
+      <p class="s-note">Aggregati dalle review di fine settimana. Dislivello e durata includono le uscite social, mostrate in grigio sopra la quota di allenamento. Il TRIMP è solo-allenamento (le social non hanno TRIMP). Regola di calibrazione: il volume sale al massimo del +10% settimana su settimana.</p>
       <div class="card">
-        <div class="chart-title">Carico TRIMP <span class="unit">/ settimana</span></div>
+        <div class="chart-title">Carico TRIMP <span class="unit">/ settimana · solo allenamento</span></div>
         ${barChart(wk, trimp, '#58a6ff')}
         <div class="cap">Salto massimo prudente da una settimana all'altra: ~+10%. Picchi più alti vanno spiegati (es. lungo o trail in più), non ripetuti a caso.</div>
       </div>
       <div class="card">
         <div class="chart-title">Dislivello <span class="unit">m D+ / settimana</span></div>
-        ${barChart(wk, dplus, '#3fb950')}
+        ${stackedBars(wk, dplusSeg, ['#3fb950', COL_SOCIAL])}
+        ${legendRow([{ color: '#3fb950', label: 'Allenamento' }, { color: COL_SOCIAL, label: 'Social' }])}
       </div>
       <div class="card">
         <div class="chart-title">Durata <span class="unit">min / settimana</span></div>
-        ${barChart(wk, dur, '#d2a8ff')}
+        ${stackedBars(wk, durSeg, ['#d2a8ff', COL_SOCIAL])}
+        ${legendRow([{ color: '#d2a8ff', label: 'Allenamento' }, { color: COL_SOCIAL, label: 'Social' }])}
       </div>
     </section>`;
 }
@@ -430,6 +454,41 @@ function renderVerdicts(reviewed) {
 }
 
 /* ── Mini-grafici SVG (nessuna dipendenza) ───────────────────── */
+function stackedBars(labels, segs, colors) {
+  const W = 680, H = 220, padL = 44, padB = 28, padT = 18, padR = 14;
+  const FA = 11, FV = 11, FX = 11;
+  const totals = segs.map(s => s.reduce((a, b) => a + (b || 0), 0));
+  const niceMax = niceCeil(Math.max(1, ...totals));
+  const plotW = W - padL - padR, plotH = H - padT - padB, n = segs.length;
+  const gap = plotW / n, bw = gap * 0.6;
+  const grid = [0, niceMax / 2, niceMax].map(t => {
+    const y = padT + plotH - (t / niceMax) * plotH;
+    return `<line x1="${padL}" y1="${y.toFixed(1)}" x2="${W - padR}" y2="${y.toFixed(1)}" stroke="#2a3040" stroke-width="1"/><text x="${padL - 6}" y="${(y + 4).toFixed(1)}" text-anchor="end" font-size="${FA}" fill="#8b949e" font-family="Space Mono,monospace">${fmtNum(t)}</text>`;
+  }).join('');
+  const bars = segs.map((s, i) => {
+    const x = padL + i * gap + (gap - bw) / 2;
+    let acc = 0, rects = '';
+    s.forEach((v, k) => {
+      if (v) {
+        const h = (v / niceMax) * plotH;
+        const yTop = padT + plotH - ((acc + v) / niceMax) * plotH;
+        rects += `<rect x="${x.toFixed(1)}" y="${yTop.toFixed(1)}" width="${bw.toFixed(1)}" height="${h.toFixed(1)}" rx="2" fill="${colors[k]}"/>`;
+      }
+      acc += (v || 0);
+    });
+    const total = totals[i];
+    const yTot = padT + plotH - (total / niceMax) * plotH;
+    return rects +
+      `<text x="${(x + bw / 2).toFixed(1)}" y="${(yTot - 5).toFixed(1)}" text-anchor="middle" font-size="${FV}" fill="#e6edf3" font-family="Space Mono,monospace">${fmtNum(total)}</text>` +
+      `<text x="${(x + bw / 2).toFixed(1)}" y="${H - 9}" text-anchor="middle" font-size="${FX}" fill="#8b949e" font-family="Space Mono,monospace">${labels[i]}</text>`;
+  }).join('');
+  return `<svg class="chart" viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMid meet" role="img">${grid}${bars}</svg>`;
+}
+
+function legendRow(items) {
+  return `<div class="zlegend" style="margin-top:.5rem">${items.map(it => `<span class="zleg-item"><span class="zleg-dot" style="background:${it.color}"></span>${it.label}</span>`).join('')}</div>`;
+}
+
 function barChart(labels, values, color) {
   const W = 680, H = 220, padL = 44, padB = 28, padT = 18, padR = 14;
   const FA = 11, FV = 11, FX = 11;
