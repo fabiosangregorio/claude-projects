@@ -431,31 +431,33 @@ function renderVerdicts(reviewed) {
 
 /* ── Mini-grafici SVG (nessuna dipendenza) ───────────────────── */
 function barChart(labels, values, color) {
-  const W = 320, H = 150, padL = 30, padB = 22, padT = 8, padR = 6;
+  const W = 680, H = 220, padL = 44, padB = 28, padT = 18, padR = 14;
+  const FA = 11, FV = 11, FX = 11;
   const vals = values.map(v => v == null ? 0 : v);
   const max = Math.max(1, ...vals);
   const niceMax = niceCeil(max);
   const plotW = W - padL - padR, plotH = H - padT - padB;
   const n = vals.length;
-  const bw = plotW / n * 0.62, gap = plotW / n;
+  const gap = plotW / n, bw = gap * 0.6;
   const ticks = [0, niceMax / 2, niceMax];
   const grid = ticks.map(t => {
     const y = padT + plotH - (t / niceMax) * plotH;
-    return `<line x1="${padL}" y1="${y.toFixed(1)}" x2="${W - padR}" y2="${y.toFixed(1)}" stroke="#2a3040" stroke-width="1"/><text x="${padL - 4}" y="${(y + 3).toFixed(1)}" text-anchor="end" font-size="8" fill="#8b949e" font-family="Space Mono,monospace">${fmtNum(t)}</text>`;
+    return `<line x1="${padL}" y1="${y.toFixed(1)}" x2="${W - padR}" y2="${y.toFixed(1)}" stroke="#2a3040" stroke-width="1"/><text x="${padL - 6}" y="${(y + 4).toFixed(1)}" text-anchor="end" font-size="${FA}" fill="#8b949e" font-family="Space Mono,monospace">${fmtNum(t)}</text>`;
   }).join('');
   const bars = vals.map((v, i) => {
     const x = padL + i * gap + (gap - bw) / 2;
     const h = (v / niceMax) * plotH;
     const y = padT + plotH - h;
-    return `<rect x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="${bw.toFixed(1)}" height="${Math.max(0, h).toFixed(1)}" rx="2" fill="${color}"/>` +
-      `<text x="${(x + bw / 2).toFixed(1)}" y="${(y - 3).toFixed(1)}" text-anchor="middle" font-size="8" fill="#e6edf3" font-family="Space Mono,monospace">${fmtNum(v)}</text>` +
-      `<text x="${(x + bw / 2).toFixed(1)}" y="${H - 7}" text-anchor="middle" font-size="9" fill="#8b949e" font-family="Space Mono,monospace">${labels[i]}</text>`;
+    return `<rect x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="${bw.toFixed(1)}" height="${Math.max(0, h).toFixed(1)}" rx="3" fill="${color}"/>` +
+      `<text x="${(x + bw / 2).toFixed(1)}" y="${(y - 5).toFixed(1)}" text-anchor="middle" font-size="${FV}" fill="#e6edf3" font-family="Space Mono,monospace">${fmtNum(v)}</text>` +
+      `<text x="${(x + bw / 2).toFixed(1)}" y="${H - 9}" text-anchor="middle" font-size="${FX}" fill="#8b949e" font-family="Space Mono,monospace">${labels[i]}</text>`;
   }).join('');
   return `<svg class="chart" viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMid meet" role="img">${grid}${bars}</svg>`;
 }
 
 function lineChart(labels, values, color, suffix) {
-  const W = 320, H = 150, padL = 32, padB = 22, padT = 10, padR = 8;
+  const W = 680, H = 220, padL = 48, padB = 28, padT = 20, padR = 16;
+  const FA = 11, FV = 11, FX = 11;
   const present = values.map((v, i) => ({ v, i })).filter(p => p.v != null);
   const vals = present.map(p => p.v);
   const min = Math.min(...vals), max = Math.max(...vals);
@@ -469,14 +471,14 @@ function lineChart(labels, values, color, suffix) {
   const ticks = [lo, (lo + hi) / 2, hi];
   const grid = ticks.map(t => {
     const yy = y(t);
-    return `<line x1="${padL}" y1="${yy.toFixed(1)}" x2="${W - padR}" y2="${yy.toFixed(1)}" stroke="#2a3040" stroke-width="1"/><text x="${padL - 4}" y="${(yy + 3).toFixed(1)}" text-anchor="end" font-size="8" fill="#8b949e" font-family="Space Mono,monospace">${fmtNum(t)}${suffix}</text>`;
+    return `<line x1="${padL}" y1="${yy.toFixed(1)}" x2="${W - padR}" y2="${yy.toFixed(1)}" stroke="#2a3040" stroke-width="1"/><text x="${padL - 6}" y="${(yy + 4).toFixed(1)}" text-anchor="end" font-size="${FA}" fill="#8b949e" font-family="Space Mono,monospace">${fmtNum(t)}${suffix}</text>`;
   }).join('');
   const pts = present.map(p => `${x(p.i).toFixed(1)},${y(p.v).toFixed(1)}`).join(' ');
-  const line = present.length > 1 ? `<polyline points="${pts}" fill="none" stroke="${color}" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>` : '';
+  const line = present.length > 1 ? `<polyline points="${pts}" fill="none" stroke="${color}" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>` : '';
   const dots = present.map(p =>
-    `<circle cx="${x(p.i).toFixed(1)}" cy="${y(p.v).toFixed(1)}" r="3" fill="${color}"/>` +
-    `<text x="${x(p.i).toFixed(1)}" y="${(y(p.v) - 7).toFixed(1)}" text-anchor="middle" font-size="8" fill="#e6edf3" font-family="Space Mono,monospace">${fmtNum(p.v)}</text>`).join('');
-  const xlabels = labels.map((l, i) => `<text x="${x(i).toFixed(1)}" y="${H - 7}" text-anchor="middle" font-size="9" fill="#8b949e" font-family="Space Mono,monospace">${l}</text>`).join('');
+    `<circle cx="${x(p.i).toFixed(1)}" cy="${y(p.v).toFixed(1)}" r="4" fill="${color}"/>` +
+    `<text x="${x(p.i).toFixed(1)}" y="${(y(p.v) - 9).toFixed(1)}" text-anchor="middle" font-size="${FV}" fill="#e6edf3" font-family="Space Mono,monospace">${fmtNum(p.v)}</text>`).join('');
+  const xlabels = labels.map((l, i) => `<text x="${x(i).toFixed(1)}" y="${H - 9}" text-anchor="middle" font-size="${FX}" fill="#8b949e" font-family="Space Mono,monospace">${l}</text>`).join('');
   return `<svg class="chart" viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMid meet" role="img">${grid}${line}${dots}${xlabels}</svg>`;
 }
 
