@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lezione 0002 - Corsa facile su strada</title>
+<meta name="theme-color" content="#0e1117">
+<script>document.documentElement.setAttribute('data-theme',localStorage.getItem('theme')||'dark')</script>
+<link rel="stylesheet" href="/claude-projects/theme.css">
+<script src="/claude-projects/theme.js" defer></script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0e1117;--sf:#161b22;--sf2:#1c2230;--bd:#2a3040;--tx:#e6edf3;--tx2:#8b949e;--ac:#58a6ff;--ac2:#3fb950;--wn:#f0883e;--rd:#f85149;--pd:#d2a8ff}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--tx);font-family:'DM Sans',sans-serif;line-height:1.65}.c{max-width:860px;margin:0 auto;padding:2rem 1.2rem 4rem}
+.back{display:inline-flex;align-items:center;gap:.35rem;font-family:'Space Mono',monospace;font-size:.75rem;color:var(--tx2);text-decoration:none;padding:.35rem .6rem;border-radius:6px;border:1px solid var(--bd);background:var(--sf);transition:border-color .2s,color .2s;margin-bottom:1.2rem}.back:hover{border-color:var(--ac);color:var(--ac)}.back svg{width:14px;height:14px}
+header{padding:2rem 0 1.5rem;border-bottom:1px solid var(--bd);margin-bottom:1.5rem}.kicker{font-family:'Space Mono',monospace;color:var(--ac2);font-size:.75rem;text-transform:uppercase;letter-spacing:.08em}h1{font-family:'Space Mono',monospace;font-size:clamp(2rem,7vw,4rem);line-height:1.05;margin:.4rem 0}.lead{color:var(--tx2);font-size:1.05rem;max-width:700px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem;margin:1.2rem 0}@media(max-width:760px){.grid{grid-template-columns:1fr}}
+.card,.quiz,.practice{background:var(--sf);border:1px solid var(--bd);border-radius:14px;padding:1rem}.card strong{display:block;font-family:'Space Mono',monospace;color:var(--ac);font-size:.85rem;margin-bottom:.35rem}.card p{margin:0;color:var(--tx2);font-size:.9rem}
+h2{font-family:'Space Mono',monospace;margin:2rem 0 .8rem}p{margin:.6rem 0}.callout{border-left:3px solid var(--wn);background:rgba(240,136,62,.08);padding:.9rem 1rem;border-radius:10px;color:var(--tx)}
+ol,ul{padding-left:1.3rem}.step{margin:.55rem 0}.rule{font-family:'Space Mono',monospace;font-size:.85rem;color:var(--ac2)}
+button{display:block;width:100%;text-align:left;margin:.55rem 0;padding:.8rem .9rem;border-radius:10px;border:1px solid var(--bd);background:var(--sf2);color:var(--tx);font:inherit;cursor:pointer}button:hover{border-color:var(--ac)}button.good{border-color:var(--ac2);background:rgba(63,185,80,.12)}button.bad{border-color:var(--rd);background:rgba(248,81,73,.1)}
+.feedback{min-height:1.6rem;color:var(--tx2);font-size:.92rem}.ok{color:var(--ac2)}.no{color:var(--rd)}
+.refs{font-size:.85rem;color:var(--tx2);border-top:1px solid var(--bd);margin-top:2rem;padding-top:1rem}.refs a{color:var(--ac)}
+</style>
+</head>
+<body>
+<main class="c">
+<a class="back" href="../"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>Trail running</a>
+
+<header>
+  <div class="kicker">Lezione 0002</div>
+  <h1>La strada costruisce il motore trail.</h1>
+  <p class="lead">Se vivi lontano dalle montagne, la corsa facile su strada non e' un ripiego: e' dove impari la disciplina piu' importante per Brenta, cioe' tenere uno sforzo sostenibile anche quando potresti andare piu' forte.</p>
+</header>
+
+<section class="grid" aria-label="contesto allenamento">
+  <div class="card"><strong>Ambiente</strong><p>Pianura vicino a Treviglio: perfetta per controllare ritmo e FC.</p></div>
+  <div class="card"><strong>Tetto operativo</strong><p>Nel piano Brenta, la corsa facile resta sotto MAF: 152 bpm.</p></div>
+  <div class="card"><strong>Perche' conta</strong><p>Meno deriva cardiaca su strada = piu' margine sulle salite lunghe.</p></div>
+</section>
+
+<section>
+  <h2>Idea chiave</h2>
+  <p>Una corsa facile riuscita non e' quella in cui dimostri di essere veloce. E' quella in cui arrivi alla fine con la sensazione di poter continuare, senza trasformare ogni uscita in una gara invisibile.</p>
+  <p>Il controllo migliore e' doppio: <strong>talk test</strong> piu' <strong>frequenza cardiaca</strong>. Dovresti poter parlare in frasi complete. Se la FC supera il tetto del giorno di piu' di pochi battiti, rallenti o inserisci camminata breve.</p>
+  <div class="callout"><span class="rule">Regola Brenta:</span> su strada alleni la pazienza. Se non riesci a correre piano in pianura, in salita spenderai troppo presto.</div>
+</section>
+
+<section>
+  <h2>Il protocollo dell'uscita facile</h2>
+  <ol>
+    <li class="step"><strong>Primi 10 minuti no ego.</strong> Parti piu' lento di quanto sembra naturale. La FC deve salire gradualmente.</li>
+    <li class="step"><strong>Controllo ogni 5 minuti.</strong> Chiediti: potrei dire due frasi complete senza ansimare?</li>
+    <li class="step"><strong>FC batte passo.</strong> Se il passo target porta sopra il tetto, il passo target e' sbagliato per oggi.</li>
+    <li class="step"><strong>Forma semplice.</strong> Corri alto, spalle rilassate, piedi leggeri. Un solo cue alla volta.</li>
+    <li class="step"><strong>Finale stabile.</strong> L'obiettivo e' chiudere senza deriva enorme: non accelerare per "salvare la media".</li>
+  </ol>
+</section>
+
+<section class="quiz" aria-label="mini quiz">
+  <h2>Mini drill: scegli il segnale giusto</h2>
+  <p>Scenario: corsa facile su strada. Il passo e' quello previsto, ma dopo 25 minuti sei a 157 bpm e parli solo a frasi corte. Cosa fai?</p>
+  <button data-answer="bad">Tengo il passo: se era previsto, va rispettato.</button>
+  <button data-answer="good">Rallento o inserisco 30-60 secondi di camminata, poi riparto facile.</button>
+  <button data-answer="bad">Accelero per finire prima, cosi' resto meno tempo sotto fatica.</button>
+  <p class="feedback" id="feedback" aria-live="polite"></p>
+</section>
+
+<section class="practice">
+  <h2>Pratica nella prossima corsa su strada</h2>
+  <ul>
+    <li>Fai 30-45 minuti facili.</li>
+    <li>Ogni 5 minuti fai il talk test: una frase completa, non tre parole.</li>
+    <li>Annota il primo minuto in cui la FC tende a salire a parita' di sensazione.</li>
+    <li>Se succede presto, non e' fallimento: e' informazione per calibrare il motore.</li>
+  </ul>
+  <p>Raccontami poi: il limite e' stato fiato, gambe, caldo, noia o orgoglio sul passo?</p>
+</section>
+
+<section class="refs">
+  <p><strong>Fonti:</strong> piano Brenta locale; McMillan Running, <a href="https://www.mcmillanrunning.com/zone-2-heart-rate-calculator/">Zone 2 Heart Rate Calculator + Training Guide</a>; Polar, <a href="https://www.polar.com/en/guide/heart-rate-zones">Heart Rate Zones</a>; TrainingPeaks, <a href="https://www.trainingpeaks.com/coach-blog/aerobic-endurance-and-decoupling/">Aerobic Decoupling and Heart Rate Drift Explained</a>; McMillan Running, <a href="https://www.mcmillanrunning.com/form-training-for-runners/">Form Training for Runners</a>.</p>
+  <p>Domande utili da farmi dopo questa lezione: "come capisco se sto andando troppo forte?", "come leggo la deriva cardiaca?", "quando posso ignorare il passo?".</p>
+</section>
+</main>
+<script>
+const feedback = document.getElementById('feedback');
+document.querySelectorAll('button[data-answer]').forEach(button => {
+  button.addEventListener('click', () => {
+    document.querySelectorAll('button[data-answer]').forEach(b => b.classList.remove('good','bad'));
+    if (button.dataset.answer === 'good') {
+      button.classList.add('good');
+      feedback.innerHTML = '<span class="ok">Corretto.</span> In una corsa facile il segnale guida e lo sforzo sostenibile, non la media al km.';
+    } else {
+      button.classList.add('bad');
+      feedback.innerHTML = '<span class="no">Non ancora.</span> Se perdi il talk test e superi il tetto FC, non stai piu facendo la seduta facile.';
+    }
+  });
+});
+</script>
+</body>
+</html>
