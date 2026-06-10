@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lezione 0003 - Termini running e trail</title>
+<meta name="theme-color" content="#0e1117">
+<script>document.documentElement.setAttribute('data-theme',localStorage.getItem('theme')||'dark')</script>
+<link rel="stylesheet" href="/claude-projects/theme.css">
+<script src="/claude-projects/theme.js" defer></script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0e1117;--sf:#161b22;--sf2:#1c2230;--bd:#2a3040;--tx:#e6edf3;--tx2:#8b949e;--ac:#58a6ff;--ac2:#3fb950;--wn:#f0883e;--rd:#f85149;--pd:#d2a8ff}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--tx);font-family:'DM Sans',sans-serif;line-height:1.72}.c{max-width:980px;margin:0 auto;padding:2rem 1.2rem 4rem}
+.back{display:inline-flex;align-items:center;gap:.35rem;font-family:'Space Mono',monospace;font-size:.75rem;color:var(--tx2);text-decoration:none;padding:.35rem .6rem;border-radius:6px;border:1px solid var(--bd);background:var(--sf);transition:border-color .2s,color .2s;margin-bottom:1.2rem}.back:hover{border-color:var(--ac);color:var(--ac)}.back svg{width:14px;height:14px}
+header{padding:2rem 0 1.5rem;border-bottom:1px solid var(--bd);margin-bottom:1.5rem}.kicker{font-family:'Space Mono',monospace;color:var(--ac2);font-size:.75rem;text-transform:uppercase;letter-spacing:.08em}h1{font-family:'Space Mono',monospace;font-size:clamp(2rem,7vw,4.3rem);line-height:1.05;margin:.4rem 0}.lead{color:var(--tx2);font-size:1.08rem;max-width:760px}
+.map{display:grid;grid-template-columns:repeat(4,1fr);gap:.75rem;margin:1.2rem 0}@media(max-width:860px){.map{grid-template-columns:repeat(2,1fr)}}@media(max-width:560px){.map{grid-template-columns:1fr}}
+.tile,.card,.quiz,.practice{background:var(--sf);border:1px solid var(--bd);border-radius:14px;padding:1rem}.tile strong{display:block;font-family:'Space Mono',monospace;color:var(--ac);font-size:.82rem;margin-bottom:.35rem}.tile p{margin:0;color:var(--tx2);font-size:.9rem}
+h2{font-family:'Space Mono',monospace;margin:2.2rem 0 .8rem}h3{font-family:'Space Mono',monospace;color:var(--ac);font-size:1rem;margin:1.1rem 0 .45rem}p{margin:.65rem 0}.callout{border-left:3px solid var(--wn);background:rgba(240,136,62,.08);padding:.9rem 1rem;border-radius:10px;color:var(--tx)}
+.term-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.8rem}@media(max-width:760px){.term-grid{grid-template-columns:1fr}}.term{background:var(--sf);border:1px solid var(--bd);border-radius:14px;padding:1rem}.term b{font-family:'Space Mono',monospace;color:var(--ac2)}.term .avoid{display:block;margin-top:.4rem;color:var(--tx2);font-size:.86rem}.example{margin-top:.55rem;padding:.65rem .75rem;background:var(--sf2);border-radius:10px;color:var(--tx2);font-size:.9rem}
+.story{background:linear-gradient(135deg,rgba(88,166,255,.12),rgba(210,168,255,.08));border:1px solid var(--bd);border-radius:16px;padding:1rem}.story ol{padding-left:1.25rem;margin:.5rem 0}.story li{margin:.45rem 0}
+button{display:block;width:100%;text-align:left;margin:.55rem 0;padding:.8rem .9rem;border-radius:10px;border:1px solid var(--bd);background:var(--sf2);color:var(--tx);font:inherit;cursor:pointer}button:hover{border-color:var(--ac)}button.good{border-color:var(--ac2);background:rgba(63,185,80,.12)}button.bad{border-color:var(--rd);background:rgba(248,81,73,.1)}
+.feedback{min-height:1.6rem;color:var(--tx2);font-size:.92rem}.ok{color:var(--ac2)}.no{color:var(--rd)}
+.refs{font-size:.85rem;color:var(--tx2);border-top:1px solid var(--bd);margin-top:2rem;padding-top:1rem}.refs a{color:var(--ac)}code{font-family:'Space Mono',monospace;background:var(--sf2);border:1px solid var(--bd);border-radius:6px;padding:.08rem .28rem}
+</style>
+</head>
+<body>
+<main class="c">
+<a class="back" href="../"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>Trail running</a>
+
+<header>
+  <div class="kicker">Lezione 0003</div>
+  <h1>Impara la lingua della corsa.</h1>
+  <p class="lead">I termini running non servono per sembrare esperti. Servono per prendere decisioni migliori: quanto piano andare oggi, quando camminare, perche' il passo non dice tutto, e cosa guardare nel piano Brenta senza perdersi nei numeri.</p>
+</header>
+
+<section class="map" aria-label="mappa della lezione">
+  <div class="tile"><strong>Sforzo</strong><p>Le parole che dicono quanto costa una seduta.</p></div>
+  <div class="tile"><strong>Metriche</strong><p>I numeri che trovi su Garmin, Strava o nel piano.</p></div>
+  <div class="tile"><strong>Terreno</strong><p>Le parole che cambiano quando lasci la strada.</p></div>
+  <div class="tile"><strong>Allenamento</strong><p>I mattoni del piano: facile, lungo, recupero, taper.</p></div>
+</section>
+
+<section>
+  <h2>Prima regola: un termine vale se cambia cosa fai</h2>
+  <p>Se un termine non cambia una decisione, per ora e' rumore. Per il Brenta 21K, le parole utili sono quelle che ti aiutano a non bruciare energia presto, leggere il percorso, e capire se il corpo sta assorbendo il carico.</p>
+  <div class="callout"><strong>Filtro Brenta:</strong> quando impari un termine, chiediti: "mi aiuta a finire entro i cancelli?". Se si', entra nel vocabolario. Se no, puo' aspettare.</div>
+</section>
+
+<section>
+  <h2>1. Termini di sforzo: quanto costa correre?</h2>
+  <p>Questi sono i termini piu' importanti all'inizio, perche' un principiante spesso sbaglia non per ignoranza tecnica, ma per intensita': corre troppo forte nei giorni facili e arriva stanco ai lavori che contano.</p>
+  <div class="term-grid">
+    <div class="term">
+      <b>Corsa facile</b>
+      <p>Una corsa a sforzo controllato, sostenibile, dove potresti parlare in frasi complete. Nel piano Brenta e' il pane quotidiano.</p>
+      <span class="avoid">Non significa: corsa inutile, corsa lenta per forza, passeggiata.</span>
+      <div class="example">Decisione: se il respiro si rompe, rallenti anche se il passo medio peggiora.</div>
+    </div>
+    <div class="term">
+      <b>Talk test</b>
+      <p>Test pratico per controllare l'intensita': se puoi parlare in frasi complete senza ansimare, sei vicino allo sforzo facile.</p>
+      <span class="avoid">Non significa: riuscire a dire tre parole tra due respiri.</span>
+      <div class="example">Decisione: se parli a scatti, non sei piu' nel lavoro facile.</div>
+    </div>
+    <div class="term">
+      <b>Zone cardio</b>
+      <p>Fasce di frequenza cardiaca. Nel tuo piano, Z2 arriva fino al tetto MAF di 152 bpm; Z3 e oltre sono da usare con cautela e piu' avanti.</p>
+      <span class="avoid">Non significa: numeri perfetti ogni giorno. Caldo, sonno e fatica spostano la risposta.</span>
+      <div class="example">Decisione: "FC batte passo": se il passo ti porta fuori zona, cambi passo.</div>
+    </div>
+    <div class="term">
+      <b>RPE</b>
+      <p>Rate of Perceived Exertion: percezione soggettiva dello sforzo, di solito su scala 1-10. Utile quando il cardio e' rumoroso.</p>
+      <span class="avoid">Non significa: umore della giornata. E' quanto costa il gesto adesso.</span>
+      <div class="example">Decisione: una corsa facile dovrebbe restare circa 3-4/10.</div>
+    </div>
+    <div class="term">
+      <b>Aerobic base</b>
+      <p>La base aerobica e' la capacita' di sostenere lavoro lungo a bassa intensita' senza consumarti. Su strada la costruisci; in trail la spendi.</p>
+      <span class="avoid">Non significa: "solo fiato". Include muscoli, cuore, capillari, efficienza e recupero.</span>
+      <div class="example">Decisione: molte uscite facili sono investimento, non mancanza di ambizione.</div>
+    </div>
+    <div class="term">
+      <b>Cardiac drift / decoupling</b>
+      <p>Quando a passo simile la FC sale nel tempo. TrainingPeaks lo misura come Pa:Hr: confronto tra prima e seconda meta' di uno sforzo stabile.</p>
+      <span class="avoid">Non significa: un singolo numero da idolatrare. Caldo, idratazione e fatica influenzano molto.</span>
+      <div class="example">Decisione: se drift alto ricorre nei facili lunghi, serve piu' base prima di piu' intensita'.</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>2. Termini di metrica: cosa misurano i numeri?</h2>
+  <p>Le metriche sono utili solo se sai cosa stanno ignorando. Il passo al km su strada e' abbastanza leggibile; in trail puo' diventare quasi inutile senza pendenza e terreno.</p>
+  <div class="term-grid">
+    <div class="term">
+      <b>Pace / passo</b>
+      <p>Tempo per chilometro, per esempio 6:30/km. Su strada e' intuitivo; in salita o su tecnico perde significato.</p>
+      <span class="avoid">Non significa: valore morale della corsa.</span>
+      <div class="example">Brenta: un km ripido puo' essere lento e perfetto.</div>
+    </div>
+    <div class="term">
+      <b>GAP</b>
+      <p>Grade Adjusted Pace: stima del passo equivalente su piano, corretta per la pendenza. Aiuta a confrontare tratti non piatti.</p>
+      <span class="avoid">Non significa: verita' assoluta. Terreno tecnico, fango e pause non si correggono bene.</span>
+      <div class="example">Decisione: meglio GAP + FC che pace grezzo su percorso ondulato.</div>
+    </div>
+    <div class="term">
+      <b>D+ / elevation gain</b>
+      <p>Dislivello positivo totale. Il Brenta ha circa 1.250 m D+, quindi il costo gara non e' nei 21 km ma nella combinazione km + salita.</p>
+      <span class="avoid">Non significa: altitudine massima. Sono metri saliti, anche in segmenti diversi.</span>
+      <div class="example">Decisione: un lungo da 90 minuti con D+ vale diversamente da 90 minuti piatti.</div>
+    </div>
+    <div class="term">
+      <b>Grade / pendenza</b>
+      <p>Quanto sale o scende il terreno in percentuale. Sopra certe pendenze, camminare forte puo' essere piu' efficiente che correre.</p>
+      <span class="avoid">Non significa: salita percepita. La percezione cambia con fondo e fatica.</span>
+      <div class="example">Decisione: se la pendenza rompe la forma, passi a power hiking.</div>
+    </div>
+    <div class="term">
+      <b>Cadence / cadenza</b>
+      <p>Passi al minuto. Per un principiante conta piu' il cue "piedi leggeri" che inseguire un numero magico.</p>
+      <span class="avoid">Non significa: tutti devono correre a 180 spm.</span>
+      <div class="example">Decisione: su discesa tecnica, passi piu' corti e rapidi danno controllo.</div>
+    </div>
+    <div class="term">
+      <b>Split</b>
+      <p>Una porzione della corsa, spesso ogni km o ogni lap. Serve per leggere andamento, non per giudicare ogni chilometro isolato.</p>
+      <span class="avoid">Non significa: ogni split deve essere uguale.</span>
+      <div class="example">Brenta: split lenti in salita e piu' fluidi in discesa sono normali.</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>3. Termini trail: cosa cambia fuori strada?</h2>
+  <p>Nel trail, la domanda principale smette di essere "quanto vado al km?" e diventa "quanto costa avanzare qui?". Terreno, pendenza, grip e tecnica cambiano il prezzo di ogni metro.</p>
+  <div class="term-grid">
+    <div class="term">
+      <b>Power hiking</b>
+      <p>Camminata forte e intenzionale in salita. Non e' una pausa: e' una marcia efficiente.</p>
+      <span class="avoid">Non significa: mi sono arreso.</span>
+      <div class="example">Brenta: usarlo presto puo' salvare energie per Croz e per la discesa finale.</div>
+    </div>
+    <div class="term">
+      <b>Runnable climb</b>
+      <p>Salita che puoi correre mantenendo forma, respiro e controllo. "Corribile" dipende da forma del giorno e durata, non solo dalla pendenza.</p>
+      <span class="avoid">Non significa: salita che devi correre sempre.</span>
+      <div class="example">Decisione: se correre e camminare hanno quasi stesso passo, scegli lo sforzo piu' sostenibile.</div>
+    </div>
+    <div class="term">
+      <b>Technical descent</b>
+      <p>Discesa con radici, rocce, curve, fondo irregolare o rischio di scivolare. Richiede controllo, non solo coraggio.</p>
+      <span class="avoid">Non significa: vai piano per paura. Significa scegli piedi e linea.</span>
+      <div class="example">Decisione: guarda avanti, passi corti, braccia libere per equilibrio.</div>
+    </div>
+    <div class="term">
+      <b>Line choice</b>
+      <p>La scelta della traiettoria: dove mettere i piedi per perdere meno energia e ridurre rischio.</p>
+      <span class="avoid">Non significa: sempre la linea piu' corta.</span>
+      <div class="example">Brenta: evitare un sasso instabile puo' valere piu' di tagliare un metro.</div>
+    </div>
+    <div class="term">
+      <b>Cutoff / cancello</b>
+      <p>Orario limite a un checkpoint. Nel Brenta, Croz dell'Altissimo ha limite 3h00'.</p>
+      <span class="avoid">Non significa: devi arrivare distrutto appena prima del limite.</span>
+      <div class="example">Decisione: pacing conservativo ma continuo, senza panico nei primi km.</div>
+    </div>
+    <div class="term">
+      <b>Mandatory kit</b>
+      <p>Materiale obbligatorio o prudente per sicurezza: telefono, idratazione, giacca, telo termico, fischietto, in base al regolamento.</p>
+      <span class="avoid">Non significa: roba extra per sembrare trailer.</span>
+      <div class="example">Decisione: controllare lista ufficiale vicino alla gara, non inventarla il giorno prima.</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>4. Termini del piano: che tipo di lavoro sto facendo?</h2>
+  <p>Le parole del piano proteggono l'intento della seduta. Se un "facile" diventa medio, hai cambiato allenamento anche se hai corso la distanza prevista.</p>
+  <div class="term-grid">
+    <div class="term">
+      <b>Long run / lungo</b>
+      <p>Uscita piu' lunga della settimana. Costruisce durata, gestione energetica e confidenza.</p>
+      <span class="avoid">Non significa: sempre forte o sempre trail.</span>
+      <div class="example">Brenta: il lungo e' non negoziabile, ma puo' adattarsi a strada o D+.</div>
+    </div>
+    <div class="term">
+      <b>Recovery run</b>
+      <p>Corsa molto facile per muovere sangue e recuperare. Deve lasciare meglio di come sei partito.</p>
+      <span class="avoid">Non significa: recuperare il lavoro saltato.</span>
+      <div class="example">Decisione: se non riesci a tenerla facile, meglio riposo.</div>
+    </div>
+    <div class="term">
+      <b>Tempo run</b>
+      <p>Tratto sostenuto ma controllato, di solito introdotto piu' avanti. Per ora non e' la priorita'.</p>
+      <span class="avoid">Non significa: "vado forte finche' tengo".</span>
+      <div class="example">Brenta: utile solo quando la base tollera gia' i facili e i lunghi.</div>
+    </div>
+    <div class="term">
+      <b>Intervals / ripetute</b>
+      <p>Blocchi piu' intensi separati da recuperi. Allenano qualita' specifiche ma costano recupero.</p>
+      <span class="avoid">Non significa: scorciatoia per diventare pronto prima.</span>
+      <div class="example">Decisione: non aggiungerle se i facili hanno gia' drift alto.</div>
+    </div>
+    <div class="term">
+      <b>Taper</b>
+      <p>Riduzione progressiva del carico prima della gara per arrivare fresco senza perdere sensazioni.</p>
+      <span class="avoid">Non significa: panico e allenamenti last minute.</span>
+      <div class="example">Brenta: nelle ultime settimane devi assorbire, non dimostrare.</div>
+    </div>
+    <div class="term">
+      <b>DOMS / niggle</b>
+      <p>DOMS: indolenzimento muscolare post-carico. Niggle: fastidio piccolo ma da monitorare, non ancora infortunio.</p>
+      <span class="avoid">Non significa: dolore acuto da ignorare.</span>
+      <div class="example">Decisione: DOMS diffuso puo' essere ok; dolore acuto o asimmetrico cambia il piano.</div>
+    </div>
+  </div>
+</section>
+
+<section class="story">
+  <h2>Come leggere una frase del piano</h2>
+  <p>Prendi una frase tipica: <strong>"45 minuti Z2 su strada, FC sotto 152, facile, focus piedi leggeri."</strong></p>
+  <ol>
+    <li><strong>45 minuti</strong> dice la durata, non il valore della seduta.</li>
+    <li><strong>Z2 / FC sotto 152</strong> dice il costo massimo accettabile.</li>
+    <li><strong>Su strada</strong> dice che il passo sara' leggibile e il D+ non e' lo stimolo principale.</li>
+    <li><strong>Facile</strong> conferma che il talk test deve restare positivo.</li>
+    <li><strong>Piedi leggeri</strong> e' il cue tecnico: una sola cosa da sentire, non dieci correzioni.</li>
+  </ol>
+  <p>Se fai 45 minuti ma stai in Z3, hai completato la durata ma hai tradito l'intento. Questa e' la differenza tra eseguire e "fare chilometri".</p>
+</section>
+
+<section class="quiz" aria-label="mini quiz">
+  <h2>Mini quiz: quale termine guida la decisione?</h2>
+  <p>Scenario 1: sei al km 4 di una corsa facile su strada. Il passo e' ok, ma non superi il talk test. Quale concetto deve vincere?</p>
+  <button data-answer="bad" data-note="Il passo e' informazione, ma non deve comandare una seduta facile.">Pace</button>
+  <button data-answer="good" data-note="Esatto: talk test e zona guidano l'intento facile.">Talk test / zona cardio</button>
+  <button data-answer="bad" data-note="Il D+ qui non e' il problema: sei su strada piatta.">D+</button>
+
+  <p>Scenario 2: sei su una salita trail ripida. Correre e camminare hanno quasi la stessa velocita', ma correndo la FC schizza. Quale termine ti aiuta?</p>
+  <button data-answer="good" data-note="Esatto: power hiking e' la marcia efficiente, non una resa.">Power hiking</button>
+  <button data-answer="bad" data-note="La cadenza puo' aiutare, ma il problema qui e' scegliere la marcia.">Cadence</button>
+  <button data-answer="bad" data-note="Lo split sara' lento comunque: non e' la decisione principale.">Split</button>
+
+  <p>Scenario 3: dopo 50 minuti stai tenendo passo simile, ma la FC sale sempre. Come si chiama il segnale?</p>
+  <button data-answer="bad" data-note="Il taper e' una fase prima della gara, non questo fenomeno.">Taper</button>
+  <button data-answer="bad" data-note="Il cutoff e' un limite orario di gara.">Cutoff</button>
+  <button data-answer="good" data-note="Esatto: e' cardiac drift, quantificabile come decoupling.">Cardiac drift / decoupling</button>
+  <p class="feedback" id="feedback" aria-live="polite"></p>
+</section>
+
+<section class="practice">
+  <h2>Pratica: porta 5 termini nella prossima uscita</h2>
+  <p>Scegli una corsa facile su strada o una salita breve. Prima di partire, scrivi mentalmente questi cinque termini:</p>
+  <ol>
+    <li><strong>Intento</strong>: facile, lungo, recupero o trail tecnico?</li>
+    <li><strong>Segnale guida</strong>: talk test, FC, RPE o terreno?</li>
+    <li><strong>Metrica secondaria</strong>: pace, GAP, D+ o split?</li>
+    <li><strong>Decisione</strong>: rallento, cammino, continuo o taglio?</li>
+    <li><strong>Segnale post-uscita</strong>: DOMS, drift, freschezza o niggle?</li>
+  </ol>
+  <p>Dopo l'uscita, torna qui e spiegami due decisioni usando i termini. Se li usi correttamente, li promuoveremo in `GLOSSARY.md` e scriveremo un learning record.</p>
+</section>
+
+<section class="refs">
+  <p><strong>Fonti:</strong> piano Brenta locale; profilo atleta locale; McMillan Running, <a href="https://www.mcmillanrunning.com/zone-2-heart-rate-calculator/">Zone 2 guide</a> e <a href="https://www.mcmillanrunning.com/form-training-for-runners/">Form Training for Runners</a>; Polar, <a href="https://www.polar.com/en/guide/heart-rate-zones">Heart Rate Zones</a>; TrainingPeaks, <a href="https://www.trainingpeaks.com/coach-blog/aerobic-endurance-and-decoupling/">Aerobic Decoupling and Heart Rate Drift Explained</a>; iRunFar, <a href="https://www.irunfar.com/an-introduction-to-powerhiking">Powerhiking</a> e <a href="https://www.irunfar.com/an-introduction-to-trail-racing-part-1-pre-race-preparation">Trail Racing Preparation</a>.</p>
+  <p>Domande utili da farmi dopo questa lezione: "quali termini devo conoscere per leggere una scheda?", "mi fai un quiz sui termini?", "ho usato bene D+, GAP e decoupling?".</p>
+</section>
+</main>
+<script>
+const feedback = document.getElementById('feedback');
+document.querySelectorAll('button[data-answer]').forEach(button => {
+  button.addEventListener('click', () => {
+    const group = button.parentElement;
+    group.querySelectorAll('button[data-answer]').forEach(b => b.classList.remove('good','bad'));
+    const ok = button.dataset.answer === 'good';
+    button.classList.add(ok ? 'good' : 'bad');
+    feedback.innerHTML = `${ok ? '<span class="ok">Corretto.</span>' : '<span class="no">Non ancora.</span>'} ${button.dataset.note}`;
+  });
+});
+</script>
+</body>
+</html>
