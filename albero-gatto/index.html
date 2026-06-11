@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Albero per Gatti — Progetto DIY</title>
+<meta name="theme-color" content="#0e1117">
+<script>document.documentElement.setAttribute('data-theme',localStorage.getItem('theme')||'dark')</script>
+<link rel="stylesheet" href="/claude-projects/theme.css">
+<script src="/claude-projects/theme.js" defer></script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0e1117;--sf:#161b22;--sf2:#1c2230;--bd:#2a3040;--tx:#e6edf3;--tx2:#8b949e;--ac:#58a6ff;--ac2:#3fb950;--wn:#f0883e;--rd:#f85149;--ju:#d2a26a}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--tx);line-height:1.6}
+.c{max-width:820px;margin:0 auto;padding:2rem 1.5rem}
+header{text-align:center;padding:2.5rem 0 1.5rem;border-bottom:1px solid var(--bd);margin-bottom:2.5rem}
+.back{display:inline-flex;align-items:center;gap:.35rem;font-family:'Space Mono',monospace;font-size:.75rem;color:var(--tx2);text-decoration:none;padding:.35rem .6rem;border-radius:6px;border:1px solid var(--bd);background:var(--sf);transition:border-color .2s,color .2s;margin-bottom:1rem}
+.back:hover{border-color:var(--ac);color:var(--ac)}
+.back svg{width:14px;height:14px}
+header h1{font-family:'Space Mono',monospace;font-size:clamp(1.6rem,4vw,2.5rem);font-weight:700;letter-spacing:-1px;margin-bottom:.4rem;background:linear-gradient(135deg,var(--ju),var(--ac));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+header p{color:var(--tx2);font-size:.9rem}
+.br{display:flex;gap:.6rem;justify-content:center;margin-top:.8rem;flex-wrap:wrap}
+.bg{font-family:'Space Mono',monospace;font-size:.65rem;padding:.25rem .6rem;border-radius:999px;border:1px solid var(--bd);color:var(--tx2);background:var(--sf)}
+section{margin-bottom:2.5rem}
+h2{font-family:'Space Mono',monospace;font-size:1.2rem;margin-bottom:1rem;color:var(--ac);display:flex;align-items:center;gap:.5rem}
+h2 .n{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:6px;background:var(--ac);color:var(--bg);font-size:.75rem;font-weight:700;flex-shrink:0}
+h3{font-size:.95rem;margin-bottom:.6rem;margin-top:1rem}
+p.intro{font-size:.95rem;color:var(--tx2);line-height:1.7}
+p.intro strong{color:var(--tx)}
+/* calc */
+.calc{background:var(--sf);border:1px solid var(--bd);border-radius:12px;padding:1.4rem;margin-bottom:1.5rem}
+.shared{font-family:'Space Mono',monospace;font-size:.6rem;text-transform:uppercase;letter-spacing:1.5px;color:var(--tx2);margin:.2rem 0 1rem}
+.ctrl{margin-bottom:1.4rem}
+.ctrl-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:.55rem}
+.ctrl-label{font-family:'Space Mono',monospace;font-size:.82rem;color:var(--tx)}
+.ctrl-val{font-family:'Space Mono',monospace;font-size:1.05rem;font-weight:700;color:var(--ac)}
+.ctrl-val.t1{color:var(--ac2)}
+.ctrl-val.t2{color:var(--wn)}
+.ctrl-val .u{font-size:.68rem;color:var(--tx2);font-weight:400}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:6px;border-radius:99px;background:var(--sf2);outline:none;cursor:pointer}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:22px;height:22px;border-radius:50%;background:var(--ac);cursor:pointer;border:3px solid var(--bg);box-shadow:0 0 0 1px var(--ac)}
+input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;background:var(--ac);cursor:pointer;border:3px solid var(--bg);box-shadow:0 0 0 1px var(--ac)}
+input.t1::-webkit-slider-thumb{background:var(--ac2);box-shadow:0 0 0 1px var(--ac2)}
+input.t1::-moz-range-thumb{background:var(--ac2);box-shadow:0 0 0 1px var(--ac2)}
+input.t2::-webkit-slider-thumb{background:var(--wn);box-shadow:0 0 0 1px var(--wn)}
+input.t2::-moz-range-thumb{background:var(--wn);box-shadow:0 0 0 1px var(--wn)}
+.ctrl-minmax{display:flex;justify-content:space-between;font-family:'Space Mono',monospace;font-size:.6rem;color:var(--tx2);margin-top:.35rem}
+.divider{height:1px;background:var(--bd);margin:1.5rem 0}
+/* results */
+.sg{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.8rem}
+.sc{background:var(--sf2);border:1px solid var(--bd);border-radius:10px;padding:1rem}
+.sc.main{border-color:var(--ac);background:rgba(88,166,255,.08)}
+.sc .l{font-size:.62rem;color:var(--tx2);text-transform:uppercase;letter-spacing:1px;margin-bottom:.2rem;font-family:'Space Mono',monospace}
+.sc .v{font-size:1.5rem;font-weight:700;font-family:'Space Mono',monospace}
+.sc.main .v{color:var(--ac)}
+.sc .u{font-size:.8rem;color:var(--tx2);font-weight:400}
+.sc .s{font-size:.65rem;color:var(--tx2);margin-top:.2rem}
+.dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:.3rem;vertical-align:middle}
+table.b{width:100%;border-collapse:collapse;font-size:.85rem}
+table.b th{font-family:'Space Mono',monospace;font-size:.62rem;text-transform:uppercase;letter-spacing:1px;color:var(--tx2);text-align:left;padding:.6rem .8rem;border-bottom:2px solid var(--bd);background:var(--sf2)}
+table.b td{padding:.6rem .8rem;border-bottom:1px solid var(--bd)}
+table.b td.dm{font-family:'Space Mono',monospace;color:var(--ac)}
+table.b tr.sel td{background:rgba(88,166,255,.1)}
+table.b tr.sel td:first-child{box-shadow:inset 3px 0 0 var(--ac)}
+.tip{background:rgba(88,166,255,.08);border-left:3px solid var(--ac);padding:.9rem 1.1rem;border-radius:0 8px 8px 0;margin:.9rem 0;font-size:.85rem;color:var(--tx2)}
+.tip strong{color:var(--ac)}
+.tip.ju{border-left-color:var(--ju);background:rgba(210,162,106,.08)}
+.tip.ju strong{color:var(--ju)}
+.tip.warn{border-left-color:var(--wn);background:rgba(240,136,62,.08)}
+.tip.warn strong{color:var(--wn)}
+.formula{font-family:'Space Mono',monospace;font-size:.9rem;background:var(--sf2);border:1px solid var(--bd);border-radius:8px;padding:.9rem 1rem;margin:.8rem 0;color:var(--ac2);text-align:center;overflow-x:auto;white-space:nowrap}
+ul.q{list-style:none;padding:0}
+ul.q li{background:var(--sf);border:1px solid var(--bd);border-radius:10px;padding:.8rem 1rem;margin-bottom:.5rem;font-size:.88rem;display:flex;gap:.6rem}
+ul.q li::before{content:'?';flex-shrink:0;width:20px;height:20px;border-radius:50%;background:var(--wn);color:var(--bg);font-family:'Space Mono',monospace;font-size:.7rem;font-weight:700;display:flex;align-items:center;justify-content:center;margin-top:2px}
+footer{text-align:center;padding:1.5rem 0;border-top:1px solid var(--bd);margin-top:1.5rem;color:var(--tx2);font-size:.72rem}
+@media(max-width:600px){.c{padding:1rem}.sg{grid-template-columns:1fr 1fr}table.b{font-size:.78rem}table.b th,table.b td{padding:.45rem .5rem}.formula{font-size:.78rem}}
+</style>
+</head>
+<body>
+<div class="c">
+
+<header>
+  <a class="back" href="../"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>Progetti</a>
+  <h1>Albero per Gatti</h1>
+  <p>Base + 2 tubi rivestiti in iuta + 2 piattaforme di legno a quote diverse</p>
+  <div class="br">
+    <span class="bg" style="border-color:var(--ac);color:var(--ac)">📐 In definizione</span>
+    <span class="bg">Tiragraffi</span>
+    <span class="bg">Corda di iuta</span>
+  </div>
+</header>
+
+<section>
+  <p class="intro">
+    Albero tiragraffi per gatto. L'idea, per ora a grandi linee: una <strong>piattaforma di base</strong>, due <strong>tubi di lunghezza diversa</strong> fissati sopra e rivestiti di <strong>corda di iuta</strong>, e in cima a ciascuno una <strong>piattaforma di legno</strong> (le due a quote diverse). Tante cose sono ancora da decidere — qui sotto trovi quello che serve <strong>adesso</strong>: capire quanta corda di iuta comprare per rivestire i tubi, al variare di diametro, spessore della corda e altezza.
+  </p>
+</section>
+
+<!-- 1 CALCOLATORE -->
+<section>
+  <h2><span class="n">1</span> Calcolo corda di iuta</h2>
+  <p style="color:var(--tx2);font-size:.85rem;margin-bottom:1rem">Sposta gli slider: il calcolo si aggiorna da solo. Diametro e spessore della corda sono in comune ai due tubi (cambia solo l'altezza). Se i tubi avessero diametri diversi, calcolane uno alla volta mettendo a 0 l'altezza dell'altro.</p>
+
+  <div class="calc">
+    <div class="shared">— In comune ai due tubi —</div>
+
+    <div class="ctrl">
+      <div class="ctrl-head">
+        <span class="ctrl-label">Diametro del tubo</span>
+        <span class="ctrl-val"><span id="vD">10.0</span><span class="u"> cm</span></span>
+      </div>
+      <input type="range" id="D" min="5" max="25" step="0.5" value="10">
+      <div class="ctrl-minmax"><span>5 cm</span><span>25 cm</span></div>
+    </div>
+
+    <div class="ctrl">
+      <div class="ctrl-head">
+        <span class="ctrl-label">Spessore della corda di iuta</span>
+        <span class="ctrl-val"><span id="vT">8</span><span class="u"> mm</span></span>
+      </div>
+      <input type="range" id="T" min="4" max="20" step="1" value="8">
+      <div class="ctrl-minmax"><span>4 mm</span><span>20 mm</span></div>
+    </div>
+
+    <div class="divider"></div>
+    <div class="shared">— Altezza di ciascun tubo —</div>
+
+    <div class="ctrl">
+      <div class="ctrl-head">
+        <span class="ctrl-label"><span class="dot" style="background:var(--ac2)"></span>Altezza Tubo 1</span>
+        <span class="ctrl-val t1"><span id="vH1">60</span><span class="u"> cm</span></span>
+      </div>
+      <input type="range" id="H1" class="t1" min="0" max="150" step="1" value="60">
+      <div class="ctrl-minmax"><span>0 cm</span><span>150 cm</span></div>
+    </div>
+
+    <div class="ctrl">
+      <div class="ctrl-head">
+        <span class="ctrl-label"><span class="dot" style="background:var(--wn)"></span>Altezza Tubo 2</span>
+        <span class="ctrl-val t2"><span id="vH2">40</span><span class="u"> cm</span></span>
+      </div>
+      <input type="range" id="H2" class="t2" min="0" max="150" step="1" value="40">
+      <div class="ctrl-minmax"><span>0 cm</span><span>150 cm</span></div>
+    </div>
+  </div>
+
+  <div class="sg">
+    <div class="sc"><div class="l"><span class="dot" style="background:var(--ac2)"></span>Tubo 1</div><div class="v" id="rH1">—</div><div class="s" id="rN1"></div></div>
+    <div class="sc"><div class="l"><span class="dot" style="background:var(--wn)"></span>Tubo 2</div><div class="v" id="rH2">—</div><div class="s" id="rN2"></div></div>
+    <div class="sc main"><div class="l">Totale corda</div><div class="v" id="rTot">—</div><div class="s">somma dei due tubi</div></div>
+    <div class="sc"><div class="l">Da comprare (+10%)</div><div class="v" id="rBuy">—</div><div class="s">margine per nodi/estremità</div></div>
+  </div>
+
+  <div class="tip ju"><strong>Perché +10%:</strong> la corda va avvolta in tensione e serve un po' di margine per fissare l'inizio e la fine, eventuali nodi e piccoli errori. Per sicurezza compra la lunghezza "+10%", arrotondata verso l'alto al taglio in vendita.</div>
+</section>
+
+<!-- 2 CONFRONTO SPESSORI -->
+<section>
+  <h2><span class="n">2</span> Quale spessore conviene?</h2>
+  <p style="color:var(--tx2);font-size:.85rem;margin-bottom:1rem">A parità di diametro e altezze, ecco quanti metri totali servono per i vari spessori di corda in commercio. La <strong>corda più sottile copre meno per giro</strong>, quindi serve molta più lunghezza. Per decidere davvero la più conveniente, confronta questi metri con il <strong>prezzo al metro</strong> di ogni spessore (quando avrai i prezzi, lo aggiungiamo qui).</p>
+  <div class="calc" style="padding:0;overflow:hidden">
+    <table class="b">
+      <thead><tr><th>Spessore corda</th><th>Lung. totale</th><th>Da comprare (+10%)</th></tr></thead>
+      <tbody id="cmp"></tbody>
+    </table>
+  </div>
+  <div class="tip warn"><strong>Nota:</strong> la riga evidenziata è lo spessore impostato qui sopra. Compra sempre corda di iuta <strong>naturale non trattata</strong> (senza oli/cere): è quella che i gatti grattano volentieri e che non rilascia sostanze.</div>
+</section>
+
+<!-- 3 COME FUNZIONA -->
+<section>
+  <h2><span class="n">3</span> Come funziona il calcolo</h2>
+  <p style="color:var(--tx2);font-size:.88rem">La corda si avvolge a spirale attorno al tubo, con i giri appoggiati uno sopra l'altro. Ogni giro sale in altezza esattamente quanto lo <strong style="color:var(--tx)">spessore della corda</strong> (t), quindi il numero di giri per coprire l'altezza H è H÷t. Ogni giro è lungo come la circonferenza percorsa dal centro della corda, cioè π×(diametro tubo + spessore corda), perché il centro della corda gira a metà spessore più in fuori del tubo.</p>
+  <div class="formula">L = (H / t) × π × (D + t)</div>
+  <p style="color:var(--tx2);font-size:.88rem">Dove L = lunghezza corda, H = altezza tubo, D = diametro tubo, t = spessore corda (tutto nella stessa unità). Il calcolo qui sopra aggiunge anche la minuscola correzione dovuta all'inclinazione della spirale (in pratica trascurabile, &lt;0,1%).</p>
+  <div class="tip"><strong>In breve:</strong> raddoppiando lo spessore della corda dimezzi più o meno i metri necessari. Aumentando il diametro del tubo, i metri crescono in proporzione.</div>
+</section>
+
+<!-- 4 DA DEFINIRE -->
+<section>
+  <h2><span class="n">4</span> Cosa manca (prossimi passi)</h2>
+  <ul class="q">
+    <li>Dimensioni della <strong>base</strong> e <strong>materiale dei tubi</strong> (cartone pressato/tubo edile? diametro reale?).</li>
+    <li>Altezza definitiva dei due tubi e <strong>dimensioni delle due piattaforme</strong> in legno.</li>
+    <li>Come <strong>fissare</strong> i tubi alla base e le piattaforme ai tubi (viti dall'interno? flange?).</li>
+    <li><strong>Prezzo al metro</strong> della corda di iuta per ogni spessore, così completiamo il confronto convenienza.</li>
+  </ul>
+  <p style="color:var(--tx2);font-size:.85rem">Quando avrai questi dati, aggiorniamo la pagina con vista esplosa, distinta base, piano di taglio e lista spesa, come negli altri progetti.</p>
+</section>
+
+<footer>
+  Progetto per Fabio — Albero per gatti — Giu 2026<br>
+  <span style="color:var(--ju)">Calcolo corda iuta interattivo · 2 tubi · rivestimento a spirale</span>
+</footer>
+</div>
+
+<script>
+const $=id=>document.getElementById(id);
+const D=$('D'),T=$('T'),H1=$('H1'),H2=$('H2');
+
+// lunghezza corda (cm) per coprire un tubo: avvolgimento a spirale, passo = spessore
+function ropeLen(D_cm, t_mm, H_cm){
+  if(H_cm<=0) return 0;
+  const t=t_mm/10;                       // mm -> cm
+  const circ=Math.PI*(D_cm+t);           // circonferenza del centro corda
+  const turns=H_cm/t;                    // numero di giri
+  const turnLen=Math.sqrt(circ*circ+t*t);// lunghezza di un giro (spirale)
+  return turns*turnLen;                  // cm
+}
+const fmtM=cm=>(cm/100).toFixed(2)+' m';
+
+function render(){
+  const d=parseFloat(D.value), t=parseInt(T.value), h1=parseInt(H1.value), h2=parseInt(H2.value);
+  $('vD').textContent=d.toFixed(1);
+  $('vT').textContent=t;
+  $('vH1').textContent=h1;
+  $('vH2').textContent=h2;
+
+  const l1=ropeLen(d,t,h1), l2=ropeLen(d,t,h2), tot=l1+l2;
+  $('rH1').innerHTML=fmtM(l1).replace(' m','<span class="u"> m</span>');
+  $('rH2').innerHTML=fmtM(l2).replace(' m','<span class="u"> m</span>');
+  $('rTot').innerHTML=fmtM(tot).replace(' m','<span class="u"> m</span>');
+  $('rBuy').innerHTML=fmtM(tot*1.10).replace(' m','<span class="u"> m</span>');
+  $('rN1').textContent= h1>0 ? `${Math.ceil(h1/(t/10))} giri` : 'tubo escluso';
+  $('rN2').textContent= h2>0 ? `${Math.ceil(h2/(t/10))} giri` : 'tubo escluso';
+
+  // confronto spessori (a parità di diametro e altezze)
+  const sizes=[6,8,10,12,14];
+  let rows='';
+  sizes.forEach(s=>{
+    const tt=ropeLen(d,s,h1)+ropeLen(d,s,h2);
+    const sel = s===t ? 'sel':'';
+    rows+=`<tr class="${sel}"><td>${s} mm</td><td class="dm">${fmtM(tt)}</td><td class="dm">${fmtM(tt*1.10)}</td></tr>`;
+  });
+  $('cmp').innerHTML=rows;
+}
+[D,T,H1,H2].forEach(el=>el.addEventListener('input',render));
+render();
+</script>
+</body>
+</html>
