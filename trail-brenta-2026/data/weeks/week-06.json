@@ -74,5 +74,102 @@
         "detail": "Rivelazione che cambia il trail: anche i bravi trail runner CAMMINANO le salite ripide - spesso e piu veloce e molto piu economico che corricchiarle, e non e barare. Quando la pendenza morde: passi corti, mani che premono sulle cosce a ogni passo (spingi e scarichi la schiena), busto un filo avanti, sguardo su per il sentiero. In sessione: e anche lo strumento che tiene la FC sotto 152 - appena sale, passa a questo invece di forzare la corsa."
       }
     }
-  ]
+  ],
+  "log": [
+    {
+      "plan_ref": "easy-1",
+      "activity": "2026-06-08_b5cb4ec4-b85a-46bd-b1a6-2b366e6bb2cd",
+      "title": "Easy serale LUN 8 — 10.5 km piatti, 14 m D+, ~73', FC media 140, 90% sotto MAF, TRIMP 116. Primi 5 km briosi (FC 150-151, 40% in zona intermedia), poi gambe levate per lo smog."
+    },
+    {
+      "plan_ref": "easy-2",
+      "activity": "2026-06-09_eff09294-2341-4d8b-9fe4-fb79b137b0e5",
+      "title": "Recovery run MAR 9 — 3.75 km, ~29', FC media 129 (71% FCmax), 99% sotto MAF, TRIMP 32. Scarico attivo da manuale il giorno dopo il fondo."
+    },
+    {
+      "plan_ref": "forza",
+      "title": "Forza MER 10 — non registrata (nessuna attivita loggata)."
+    },
+    {
+      "plan_ref": "trail-d-plus",
+      "title": "Trail D+ DOM 14 — NON FATTO. Visita ortopedica (Treviglio, 10/06) per coxalgia sin atraumatica: diagnosi trocanterite sin con lieve insufficienza medio gluteo e infiammazione bandelletta ileo-tibiale, Trendelenburg +. NB: il referto riporta 'da un anno' nell'anamnesi, ma l'atleta precisa che il dolore e comparso con l'inizio della preparazione Brenta (~inizio maggio, ~6 settimane) - quindi sovraccarico da ripresa dopo 13 mesi di stop, non problema cronico. Terapia: Celebrex 200 mg x10 gg + Keplat + Nedemax x7 gg, poi ciclo FKT (stretching, rieducazione posturale globale, rinforzo glutei), tecar e onde d'urto focali se non responsivo."
+    }
+  ],
+  "review": {
+    "date": "2026-06-14",
+    "verdict": "recalibrate",
+    "headline": "Trocanterite sin diagnosticata: il motore aerobico c'e, ma la Fase 2 va riprogrammata attorno alla riabilitazione dell'anca.",
+    "synthesis": "Settimana di carico leggero — due easy piatte, dislivello quasi nullo, lungo trail rinviato per la visita ortopedica. Con i farmaci fino a mercoledi e la FKT (rinforzo glutei + rieducazione posturale) dalla settimana dopo, la rampa di dislivello della Fase 2 va tenuta al minimo o sospesa finche la trocanterite non risponde: il rinforzo del medio gluteo prescritto coincide con la forza gia prevista dal piano, da far ripartire subito come priorita.",
+    "auto": {
+      "adherence": {
+        "planned": 3,
+        "done": 2,
+        "long_run": "missed",
+        "swapped": [
+          {
+            "planned": "trail D+ DOM 14 (lungo di Fase 2)",
+            "replaced_with": "non fatto",
+            "reason": "visita ortopedica per coxalgia sin -> diagnosi trocanterite; stop su dolore articolare/asimmetrico"
+          },
+          {
+            "planned": "forza MER 10",
+            "replaced_with": "non registrata",
+            "reason": "nessuna attivita loggata; da riagganciare via FKT (rinforzo glutei)"
+          }
+        ]
+      },
+      "load": {
+        "trimp_training": 148,
+        "ascent_m_total": 17,
+        "duration_min_total": 102,
+        "maf_below_pct_training": 93,
+        "weight_delta_kg": 1.7,
+        "weight_kg_latest": 68.5
+      },
+      "phase_kpi": {
+        "objective": "Sostenere 1h30 di corsa/cammino con 600 m D+ a FC conversazionale (Z2).",
+        "status": "not_measurable_this_week",
+        "note": "Lungo trail di Fase 2 (DOM 14) saltato per la visita ortopedica; le uniche due uscite erano easy piatte in citta (D+ 14 m e 3 m, max 73'). Nessuna sessione >=90' con D+ >=400 m: il KPI di salita non era misurabile. Da rivalutare quando la trocanterite risponde alla terapia."
+      },
+      "open_concerns": [
+        {
+          "area": "trocanterite/coxalgia anca-gluteo sin",
+          "weeks_open": 1,
+          "severity_max": 4
+        },
+        {
+          "area": "controllo intensita in corsa facile",
+          "weeks_open": 3,
+          "severity_max": 4
+        }
+      ],
+      "highlights": "Decisione clinicamente corretta: lungo rinviato e visita ortopedica fatta invece di forzare un dolore articolare asimmetrico — esattamente la regola del piano. Le due easy ben gestite aerobicamente (93% del tempo sotto MAF; recovery run da manuale, 99% sotto MAF, TRIMP 32).",
+      "lowlights": "Trocanterite sin con insufficienza del medio gluteo e bandelletta ileo-tibiale infiammata (Trendelenburg +), comparsa con l'inizio della preparazione Brenta (~6 settimane): tipico sovraccarico laterale dell'anca da ripresa dopo 13 mesi di stop. Primo lungo di Fase 2 saltato e fase da riprogrammare. La easy di lunedi e tornata nella 'zona grigia' (40% del tempo in zona intermedia, FC fino a 151 nei primi 5 km): il controllo intensita resta aperto per la 3a settimana.",
+      "race_day_break_derived": {
+        "value": "gambe (salita o discesa)",
+        "reason": "Il motore aerobico e promosso (Fase 1 chiusa a +1.0% di decoupling); il limite di gara si sposta sull'apparato muscolo-scheletrico: trocanterite sin con insufficienza del medio gluteo e bandelletta ileo-tibiale infiammata (Trendelenburg +). Sono esattamente le strutture che la salita (spinta dei glutei) e la discesa (stabilita laterale del bacino) della 21K di Brenta caricano di piu."
+      }
+    },
+    "checkin": {
+      "recovery": "neutro — riposato ma serve un giorno facile",
+      "doms": "tipici (3-4 gg)",
+      "sleep_avg": "6-7h",
+      "life_load": "normale — routine standard",
+      "niggles": [
+        "anca/gluteo sin: trocanterite con insufficienza medio gluteo + bandelletta ileo-tibiale infiammata (diagnosi ortopedica; dolore in corsa sopportabile, non bloccante)"
+      ]
+    },
+    "adaptive": [
+      {
+        "trigger": "injury",
+        "q": "Dolore anca/gluteo sin (trocanterite) in corsa",
+        "a": "presente in corsa ma sopportabile, non mi ferma"
+      },
+      {
+        "trigger": "injury",
+        "q": "Stato farmaci/terapia",
+        "a": "farmaci iniziati, finiscono mercoledi; FKT dalla settimana dopo; tecar/onde d'urto focali solo se la cosa continua"
+      }
+    ]
+  }
 }

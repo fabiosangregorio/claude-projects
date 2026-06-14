@@ -1,0 +1,250 @@
+{
+  "schema_version": 1,
+  "id": "b5cb4ec4-b85a-46bd-b1a6-2b366e6bb2cd",
+  "start": "2026-06-08T16:52:38.605Z",
+  "name": "lunedì corsa serale",
+  "user_note": "Molto smog nella seconda parte che non mi faceva venir voglia di correre",
+  "komoot_url": "https://www.komoot.com/it-it/tour/3024074998",
+  "ai_analysis": {
+    "model": "claude-opus-4-8",
+    "generated_at": "2026-06-14T08:07:32Z",
+    "prompt_version": 1,
+    "classification": {
+      "workout_type": "fondo facile (a due fasi)",
+      "primary_benefit": "base aerobica",
+      "training_effect_aerobic": 3,
+      "training_effect_anaerobic": 1
+    },
+    "execution": {
+      "intent_inferred": "fondo facile serale, diventato veloce-primo/piano-secondo",
+      "execution_quality": 3,
+      "primary_failure_mode": "ambientale (smog)",
+      "failure_confidence": 0.75
+    },
+    "trail_specificity": {
+      "score": 1,
+      "vertical_load_pct_of_race": 1.1,
+      "notes": "Anello cittadino piatto in pianura: dislivello positivo (D+) 14 m, nessuna salita. Zero specificità verso la 21K di Brenta."
+    },
+    "headline": "Fondo serale spezzato in due: primi 5 km briosi a ridosso della soglia aerobica, poi gambe levate per lo smog. Aerobicamente sano ma con troppa zona grigia nella prima metà.",
+    "strengths": [
+      "Buon controllo aerobico complessivo: 90% del tempo sotto la soglia aerobica Maffetone (MAF), nessun picco in alta intensità.",
+      "Saper rallentare quando l'aria era irrespirabile è una scelta sensata, non un cedimento fisiologico.",
+      "Volume utile di un'ora abbondante di corsa continua senza pause di cammino."
+    ],
+    "concerns": [
+      {
+        "area": "distribuzione intensità",
+        "severity": 3,
+        "note": "Quasi il 40% del tempo in zona intermedia (MIT): i primi 5 km a 6:00-6:20/km hanno spinto la frequenza cardiaca (FC) a 150-151, al limite della MAF. Troppo medio per un fondo facile."
+      },
+      {
+        "area": "deriva cardiaca",
+        "severity": 2,
+        "note": "Deriva cardiaca (decoupling Pa:Hr) 12,3%, ma sovrastimata: nella seconda metà è calato sia il passo sia la FC (144 -> 137), quindi è un rallentamento volontario, non vera deriva da fatica."
+      }
+    ],
+    "narrative": "Corsa serale piatta in città vissuta in due tempi. Nei primi 5 km il passo è stato vivace (6:00-6:30/km) con la frequenza cardiaca (FC) in salita fino a 150-151, cioè a un soffio dalla soglia aerobica Maffetone (MAF, 152). Per quella che doveva essere un'uscita facile è un po' troppo: ne esce un 40% di tempo in zona intermedia, la classica 'zona grigia' né facile né allenante.\n\nDal km 6 il passo crolla a ~8:00/km e la FC scende con lui: come annotato, lo smog ha tolto la voglia di spingere. Questo spiega la deriva cardiaca (decoupling Pa:Hr) al 12,3%, che però va letta con cautela — quando rallentano insieme passo e FC non è il cuore che deriva sotto sforzo, ma una decelerazione voluta. Nel complesso una seduta aerobicamente pulita (carico interno TRIMP 116) ma senza alcuna valenza specifica per la gara: terreno totalmente piatto, dislivello nullo."
+  },
+  "totals": {
+    "distance_km": 10.52,
+    "duration_sec": 4365,
+    "avg_pace_min_per_km": 6.914,
+    "gap_min_per_km": 6.852,
+    "ef": 1.039,
+    "avg_hr": 140,
+    "max_hr_observed": 157,
+    "hrmax_est_used": 181,
+    "hrmax_source": "profile",
+    "elevation_source": "komoot_dem",
+    "ascent_m": 14,
+    "descent_m": 15,
+    "nrc_ascent_m": 33,
+    "nrc_descent_m": 30,
+    "elev_min_m": 126,
+    "elev_max_m": 137,
+    "steps": 10906,
+    "avg_cadence_spm": 149.9,
+    "avg_stride_cm": 96
+  },
+  "derived": {
+    "trimp": 116,
+    "polarization_3z": {
+      "lit_pct": 60.4,
+      "mit_pct": 39.6,
+      "hit_pct": 0
+    },
+    "maf": {
+      "ceiling_bpm": 152,
+      "time_below_pct": 90.2
+    },
+    "vertical": {
+      "vam_m_per_h": 12,
+      "ascent_m_per_h": 12,
+      "descent_m_per_h": 13
+    },
+    "grade_distribution": {
+      "flat_lt_2": 80.1,
+      "rolling_2_5": 8.5,
+      "uphill_5_10": 0.3,
+      "steep_gt_10": 0.4,
+      "down_2_5": 9.8,
+      "down_5_10": 0.4,
+      "down_gt_10": 0.5
+    },
+    "climb_efficiency": {
+      "ef_uphill": 1.125,
+      "uphill_time_sec": 28
+    },
+    "race_match": {
+      "vertical_match_pct": 1.1,
+      "duration_match_pct": 24.2
+    }
+  },
+  "decoupling": {
+    "first_half": {
+      "gap_min_per_km": 6.823,
+      "hr": 144
+    },
+    "second_half": {
+      "gap_min_per_km": 8.138,
+      "hr": 137
+    },
+    "pct": 12.33
+  },
+  "pace_variability": {
+    "cv_overall_pct": 30.25,
+    "cv_running_only_pct": null
+  },
+  "split_balance": {
+    "first_half_sec": 1873,
+    "second_half_sec": 2287,
+    "diff_pct": 22.08
+  },
+  "hr_zones": [
+    {
+      "zone": 1,
+      "time_sec": 88
+    },
+    {
+      "zone": 2,
+      "time_sec": 478
+    },
+    {
+      "zone": 3,
+      "time_sec": 1523
+    },
+    {
+      "zone": 4,
+      "time_sec": 2251
+    },
+    {
+      "zone": 5,
+      "time_sec": 0
+    }
+  ],
+  "walks_summary": {
+    "count": 0,
+    "total_walk_sec": 0,
+    "walk_pct": 0
+  },
+  "walk_breaks": [],
+  "splits": [
+    {
+      "km": 1,
+      "duration_sec": 380.4,
+      "pace_min_per_km": 6.34,
+      "gap_min_per_km": 6.194,
+      "avg_hr": 127,
+      "pct_hrmax": 70.4,
+      "ef": 1.268
+    },
+    {
+      "km": 2,
+      "duration_sec": 365.7,
+      "pace_min_per_km": 6.096,
+      "gap_min_per_km": 6.058,
+      "avg_hr": 143,
+      "pct_hrmax": 79,
+      "ef": 1.155
+    },
+    {
+      "km": 3,
+      "duration_sec": 365.8,
+      "pace_min_per_km": 6.097,
+      "gap_min_per_km": 6.029,
+      "avg_hr": 147,
+      "pct_hrmax": 81.2,
+      "ef": 1.129
+    },
+    {
+      "km": 4,
+      "duration_sec": 380.6,
+      "pace_min_per_km": 6.344,
+      "gap_min_per_km": 6.371,
+      "avg_hr": 150,
+      "pct_hrmax": 82.7,
+      "ef": 1.048
+    },
+    {
+      "km": 5,
+      "duration_sec": 380.6,
+      "pace_min_per_km": 6.343,
+      "gap_min_per_km": 6.363,
+      "avg_hr": 151,
+      "pct_hrmax": 83.4,
+      "ef": 1.041
+    },
+    {
+      "km": 6,
+      "duration_sec": 478.7,
+      "pace_min_per_km": 7.978,
+      "gap_min_per_km": 8.093,
+      "avg_hr": 140,
+      "pct_hrmax": 77.5,
+      "ef": 0.88
+    },
+    {
+      "km": 7,
+      "duration_sec": 471.9,
+      "pace_min_per_km": 7.866,
+      "gap_min_per_km": 7.812,
+      "avg_hr": 130,
+      "pct_hrmax": 71.9,
+      "ef": 0.984
+    },
+    {
+      "km": 8,
+      "duration_sec": 477.4,
+      "pace_min_per_km": 7.957,
+      "gap_min_per_km": 8.046,
+      "avg_hr": 136,
+      "pct_hrmax": 75.2,
+      "ef": 0.913
+    },
+    {
+      "km": 9,
+      "duration_sec": 440,
+      "pace_min_per_km": 7.334,
+      "gap_min_per_km": 7.371,
+      "avg_hr": 137,
+      "pct_hrmax": 75.6,
+      "ef": 0.991
+    },
+    {
+      "km": 10,
+      "duration_sec": 418.8,
+      "pace_min_per_km": 6.98,
+      "gap_min_per_km": 7.067,
+      "avg_hr": 144,
+      "pct_hrmax": 79.4,
+      "ef": 0.985
+    }
+  ],
+  "remainder": {
+    "km": 0.52,
+    "duration_sec": 204.8,
+    "pace_min_per_km": 6.538,
+    "gap_min_per_km": 6.673
+  }
+}

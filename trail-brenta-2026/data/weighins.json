@@ -1,7 +1,7 @@
 {
   "_schema_version": "1.0",
   "_description": "Pesate settimanali (LUN mattina, a digiuno) durante la preparazione. Sorgente: scala 1byone Health via onebyone-cli. Una entry per settimana del piano. Aggiornare last_updated a ogni nuova entry.",
-  "last_updated": "2026-06-01",
+  "last_updated": "2026-06-08",
   "source": {
     "device": "1byone Health smart scale",
     "mac": "cf:e2:0c:1b:03:25",
@@ -57,6 +57,16 @@
       "body_water_pct": 59.7,
       "visceral_fat": 5,
       "bmr_kcal": 1481
+    },
+    {
+      "date": "2026-06-08",
+      "weight_kg": 68.5,
+      "body_fat_pct": 15.6,
+      "bmi": 20.5,
+      "muscle_kg": 54.9,
+      "body_water_pct": 57.9,
+      "visceral_fat": 6,
+      "bmr_kcal": 1506
     }
   ]
 }

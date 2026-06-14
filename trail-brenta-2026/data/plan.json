@@ -1,7 +1,7 @@
 {
   "_schema_version": "1.5",
   "_description": "Struttura del piano di allenamento: fasi, template forza/mobility, budget e regole. Le settimane vivono in weeks/ (un file per settimana, manifest in weeks/index.json) a partire da v1.5. Le date di passaggio fase sono indicative — la transizione reale dipende dal KPI raggiunto e dalla tolleranza osservata, non dal calendario.",
-  "last_updated": "2026-06-07",
+  "last_updated": "2026-06-14",
   "total_weeks": 18,
   "weekly_budget": {
     "running_sessions": 3,
@@ -64,7 +64,8 @@
       ],
       "intensity": "Quasi tutto Z2. Le salite naturali possono spingere brevemente in Z3 ma in salita CAMMINI quando la FC supera la soglia.",
       "calibration_note": "Le sessioni dettagliate verranno definite alla fine della Fase 1, sulla base del test.",
-      "coaching_note": "Da settimana 06: inizia a testare la nutrizione di gara (gel/idratazione) sui lunghi, anche se brevi - la tolleranza gastrica si costruisce ora, non si scopre in Fase 3."
+      "coaching_note": "Da settimana 06: inizia a testare la nutrizione di gara (gel/idratazione) sui lunghi, anche se brevi - la tolleranza gastrica si costruisce ora, non si scopre in Fase 3.",
+      "rehab_note": "AGGIORNAMENTO 14/06/2026: rampa di dislivello SOSPESA dalla settimana 07 per trocanterite sin (insufficienza medio gluteo + bandelletta ileo-tibiale, Trendelenburg +), diagnosticata nella 06 - sovraccarico laterale dell'anca da ripresa dopo 13 mesi di stop, comparso con l'inizio della preparazione. Salita e discesa caricano direttamente la struttura infiammata, quindi il D+ resta congelato finche l'anca non e silente in piano. Nel frattempo: motore aerobico mantenuto su bici (non-impatto) e corsa piatta easy a basso volume con regola dolore (24h); il rinforzo del medio gluteo della FKT prescritta (Celebrex 10 gg fino al 17/06, poi ciclo FKT + tecar/onde focali se non responsivo) diventa il lavoro principale e costruisce la gamba da salita da fermo. Il key_objective (1h30 con 600 m D+ in Z2) resta valido ma la sua tempistica slitta: la rampa D+ ripartira gradualmente, telescopata, solo quando l'anca tollera il piano senza dolore. Transizione di fase KPI-driven, non calendario-driven (vedi descrizione del piano)."
     },
     {
       "id": "3-build",

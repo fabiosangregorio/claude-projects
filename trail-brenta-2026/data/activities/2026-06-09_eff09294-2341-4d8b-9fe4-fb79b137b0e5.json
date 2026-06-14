@@ -1,0 +1,186 @@
+{
+  "schema_version": 1,
+  "id": "eff09294-2341-4d8b-9fe4-fb79b137b0e5",
+  "start": "2026-06-09T17:04:58.959Z",
+  "name": "Recovery run",
+  "user_note": "Recovery run easy",
+  "komoot_url": "https://www.komoot.com/it-it/tour/3026126765",
+  "ai_analysis": {
+    "model": "claude-opus-4-8",
+    "generated_at": "2026-06-14T08:07:32Z",
+    "prompt_version": 1,
+    "classification": {
+      "workout_type": "recupero",
+      "primary_benefit": "recupero",
+      "training_effect_aerobic": 1.5,
+      "training_effect_anaerobic": 1
+    },
+    "execution": {
+      "intent_inferred": "scarico attivo facile il giorno dopo il fondo da 10,5 km",
+      "execution_quality": 5,
+      "primary_failure_mode": "nessuno",
+      "failure_confidence": 0.9
+    },
+    "trail_specificity": {
+      "score": 1,
+      "vertical_load_pct_of_race": 0.2,
+      "notes": "Brevissima uscita piatta di recupero: dislivello positivo (D+) 3 m. Nessuna specificità verso la gara, ma non è questo il suo scopo."
+    },
+    "headline": "Recupero da manuale: corto, lento e quasi interamente aerobico il giorno dopo il fondo. Esattamente quello che doveva essere.",
+    "strengths": [
+      "Intensità perfetta per lo scopo: 99% del tempo sotto la soglia aerobica Maffetone (MAF), frequenza cardiaca (FC) media al 71% della massima.",
+      "Carico interno minimo (TRIMP 32): scarica le gambe senza aggiungere fatica dopo i 10,5 km del giorno prima.",
+      "Durata e passo contenuti, senza la tentazione di trasformarlo in un allenamento."
+    ],
+    "concerns": [
+      {
+        "area": "cadenza",
+        "severity": 1,
+        "note": "Cadenza media bassa (136 passi/min) con una pausa di cammino di 95 s: fisiologico in recupero, ma è una corsa 'strascicata'. Nessun problema reale."
+      }
+    ],
+    "narrative": "Esecuzione di recupero ineccepibile. Il giorno dopo il fondo da 10,5 km, Fabio ha tenuto tutto facile: 3,75 km a ~7:45/km con la frequenza cardiaca (FC) ferma intorno al 71% della massima e il 99% del tempo sotto la soglia aerobica Maffetone (MAF). È esattamente il profilo di uno scarico attivo ben fatto — favorisce il recupero senza aggiungere carico (carico interno TRIMP 32).\n\nLa deriva cardiaca (decoupling Pa:Hr) al 6,5% e il breve tratto camminato finale sono del tutto normali su un'uscita così corta e a bassa intensità: rumore di fondo, non segnali. L'unica nota è la cadenza bassa (136 passi/min), tipica della corsa lenta di recupero. Nessuna valenza per la specificità di gara, ma non è ciò che si chiede a una seduta come questa: il suo compito era far girare le gambe, e l'ha assolto."
+  },
+  "totals": {
+    "distance_km": 3.75,
+    "duration_sec": 1745,
+    "avg_pace_min_per_km": 7.747,
+    "gap_min_per_km": 7.763,
+    "ef": 1,
+    "avg_hr": 129,
+    "max_hr_observed": 165,
+    "hrmax_est_used": 181,
+    "hrmax_source": "profile",
+    "elevation_source": "komoot_dem",
+    "ascent_m": 3,
+    "descent_m": 4,
+    "nrc_ascent_m": 9,
+    "nrc_descent_m": 9,
+    "elev_min_m": 125,
+    "elev_max_m": 134,
+    "steps": 3962,
+    "avg_cadence_spm": 136.2,
+    "avg_stride_cm": 95
+  },
+  "derived": {
+    "trimp": 32,
+    "polarization_3z": {
+      "lit_pct": 99.4,
+      "mit_pct": 0,
+      "hit_pct": 0.6
+    },
+    "maf": {
+      "ceiling_bpm": 152,
+      "time_below_pct": 99.4
+    },
+    "vertical": {
+      "vam_m_per_h": 5,
+      "ascent_m_per_h": 5,
+      "descent_m_per_h": 7
+    },
+    "grade_distribution": {
+      "flat_lt_2": 87.8,
+      "rolling_2_5": 4.9,
+      "uphill_5_10": 0,
+      "steep_gt_10": 0,
+      "down_2_5": 5.6,
+      "down_5_10": 0.6,
+      "down_gt_10": 1.2
+    },
+    "climb_efficiency": null,
+    "race_match": {
+      "vertical_match_pct": 0.2,
+      "duration_match_pct": 9.7
+    }
+  },
+  "decoupling": {
+    "first_half": {
+      "gap_min_per_km": 8.176,
+      "hr": 127
+    },
+    "second_half": {
+      "gap_min_per_km": 8.465,
+      "hr": 131
+    },
+    "pct": 6.55
+  },
+  "pace_variability": {
+    "cv_overall_pct": 18.59,
+    "cv_running_only_pct": 16.46
+  },
+  "split_balance": {
+    "first_half_sec": 467,
+    "second_half_sec": 921,
+    "diff_pct": 97.21
+  },
+  "hr_zones": [
+    {
+      "zone": 1,
+      "time_sec": 15
+    },
+    {
+      "zone": 2,
+      "time_sec": 411
+    },
+    {
+      "zone": 3,
+      "time_sec": 1308
+    },
+    {
+      "zone": 4,
+      "time_sec": 1
+    },
+    {
+      "zone": 5,
+      "time_sec": 9
+    }
+  ],
+  "walks_summary": {
+    "count": 1,
+    "total_walk_sec": 95,
+    "walk_pct": 5.43
+  },
+  "walk_breaks": [
+    {
+      "started_sec": 1342,
+      "duration_sec": 95,
+      "avg_cadence_spm": 106.1,
+      "at_km": 3
+    }
+  ],
+  "splits": [
+    {
+      "km": 1,
+      "duration_sec": 467.1,
+      "pace_min_per_km": 7.784,
+      "gap_min_per_km": 7.92,
+      "avg_hr": 125,
+      "pct_hrmax": 69,
+      "ef": 1.011
+    },
+    {
+      "km": 2,
+      "duration_sec": 452,
+      "pace_min_per_km": 7.534,
+      "gap_min_per_km": 7.472,
+      "avg_hr": 129,
+      "pct_hrmax": 71.4,
+      "ef": 1.036
+    },
+    {
+      "km": 3,
+      "duration_sec": 469.1,
+      "pace_min_per_km": 7.818,
+      "gap_min_per_km": 7.915,
+      "avg_hr": 130,
+      "pct_hrmax": 71.8,
+      "ef": 0.972
+    }
+  ],
+  "remainder": {
+    "km": 0.75,
+    "duration_sec": 356.8,
+    "pace_min_per_km": 7.885,
+    "gap_min_per_km": 8.065
+  }
+}

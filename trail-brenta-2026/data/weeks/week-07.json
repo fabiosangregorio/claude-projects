@@ -1,0 +1,51 @@
+{
+  "_schema_version": "2.0",
+  "number": 7,
+  "phase_id": "2-base-mountain",
+  "start_date": "2026-06-15",
+  "end_date": "2026-06-21",
+  "label": "Riabilitazione anca: rampa D+ congelata, motore in bici",
+  "narrative": "Settimana di riprogrammazione dopo la diagnosi di trocanterite sin (insufficienza medio gluteo + bandelletta ileo-tibiale infiammata, Trendelenburg +) emersa nella 06. La rampa di dislivello della Fase 2 e SOSPESA: salita e discesa sono i due gesti che caricano la struttura infiammata, quindi si congela e si ripartira solo quando l'anca e silente in piano. Il motore aerobico (gia promosso a fine Fase 1, decoupling +1.0%) si mantiene sulla bici, non-impatto: il rientro Villapizzone-Treviglio del giovedi diventa la seduta lunga della settimana. Una sola corsa, facile e piatta, il sabato. Nessuna forza ne attivazione glutei fai-da-te questa settimana: il rinforzo glutei e la rieducazione posturale partono col ciclo FKT dalla settimana prossima, su protocollo del fisioterapista - meglio non improvvisare carico su una tendinopatia. Farmaci (Celebrex) fino a mercoledi 17: il giro in bici di giovedi 18 e il primo collaudo dell'anca senza l'effetto-maschera dell'antinfiammatorio - leggere il dolore nelle 24h e il segnale che conta.",
+  "plan": [
+    {
+      "id": "checkin",
+      "type": "check-in",
+      "label": "Pesa",
+      "when": "LUN 15 mattina, a digiuno",
+      "notes": "Prima di partire: registra solo il dato, non cambiare nulla per il numero. Stesse condizioni delle altre settimane (a digiuno, prima di bere). La 08 ha letto 68.5 kg con body fat e acqua corporea fuori scala rispetto al trend: probabile artefatto di idratazione/condizioni di misura, non grasso reale. Lettura attesa: rientro verso 66-67 kg. Se 68.x si conferma per 2-3 settimane, allora e trend e se ne riparla."
+    },
+    {
+      "id": "bici-lunga",
+      "type": "cross-training",
+      "label": "Bici Villapizzone-Treviglio",
+      "when": "GIO 18 sera",
+      "duration_min": 110,
+      "intensity": "Z1-Z2, seduto, piatto",
+      "notes": "La seduta lunga della settimana, non-impatto: rientro in bici da Milano Villapizzone a Treviglio (~35 km di pianura). Scopo: mantenere il motore aerobico senza caricare l'anca. Tieni Z1-Z2 conversazionale, SEMPRE seduto, niente salite in piedi, niente sprint, niente resistenza alta - sono gli sforzi che reclutano forte i glutei. Sella all'altezza giusta: il bacino deve restare fermo, se dondola lato-lato a ogni pedalata e proprio il movimento del Trendelenburg che irrita il medio gluteo, abbassala finche e stabile. Timing: e il primo giorno dopo la fine del Celebrex, quindi l'anca non e piu mascherata dall'antinfiammatorio - tienila moderata e leggi bene il dolore durante e nelle 24h dopo. Se si riaccende, accorcia o spezza il rientro.",
+      "routes": [
+        {
+          "url": "https://www.komoot.com/it-it/tour/3036345245",
+          "name": "Villapizzone -> Treviglio (Komoot)"
+        }
+      ]
+    },
+    {
+      "id": "easy-piatta",
+      "type": "easy",
+      "label": "Easy piatta breve",
+      "duration_min": 30,
+      "intensity": "Z2/MAF",
+      "fc_max_bpm": 152,
+      "when": "SAB 20 mattina",
+      "notes": "Unica corsa della settimana, test prudente del gesto su gambe riposate (giorno cuscinetto dopo la bici di giovedi). Percorso: Treviglio piatto, Mizuno (strada). Target: 25-30', FC 140-150, tetto 152, respirazione conversazionale piena, ZERO salite e discese. Regola dolore stretta: se l'anca/gluteo sin da fastidio che aumenta correndo, o resta acceso oltre 24h, fermati e torna alla sola bici - non e una settimana per forzare il rientro alla corsa. Se invece e silente, e il primo mattone del rientro graduale. Niente progressivo, niente allungo finale.",
+      "coaching_tip": {
+        "title": "Atterraggio sotto il bacino",
+        "detail": "Con un'anca laterale irritata conta dove atterra il piede: se cade molto avanti al corpo (overstriding) l'impatto risale lungo la catena e stressa la stabilita del bacino a ogni passo. Cerca un atterraggio sotto il baricentro, cadenza un filo piu alta e passi corti - lo stesso fix della cadenza della 06, ma qui serve a proteggere l'anca, non solo a correre meglio. In sessione: ogni tanto immagina di correre 'leggero e raccolto', piedi che toccano sotto di te, non davanti."
+      }
+    }
+  ],
+  "strength": {
+    "skipped": true,
+    "reason": "Niente forza ne attivazione glutei fai-da-te questa settimana. Su una tendinopatia gluteo-trocanterica il carico va impostato dal fisioterapista: il ciclo FKT (rinforzo glutei + rieducazione posturale) parte dalla settimana 08 e da li si segue quel protocollo."
+  }
+}
