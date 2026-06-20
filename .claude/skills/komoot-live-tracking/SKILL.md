@@ -17,6 +17,38 @@ Komoot's public pages can expose partial or inconsistent fields. Treat the live 
 
 This skill is intentionally limited to tracking extraction and route math. Do not interpret the data into athlete guidance or activity decisions.
 
+## Preferred workflow: run the helper script
+
+Use the bundled deterministic helper first:
+
+```bash
+python3 /workspace/.claude/skills/komoot-live-tracking/komoot_live_tracking.py '<komoot-live-url>'
+```
+
+If the live page does not expose the planned tour ID, pass it explicitly:
+
+```bash
+python3 /workspace/.claude/skills/komoot-live-tracking/komoot_live_tracking.py '<komoot-live-url>' --tour-id '<tour-id-or-tour-url>'
+```
+
+Useful options:
+
+- `--window-m 300` — distance window for the next-profile estimate
+- `--timeout 15` — HTTP timeout in seconds
+- `--retries 1` — retry count per request
+- `--compact` — compact JSON output
+
+The script:
+
+1. fetches the live page
+2. extracts current/last live coordinates
+3. discovers the linked planned tour when present
+4. fetches Komoot planned route coordinates
+5. matches the live point to the route
+6. emits structured JSON matching the output contract below
+
+If the script returns `warnings`, surface them with the data. If it returns `error`, report the error and, only if useful, fall back to the manual workflow below.
+
 ## Inputs
 
 - A `https://www.komoot.com/live/...` URL.
@@ -65,7 +97,9 @@ Return the most useful subset of this state:
 
 If a field is unknown, omit it or add a short warning. Do not invent exact values.
 
-## Endpoints
+## Manual fallback and endpoint reference
+
+Use this section when the helper script cannot be run or needs debugging.
 
 ### 1. Live page
 
