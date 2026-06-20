@@ -1,29 +1,73 @@
 ---
 name: komoot-live-tracking
-description: Coach a live outdoor activity from a Komoot live tracking link. Use when the user shares a komoot.com/live URL, invokes /komoot-live-tracking, asks for live position checks, asks how much remains, compares a route to Brenta training, or wants live pacing/fueling/heat/safety guidance.
+description: Extract live tracking state from a Komoot live URL. Use when the user shares a komoot.com/live link, invokes /komoot-live-tracking, asks whether the live link is accessible, wants the current position, or needs route progress/distance/elevation estimates from Komoot data.
 ---
 
-# Komoot live tracking coach
+# Komoot live tracking
 
-Use this skill when the user wants live help from a Komoot live tracking link. The core pattern is:
+Use this skill to turn a Komoot live tracking link into structured tracking data.
 
-**live Komoot point -> planned Komoot route coordinates -> nearest route position -> route remaining/profile -> coaching advice.**
+Core pattern:
+
+```text
+live Komoot point -> planned Komoot route coordinates -> nearest route position -> route progress/profile
+```
 
 Komoot's public pages can expose partial or inconsistent fields. Treat the live page as a source of current GPS coordinates, not as a complete activity API.
+
+This skill is intentionally limited to tracking extraction and route math. Do not provide pacing, training, nutrition, safety, or race-coaching advice from this skill.
 
 ## Inputs
 
 - A `https://www.komoot.com/live/...` URL.
 - Optionally a planned tour URL or ID, usually present in the live page as `https://www.komoot.com/tour/<tour_id>`.
-- Optional athlete context from this workspace:
-  - `trail-brenta-2026/data/plan.json`
-  - `trail-brenta-2026/data/weeks/*.json`
-  - `trail-brenta-2026/data/race.json`
-  - `trail-brenta-2026/data/profile.json`
 
-## Tools and endpoints
+## Output contract
 
-### 1. Read the live page
+Return the most useful subset of this state:
+
+```json
+{
+  "activity_status": "Active",
+  "live_point": {
+    "lat": 45.744646,
+    "lng": 9.662524,
+    "accuracy": "5 yd",
+    "last_update": "less than a minute ago",
+    "source_label": "Current location"
+  },
+  "tour": {
+    "id": "3050332229",
+    "name": "da Sorisole a Canto Alto",
+    "distance_m": 11547.6,
+    "elevation_up_m": 733.2,
+    "elevation_down_m": 733.2
+  },
+  "route_match": {
+    "matched": true,
+    "confidence": "good",
+    "nearest_distance_m": 12,
+    "route_index": 123,
+    "distance_done_m": 5400,
+    "distance_remaining_m": 6150,
+    "elevation_up_remaining_m": 320,
+    "elevation_down_remaining_m": 690,
+    "planned_altitude_m": 843
+  },
+  "next_profile": {
+    "window_m": 300,
+    "grade_pct": 14,
+    "elevation_delta_m": 42
+  },
+  "warnings": []
+}
+```
+
+If a field is unknown, omit it or add a short warning. Do not invent exact values.
+
+## Endpoints
+
+### 1. Live page
 
 Fetch the live URL. Extract:
 
@@ -33,7 +77,7 @@ Fetch the live URL. Extract:
 - activity status
 - planned tour link, if present
 
-Do **not** rely on:
+Do not rely on:
 
 - `Elapsed time` when it conflicts with user report
 - `-- yd remaining`
@@ -41,7 +85,7 @@ Do **not** rely on:
 
 If the fetch times out, retry once before falling back to the last known live point.
 
-### 2. Read the planned Komoot tour
+### 2. Planned tour metadata
 
 If the live page includes a tour URL, fetch:
 
@@ -63,7 +107,7 @@ Useful fields:
 - `summary.surfaces`
 - `summary.way_types`
 
-### 3. Read full planned coordinates
+### 3. Full planned coordinates
 
 Fetch:
 
@@ -101,7 +145,7 @@ https://www.komoot.com/api/v007/tours/<tour_id>.gpx
 
 may fail with `503 Service Unavailable` or require non-public access. Prefer `/coordinates`.
 
-### 5. Optional reverse geocoding/elevation fallback
+### 5. Optional fallback data
 
 Only if planned coordinates are unavailable or clearly stale:
 
@@ -110,9 +154,9 @@ Only if planned coordinates are unavailable or clearly stale:
 
 When planned coordinates are available, prefer Komoot route altitudes over external elevation APIs because they align with the planned profile.
 
-## Route matching workflow
+## Workflow
 
-1. Refresh live URL and get current `lat,lng`.
+1. Refresh the live URL and get current `lat,lng`.
 2. Fetch planned coordinates once, cache mentally for the conversation, and reuse unless the tour ID changes.
 3. Find the nearest route point to the live point using haversine distance.
 4. Reject the match or state uncertainty if nearest distance is large:
@@ -131,74 +175,57 @@ When planned coordinates are available, prefer Komoot route altitudes over exter
    - grade = elevation_delta / horizontal_distance
    - report as a range, not false precision
 
-## Coaching output style
+## Route math
 
-The user may be moving, tired, hot, or stressed. Keep live responses short and operational.
+### Haversine distance
 
-For each live check, prefer:
+Use haversine distance for point-to-point route matching. A rough local approximation is acceptable for short windows, but do not use raw degree deltas as meters.
 
-1. where they are on the route
-2. what comes next
-3. one immediate instruction
-4. one safety check if conditions are harsh
+### Cumulative distance
 
-Example:
+For the coordinate list:
+
+1. compute distance between consecutive points
+2. store cumulative distance at every index
+3. `distance_done_m = cumulative[index]`
+4. `distance_remaining_m = total_distance - cumulative[index]`
+
+### Cumulative elevation
+
+From planned coordinate altitudes:
+
+1. for every consecutive point pair, compute `delta_alt`
+2. add positive deltas to cumulative D+
+3. add absolute negative deltas to cumulative D-
+4. compute remaining D+/D- from the matched index to the end
+
+Use Komoot's own `elevation_up`/`elevation_down` as the top-level route totals when available. Use point-derived elevation only for local/remaining estimates.
+
+### Next profile window
+
+To describe the route ahead:
+
+1. choose a distance window, usually 100-300 m for live use
+2. find the coordinate index at `current_cumulative + window_m`
+3. compute horizontal distance and altitude delta between current and target index
+4. compute grade percentage
+
+If the window contains switchbacks or mixed terrain, report a range or say the profile is mixed.
+
+## Response style
+
+Keep responses data-first and neutral. Examples:
 
 ```text
-Sei circa al km 5.8 della traccia, quota ~910 m. Prossimi 600-800 m ancora ripidi, poi molla un po'. Adesso cammina forte: passo corto, mani sulle cosce, niente acido.
+Live point: 45.76025, 9.67610, updated less than a minute ago.
+Matched to planned route with good confidence, about 5.6 km in. Estimated remaining: 5.9 km, +250 m / -720 m. Next 300 m: steep, roughly +40 m.
 ```
 
-## Training-plan integration for Brenta
+```text
+I can access the live link, but I cannot match the point confidently to the planned route: nearest route point is about 140 m away. Current live point is 45.75082, 9.66130.
+```
 
-When the user asks about XTERRA Dolomiti di Brenta / "Brenta":
-
-1. Read `trail-brenta-2026/data/race.json`.
-2. Read current week from `trail-brenta-2026/data/weeks/index.json` and the latest week file.
-3. Read `trail-brenta-2026/data/plan.json` for phase rules.
-4. Compare the live activity against the plan conservatively.
-
-Known Brenta references from the plan:
-
-- race: XTERRA Dolomiti di Brenta Trail SHORT 21K
-- race distance: 21 km
-- race D+: 1250 m
-- cutoff: Rifugio Croz dell'Altissimo within 3h
-- grade distribution reference:
-  - ~24% steep uphill >10%
-  - ~26% steep downhill >10%
-- current plan may include injury constraints; never ignore active rehab notes
-
-If the current week says D+ is suspended or the hip is being protected, say so plainly and shift advice toward damage control:
-
-- hike steep climbs
-- run only easy traverses/flats
-- descend conservatively
-- prioritize the 24h pain response over today's pace
-
-## Fueling and heat guidance
-
-For hard mountain efforts:
-
-- caffeine gel: usually useful before or early in the hard section, with water, not when already nauseous or overheated
-- water-only intake in heat can still leave sodium deficit; suggest salty food/sports drink after
-- if the user reports heat stress, stop coaching for pace and coach cooling:
-  - walk
-  - shade
-  - small sips
-  - wet head/neck/wrists if possible
-  - seek help if red flags appear
-
-Heat red flags:
-
-- confusion
-- faintness or inability to walk straight
-- vomiting
-- chills/goosebumps in heat
-- severe or worsening headache
-- chest pain
-- stopped sweating while feeling hot
-
-Tell the user to stop, contact someone nearby, or call emergency services if these appear.
+Do not append coaching instructions such as when to run, what to eat, or how to manage injury risk. A separate coaching skill should consume this tracking state if the user asks for guidance.
 
 ## Known sharp edges
 
@@ -208,10 +235,9 @@ Tell the user to stop, contact someone nearby, or call emergency services if the
 - Planned tour coordinates are not the recorded live track. If the athlete deviates, nearest-point estimates become uncertain.
 - The public tour endpoint may be reachable even when the GPX endpoint is not.
 - External elevation APIs may disagree with Komoot altitudes; do not mix them silently.
-- Do not provide medical diagnosis. Give conservative safety guidance and escalation criteria.
 
-## When to stop using this skill
+## When not to use this skill
 
-- The activity is finished and the user asks for post-run analysis; switch to normal activity-analysis workflow.
-- The user asks to log the activity into the training plan; use the repository's activity logging conventions instead.
-- The user reports emergency symptoms; prioritize emergency guidance over route analysis.
+- The user asks for pacing, race strategy, nutrition, heat management, or injury-aware decisions. Use a separate coaching skill.
+- The activity is finished and the user asks for post-run analysis. Use the normal activity-analysis workflow.
+- The user asks to log the activity into the training plan. Use the repository's activity logging conventions instead.
