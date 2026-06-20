@@ -15,7 +15,7 @@ live Komoot point -> planned Komoot route coordinates -> nearest route position 
 
 Komoot's public pages can expose partial or inconsistent fields. Treat the live page as a source of current GPS coordinates, not as a complete activity API.
 
-This skill is intentionally limited to tracking extraction and route math. Do not provide pacing, training, nutrition, safety, or race-coaching advice from this skill.
+This skill is intentionally limited to tracking extraction and route math. Do not interpret the data into athlete guidance or activity decisions.
 
 ## Inputs
 
@@ -225,7 +225,7 @@ Matched to planned route with good confidence, about 5.6 km in. Estimated remain
 I can access the live link, but I cannot match the point confidently to the planned route: nearest route point is about 140 m away. Current live point is 45.75082, 9.66130.
 ```
 
-Do not append coaching instructions such as when to run, what to eat, or how to manage injury risk. A separate coaching skill should consume this tracking state if the user asks for guidance.
+Do not append action instructions such as when to run, what to eat, or how to manage physical risk. A separate higher-level skill should consume this tracking state if the user asks for guidance.
 
 ## Known sharp edges
 
@@ -238,6 +238,6 @@ Do not append coaching instructions such as when to run, what to eat, or how to 
 
 ## When not to use this skill
 
-- The user asks for pacing, race strategy, nutrition, heat management, or injury-aware decisions. Use a separate coaching skill.
+- The user asks what to do next based on the tracking data. Use a separate higher-level skill.
 - The activity is finished and the user asks for post-run analysis. Use the normal activity-analysis workflow.
 - The user asks to log the activity into the training plan. Use the repository's activity logging conventions instead.
