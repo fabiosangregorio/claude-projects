@@ -36,6 +36,10 @@ section{margin:2rem 0}
 .week-narr{font-size:.85rem;color:var(--tx2);line-height:1.55;padding:.7rem .85rem;background:var(--sf2);border-left:2px solid var(--ac2);border-radius:4px;margin-bottom:.9rem}
 
 .sess{padding:.85rem 0;border-bottom:1px solid var(--bd)}
+.sess.cancelled{opacity:.6}
+.sess.cancelled .sess-type{text-decoration:line-through;opacity:.85}
+.sess-cancel{font-size:.78rem;color:var(--wn);line-height:1.5;margin-top:.4rem;padding:.45rem .65rem;background:rgba(240,136,62,.08);border-left:2px solid var(--wn);border-radius:4px}
+.sess-cancel-tag{font-family:'Space Mono',monospace;font-size:.56rem;text-transform:uppercase;letter-spacing:.8px;font-weight:700;color:var(--wn);display:block;margin-bottom:.25rem}
 .sess:last-of-type{border-bottom:none}
 .sess-head{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;margin-bottom:.35rem}
 .sess-type{font-family:'Space Mono',monospace;font-size:.6rem;text-transform:uppercase;letter-spacing:.8px;font-weight:700;padding:.18rem .5rem;border-radius:4px;cursor:help;position:relative;display:inline-block}
@@ -391,8 +395,14 @@ function todayISO() {
 }
 
 function renderSession(s, week) {
+  const cancelled = !!s.cancelled;
   const typeLabel = s.label || TYPE_LABELS[s.type] || s.type;
   const typeDesc = TYPE_DESCRIPTIONS[s.type] || '';
+  const cancelHtml = cancelled ? `
+    <div class="sess-cancel">
+      <span class="sess-cancel-tag">⚠ Piano decaduto</span>
+      ${s.cancel_reason || 'Sessione non più valida.'}
+    </div>` : '';
   const meta = [];
   if (s.intensity) meta.push(s.intensity);
   if (s.fc_max_bpm) meta.push(`FC max ${s.fc_max_bpm}`);
@@ -411,7 +421,7 @@ function renderSession(s, week) {
     </div>` : '';
 
   return `
-    <div class="sess">
+    <div class="sess${cancelled ? ' cancelled' : ''}">
       <div class="sess-head">
         <span class="sess-type sess-type-${s.type}"${typeDesc ? ` data-tooltip="${typeDesc}" tabindex="0" aria-label="${typeLabel}: ${typeDesc}"` : ''}>${typeLabel}</span>
         ${s.duration_min ? `<span class="sess-dur">${s.duration_min} min</span>` : ''}
@@ -419,14 +429,15 @@ function renderSession(s, week) {
         ${s.when ? `<span class="sess-when">${s.when}</span>` : ''}
       </div>
       ${valueLineHtml}
+      ${cancelHtml}
       ${s.notes ? `<div class="sess-notes">${s.notes}</div>` : ''}
-      ${s.coaching_tip ? `
+      ${!cancelled && s.coaching_tip ? `
       <div class="sess-tip">
         <div class="sess-tip-label">💡 Focus della sessione · impara qualcosa di nuovo</div>
         ${s.coaching_tip.title ? `<div class="sess-tip-title">${s.coaching_tip.title}</div>` : ''}
         ${s.coaching_tip.detail ? `<div class="sess-tip-detail">${s.coaching_tip.detail}</div>` : ''}
       </div>` : ''}
-      ${routesHtml}
+      ${cancelled ? '' : routesHtml}
     </div>
   `;
 }
