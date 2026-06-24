@@ -15,7 +15,7 @@ trail-brenta-2026/
 ├── index.html              ← Home. Tasks + obiettivo gara + profilo + link a piano e attività.
 ├── plan.html               ← Indice del piano (fasi, milestone, riferimenti tecnici, link a settimana).
 ├── week.html               ← Dettaglio piano settimanale (#<numero-settimana>).
-├── activities.html         ← Lista di tutte le attività (run + hike).
+├── activities.html         ← Lista di tutte le attività (run + hike + bike).
 ├── activity.html           ← Dettaglio singola attività (#<filename-senza-.json>).
 ├── weighins.html           ← Lista di tutte le pesate settimanali (con summary + delta).
 ├── guides/                 ← Guide pratiche linkate dalla home (sezione "Guide").
@@ -35,7 +35,7 @@ trail-brenta-2026/
     ├── weighins.json       ← Pesate settimanali (LUN mattina) da scala 1byone.
     └── activities/
         ├── index.json      ← Manifest: elenco dei file attività. AGGIORNARE a ogni nuovo log.
-        └── <date>_<uuid>.json  ← Un file per attività (run o hike).
+        └── <date>_<uuid>.json  ← Un file per attività (run, hike o bike).
 ```
 
 ### Perché questa separazione
@@ -117,12 +117,12 @@ Render:
 
 ### `data/activities/`
 
-Cartella con un JSON per attività (run o hike). Filename: `<YYYY-MM-DD>_<uuid>.json`.
+Cartella con un JSON per attività (run, hike o bike). Filename: `<YYYY-MM-DD>_<id>.json` (`<id>` = UUID per run/hike, ID tour Komoot per bici).
 
-**Schema unificato (schema_version: 2)**: un solo formato per run e hike, distinti dal campo `activity_type`.
+**Schema unificato (schema_version: 2)**: un solo formato per run, hike e bike, distinti dal campo `activity_type`.
 
 Campi top-level comuni:
-- `schema_version`, `activity_type` (`"run"` | `"hike"`), `id`, `start`, `end`, `title?`, `source?`, `source_url?`, `user_notes?`
+- `schema_version`, `activity_type` (`"run"` | `"hike"` | `"bike"`), `id`, `start`, `end`, `title?`, `source?`, `source_url?`, `user_notes?`
 - `category?` (`"training"` default omesso | `"social"` | `"test"`) — vedi sotto
 - `totals` — distanza, durate, dislivello (vedi sotto per differenze run/hike)
 - `derived` — metriche calcolate (vertical, race_match, eccetera)
@@ -137,6 +137,8 @@ Campi top-level comuni:
 **Per `activity_type: "run"`** — `totals` include `duration_sec`, `avg_pace_min_per_km`, `gap_min_per_km`, `avg_hr`, `max_hr_observed`, `avg_cadence_spm`, `ef`, `steps`, ecc. Top-level: `splits`, `hr_zones`, `decoupling`, `walk_breaks`, `walks_summary`, `pace_variability`. Sorgente: parsing Garmin/Strava + analisi AI esterna.
 
 **Per `activity_type: "hike"`** — `totals` include `duration_sec` (= totale, start→end), `duration_moving_sec`, `pause_sec`, `descent_m`, `avg_speed_kmh_moving`. Niente `splits`/`hr_zones`/`decoupling`. Sorgente tipica: GPX da Komoot.
+
+**Per `activity_type: "bike"`** — cross-training non-impatto (uscita in bici). `totals` come l'hike: `distance_km`, `duration_sec` (= totale, start→end), `duration_moving_sec`, `pause_sec`, `ascent_m`, `descent_m`, `avg_speed_kmh_moving`. Niente `splits`/`hr_zones`/`decoupling`/`walk_breaks` né polarizzazione (no cardiofrequenzimetro su bici, no metriche di corsa). Niente `ai_analysis` (la pipeline `run-analysis` non si applica). Sorgente tipica: tour registrato su Komoot. Una bici di allenamento è `category: "training"` (omesso) — contribuisce al carico settimanale e al motore aerobico, anche se non alla specificità trail (gesto diverso, niente D+). `activity.html` renderizza hero, totali ed eventuali metriche derivate; salta le sezioni run-only.
 
 **Campi di pianificazione (top-level, opzionali):** vivono nell'attività perché sono *attività-specifici* (cosa portare/mangiare/fare per **questa** uscita), non nella settimana. Si popolano in fase di pianificazione (anche prima dell'esecuzione, su un file attività skeleton) e restano come record.
 - `gear_checklist[]` — array di `{category, items[]}`. "Cosa portare" per categoria (Indosso, Zaino, Opzionali, ecc.). Renderizzato da `activity.html` come sezione "Cosa portare".
