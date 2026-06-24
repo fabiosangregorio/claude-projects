@@ -1,0 +1,310 @@
+{
+  "schema_version": 1,
+  "id": "aa656164-4991-433b-ace0-0aaf39b60f2c",
+  "start": "2026-06-20T07:14:30.237Z",
+  "name": "Da Sorisole a Canto Alto",
+  "user_note": null,
+  "komoot_url": "https://www.komoot.com/it-it/tour/3051409851",
+  "ai_analysis": {
+    "model": "claude-opus-4-8",
+    "generated_at": "2026-06-24T18:10:00Z",
+    "prompt_version": 1,
+    "classification": {
+      "workout_type": "salita",
+      "primary_benefit": "soglia",
+      "training_effect_aerobic": 4.5,
+      "training_effect_anaerobic": 2.5
+    },
+    "execution": {
+      "intent_inferred": "uscita lunga di montagna corsa/cammino + prova di nutrizione, fuori dal piano riabilitativo",
+      "execution_quality": 3,
+      "primary_failure_mode": "caldo",
+      "failure_confidence": 0.6
+    },
+    "trail_specificity": {
+      "score": 4,
+      "vertical_load_pct_of_race": 63,
+      "notes": "Trail vero: +787 m, salita sostenuta di 73' e discesa ripida (>10% per il 27% del tempo). Manca solo durata/quota gara."
+    },
+    "headline": "Stress test di montagna fuori programma: +787 m e discesa tecnica nel caldo, motore a lungo in Z4 fino alla crisi in cima. Utile come prova, lontano dal piano riabilitativo.",
+    "strengths": [
+      "Salita di 73' col giusto mix cammino-corsa: efficienza buona pur con pendenze oltre il 10% per buona parte del tempo.",
+      "Nutrizione e idratazione azzeccate: gel con caffeina al momento giusto e ~2,25 L di acqua col caldo.",
+      "Completato un carico vicino al 63% del dislivello positivo (D+) di gara: primo assaggio di terreno specifico."
+    ],
+    "concerns": [
+      { "area": "crisi 2ª metà", "severity": 4, "note": "Crollo fino alla crisi in cima: ~49% del tempo camminato e FC scesa, non deriva cardiaca ma soste da caldo/fatica." },
+      { "area": "intensità", "severity": 4, "note": "Quasi 3/4 del tempo in Z4-Z5 e carico interno (TRIMP) alto su un'uscita nata aerobica: in acido sui tratti ripidi." },
+      { "area": "carico anca/discesa", "severity": 4, "note": "770 m di discesa, tratti >10%: il gesto che il piano evitava, carico su anca/bandelletta/medio gluteo sin." }
+    ],
+    "narrative": "Uscita fuori specifica rispetto al piano della 07 (corsa piatta breve in Z2, zero dislivello): qui +787 m di dislivello positivo (D+), salita lunga e ripida, caldo (~30°C) e gambe già stanche in partenza. Da leggere come test di montagna corsa/cammino e nutrizione, non come allenamento riabilitativo.\n\nIn salita la gestione è stata corretta — cammino dove ripido, corsa solo sui tratti corribili — ma il motore è rimasto a lungo in Z4 e nella seconda metà, tra caldo, quota e fatica pregressa, è arrivata la crisi: passo crollato e quasi metà del tempo camminato (la frequenza cardiaca è anzi scesa: non è deriva cardiaca). Nutrizione e idratazione invece ben gestite.\n\nLa nota vera non è salire ma scendere: 770 m con tratti oltre il 10% caricano proprio anca, bandelletta e medio gluteo sin, le strutture che il piano proteggeva. Assaggio utile di terreno-gara, da isolare, non replicare."
+  },
+  "totals": {
+    "distance_km": 12.03,
+    "duration_sec": 9093,
+    "avg_pace_min_per_km": 12.595,
+    "gap_min_per_km": 10.04,
+    "ef": 0.663,
+    "avg_hr": 150,
+    "max_hr_observed": 179,
+    "hrmax_est_used": 181,
+    "hrmax_source": "profile",
+    "elevation_source": "komoot_dem",
+    "ascent_m": 787,
+    "descent_m": 770,
+    "nrc_ascent_m": 799,
+    "nrc_descent_m": 801,
+    "elev_min_m": 349,
+    "elev_max_m": 1150,
+    "steps": 15543,
+    "avg_cadence_spm": 102.6,
+    "avg_stride_cm": 77
+  },
+  "derived": {
+    "trimp": 322,
+    "polarization_3z": {
+      "lit_pct": 30.9,
+      "mit_pct": 48,
+      "hit_pct": 21.1
+    },
+    "maf": {
+      "ceiling_bpm": 152,
+      "time_below_pct": 43.6
+    },
+    "vertical": {
+      "vam_m_per_h": 312,
+      "ascent_m_per_h": 312,
+      "descent_m_per_h": 305
+    },
+    "grade_distribution": {
+      "flat_lt_2": 5.1,
+      "rolling_2_5": 5,
+      "uphill_5_10": 8.9,
+      "steep_gt_10": 43.4,
+      "down_2_5": 4.2,
+      "down_5_10": 6.6,
+      "down_gt_10": 26.8
+    },
+    "climb_efficiency": {
+      "ef_uphill": 1.314,
+      "uphill_time_sec": 4390
+    },
+    "race_match": {
+      "vertical_match_pct": 63,
+      "duration_match_pct": 50.5
+    }
+  },
+  "decoupling": {
+    "first_half": {
+      "gap_min_per_km": 6.871,
+      "hr": 154
+    },
+    "second_half": {
+      "gap_min_per_km": 9.063,
+      "hr": 147
+    },
+    "pct": 20.74
+  },
+  "pace_variability": {
+    "cv_overall_pct": 26.46,
+    "cv_running_only_pct": 26.49
+  },
+  "split_balance": {
+    "first_half_sec": 3987,
+    "second_half_sec": 5084,
+    "diff_pct": 27.51
+  },
+  "hr_zones": [
+    {
+      "zone": 1,
+      "time_sec": 195
+    },
+    {
+      "zone": 2,
+      "time_sec": 521
+    },
+    {
+      "zone": 3,
+      "time_sec": 1713
+    },
+    {
+      "zone": 4,
+      "time_sec": 5022
+    },
+    {
+      "zone": 5,
+      "time_sec": 1639
+    }
+  ],
+  "walks_summary": {
+    "count": 8,
+    "total_walk_sec": 4461,
+    "walk_pct": 49.04
+  },
+  "walk_breaks": [
+    {
+      "started_sec": 703,
+      "duration_sec": 1676,
+      "avg_cadence_spm": 95,
+      "at_km": 2.45
+    },
+    {
+      "started_sec": 2444,
+      "duration_sec": 96,
+      "avg_cadence_spm": 94.1,
+      "at_km": 3.6
+    },
+    {
+      "started_sec": 2834,
+      "duration_sec": 132,
+      "avg_cadence_spm": 111.4,
+      "at_km": 4.29
+    },
+    {
+      "started_sec": 3515,
+      "duration_sec": 434,
+      "avg_cadence_spm": 77,
+      "at_km": 5.77
+    },
+    {
+      "started_sec": 4057,
+      "duration_sec": 134,
+      "avg_cadence_spm": 91.5,
+      "at_km": 6.13
+    },
+    {
+      "started_sec": 4357,
+      "duration_sec": 785,
+      "avg_cadence_spm": 75.7,
+      "at_km": 6.67
+    },
+    {
+      "started_sec": 5206,
+      "duration_sec": 362,
+      "avg_cadence_spm": 62.9,
+      "at_km": 7.3
+    },
+    {
+      "started_sec": 5706,
+      "duration_sec": 842,
+      "avg_cadence_spm": 30,
+      "at_km": 7.81
+    }
+  ],
+  "splits": [
+    {
+      "km": 1,
+      "duration_sec": 405.2,
+      "pace_min_per_km": 6.753,
+      "gap_min_per_km": 9.113,
+      "avg_hr": 132,
+      "pct_hrmax": 73,
+      "ef": 0.831
+    },
+    {
+      "km": 2,
+      "duration_sec": 699.7,
+      "pace_min_per_km": 11.662,
+      "gap_min_per_km": 6.871,
+      "avg_hr": 156,
+      "pct_hrmax": 86,
+      "ef": 0.935
+    },
+    {
+      "km": 3,
+      "duration_sec": 917.4,
+      "pace_min_per_km": 15.29,
+      "gap_min_per_km": 7.424,
+      "avg_hr": 148,
+      "pct_hrmax": 81.8,
+      "ef": 0.91
+    },
+    {
+      "km": 4,
+      "duration_sec": 700.8,
+      "pace_min_per_km": 11.679,
+      "gap_min_per_km": 6.694,
+      "avg_hr": 157,
+      "pct_hrmax": 86.7,
+      "ef": 0.952
+    },
+    {
+      "km": 5,
+      "duration_sec": 537.7,
+      "pace_min_per_km": 8.962,
+      "gap_min_per_km": 7.535,
+      "avg_hr": 157,
+      "pct_hrmax": 86.8,
+      "ef": 0.844
+    },
+    {
+      "km": 6,
+      "duration_sec": 726.6,
+      "pace_min_per_km": 12.11,
+      "gap_min_per_km": 7.697,
+      "avg_hr": 163,
+      "pct_hrmax": 89.9,
+      "ef": 0.799
+    },
+    {
+      "km": 7,
+      "duration_sec": 1114.8,
+      "pace_min_per_km": 18.58,
+      "gap_min_per_km": 7.84,
+      "avg_hr": 158,
+      "pct_hrmax": 87.4,
+      "ef": 0.806
+    },
+    {
+      "km": 8,
+      "duration_sec": 1546.1,
+      "pace_min_per_km": 25.768,
+      "gap_min_per_km": 17.951,
+      "avg_hr": 138,
+      "pct_hrmax": 76.2,
+      "ef": 0.404
+    },
+    {
+      "km": 9,
+      "duration_sec": 484.7,
+      "pace_min_per_km": 8.079,
+      "gap_min_per_km": 16.326,
+      "avg_hr": 163,
+      "pct_hrmax": 90.2,
+      "ef": 0.375
+    },
+    {
+      "km": 10,
+      "duration_sec": 768.9,
+      "pace_min_per_km": 12.815,
+      "gap_min_per_km": 25.653,
+      "avg_hr": 143,
+      "pct_hrmax": 79.1,
+      "ef": 0.272
+    },
+    {
+      "km": 11,
+      "duration_sec": 686.5,
+      "pace_min_per_km": 11.442,
+      "gap_min_per_km": 23.066,
+      "avg_hr": 149,
+      "pct_hrmax": 82.5,
+      "ef": 0.29
+    },
+    {
+      "km": 12,
+      "duration_sec": 483.2,
+      "pace_min_per_km": 8.053,
+      "gap_min_per_km": 15.07,
+      "avg_hr": 148,
+      "pct_hrmax": 81.7,
+      "ef": 0.449
+    }
+  ],
+  "remainder": {
+    "km": 0.03,
+    "duration_sec": 21.3,
+    "pace_min_per_km": 11.024,
+    "gap_min_per_km": 12.719
+  }
+}

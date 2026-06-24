@@ -1,0 +1,224 @@
+{
+  "schema_version": 1,
+  "id": "f347c556-7f6c-43a4-9f20-bd38ae04a287",
+  "start": "2026-06-23T06:25:54.670Z",
+  "name": "Valencia easy run",
+  "user_note": null,
+  "komoot_url": "https://www.komoot.com/it-it/tour/3058694970",
+  "ai_analysis": {
+    "model": "claude-opus-4-8",
+    "generated_at": "2026-06-24T18:25:00Z",
+    "prompt_version": 1,
+    "classification": {
+      "workout_type": "facile",
+      "primary_benefit": "base",
+      "training_effect_aerobic": 2.8,
+      "training_effect_anaerobic": 0.5
+    },
+    "execution": {
+      "intent_inferred": "corsa facile rigenerante in piano, primo rientro alla corsa dopo lo stress test del Canto Alto",
+      "execution_quality": 4,
+      "primary_failure_mode": "nessuno",
+      "failure_confidence": 0.8
+    },
+    "trail_specificity": {
+      "score": 1,
+      "vertical_load_pct_of_race": 1.7,
+      "notes": "Corsa piatta su strada (+21 m): zero specificità trail, vale come base aerobica pura."
+    },
+    "headline": "Corsa facile da manuale a Valencia: piatta, 98% sotto la soglia aerobica, ben polarizzata. Primo rientro pulito alla corsa dopo il Canto Alto, solo un calo nel finale.",
+    "strengths": [
+      "Aerobico pulito: 98% del tempo sotto la soglia aerobica Maffetone (MAF) e oltre l'80% in fascia facile, ben polarizzata.",
+      "Efficienza (EF) alta e stabile per i primi 6 km, un'ora di corsa continua senza pause: gesto fluido sul piatto.",
+      "Primo rientro alla corsa piatta dopo il Canto Alto senza strascichi: anca/gluteo sin hanno retto un'ora continua."
+    ],
+    "concerns": [
+      { "area": "calo finale", "severity": 1, "note": "Calo negli ultimi ~2 km da rientro su strada trafficata (stop ai semafori), non fisiologico: nel parco il passo filava." },
+      { "area": "cadenza", "severity": 2, "note": "Cadenza media 142 passi/min: ancora bassa, margine per passi più corti e frequenti (tema delle settimane scorse)." }
+    ],
+    "narrative": "Corsa facile fatta bene: piatta (Valencia), un'ora di corsa continua senza pause, 98% del tempo sotto la soglia aerobica Maffetone (MAF) e distribuzione ben polarizzata (oltre l'80% in fascia facile). È proprio il tipo di seduta che il piano della 07 prescriveva — piatto, easy, aerobico — solo arrivata qualche giorno dopo.\n\nIl dato che conta: è il primo rientro alla corsa piatta dopo lo stress test del Canto Alto, e anca/gluteo sin hanno retto un'ora di gesto continuo senza strascichi. L'efficienza (EF) è rimasta alta e stabile per i primi 6 km.\n\nIl calo negli ultimi ~2 km (passo +40%, lieve deriva cardiaca - decoupling Pa:Hr ~13%) è solo contesto: rientro su strada trafficata con stop ai semafori e agli attraversamenti, mentre nel parco il passo filava liscio. Non un cedimento ma interruzioni esterne, quindi la parte aerobica vera è ancora più pulita del dato medio."
+  },
+  "totals": {
+    "distance_km": 8.71,
+    "duration_sec": 4036,
+    "avg_pace_min_per_km": 7.72,
+    "gap_min_per_km": 7.452,
+    "ef": 0.954,
+    "avg_hr": 141,
+    "max_hr_observed": 175,
+    "hrmax_est_used": 181,
+    "hrmax_source": "profile",
+    "elevation_source": "komoot_dem",
+    "ascent_m": 21,
+    "descent_m": 19,
+    "nrc_ascent_m": 44,
+    "nrc_descent_m": 45,
+    "elev_min_m": 7,
+    "elev_max_m": 24,
+    "steps": 9580,
+    "avg_cadence_spm": 142.4,
+    "avg_stride_cm": 91
+  },
+  "derived": {
+    "trimp": 106,
+    "polarization_3z": {
+      "lit_pct": 80.8,
+      "mit_pct": 18.3,
+      "hit_pct": 0.8
+    },
+    "maf": {
+      "ceiling_bpm": 152,
+      "time_below_pct": 98
+    },
+    "vertical": {
+      "vam_m_per_h": 18,
+      "ascent_m_per_h": 18,
+      "descent_m_per_h": 17
+    },
+    "grade_distribution": {
+      "flat_lt_2": 68.5,
+      "rolling_2_5": 12.4,
+      "uphill_5_10": 2.8,
+      "steep_gt_10": 0.1,
+      "down_2_5": 14,
+      "down_5_10": 1.3,
+      "down_gt_10": 1
+    },
+    "climb_efficiency": {
+      "ef_uphill": 1.159,
+      "uphill_time_sec": 113
+    },
+    "race_match": {
+      "vertical_match_pct": 1.7,
+      "duration_match_pct": 22.4
+    }
+  },
+  "decoupling": {
+    "first_half": {
+      "gap_min_per_km": 6.692,
+      "hr": 140
+    },
+    "second_half": {
+      "gap_min_per_km": 7.695,
+      "hr": 141
+    },
+    "pct": 13.33
+  },
+  "pace_variability": {
+    "cv_overall_pct": 22.54,
+    "cv_running_only_pct": null
+  },
+  "split_balance": {
+    "first_half_sec": 1644,
+    "second_half_sec": 2011,
+    "diff_pct": 22.32
+  },
+  "hr_zones": [
+    {
+      "zone": 1,
+      "time_sec": 30
+    },
+    {
+      "zone": 2,
+      "time_sec": 236
+    },
+    {
+      "zone": 3,
+      "time_sec": 2439
+    },
+    {
+      "zone": 4,
+      "time_sec": 1302
+    },
+    {
+      "zone": 5,
+      "time_sec": 27
+    }
+  ],
+  "walks_summary": {
+    "count": 0,
+    "total_walk_sec": 0,
+    "walk_pct": 0
+  },
+  "walk_breaks": [],
+  "splits": [
+    {
+      "km": 1,
+      "duration_sec": 389.3,
+      "pace_min_per_km": 6.489,
+      "gap_min_per_km": 6.822,
+      "avg_hr": 134,
+      "pct_hrmax": 74.2,
+      "ef": 1.092
+    },
+    {
+      "km": 2,
+      "duration_sec": 427.7,
+      "pace_min_per_km": 7.128,
+      "gap_min_per_km": 7.32,
+      "avg_hr": 138,
+      "pct_hrmax": 76.2,
+      "ef": 0.991
+    },
+    {
+      "km": 3,
+      "duration_sec": 417,
+      "pace_min_per_km": 6.95,
+      "gap_min_per_km": 6.768,
+      "avg_hr": 142,
+      "pct_hrmax": 78.5,
+      "ef": 1.04
+    },
+    {
+      "km": 4,
+      "duration_sec": 409.7,
+      "pace_min_per_km": 6.828,
+      "gap_min_per_km": 6.788,
+      "avg_hr": 146,
+      "pct_hrmax": 80.4,
+      "ef": 1.012
+    },
+    {
+      "km": 5,
+      "duration_sec": 424.2,
+      "pace_min_per_km": 7.071,
+      "gap_min_per_km": 6.981,
+      "avg_hr": 143,
+      "pct_hrmax": 78.8,
+      "ef": 1.005
+    },
+    {
+      "km": 6,
+      "duration_sec": 433.9,
+      "pace_min_per_km": 7.232,
+      "gap_min_per_km": 7.018,
+      "avg_hr": 146,
+      "pct_hrmax": 80.4,
+      "ef": 0.979
+    },
+    {
+      "km": 7,
+      "duration_sec": 498.7,
+      "pace_min_per_km": 8.311,
+      "gap_min_per_km": 8.397,
+      "avg_hr": 142,
+      "pct_hrmax": 78.6,
+      "ef": 0.837
+    },
+    {
+      "km": 8,
+      "duration_sec": 653.8,
+      "pace_min_per_km": 10.896,
+      "gap_min_per_km": 11.066,
+      "avg_hr": 136,
+      "pct_hrmax": 75.3,
+      "ef": 0.663
+    }
+  ],
+  "remainder": {
+    "km": 0.71,
+    "duration_sec": 381.9,
+    "pace_min_per_km": 8.923,
+    "gap_min_per_km": 9.177
+  }
+}

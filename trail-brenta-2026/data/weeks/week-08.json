@@ -1,0 +1,17 @@
+{
+  "_schema_version": "2.0",
+  "number": 8,
+  "phase_id": "2-base-mountain",
+  "start_date": "2026-06-22",
+  "end_date": "2026-06-28",
+  "label": "Transizione (Valencia) — da pianificare",
+  "narrative": "Settimana ancora da pianificare. Trasferta a Valencia: per ora l'unica seduta registrata e una corsa facile e piatta il 23/6, primo rientro alla corsa sul piano dopo lo stress test del Canto Alto (la 07 si era chiusa senza piano). Il piano vero - corsa di rientro graduale + forza per il gluteo medio sin - va ancora costruito.",
+  "plan": [],
+  "log": [
+    {
+      "activity": "2026-06-23_f347c556-7f6c-43a4-9f20-bd38ae04a287",
+      "title": "Valencia easy run MAR 23 — 8.7 km piatti in ~1h07', FC media 141, 98% del tempo sotto la soglia aerobica e distribuzione ben polarizzata. Primo rientro alla corsa piatta dopo il Canto Alto: anca/gluteo sin hanno retto un'ora continua. Il calo negli ultimi 2 km è solo il rientro su strada trafficata (stop ai semafori), nel parco filava liscio."
+    }
+  ],
+  "strength": null
+}

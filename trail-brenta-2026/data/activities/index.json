@@ -2,6 +2,8 @@
   "_schema_version": "1.1",
   "_description": "Manifest delle attività registrate (run + hike + bike). Aggiungere il filename (relativo a data/activities/) di ogni nuova attività. Ordine: dal più recente al più vecchio (la pagina ordina comunque per data).",
   "activities": [
+    "2026-06-23_f347c556-7f6c-43a4-9f20-bd38ae04a287.json",
+    "2026-06-20_aa656164-4991-433b-ace0-0aaf39b60f2c.json",
     "2026-06-18_3047929041.json",
     "2026-06-09_eff09294-2341-4d8b-9fe4-fb79b137b0e5.json",
     "2026-06-08_b5cb4ec4-b85a-46bd-b1a6-2b366e6bb2cd.json",
