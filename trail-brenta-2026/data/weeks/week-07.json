@@ -5,7 +5,7 @@
   "start_date": "2026-06-15",
   "end_date": "2026-06-21",
   "label": "Riabilitazione anca: rampa D+ congelata, motore in bici",
-  "narrative": "Settimana di riprogrammazione dopo la diagnosi di trocanterite sin (insufficienza medio gluteo + bandelletta ileo-tibiale infiammata, Trendelenburg +) emersa nella 06. La rampa di dislivello della Fase 2 e SOSPESA: salita e discesa sono i due gesti che caricano la struttura infiammata, quindi si congela e si ripartira solo quando l'anca e silente in piano. Il motore aerobico (gia promosso a fine Fase 1, decoupling +1.0%) si mantiene sulla bici, non-impatto: il rientro Villapizzone-Treviglio del giovedi diventa la seduta lunga della settimana. Una sola corsa, facile e piatta, il sabato. Nessuna forza ne attivazione glutei fai-da-te questa settimana: il rinforzo glutei e la rieducazione posturale partono col ciclo FKT dalla settimana prossima, su protocollo del fisioterapista - meglio non improvvisare carico su una tendinopatia. Farmaci (Celebrex) fino a mercoledi 17: il giro in bici di giovedi 18 e il primo collaudo dell'anca senza l'effetto-maschera dell'antinfiammatorio - leggere il dolore nelle 24h e il segnale che conta.",
+  "narrative": "Settimana di riprogrammazione dopo la diagnosi di trocanterite sin (insufficienza medio gluteo + bandelletta ileo-tibiale infiammata, Trendelenburg +) emersa nella 06. La rampa di dislivello della Fase 2 e SOSPESA: salita e discesa sono i due gesti che caricano la struttura infiammata, quindi si congela e si ripartira solo quando l'anca e silente in piano. Il motore aerobico (gia promosso a fine Fase 1, decoupling +1.0%) si mantiene sulla bici, non-impatto: il rientro Villapizzone-Treviglio del giovedi diventa la seduta lunga della settimana. Una sola corsa, facile e piatta, il sabato. Dal fisioterapista: OK a riprendere l'allenamento e via libera al rinforzo glutei, che parte da questa settimana su sua indicazione. Ha confermato il gluteo medio sin piu debole (origine del Trendelenburg + e della trocanterite) e dato esercizi di rinforzo da fare a casa (vedi sessione forza). Con l'OK a riprendere, la corsa easy piatta prevista per il sabato e decaduta: la riprogrammazione prudente non aveva piu motivo di esistere e per il weekend mi sono ritrovato di fatto senza un piano, cosi sabato 20 ho corso un trail (Canto Alto) fuori programma. Farmaci (Celebrex) fino a mercoledi 17: il giro in bici di giovedi 18 e il primo collaudo dell'anca senza l'effetto-maschera dell'antinfiammatorio - leggere il dolore nelle 24h e il segnale che conta.",
   "plan": [
     {
       "id": "checkin",
@@ -13,6 +13,13 @@
       "label": "Pesa",
       "when": "LUN 15 mattina, a digiuno",
       "notes": "Prima di partire: registra solo il dato, non cambiare nulla per il numero. Stesse condizioni delle altre settimane (a digiuno, prima di bere). La 08 ha letto 68.5 kg con body fat e acqua corporea fuori scala rispetto al trend: probabile artefatto di idratazione/condizioni di misura, non grasso reale. Lettura attesa: rientro verso 66-67 kg. Se 68.x si conferma per 2-3 settimane, allora e trend e se ne riparla."
+    },
+    {
+      "id": "forza",
+      "type": "strength",
+      "label": "Forza (fisio)",
+      "when": "MER 17",
+      "notes": "Il fisioterapista ha dato l'OK a riprendere l'allenamento e ha consigliato esercizi di rinforzo da fare a casa per il gluteo medio sin (confermato piu debole). Esercizi indicati e svolti: ponte monopodalico (~3x30, corpo libero), affondi (corpo libero), squat con manubri 20 kg. Serie/rip di affondi e squat, frequenza, progressione e cautele: da formalizzare col fisio (vedi _forza-todo.md)."
     },
     {
       "id": "bici-lunga",
@@ -37,6 +44,8 @@
       "intensity": "Z2/MAF",
       "fc_max_bpm": 152,
       "when": "SAB 20 mattina",
+      "cancelled": true,
+      "cancel_reason": "Decaduta dopo l'OK del fisio a riprendere l'allenamento: la riprogrammazione prudente 'una corsa facile e piatta' non aveva piu motivo di esistere e per il weekend mi sono ritrovato di fatto senza un piano. Sabato 20 ho corso un trail (Canto Alto, da Sorisole) fuori programma - vedi log.",
       "notes": "Unica corsa della settimana, test prudente del gesto su gambe riposate (giorno cuscinetto dopo la bici di giovedi). Percorso: Treviglio piatto, Mizuno (strada). Target: 25-30', FC 140-150, tetto 152, respirazione conversazionale piena, ZERO salite e discese. Regola dolore stretta: se l'anca/gluteo sin da fastidio che aumenta correndo, o resta acceso oltre 24h, fermati e torna alla sola bici - non e una settimana per forzare il rientro alla corsa. Se invece e silente, e il primo mattone del rientro graduale. Niente progressivo, niente allungo finale.",
       "coaching_tip": {
         "title": "Atterraggio sotto il bacino",
@@ -46,13 +55,17 @@
   ],
   "log": [
     {
+      "plan_ref": "forza",
+      "title": "Forza MER 17 — ponte monopodalico ~3×30 (corpo libero), affondi (corpo libero), squat con manubri 20 kg. Prima sessione di forza dopo l'OK del fisioterapista; confermata debolezza del gluteo medio sin."
+    },
+    {
       "plan_ref": "bici-lunga",
       "activity": "2026-06-18_3047929041",
       "title": "Bici Milano → Treviglio GIO 18 — 40.1 km piatti, +75 m D+, ~2h27' totali (2h13' in movimento, 14' di pause), velocità media 18.1 km/h. Seduta lunga aerobica non-impatto, primo collaudo dell'anca senza Celebrex. Solo komoot, senza cardiofrequenzimetro."
+    },
+    {
+      "title": "Trail Canto Alto SAB 20 — da Sorisole al Canto Alto, salita vera (fuori programma). Corso senza un piano: l'easy piatta era decaduta e per il weekend non c'era piu nulla in calendario. Attività completa (GPS/metriche, NRC + komoot) ancora da loggare."
     }
   ],
-  "strength": {
-    "skipped": true,
-    "reason": "Niente forza ne attivazione glutei fai-da-te questa settimana. Su una tendinopatia gluteo-trocanterica il carico va impostato dal fisioterapista: il ciclo FKT (rinforzo glutei + rieducazione posturale) parte dalla settimana 08 e da li si segue quel protocollo."
-  }
+  "strength": null
 }
