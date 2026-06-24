@@ -1,0 +1,20 @@
+{
+  "schema_version": 2,
+  "activity_type": "bike",
+  "id": "3047929041",
+  "start": "2026-06-18T16:22:36+00:00",
+  "end": "2026-06-18T18:49:27+00:00",
+  "title": "Bici Milano → Treviglio",
+  "source": "komoot",
+  "source_url": "https://www.komoot.com/tour/3047929041",
+  "user_notes": "Seduta lunga aerobica della 07, cross-training non-impatto: rientro in bici da Milano Villapizzone a Treviglio (~40 km di pianura). Scopo: mantenere il motore aerobico senza caricare l'anca dopo la diagnosi di trocanterite. Z1-Z2 seduto, niente salite in piedi né sprint. Primo giorno dopo la fine del Celebrex: primo collaudo dell'anca senza l'effetto-maschera dell'antinfiammatorio. Solo komoot, senza cardiofrequenzimetro.",
+  "totals": {
+    "distance_km": 40.14,
+    "duration_sec": 8811,
+    "duration_moving_sec": 7995,
+    "pause_sec": 816,
+    "ascent_m": 75,
+    "descent_m": 68,
+    "avg_speed_kmh_moving": 18.08
+  }
+}

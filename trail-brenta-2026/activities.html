@@ -38,6 +38,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--tx);line-
 .tag{font-family:'Space Mono',monospace;font-size:.6rem;padding:.15rem .45rem;border-radius:4px;text-transform:uppercase;letter-spacing:.5px;font-weight:700;background:var(--sf2);color:var(--tx2);border:1px solid var(--bd)}
 .tag.type-run{color:var(--ac);border-color:var(--ac)}
 .tag.type-hike{color:var(--ac2);border-color:var(--ac2)}
+.tag.type-bike{color:var(--pd);border-color:var(--pd)}
 .tag.cat-social{color:var(--tx2);border-color:var(--tx2);background:transparent}
 .act-card.is-social{opacity:.78}
 .act-card.is-social:hover{opacity:1}
@@ -59,7 +60,7 @@ footer a{color:var(--ac);text-decoration:none}
   <div class="hero">
     <div class="kicker">Log attività</div>
     <h1>Attività</h1>
-    <p class="hero-sub" id="subline">Storico delle uscite registrate (run + hike).</p>
+    <p class="hero-sub" id="subline">Storico delle uscite registrate (run + hike + bike).</p>
   </div>
 
   <div id="app"><div class="loader"><div class="spinner"></div><br>Caricamento attività...</div></div>
@@ -107,8 +108,10 @@ function renderCard(act) {
   const exec = a.execution || {};
   const quality = exec.execution_quality;
   const isHike = act.activity_type === 'hike';
+  const isBike = act.activity_type === 'bike';
+  const isEndurance = isHike || isBike;
   const isSocial = act.category === 'social';
-  const typeLbl = isHike ? 'hike' : (act.activity_type || 'run');
+  const typeLbl = isHike ? 'hike' : isBike ? 'bike' : (act.activity_type || 'run');
 
   return `
     <a class="act-card${isSocial ? ' is-social' : ''}" href="./activity.html#${encodeURIComponent(id)}">
@@ -122,11 +125,11 @@ function renderCard(act) {
       <div class="act-stats">
         ${t.distance_km != null ? `<span><strong>${t.distance_km.toFixed(2)}</strong> km</span>` : ''}
         ${t.duration_sec != null ? `<span><strong>${formatDuration(t.duration_sec)}</strong></span>` : ''}
-        ${!isHike && t.avg_pace_min_per_km != null ? `<span><strong>${formatPace(t.avg_pace_min_per_km)}</strong>/km</span>` : ''}
-        ${isHike && t.avg_speed_kmh_moving != null ? `<span><strong>${t.avg_speed_kmh_moving.toFixed(1)}</strong> km/h</span>` : ''}
+        ${!isEndurance && t.avg_pace_min_per_km != null ? `<span><strong>${formatPace(t.avg_pace_min_per_km)}</strong>/km</span>` : ''}
+        ${isEndurance && t.avg_speed_kmh_moving != null ? `<span><strong>${t.avg_speed_kmh_moving.toFixed(1)}</strong> km/h</span>` : ''}
         ${t.ascent_m != null ? `<span>+<strong>${t.ascent_m}</strong> m</span>` : ''}
-        ${isHike && t.descent_m != null && t.descent_m > 0 ? `<span>−<strong>${t.descent_m}</strong> m</span>` : ''}
-        ${!isHike && t.avg_hr != null ? `<span><strong>${t.avg_hr}</strong> bpm</span>` : ''}
+        ${isEndurance && t.descent_m != null && t.descent_m > 0 ? `<span>−<strong>${t.descent_m}</strong> m</span>` : ''}
+        ${!isEndurance && t.avg_hr != null ? `<span><strong>${t.avg_hr}</strong> bpm</span>` : ''}
       </div>
       <div class="act-stats" style="margin-top:.5rem">
         <span class="tag type-${typeLbl}">${typeLbl}</span>

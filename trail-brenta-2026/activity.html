@@ -196,10 +196,13 @@ function render(app, act, race) {
   const a = act.ai_analysis || {};
   const t = act.totals || {};
   const isHike = act.activity_type === 'hike';
+  const isBike = act.activity_type === 'bike';
   const isSocial = act.category === 'social';
+  // Run-only sections (splits, HR zones, decoupling, walks, polarizzazione) non valgono per hike né bike.
+  const isEndurance = isHike || isBike;
 
   app.innerHTML = [
-    renderHero(act, t, isHike),
+    renderHero(act, t, isHike, isBike),
     isSocial ? renderSocialBanner() : '',
     isSocial ? '' : renderUserNote(act),
     renderHeadline(a),
@@ -208,12 +211,12 @@ function render(app, act, race) {
     renderConcerns(a),
     renderStrengths(a),
     renderNextSession(a),
-    renderTotals(t, isHike),
-    isHike ? '' : renderPolarization(act.derived, act.hr_zones, t.duration_sec),
+    renderTotals(t, isHike, isBike),
+    isEndurance ? '' : renderPolarization(act.derived, act.hr_zones, t.duration_sec),
     renderDerived(act.derived),
-    isHike ? '' : renderDecoupling(act.decoupling),
-    isHike ? '' : renderSplits(act.splits, act.remainder),
-    isHike ? '' : renderWalks(act.walk_breaks, act.walks_summary),
+    isEndurance ? '' : renderDecoupling(act.decoupling),
+    isEndurance ? '' : renderSplits(act.splits, act.remainder),
+    isEndurance ? '' : renderWalks(act.walk_breaks, act.walks_summary),
     renderGearChecklist(act.gear_checklist),
     renderPlannedGradeDistribution(act.grade_distribution, race),
     renderNutritionPlan(act.nutrition_plan),
@@ -234,14 +237,14 @@ function renderSocialBanner() {
 
 /* ── Sections ──────────────────────────────────────────────── */
 
-function renderHero(act, t, isHike) {
-  const kicker = isHike ? 'Hike' : 'Allenamento';
+function renderHero(act, t, isHike, isBike) {
+  const kicker = isHike ? 'Hike' : isBike ? 'Bici' : 'Allenamento';
   const subParts = [
     formatTime(act.start),
     t.distance_km != null ? t.distance_km.toFixed(2) + ' km' : null,
-    t.duration_sec != null ? formatDuration(t.duration_sec) + (isHike ? ' totale' : '') : null,
+    t.duration_sec != null ? formatDuration(t.duration_sec) + (isHike || isBike ? ' totale' : '') : null,
     t.ascent_m != null ? '+' + t.ascent_m + ' m' : null,
-    isHike && t.descent_m != null && t.descent_m > 0 ? '−' + t.descent_m + ' m' : null
+    (isHike || isBike) && t.descent_m != null && t.descent_m > 0 ? '−' + t.descent_m + ' m' : null
   ].filter(Boolean).join(' · ');
 
   const sourceLink = act.source_url ? `
@@ -286,13 +289,17 @@ function renderHeadline(a) {
   `;
 }
 
-function renderTotals(t, isHike) {
-  const items = isHike ? [
+function renderTotals(t, isHike, isBike) {
+  const isEndurance = isHike || isBike;
+  const speedHelp = isBike
+    ? 'Calcolata sul tempo di movimento. In bici su pianura in Z1-Z2 conversazionale: ~16-20 km/h è un ritmo aerobico tranquillo.'
+    : 'Calcolata sul tempo di movimento. Per hike in montagna: 3-4 km/h è un buon ritmo sostenuto.';
+  const items = isEndurance ? [
     { lbl: 'Distanza', val: t.distance_km != null ? t.distance_km.toFixed(2) + ' km' : null },
     { lbl: 'Durata totale', val: t.duration_sec != null ? formatDuration(t.duration_sec) : null, help: 'Da inizio a fine attività, pause incluse.' },
     { lbl: 'In movimento', val: t.duration_moving_sec != null ? formatDuration(t.duration_moving_sec) : null, help: 'Tempo di effettivo movimento (esclude soste).' },
-    { lbl: 'Pause', val: t.pause_sec != null ? formatDuration(t.pause_sec) : null, sub: t.pause_sec != null && t.duration_sec ? Math.round(t.pause_sec / t.duration_sec * 100) + '% del totale' : null, help: 'Tempo fermo (pranzo, foto, soste).' },
-    { lbl: 'Velocità media', val: t.avg_speed_kmh_moving != null ? t.avg_speed_kmh_moving.toFixed(2) + ' km/h' : null, help: 'Calcolata sul tempo di movimento. Per hike in montagna: 3-4 km/h è un buon ritmo sostenuto.' },
+    { lbl: 'Pause', val: t.pause_sec != null ? formatDuration(t.pause_sec) : null, sub: t.pause_sec != null && t.duration_sec ? Math.round(t.pause_sec / t.duration_sec * 100) + '% del totale' : null, help: isBike ? 'Tempo fermo (semafori, soste).' : 'Tempo fermo (pranzo, foto, soste).' },
+    { lbl: 'Velocità media', val: t.avg_speed_kmh_moving != null ? t.avg_speed_kmh_moving.toFixed(2) + ' km/h' : null, help: speedHelp },
     { lbl: 'Dislivello +', val: t.ascent_m != null ? '+' + t.ascent_m + ' m' : null, sub: t.elev_min_m != null ? t.elev_min_m + '-' + t.elev_max_m + ' m' : null },
     { lbl: 'Dislivello −', val: t.descent_m != null ? '−' + t.descent_m + ' m' : null }
   ].filter(i => i.val != null) : [
@@ -312,7 +319,7 @@ function renderTotals(t, isHike) {
   return `
     <section>
       <h2 class="s-title">Totali</h2>
-      <p class="s-desc">${isHike ? 'I numeri grezzi dell\'uscita. La distinzione tra durata totale e movimento è significativa per gli hike: pause lunghe sono normali, ma utili da tracciare.' : 'I numeri grezzi della corsa. Le sottolabel grigie riportano un valore correlato (es. % FCmax, range altimetrico).'}</p>
+      <p class="s-desc">${isEndurance ? 'I numeri grezzi dell\'uscita. La distinzione tra durata totale e movimento è significativa: pause lunghe sono normali, ma utili da tracciare.' : 'I numeri grezzi della corsa. Le sottolabel grigie riportano un valore correlato (es. % FCmax, range altimetrico).'}</p>
       <div class="metrics">
         ${items.map(metricCard).join('')}
       </div>

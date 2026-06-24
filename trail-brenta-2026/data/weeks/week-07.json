@@ -44,6 +44,13 @@
       }
     }
   ],
+  "log": [
+    {
+      "plan_ref": "bici-lunga",
+      "activity": "2026-06-18_3047929041",
+      "title": "Bici Milano → Treviglio GIO 18 — 40.1 km piatti, +75 m D+, ~2h27' totali (2h13' in movimento, 14' di pause), velocità media 18.1 km/h. Seduta lunga aerobica non-impatto, primo collaudo dell'anca senza Celebrex. Solo komoot, senza cardiofrequenzimetro."
+    }
+  ],
   "strength": {
     "skipped": true,
     "reason": "Niente forza ne attivazione glutei fai-da-te questa settimana. Su una tendinopatia gluteo-trocanterica il carico va impostato dal fisioterapista: il ciclo FKT (rinforzo glutei + rieducazione posturale) parte dalla settimana 08 e da li si segue quel protocollo."
