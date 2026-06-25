@@ -65,9 +65,16 @@
       "duration_min": 120,
       "intensity": "Z2, corsa/cammino da subito",
       "fc_max_bpm": 152,
+      "vertical_m": 590,
       "vertical_m_max": 700,
       "when": "SAB 27 mattina",
-      "notes": "Lungo della settimana: 1h45-2h00, 500-700 m D+, location da scegliere su Komoot in zona Bergamo (opzioni candidate: Maresana/Canto Alto, Monte Misma, Monte Canto). Obiettivo: tempo in montagna + gestione salita/discesa, non prestazione. Cammina appena la FC supera 152, niente Z4 intenzionale. In discesa passo corto e controllato, no bombing. Se dopo 75-90' l'anca passa da rigidita abituale a dolore crescente, taglia e rientra. Stop mentale a ~2h anche se le gambe sembrano buone.",
+      "notes": "Lungo della settimana sul tour Komoot Sedrina - Prati Parini - Canto Alto: 11.5 km, +590/-590 m, stima Komoot 1h52. Obiettivo: tempo in montagna + gestione salita/discesa, non prestazione. Cammina appena la FC supera 152, niente Z4 intenzionale. In discesa passo corto e controllato, no bombing. Se dopo 75-90' l'anca passa da rigidita abituale a dolore crescente, taglia e rientra. Stop mentale a ~2h anche se le gambe sembrano buone.",
+      "routes": [
+        {
+          "url": "https://www.komoot.com/it-it/tour/3063091820",
+          "name": "Sedrina - Prati Parini - Canto Alto (11.5 km, 590 m D+) — Komoot"
+        }
+      ],
       "coaching_tip": {
         "title": "Disciplina in salita",
         "detail": "Il lavoro vero e stare sotto controllo quando il sentiero invita a spingere. Usa il power-hike prima di andare in acido: mani sulle cosce nei tratti ripidi, passo corto, busto leggermente avanti, FC sotto 152. Cosi alleni il gesto gara senza trasformare il lungo in un altro stress test."
