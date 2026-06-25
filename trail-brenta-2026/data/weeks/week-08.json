@@ -4,11 +4,93 @@
   "phase_id": "2-base-mountain",
   "start_date": "2026-06-22",
   "end_date": "2026-06-28",
-  "label": "Transizione (Valencia) — da pianificare",
-  "narrative": "Settimana ancora da pianificare. Trasferta a Valencia: per ora l'unica seduta registrata e una corsa facile e piatta il 23/6, primo rientro alla corsa sul piano dopo lo stress test del Canto Alto (la 07 si era chiusa senza piano). Il piano vero - corsa di rientro graduale + forza per il gluteo medio sin - va ancora costruito.",
-  "plan": [],
+  "label": "Rientro controllato + lungo trail",
+  "narrative": "Settimana di rientro controllato alla corsa con una forzante chiara: l'anca/gluteo sin non da problemi a riposo, ma resta la rigidita abituale durante la corsa. La corsa facile di Valencia del 23/6 ha gia dato il primo segnale buono (8.7 km piatti, ~1h07', FC media 141, anca tollerante). Da qui si costruisce una settimana non-chill ma protetta: bici commute + forza gluteo medio in ufficio giovedi, mini-run piatta opzionale venerdi solo come check, lungo trail sabato con D+ moderato e controllo stretto della FC, riposo domenica per leggere la risposta nelle 24h. Obiettivo: rimettere un lungo di montagna nel piano senza replicare il Canto Alto fuori controllo della 07.",
+  "plan": [
+    {
+      "id": "valencia-easy",
+      "type": "easy",
+      "label": "Valencia easy run",
+      "duration_min": 67,
+      "intensity": "Z2/MAF",
+      "fc_max_bpm": 152,
+      "when": "MAR 23 mattina",
+      "notes": "Gia eseguita: corsa facile piatta a Valencia, 8.7 km in ~1h07', FC media 141, 98% sotto MAF. Vale come primo rientro pulito alla corsa dopo il Canto Alto: anca/gluteo sin hanno retto un'ora continua. Il calo finale e da contesto urbano/semafori, non da cedimento aerobico.",
+      "routes": [
+        {
+          "url": "https://www.komoot.com/it-it/tour/3058694970",
+          "name": "Valencia easy run (Komoot)"
+        }
+      ],
+      "coaching_tip": {
+        "title": "Passi corti sul piatto",
+        "detail": "Tema tecnico della settimana: proteggere l'anca con appoggio sotto il bacino. Sul piatto evita il passo lungo davanti al corpo; cerca passi corti, leggeri e un filo piu frequenti, senza aumentare ritmo o FC."
+      }
+    },
+    {
+      "id": "bici-commute",
+      "type": "cross-training",
+      "label": "Bici commute",
+      "when": "GIO 25",
+      "intensity": "Z1-Z2, agile, seduto",
+      "notes": "Commute in bici come motore aerobico non-impatto. Pedalata agile, tutto seduto, niente sprint, niente rapportoni duri e niente tratti tirati. Se anca/gluteo/bandelletta si accendono, rendila il piu facile possibile o taglia."
+    },
+    {
+      "id": "forza-gluteo",
+      "type": "strength",
+      "label": "Forza gluteo medio",
+      "duration_min": 25,
+      "when": "GIO 25 in ufficio",
+      "notes": "Forza corpo libero perche in ufficio non ci sono pesi. RPE 6/10, tecnica pulita, niente cedimento: ponte monopodalico 3x12-15/lato con 2'' di tenuta in alto; affondi indietro 3x8-10/lato lenti e controllati; squat a corpo libero tempo 3x12-15 con discesa lenta 3''; abduzioni fianco a terra 2x15/lato; side plank 2x20-30''/lato. Il fisio aveva lavorato su affondi + ponte monopodalico + squat con bilanciere: oggi si replica il pattern in versione leggera. Stop se compare dolore laterale puntiforme o crescente; deve sembrare lavoro muscolare, non irritazione."
+    },
+    {
+      "id": "mini-run-check",
+      "type": "easy",
+      "label": "Mini-run piatta opzionale",
+      "duration_min": 25,
+      "intensity": "Z1-Z2 bassa",
+      "fc_max_bpm": 150,
+      "when": "VEN 26",
+      "optional": true,
+      "notes": "Solo se dopo bici + forza l'anca e ok e non ci sono DOMS/rigidita sopra il solito. Target 20-25' piatti, facilissimi, FC sotto 145-150, zero allunghi e zero progressivo. Serve come check e scioglimento prima del lungo, non come allenamento vero. Se qualunque segnale aumenta, salta senza recuperarla domenica.",
+      "coaching_tip": {
+        "title": "Check anca, non fitness",
+        "detail": "Questa uscita serve a fare diagnostica del gesto: parti molto piano e chiediti ogni 5' se la rigidita resta stabile, scende o sale. Se sale, ti fermi; se resta stabile, continui facile. Il successo e arrivare a casa piu sciolto, non piu stanco."
+      }
+    },
+    {
+      "id": "lungo-trail",
+      "type": "long",
+      "label": "Lungo trail D+ controllato",
+      "duration_min": 120,
+      "intensity": "Z2, corsa/cammino da subito",
+      "fc_max_bpm": 152,
+      "vertical_m": 590,
+      "vertical_m_max": 700,
+      "when": "SAB 27 mattina",
+      "notes": "Lungo della settimana sul tour Komoot Sedrina - Prati Parini - Canto Alto: 11.5 km, +590/-590 m, stima Komoot 1h52. Obiettivo: tempo in montagna + gestione salita/discesa, non prestazione. Cammina appena la FC supera 152, niente Z4 intenzionale. In discesa passo corto e controllato, no bombing. Se dopo 75-90' l'anca passa da rigidita abituale a dolore crescente, taglia e rientra. Stop mentale a ~2h anche se le gambe sembrano buone.",
+      "routes": [
+        {
+          "url": "https://www.komoot.com/it-it/tour/3063091820",
+          "name": "Sedrina - Prati Parini - Canto Alto (11.5 km, 590 m D+) — Komoot"
+        }
+      ],
+      "coaching_tip": {
+        "title": "Disciplina in salita",
+        "detail": "Il lavoro vero e stare sotto controllo quando il sentiero invita a spingere. Usa il power-hike prima di andare in acido: mani sulle cosce nei tratti ripidi, passo corto, busto leggermente avanti, FC sotto 152. Cosi alleni il gesto gara senza trasformare il lungo in un altro stress test."
+      }
+    },
+    {
+      "id": "riposo-post-lungo",
+      "type": "check-in",
+      "label": "Riposo + check anca",
+      "when": "DOM 28",
+      "notes": "Riposo vero dopo il lungo. Non correre domenica: serve leggere la risposta dell'anca nelle 24h. Mobility leggera ok se aiuta; se compare dolore laterale piu alto del solito, la settimana 09 riparte conservativa."
+    }
+  ],
   "log": [
     {
+      "plan_ref": "valencia-easy",
       "activity": "2026-06-23_f347c556-7f6c-43a4-9f20-bd38ae04a287",
       "title": "Valencia easy run MAR 23 — 8.7 km piatti in ~1h07', FC media 141, 98% del tempo sotto la soglia aerobica e distribuzione ben polarizzata. Primo rientro alla corsa piatta dopo il Canto Alto: anca/gluteo sin hanno retto un'ora continua. Il calo negli ultimi 2 km è solo il rientro su strada trafficata (stop ai semafori), nel parco filava liscio."
     }
