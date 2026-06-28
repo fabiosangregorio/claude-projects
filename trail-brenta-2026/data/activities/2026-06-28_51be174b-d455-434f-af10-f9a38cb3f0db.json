@@ -1,0 +1,328 @@
+{
+  "schema_version": 1,
+  "id": "51be174b-d455-434f-af10-f9a38cb3f0db",
+  "start": "2026-06-28T06:05:25.963Z",
+  "name": "Failure @ km 2",
+  "user_note": null,
+  "komoot_url": "https://www.komoot.com/it-it/tour/3069489744",
+  "ai_analysis": {
+    "model": "claude-opus-4-8",
+    "generated_at": "2026-06-28T12:54:44Z",
+    "prompt_version": 1,
+    "classification": {
+      "workout_type": "lungo",
+      "primary_benefit": "base aerobica",
+      "training_effect_aerobic": 3.0,
+      "training_effect_anaerobic": 1.8
+    },
+    "execution": {
+      "intent_inferred": "lungo su sentiero in base aerobica, interrotto da una crisi al km 2",
+      "execution_quality": 2,
+      "primary_failure_mode": "alimentazione",
+      "failure_confidence": 0.8
+    },
+    "trail_specificity": {
+      "score": 4,
+      "vertical_load_pct_of_race": 49.5,
+      "notes": "Sentiero con 619 m di dislivello positivo (D+) e tratti molto ripidi (>30% del percorso oltre il 10%); ~50% del D+ gara."
+    },
+    "headline": "Lungo su sentiero spezzato da una pre-sincope al km 2 (calo pressorio da caldo + partenza dura + colazione povera di carboidrati); dopo gel e rifornimento, seconda metà corsa solida.",
+    "strengths": [
+      "Gestione lucida della crisi: 10' da seduto, gel + caffè e poi pane e marmellata al rifugio Prati Parini hanno risolto il calo pressorio.",
+      "Seconda metà corsa in modo continuo e nettamente più rapido, con cuore stabile: il limite era il carburante, non le gambe.",
+      "Terreno specifico per la gara: sentiero con buon dislivello e tratti ripidi, vicino alle richieste della Brenta 21K."
+    ],
+    "concerns": [
+      { "area": "alimentazione e partenza", "severity": 4, "note": "Colazione proteica e povera di carboidrati + km1 all'85% della frequenza cardiaca massima (FCmax) col caldo: combinazione che ha innescato la pre-sincope." },
+      { "area": "deriva cardiaca (decoupling Pa:Hr)", "severity": 2, "note": "Valore alto ma non leggibile: ~42' di soste e la crisi metabolica lo gonfiano, non riflette la tenuta aerobica reale." },
+      { "area": "continuità e intensità", "severity": 2, "note": "Metà del tempo in cammino e molto tempo in Z4: come lungo aerobico continuo la sessione resta sporcata e poco rappresentativa." }
+    ],
+    "narrative": "La corsa si spezza in due. Nel primo km parti troppo forte per un lungo, con il cuore subito vicino all'85% della massima, e con poche scorte: la colazione era proteica e povera di carboidrati. Sotto il caldo l'effetto combinato — sangue dirottato ai muscoli, glicemia bassa, vasodilatazione — ti porta al pre-svenimento con vista offuscata e pressione bassa appena dopo il km 1. È un cedimento metabolico e posturale, non di condizione fisica.\n\nLa reazione è stata corretta: sosta da seduto, gel e caffè, poi pane e marmellata al rifugio Prati Parini. Da lì il quadro cambia: nella seconda metà corri in modo continuo e più rapido, con il cuore stabile. È la conferma che il vincolo era il carburante e non le gambe.\n\nUn avvertimento sui numeri: le due soste lunghe e la crisi gonfiano deriva cardiaca, percentuale di cammino e tempo in Z4, che qui non misurano la durabilità aerobica. Resta invece molto valido il terreno, ripido e specifico per la Brenta."
+  },
+  "totals": {
+    "distance_km": 12.51,
+    "duration_sec": 9914,
+    "avg_pace_min_per_km": 13.205,
+    "gap_min_per_km": 10.708,
+    "ef": 0.682,
+    "avg_hr": 137,
+    "max_hr_observed": 171,
+    "hrmax_est_used": 181,
+    "hrmax_source": "profile",
+    "elevation_source": "komoot_dem",
+    "ascent_m": 619,
+    "descent_m": 564,
+    "nrc_ascent_m": 687,
+    "nrc_descent_m": 659,
+    "elev_min_m": 417,
+    "elev_max_m": 1052,
+    "steps": 15231,
+    "avg_cadence_spm": 92.2,
+    "avg_stride_cm": 82
+  },
+  "derived": {
+    "trimp": 263,
+    "polarization_3z": {
+      "lit_pct": 52.2,
+      "mit_pct": 38.7,
+      "hit_pct": 9.1
+    },
+    "maf": {
+      "ceiling_bpm": 152,
+      "time_below_pct": 66.7
+    },
+    "vertical": {
+      "vam_m_per_h": 225,
+      "ascent_m_per_h": 225,
+      "descent_m_per_h": 205
+    },
+    "grade_distribution": {
+      "flat_lt_2": 11.6,
+      "rolling_2_5": 6.7,
+      "uphill_5_10": 11.8,
+      "steep_gt_10": 32.2,
+      "down_2_5": 7.2,
+      "down_5_10": 12.4,
+      "down_gt_10": 18.1
+    },
+    "climb_efficiency": {
+      "ef_uphill": 1.351,
+      "uphill_time_sec": 3336
+    },
+    "race_match": {
+      "vertical_match_pct": 49.5,
+      "duration_match_pct": 55.1
+    }
+  },
+  "decoupling": {
+    "first_half": {
+      "gap_min_per_km": 7.083,
+      "hr": 132
+    },
+    "second_half": {
+      "gap_min_per_km": 9.384,
+      "hr": 142
+    },
+    "pct": 29.58
+  },
+  "pace_variability": {
+    "cv_overall_pct": 29.24,
+    "cv_running_only_pct": 30.14
+  },
+  "split_balance": {
+    "first_half_sec": 6099,
+    "second_half_sec": 3595,
+    "diff_pct": -41.06
+  },
+  "hr_zones": [
+    {
+      "zone": 1,
+      "time_sec": 1434
+    },
+    {
+      "zone": 2,
+      "time_sec": 984
+    },
+    {
+      "zone": 3,
+      "time_sec": 1995
+    },
+    {
+      "zone": 4,
+      "time_sec": 4267
+    },
+    {
+      "zone": 5,
+      "time_sec": 759
+    }
+  ],
+  "walks_summary": {
+    "count": 11,
+    "total_walk_sec": 5021,
+    "walk_pct": 50.5
+  },
+  "walk_breaks": [
+    {
+      "started_sec": 224,
+      "duration_sec": 149,
+      "avg_cadence_spm": 103.4,
+      "at_km": 0.44
+    },
+    {
+      "started_sec": 743,
+      "duration_sec": 1248,
+      "avg_cadence_spm": 61.9,
+      "at_km": 1.69
+    },
+    {
+      "started_sec": 2500,
+      "duration_sec": 317,
+      "avg_cadence_spm": 85.3,
+      "at_km": 2.91
+    },
+    {
+      "started_sec": 2892,
+      "duration_sec": 1255,
+      "avg_cadence_spm": 3.9,
+      "at_km": 3.17
+    },
+    {
+      "started_sec": 4405,
+      "duration_sec": 284,
+      "avg_cadence_spm": 91.2,
+      "at_km": 3.83
+    },
+    {
+      "started_sec": 4834,
+      "duration_sec": 153,
+      "avg_cadence_spm": 95.7,
+      "at_km": 4.34
+    },
+    {
+      "started_sec": 5287,
+      "duration_sec": 172,
+      "avg_cadence_spm": 95.1,
+      "at_km": 4.98
+    },
+    {
+      "started_sec": 5621,
+      "duration_sec": 244,
+      "avg_cadence_spm": 95.2,
+      "at_km": 5.52
+    },
+    {
+      "started_sec": 5905,
+      "duration_sec": 94,
+      "avg_cadence_spm": 101.4,
+      "at_km": 5.76
+    },
+    {
+      "started_sec": 6062,
+      "duration_sec": 1003,
+      "avg_cadence_spm": 33.1,
+      "at_km": 6.32
+    },
+    {
+      "started_sec": 9462,
+      "duration_sec": 102,
+      "avg_cadence_spm": 90.7,
+      "at_km": 11.6
+    }
+  ],
+  "splits": [
+    {
+      "km": 1,
+      "duration_sec": 673.6,
+      "pace_min_per_km": 11.227,
+      "gap_min_per_km": 6.032,
+      "avg_hr": 154,
+      "pct_hrmax": 85.3,
+      "ef": 1.074
+    },
+    {
+      "km": 2,
+      "duration_sec": 1334.3,
+      "pace_min_per_km": 22.238,
+      "gap_min_per_km": 10.839,
+      "avg_hr": 135,
+      "pct_hrmax": 74.7,
+      "ef": 0.682
+    },
+    {
+      "km": 3,
+      "duration_sec": 758.4,
+      "pace_min_per_km": 12.64,
+      "gap_min_per_km": 7.795,
+      "avg_hr": 151,
+      "pct_hrmax": 83.6,
+      "ef": 0.848
+    },
+    {
+      "km": 4,
+      "duration_sec": 1921.9,
+      "pace_min_per_km": 32.032,
+      "gap_min_per_km": 23.16,
+      "avg_hr": 113,
+      "pct_hrmax": 62.3,
+      "ef": 0.383
+    },
+    {
+      "km": 5,
+      "duration_sec": 702.5,
+      "pace_min_per_km": 11.709,
+      "gap_min_per_km": 8.188,
+      "avg_hr": 137,
+      "pct_hrmax": 75.5,
+      "ef": 0.894
+    },
+    {
+      "km": 6,
+      "duration_sec": 707.8,
+      "pace_min_per_km": 11.797,
+      "gap_min_per_km": 7.443,
+      "avg_hr": 147,
+      "pct_hrmax": 81.3,
+      "ef": 0.913
+    },
+    {
+      "km": 7,
+      "duration_sec": 1220.2,
+      "pace_min_per_km": 20.337,
+      "gap_min_per_km": 24.552,
+      "avg_hr": 121,
+      "pct_hrmax": 66.9,
+      "ef": 0.336
+    },
+    {
+      "km": 8,
+      "duration_sec": 449,
+      "pace_min_per_km": 7.483,
+      "gap_min_per_km": 11.415,
+      "avg_hr": 154,
+      "pct_hrmax": 85.1,
+      "ef": 0.569
+    },
+    {
+      "km": 9,
+      "duration_sec": 438.2,
+      "pace_min_per_km": 7.303,
+      "gap_min_per_km": 11.185,
+      "avg_hr": 142,
+      "pct_hrmax": 78.3,
+      "ef": 0.631
+    },
+    {
+      "km": 10,
+      "duration_sec": 508.9,
+      "pace_min_per_km": 8.481,
+      "gap_min_per_km": 14.568,
+      "avg_hr": 151,
+      "pct_hrmax": 83.2,
+      "ef": 0.456
+    },
+    {
+      "km": 11,
+      "duration_sec": 461.5,
+      "pace_min_per_km": 7.692,
+      "gap_min_per_km": 12.177,
+      "avg_hr": 157,
+      "pct_hrmax": 86.7,
+      "ef": 0.523
+    },
+    {
+      "km": 12,
+      "duration_sec": 516.9,
+      "pace_min_per_km": 8.615,
+      "gap_min_per_km": 15.109,
+      "avg_hr": 151,
+      "pct_hrmax": 83.5,
+      "ef": 0.438
+    }
+  ],
+  "remainder": {
+    "km": 0.51,
+    "duration_sec": 221,
+    "pace_min_per_km": 7.171,
+    "gap_min_per_km": 13.161
+  }
+}

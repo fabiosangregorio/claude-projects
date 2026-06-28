@@ -24,6 +24,14 @@
       "notes": "Treviglio piatto, scarpe Mizuno Ultima 17. FC<140 stretta — è un easy vero, non un fartlek mascherato. Stesso giorno: Forza A dal template (25 min), in finestra separata (mattina/sera) o subito dopo l'easy. Il template autorizza 'giornata con corsa breve facile' come timing per la forza."
     },
     {
+      "id": "forza",
+      "type": "strength",
+      "label": "Forza",
+      "duration_min": 25,
+      "when": "MAR 12 (dopo l'easy)",
+      "notes": "Forza A dal template (full-body, 25 min), in finestra separata o subito dopo l'easy — il template autorizza 'giornata con corsa breve facile' come timing. Prima sessione di forza dopo lo skip giustificato della week-1."
+    },
+    {
       "id": "padel",
       "type": "cross-training",
       "label": "Padel",
