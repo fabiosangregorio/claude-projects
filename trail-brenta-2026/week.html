@@ -219,22 +219,6 @@ function renderRoute() {
 
   const sessHtml = (week.plan || []).map(s => renderSession(s, week)).join('');
   const logSectionHtml = renderLogSection(week);
-  const strengthHtml = (week.strength && week.strength.skipped)
-    ? `<div class="sess">
-         <div class="sess-head">
-           <span class="sess-type sess-type-strength" data-tooltip="${TYPE_DESCRIPTIONS.strength}" tabindex="0" aria-label="forza: ${TYPE_DESCRIPTIONS.strength}">forza</span>
-           <span class="sess-meta">· saltata</span>
-         </div>
-         <div class="sess-notes" style="color:var(--wn)">⚠ ${week.strength.reason}</div>
-       </div>`
-    : `<div class="sess">
-         <div class="sess-head">
-           <span class="sess-type sess-type-strength" data-tooltip="${TYPE_DESCRIPTIONS.strength}" tabindex="0" aria-label="forza: ${TYPE_DESCRIPTIONS.strength}">forza</span>
-           <span class="sess-dur">~25 min</span>
-           <span class="sess-meta">full-body · vedi piano principale</span>
-         </div>
-         <div class="sess-notes">Template completo nella sezione "Forza & mobility" della <a href="./plan.html" style="color:var(--ac)">pagina piano</a>. 1 sessione. Mai prima del lungo.</div>
-       </div>`;
 
   const prev = weeks.find(w => w.number === week.number - 1);
   const next = weeks.find(w => w.number === week.number + 1);
@@ -274,7 +258,6 @@ function renderRoute() {
         </div>
         ${week.narrative ? `<div class="week-narr">${week.narrative}</div>` : ''}
         ${sessHtml}
-        ${strengthHtml}
       </div>
     </section>
     ${pagerHtml}

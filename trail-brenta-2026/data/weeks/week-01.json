@@ -76,6 +76,13 @@
           "name": "Monte Linzone loop da Roncola (6 km, 490 m D+, ~2h38)"
         }
       ]
+    },
+    {
+      "id": "forza-saltata",
+      "type": "strength",
+      "label": "Forza",
+      "cancelled": true,
+      "cancel_reason": "Saltata. Tre uscite montagna in 8 giorni sono il carico massimo possibile per il rientro. Sostituire con 5-10 min di mobility le sere dei giorni di hike e il giorno dopo."
     }
   ],
   "log": [
@@ -108,10 +115,6 @@
       "title": "Baseline Linzone"
     }
   ],
-  "strength": {
-    "skipped": true,
-    "reason": "Saltata. Tre uscite montagna in 8 giorni sono il carico massimo possibile per il rientro. Sostituire con 5-10 min di mobility le sere dei giorni di hike e il giorno dopo."
-  },
   "review": {
     "date": "2026-05-10",
     "verdict": "on-track",

@@ -1,0 +1,86 @@
+{
+  "_schema_version": "2.0",
+  "number": 9,
+  "phase_id": "2-base-mountain",
+  "start_date": "2026-06-29",
+  "end_date": "2026-07-05",
+  "label": "Ponte verso il fisio: motore in bici, anca protetta, fueling da sistemare",
+  "narrative": "Settimana-ponte dopo il verdetto 'recalibrate' della 08. Due forzanti aperte: l'anca/gluteo sin (trocanterite, 3a settimana) si e mossa in leggero peggioramento sotto il primo vero lungo di montagna, e la pre-sincope al km2 ha dimostrato che il fueling e rotto (colazione povera di carboidrati + partenza all'85% FCmax). La visita dal fisio e fissata per MAR 7/7, che cade pero nella settimana 10: quindi la 09 corre SENZA il via libera e resta deliberatamente conservativa, con il fisio come snodo della prossima settimana, non di questa. Niente vero lungo di montagna finche l'anca non e silente e il fisio non sblocca: si tiene il motore aerobico sulla bici (non-impatto), la forza del gluteo medio resta l'investimento principale, e si fanno solo due corse - una piatta di rientro infrasettimanale e un mini-trail corto e controllato sabato pomeriggio al Resegone (sono al rifugio per lavoro). Il vincolo della settimana: MER occupato, SAB e DOM al rifugio. La missione tecnica e una sola e correggibile - provare il fueling giusto (colazione ricca di carboidrati + gel/snack dai primi minuti + partenza facile) gia sul mini-trail di sabato, cosi al primo lungo post-fisio non si ripete la crisi.",
+  "plan": [
+    {
+      "id": "checkin-pesa",
+      "type": "check-in",
+      "label": "Pesa",
+      "when": "LUN 29 mattina, a digiuno",
+      "notes": "Registra solo il dato, stesse condizioni delle altre settimane (a digiuno, prima di bere). Lunedi e il giorno-dopo-il-lungo (il lungo trail e stato fatto domenica 28): niente corsa, riposo vero + mobility leggera se aiuta. Serve a leggere la risposta dell'anca nelle 24-48h dopo il primo vero lungo di montagna: se il fastidio laterale resta sopra il solito o sale, la settimana si fa ancora piu prudente e il mini-trail di sabato salta."
+    },
+    {
+      "id": "easy-piatta-rientro",
+      "type": "easy",
+      "label": "Easy piatta di rientro",
+      "duration_min": 35,
+      "intensity": "Z2/MAF",
+      "fc_max_bpm": 152,
+      "when": "MAR 30",
+      "notes": "Unica corsa piatta della settimana, due giorni dopo il lungo. Target 30-35' completamente piatti (Treviglio, strada), FC 140-150 con tetto 152, respirazione conversazionale piena, ZERO salite e discese. Regola dolore stretta: se l'anca/gluteo sin da fastidio che aumenta correndo o resta acceso oltre 24h, fermati e resta sulla sola bici - non e una settimana per forzare. Niente progressivo, niente allungo finale: e un rientro pulito sul piano, non un test di forma.",
+      "coaching_tip": {
+        "title": "Conta i passi: cadenza",
+        "detail": "Tema della settimana sul piatto: la cadenza bassa torna da 3 settimane. Conta i passi di un piede per 20'' e moltiplica per 6: punta a stare verso 165-170+ passi/min con passi corti e leggeri, non allungando la falcata davanti al corpo. Cadenza alta = appoggio sotto il bacino = meno carico laterale sull'anca. Usa un metronomo o una playlist a ~170 bpm se aiuta. Stesso ritmo e stessa FC di prima, solo passi piu piccoli e frequenti."
+      }
+    },
+    {
+      "id": "riposo-mercoledi",
+      "type": "check-in",
+      "label": "Riposo",
+      "when": "MER 1",
+      "notes": "Giornata occupata: riposo. Mobility leggera la sera se ti va, niente di strutturato."
+    },
+    {
+      "id": "forza-gluteo",
+      "type": "strength",
+      "label": "Forza gluteo medio",
+      "duration_min": 25,
+      "when": "GIO 2 mattina, in ufficio",
+      "notes": "Forza a corpo libero perche in ufficio non ci sono pesi - stessa sessione della 08, e l'investimento principale finche l'anca non e sbloccata. RPE 6/10, tecnica pulita, niente cedimento: ponte monopodalico 3x12-15/lato con 2'' di tenuta in alto; affondi indietro 3x8-10/lato lenti e controllati; squat a corpo libero tempo 3x12-15 con discesa lenta 3''; abduzioni fianco a terra 2x15/lato; side plank 2x20-30''/lato. Replica leggera del pattern dato dal fisio (affondi + ponte monopodalico + squat). Stop se compare dolore laterale puntiforme o crescente: deve sembrare lavoro muscolare, non irritazione."
+    },
+    {
+      "id": "bici-commute",
+      "type": "cross-training",
+      "label": "Bici commute",
+      "when": "GIO 2 sera",
+      "intensity": "Z1-Z2, agile, seduto",
+      "notes": "Il motore aerobico della settimana, non-impatto: commute in bici. Pedalata agile, SEMPRE seduto, niente sprint, niente rapportoni duri, niente salite in piedi - sono gli sforzi che reclutano forte i glutei e irritano l'anca. Sella all'altezza giusta: se il bacino dondola lato-lato a ogni pedalata e proprio il movimento del Trendelenburg, abbassala finche e stabile. Se anca/gluteo/bandelletta si accendono, rendila piu facile possibile o taglia."
+    },
+    {
+      "id": "scarico-venerdi",
+      "type": "check-in",
+      "label": "Scarico",
+      "when": "VEN 3, post lavoro",
+      "notes": "Hai il pomeriggio libero ma NON e giorno da corsa: domani c'e il mini-trail e l'anca e ancora la forzante. Usa il tempo per mobility + core (cat-cow, hip flexor stretch, piriforme, side plank) e per preparare zaino e fueling di sabato. Arrivare freschi al mini-trail vale piu di una corsetta in piu oggi."
+    },
+    {
+      "id": "mini-trail-resegone",
+      "type": "long",
+      "label": "Mini-trail Resegone controllato",
+      "duration_min": 50,
+      "intensity": "Z2, cammino libero in salita da subito",
+      "fc_max_bpm": 152,
+      "vertical_m": 300,
+      "vertical_m_max": 400,
+      "when": "SAB 4 pomeriggio",
+      "notes": "NON e il lungo della settimana - il vero lungo di montagna resta congelato fino al via libera del fisio (MAR 7/7, settimana 10). Questo e un mini-trail corto e controllato, sfruttando che sei al rifugio sul Resegone per lavoro. Tetto duro: ~45-60', +300/400 m massimo, percorso da scegliere sul posto. Cammina in salita DA SUBITO appena la FC sale, niente Z4 intenzionale, niente crisi in cima come al Canto Alto. In discesa passo corto e controllato, zero bombing (la discesa e cio che carica di piu l'anca). Regola dolore assoluta: se l'anca/gluteo sin passa da rigidita abituale a dolore crescente, taglia e rientra camminando - non c'e nessun obiettivo di carico questa settimana, solo terreno specifico in dose minima. Occasione utile per collaudare il nuovo zaino Salomon (vestibilita, sfregamenti) prima delle uscite lunghe della Fase 3.",
+      "coaching_tip": {
+        "title": "Colazione e primi 10 minuti",
+        "detail": "Questo e il fix diretto della crisi della 08. Colazione ricca di carboidrati 2-3h prima (pane/marmellata o avena+miele+banana, non solo proteine), un sorso d'acqua con sali prima di partire, e gel o snack zuccherino entro i primi 20-30' e poi a intervalli regolari - non aspettare la fame. Soprattutto: i primi 10' facilissimi, niente partenza all'85% FCmax. La pre-sincope al km2 e nata li, da carburante basso + partenza dura sotto il caldo. Parti piano, mangia presto, e il motore regge."
+      }
+    },
+    {
+      "id": "riposo-domenica",
+      "type": "check-in",
+      "label": "Riposo + check anca",
+      "when": "DOM 5, al rifugio",
+      "notes": "Riposo dalla corsa (sei al rifugio per lavoro, gambe gia in movimento). Leggi la risposta dell'anca al mini-trail e tieni nota dei sintomi da portare al fisio MAR 7/7: dove fa male (laterale puntiforme vs diffuso), quando (salita, discesa, a riposo), come va nelle 24h. La 10 riparte dalla sua valutazione."
+    }
+  ],
+  "strength": null
+}

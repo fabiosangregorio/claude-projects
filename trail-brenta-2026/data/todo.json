@@ -1,6 +1,6 @@
 {
   "_description": "Task list per la preparazione (burocrazia, equipment, test).",
-  "last_updated": "2026-06-07T21:10:00",
+  "last_updated": "2026-06-28T15:30:00",
   "tasks": [
     {
       "category": "burocrazia",
@@ -41,25 +41,31 @@
       "category": "attrezzatura",
       "task": "Zaino idratazione (5-10L)",
       "deadline": "2026-07-31",
-      "status": "pending"
+      "status": "done",
+      "completed_date": "2026-06-28",
+      "note": "Regalato uno zaino Salomon. Non include flask né fischietto — vanno acquistati a parte (vedi task dedicate)."
+    },
+    {
+      "category": "attrezzatura",
+      "task": "Flask morbide per zaino Salomon (2x 500ml)",
+      "deadline": "2026-08-15",
+      "status": "pending",
+      "note": "Lo zaino regalato è arrivato senza flask. Servono 2 soft flask per le tasche frontali."
     },
     {
       "category": "attrezzatura",
       "task": "Giacca antivento",
       "deadline": "2026-07-31",
-      "status": "pending"
+      "status": "done",
+      "completed_date": "2026-06-28",
+      "note": "Già posseduta."
     },
     {
       "category": "attrezzatura",
-      "task": "Bicchiere/borraccia pieghevole",
+      "task": "Fischietto",
       "deadline": "2026-08-15",
-      "status": "pending"
-    },
-    {
-      "category": "attrezzatura",
-      "task": "Telo termico + fischietto",
-      "deadline": "2026-08-15",
-      "status": "pending"
+      "status": "pending",
+      "note": "Telo termico già posseduto. Resta da prendere il fischietto (alcuni zaini Salomon ce l'hanno integrato sullo spallaccio — verificare)."
     },
     {
       "category": "logistica",
