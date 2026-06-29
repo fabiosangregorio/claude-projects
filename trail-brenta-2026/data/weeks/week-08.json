@@ -93,7 +93,91 @@
       "plan_ref": "valencia-easy",
       "activity": "2026-06-23_f347c556-7f6c-43a4-9f20-bd38ae04a287",
       "title": "Valencia easy run MAR 23 — 8.7 km piatti in ~1h07', FC media 141, 98% del tempo sotto la soglia aerobica e distribuzione ben polarizzata. Primo rientro alla corsa piatta dopo il Canto Alto: anca/gluteo sin hanno retto un'ora continua. Il calo negli ultimi 2 km è solo il rientro su strada trafficata (stop ai semafori), nel parco filava liscio."
+    },
+    {
+      "plan_ref": "bici-commute",
+      "title": "Bici commute GIO 25 — pedalata agile Z1-Z2 non-impatto, tutto seduto. Motore aerobico mantenuto senza caricare l'anca. Non registrata su file (no cardio/komoot)."
+    },
+    {
+      "plan_ref": "forza-gluteo",
+      "title": "Forza gluteo medio GIO 25 — sessione a corpo libero in ufficio: ponte monopodalico, affondi indietro lenti, squat tempo, abduzioni a terra, side plank. Replica leggera del pattern dato dal fisio, RPE moderato senza cedimento."
+    },
+    {
+      "plan_ref": "lungo-trail",
+      "activity": "2026-06-28_51be174b-d455-434f-af10-f9a38cb3f0db",
+      "title": "Lungo trail DOM 28 (spostato dal sabato) — Sedrina/Prati Parini, 12.5 km e +619 m D+ (komoot DEM), 165' totali. Pre-sincope al km2 (calo pressorio da caldo + partenza all'85% FCmax + colazione proteica povera di carboidrati), risolta con 10' da seduto, gel+caffè e pane/marmellata al rifugio Prati Parini; seconda metà corsa in modo continuo e più rapido a cuore stabile. 50% di cammino e ~71' in Z4: il limite era il carburante, non le gambe. Terreno e dislivello specifici per la Brenta (~50% del D+ gara)."
     }
   ],
-  "strength": null
+  "strength": null,
+  "review": {
+    "date": "2026-06-28",
+    "verdict": "recalibrate",
+    "headline": "Settimana eseguita per intero e con buoni segnali sul motore aerobico, ma il primo lungo trail si è spezzato su una crisi alimentare e l'anca è data in leggero peggioramento: rientro da tenere conservativo fino al controllo dal fisio.",
+    "synthesis": "Settimana di carico medio con 3 sessioni completate (easy piatta + forza glutei + lungo trail), bici commute non-impatto aggiunta e 640 m di D+ tra Valencia e il lungo. La forzante resta muscolo-scheletrica: l'anca/gluteo sin è leggermente peggiorata sotto il primo vero lungo di montagna, quindi la 09 riparte conservativa con la visita fisio come snodo e il fueling (colazione ricca di carboidrati + gel da subito) da sistemare prima del prossimo lungo.",
+    "auto": {
+      "adherence": {
+        "planned": 3,
+        "done": 3,
+        "long_run": "done",
+        "swapped": []
+      },
+      "load": {
+        "trimp_training": 369,
+        "ascent_m_total": 640,
+        "duration_min_total": 233,
+        "maf_below_pct_training": 76,
+        "weight_delta_kg": -0.6,
+        "weight_kg_latest": 67.9
+      },
+      "phase_kpi": {
+        "objective": "Sostenere 1h30 di corsa/cammino con 600 m D+ a FC conversazionale (Z2).",
+        "status": "not_measurable_this_week",
+        "note": "Il lungo ha centrato per la prima volta in Fase 2 il cancello di durata e dislivello (165', +619 m ≈ obiettivo 600 m), ma la pre-sincope al km2, il 50% di cammino e i ~71' in Z4 lo rendono non valido come misura di salita conversazionale Z2: terreno e D+ giusti, esecuzione sporcata da una crisi metabolica."
+      },
+      "open_concerns": [
+        {
+          "area": "anca/gluteo sin (trocanterite - carico salita/discesa)",
+          "weeks_open": 3,
+          "severity_max": 4
+        },
+        {
+          "area": "alimentazione/fueling (colazione povera di carboidrati + partenza dura)",
+          "weeks_open": 1,
+          "severity_max": 4
+        },
+        {
+          "area": "controllo intensità (partenza/salita troppo forte, zona grigia)",
+          "weeks_open": 5,
+          "severity_max": 4
+        },
+        {
+          "area": "cadenza bassa",
+          "weeks_open": 3,
+          "severity_max": 2
+        }
+      ],
+      "highlights": "Settimana eseguita al completo: easy piatta pulita a Valencia (98% sotto la soglia aerobica), forza glutei e bici commute fatti, e il primo lungo trail della Fase 2 con terreno e dislivello specifici per la Brenta. Dopo aver gestito con lucidità la crisi al km2, seconda metà del lungo solida e più rapida a cuore stabile: il limite era il carburante, non le gambe.",
+      "lowlights": "Pre-sincope al km2 da colazione proteica/povera di carboidrati + km1 all'85% FCmax sotto il caldo: il lungo si è spezzato (50% di cammino, ~71' in Z4) e non vale come misura di salita Z2. E l'anca/gluteo sin è data in leggero peggioramento, con un filo più di fastidio del solito durante l'uscita — visita dal fisio tra circa una settimana.",
+      "race_day_break_derived": {
+        "value": "nutrizione/idratazione",
+        "reason": "Il lungo è l'unica uscita della settimana finita in cedimento, e ha ceduto sul carburante: pre-sincope al km2 da colazione proteica povera di carboidrati + partenza all'85% FCmax col caldo, risolta solo dopo gel e rifornimento al rifugio, con seconda metà solida a cuore stabile (gambe ok). È il fallimento dimostrato di questa settimana ed è correggibile. La forzante strutturale resta però l'anca/gluteo sin (trocanterite, 3a settimana, data in leggero peggioramento): co-limite di gara da monitorare col fisio."
+      }
+    },
+    "checkin": {
+      "recovery": "stanco - recupero attivo o riposo",
+      "doms": "non ancora valutabile (lungo fatto oggi)",
+      "sleep_avg": "6-7h",
+      "niggles": [
+        "anca/gluteo sin"
+      ],
+      "life_load": "normale - routine standard"
+    },
+    "adaptive": [
+      {
+        "trigger": "carryover_concern",
+        "q": "Anca/gluteo sin torna per la 3a settimana - stato",
+        "a": "leggermente peggiorato (un filo più di fastidio del solito durante il lungo); visita fisio tra ~1 settimana"
+      }
+    ]
+  }
 }
