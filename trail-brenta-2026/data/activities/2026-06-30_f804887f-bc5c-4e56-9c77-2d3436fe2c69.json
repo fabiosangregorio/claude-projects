@@ -1,0 +1,189 @@
+{
+  "schema_version": 1,
+  "id": "f804887f-bc5c-4e56-9c77-2d3436fe2c69",
+  "start": "2026-06-30T04:59:22.456Z",
+  "name": "martedì corsa mattutina",
+  "user_note": null,
+  "komoot_url": "https://www.komoot.com/it-it/tour/3073404851",
+  "ai_analysis": {
+    "model": "claude-opus-4-8",
+    "generated_at": "2026-06-30T07:30:00Z",
+    "prompt_version": 1,
+    "classification": {
+      "workout_type": "facile",
+      "primary_benefit": "base",
+      "training_effect_aerobic": 2.8,
+      "training_effect_anaerobic": 0.8
+    },
+    "execution": {
+      "intent_inferred": "rientro facile in piano, FC sotto soglia aerobica Maffetone (MAF)",
+      "execution_quality": 3,
+      "primary_failure_mode": "ritmo",
+      "failure_confidence": 0.6
+    },
+    "trail_specificity": {
+      "score": 1,
+      "vertical_load_pct_of_race": 0.6,
+      "notes": "Corsa piatta breve su strada (8 m D+), per disegno: zero specificità trail, è il rientro protettivo per l'anca."
+    },
+    "headline": "Rientro piatto e pulito con cadenza finalmente alta (180 passi/min), ma la frequenza cardiaca è salita sopra la fascia easy: più corsa controllata che davvero facile.",
+    "strengths": [
+      "Cadenza a 180 passi/min, oltre il target 165-170 della settimana: appoggio sotto il bacino, meno carico laterale sull'anca.",
+      "Terreno perfettamente piatto (8 m di dislivello positivo, D+): rispettato il vincolo 'zero salite' a protezione dell'anca.",
+      "Buona efficienza aerobica: 5:48/km a FC media 150, il passo piatto più rapido del blocco a parità di sforzo."
+    ],
+    "concerns": [
+      { "area": "intensità", "severity": 3, "note": "Dal km 2 assestato a 153-155 bpm (84-85% FCmax), sopra la fascia 140-150 e oltre il tetto MAF di 152 per circa due terzi del tempo." },
+      { "area": "dato anca mancante", "severity": 2, "note": "Nessuna nota soggettiva inserita: impossibile leggere dai dati la risposta dell'anca/gluteo, vera forzante della settimana." },
+      { "area": "durata", "severity": 1, "note": "27'55\" contro i 30-35' previsti: scarto minimo, ma leggermente sotto il target della singola corsa piatta della settimana." }
+    ],
+    "narrative": "Quasi tutto giusto, con un solo neo. Terreno perfettamente piatto e cadenza finalmente a 180 passi/min: il tema tecnico della settimana centrato in pieno — passi corti e frequenti, appoggio sotto il bacino, ciò che alleggerisce il carico laterale sull'anca.\n\nIl neo è l'intensità. Dopo un primo km a 138 bpm, la frequenza si è assestata a 153-155 per il resto della corsa: 84-85% della frequenza cardiaca massima, appena sopra il tetto Maffetone (MAF) di 152, sopra soglia per due terzi del tempo. Non è una corsa dura — la deriva cardiaca (decoupling Pa:Hr) è nulla e il passo regolare — ma è 'moderata', non il rientro davvero facile prescritto. Il passo di 5:48/km a FC 150 resta però un buon segnale di motore aerobico in crescita.\n\nNessuna nota soggettiva inserita: la risposta dell'anca, la vera forzante della settimana, non è leggibile dai dati ed è ciò che conterà di più verso il fisio di martedì 7."
+  },
+  "totals": {
+    "distance_km": 4.81,
+    "duration_sec": 1670,
+    "avg_pace_min_per_km": 5.791,
+    "gap_min_per_km": 5.807,
+    "ef": 1.144,
+    "avg_hr": 150,
+    "max_hr_observed": 160,
+    "hrmax_est_used": 181,
+    "hrmax_source": "profile",
+    "elevation_source": "komoot_dem",
+    "ascent_m": 8,
+    "descent_m": 8,
+    "nrc_ascent_m": 12,
+    "nrc_descent_m": 10,
+    "elev_min_m": 126,
+    "elev_max_m": 135,
+    "steps": 5015,
+    "avg_cadence_spm": 180.2,
+    "avg_stride_cm": 96
+  },
+  "derived": {
+    "trimp": 57,
+    "polarization_3z": {
+      "lit_pct": 22.3,
+      "mit_pct": 77.7,
+      "hit_pct": 0
+    },
+    "maf": {
+      "ceiling_bpm": 152,
+      "time_below_pct": 35
+    },
+    "vertical": {
+      "vam_m_per_h": 16,
+      "ascent_m_per_h": 16,
+      "descent_m_per_h": 18
+    },
+    "grade_distribution": {
+      "flat_lt_2": 84.6,
+      "rolling_2_5": 7.1,
+      "uphill_5_10": 0.2,
+      "steep_gt_10": 0,
+      "down_2_5": 8.1,
+      "down_5_10": 0,
+      "down_gt_10": 0
+    },
+    "climb_efficiency": {
+      "ef_uphill": 1.513,
+      "uphill_time_sec": 3
+    },
+    "race_match": {
+      "vertical_match_pct": 0.6,
+      "duration_match_pct": 9.3
+    }
+  },
+  "decoupling": {
+    "first_half": {
+      "gap_min_per_km": 6.16,
+      "hr": 147
+    },
+    "second_half": {
+      "gap_min_per_km": 5.854,
+      "hr": 154
+    },
+    "pct": -0.23
+  },
+  "pace_variability": {
+    "cv_overall_pct": 17.94,
+    "cv_running_only_pct": null
+  },
+  "split_balance": {
+    "first_half_sec": 696,
+    "second_half_sec": 701,
+    "diff_pct": 0.67
+  },
+  "hr_zones": [
+    {
+      "zone": 1,
+      "time_sec": 10
+    },
+    {
+      "zone": 2,
+      "time_sec": 39
+    },
+    {
+      "zone": 3,
+      "time_sec": 230
+    },
+    {
+      "zone": 4,
+      "time_sec": 1386
+    },
+    {
+      "zone": 5,
+      "time_sec": 0
+    }
+  ],
+  "walks_summary": {
+    "count": 0,
+    "total_walk_sec": 0,
+    "walk_pct": 0
+  },
+  "walk_breaks": [],
+  "splits": [
+    {
+      "km": 1,
+      "duration_sec": 357.9,
+      "pace_min_per_km": 5.965,
+      "gap_min_per_km": 5.906,
+      "avg_hr": 138,
+      "pct_hrmax": 76.1,
+      "ef": 1.23
+    },
+    {
+      "km": 2,
+      "duration_sec": 338.4,
+      "pace_min_per_km": 5.64,
+      "gap_min_per_km": 5.581,
+      "avg_hr": 155,
+      "pct_hrmax": 85.5,
+      "ef": 1.158
+    },
+    {
+      "km": 3,
+      "duration_sec": 345.8,
+      "pace_min_per_km": 5.763,
+      "gap_min_per_km": 5.782,
+      "avg_hr": 153,
+      "pct_hrmax": 84.6,
+      "ef": 1.13
+    },
+    {
+      "km": 4,
+      "duration_sec": 355.2,
+      "pace_min_per_km": 5.92,
+      "gap_min_per_km": 5.975,
+      "avg_hr": 153,
+      "pct_hrmax": 84.3,
+      "ef": 1.096
+    }
+  ],
+  "remainder": {
+    "km": 0.81,
+    "duration_sec": 272.3,
+    "pace_min_per_km": 5.635,
+    "gap_min_per_km": 5.812
+  }
+}
